@@ -28,56 +28,56 @@ TODO: Fill out this long description.
 
 ## Contributors
 <div>
-<img align="left" src="https://avatars.githubusercontent.com/futurizing" width="68px;" style="margin: 0px 20px 0 0;"/>
+<a href="https://github.com/futurizing"><img align="left" src="https://avatars.githubusercontent.com/futurizing" width="68px;" style="margin: 0px 20px 0 0;"/></a>
 <b>Kasidit Iamthong</b><br>
 Student ID: 5731005321<br>
 GitHub: <a href="https://github.com/futurizing">@futurizing</a>
 </div>
 <br>
 <div>
-<img align="left" src="https://avatars.githubusercontent.com/KawinL" width="68px;" style="margin: 0px 20px 0 0;"/>
+<a href="https://github.com/KawinL"><img align="left" src="https://avatars.githubusercontent.com/KawinL" width="68px;" style="margin: 0px 20px 0 0;"/></a>
 <b>Kawin Liaowongphuthorn</b><br>
 Student ID: 5731004721<br>
 GitHub: <a href="https://github.com/KawinL">@KawinL</a>
 </div>
 <br>
 <div>
-<img align="left" src="https://avatars.githubusercontent.com/korrawe" width="68px;" style="margin: 0px 20px 0 0;"/>
+<a href="https://github.com/korrawe"><img align="left" src="https://avatars.githubusercontent.com/korrawe" width="68px;" style="margin: 0px 20px 0 0;"/></a>
 <b>Korrawe Karunratanakul</b><br>
 Student ID: 5731002421<br>
 GitHub: <a href="https://github.com/korrawe">@korrawe</a>
 </div>
 <br>
 <div>
-<img align="left" src="https://avatars.githubusercontent.com/neungkl" width="68px;" style="margin: 0px 20px 0 0;"/>
+<a href="https://github.com/neungkl"><img align="left" src="https://avatars.githubusercontent.com/neungkl" width="68px;" style="margin: 0px 20px 0 0;"/></a>
 <b>Kosate Limpongsa</b><br>
 Student ID: 5731012721<br>
 GitHub: <a href="https://github.com/neungkl">@neungkl</a>
 </div>
 <br>
 <div>
-<img align="left" src="https://avatars.githubusercontent.com/pirsquareff" width="68px;" style="margin: 0px 20px 0 0;"/>
+<a href="https://github.com/pirsquareff"><img align="left" src="https://avatars.githubusercontent.com/pirsquareff" width="68px;" style="margin: 0px 20px 0 0;"/></a>
 <b>Parinthorn Saithong</b><br>
 Student ID: 5730329521<br>
 GitHub: <a href="https://github.com/pirsquareff">@pirsquareff</a>
 </div>
 <br>
 <div>
-<img align="left" src="https://avatars.githubusercontent.com/PoomarinPh" width="68px;" style="margin: 0px 20px 0 0;"/>
+<a href="https://github.com/PoomarinPh"><img align="left" src="https://avatars.githubusercontent.com/PoomarinPh" width="68px;" style="margin: 0px 20px 0 0;"/></a>
 <b>Poomarin Phloyaphisut</b><br>
 Student ID: 5731091221<br>
 GitHub: <a href="https://github.com/PoomarinPh">@PoomarinPh</a>
 </div>
 <br>
 <div>
-<img align="left" src="https://avatars.githubusercontent.com/sirinthra-cc" width="68px;" style="margin: 0px 20px 0 0;"/>
+<a href="https://github.com/sirinthra-cc"><img align="left" src="https://avatars.githubusercontent.com/sirinthra-cc" width="68px;" style="margin: 0px 20px 0 0;"/></a>
 <b>Sirinthra Chantharaj</b><br>
 Student ID: 5730635521<br>
 GitHub: <a href="https://github.com/sirinthra-cc">@sirinthra-cc</a>
 </div>
 <br>
 <div>
-<img align="left" src="https://avatars.githubusercontent.com/JThanat" width="68px;" style="margin: 0px 20px 0 0;"/>
+<a href="https://github.com/JThanat"><img align="left" src="https://avatars.githubusercontent.com/JThanat" width="68px;" style="margin: 0px 20px 0 0;"/></a>
 <b>Thanat Jatuphattharachat</b><br>
 Student ID: 5730243121<br>
 GitHub: <a href="https://github.com/JThanat">@JThanat</a>
