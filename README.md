@@ -28,16 +28,17 @@ TODO: Fill out this long description.
 
 ## Contributors
 
-| No.   | Name                     | Student ID | GitHub     |
-|:-----:|--------------------------|------------|------------|
-| 1     | Kasidit Iamthong         | 5731005321 | *[@futurizing](https://github.com/futurizing)* |
-| 2     | Kawin Liaowongphuthorn   | 5731004721 | *[@KawinL](https://github.com/KawinL)* |
-| 3     | Korrawe Karunratanakul   | 5731002421 | *[@korrawe](https://github.com/korrawe)* |
-| 4     | Kosate Limpongsa         | 5731012721 | *[@neungkl](https://github.com/neungkl)* |
-| 5     | Parinthorn Saithong      | 5730329521 | *[@pirsquareff](https://github.com/pirsquareff)* |
-| 6     | Poomarin Phloyaphisut    | 5731091221 | *[@PoomarinPh](https://github.com/PoomarinPh)* |
-| 7     | Sirinthra Chantharaj     | 5730635521 | *[@sirinthra-cc](https://github.com/sirinthra-cc)* |
-| 8     | Thanat Jatuphattharachat | 5730243121 | *[@JThanat](https://github.com/JThanat)* |
+| Student ID | Name                     | GitHub     |
+|:-------------------------|:-----------|:-----------|
+| 5730243121 | Thanat Jatuphattharachat | *[@JThanat](https://github.com/JThanat)* |
+| 5730329521 | Parinthorn Saithong      | *[@pirsquareff](https://github.com/pirsquareff)* |
+| 5730635521 | Sirinthra Chantharaj     | *[@sirinthra-cc](https://github.com/sirinthra-cc)* |
+| 5731002421 | Korrawe Karunratanakul   | *[@korrawe](https://github.com/korrawe)* |
+| 5731004721 | Kawin Liaowongphuthorn   | *[@KawinL](https://github.com/KawinL)* |
+| 5731005321 | Kasidit Iamthong         | *[@futurizing](https://github.com/futurizing)* |
+| 5731012721 | Kosate Limpongsa         | *[@neungkl](https://github.com/neungkl)* |
+| 5731091221 | Poomarin Phloyaphisut    | *[@PoomarinPh](https://github.com/PoomarinPh)* |
+
 
 ## License
 
