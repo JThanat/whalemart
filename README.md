@@ -1,6 +1,8 @@
 # Snow White and the Seven Pandas
 
-[![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
+![section label](https://img.shields.io/badge/section-1-yellowgreen.svg)
+[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-green.svg)](https://github.com/RichardLitt/standard-readme)
+[![GitHub stars](https://img.shields.io/github/issues/we-inc/mms-snow-white-and-the-seven-pandas.svg?style=social&label=Issue)](https://github.com/we-inc/mms-snow-white-and-the-seven-pandas)
 
 > A team project&#39;s repository as part of 2110423 Software Engineering course 1/2017
 
@@ -85,4 +87,4 @@ GitHub: <a href="https://github.com/JThanat">@JThanat</a>
 
 ## License
 
-MIT © 2017 Snow White and the Seven Pandas
+[MIT](LICENSE) © 2017 Snow White and the Seven Pandas
