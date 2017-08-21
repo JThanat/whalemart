@@ -1,6 +1,6 @@
 # Snow White and the Seven Pandas
 
-[![section label](https://img.shields.io/badge/section-1-yellowgreen.svg)](#contributors)
+[![section label](https://img.shields.io/badge/section-1-ff69b4.svg)](#contributors)
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-green.svg)](https://github.com/RichardLitt/standard-readme)
 [![GitHub issues](https://img.shields.io/github/issues/we-inc/mms-snow-white-and-the-seven-pandas.svg?style=social&label=Issue)](https://github.com/we-inc/mms-snow-white-and-the-seven-pandas/issues)
 
