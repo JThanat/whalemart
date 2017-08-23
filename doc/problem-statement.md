@@ -54,13 +54,13 @@ However, the current flea market booth rental and reservation is done using mult
 Nowadays, people are more familiar with online reservation systems such as plane ticket reservation, concert ticket reservation, hotel reservation, and movie ticket reservation. Therefore, online flea market booth rental and reservation system can solve the problems and improve the reservation process for both lessors and vendors as listed in [Table 3-1](#3-solution)
 
 ## 3. Solution
-| Problem                                                                                                              | Urgency | Clarity | Precedence | Solution                                                                                  |
-| -------------------------------------------------------------------------------------------------------------------- | ------- | ------- | ---------- | ----------------------------------------------------------------------------------------- |
-| Flea market vendors have difficulty in finding the place to sell their merchandise                                   | High    | Medium  |          2 | Develop a web-based application that is easily accessible via the Internet                |
-| Flea market lessors want to find as much vendors as possible to rent booths in the flea market                       | High    | High    |          1 | Develop a system which allows flea market lessors to promote their booth area             |
-| It is a waste of booth area for both lessors and vendors if some vendors do not make a payment after the reservation | High    | Medium  |          2 | Develop a system which provides payment channel and also deposit-refund system            |
-| Flea market vendors do not know which booth area are already reserved                                                | Medium  | High    |          1 | Develop a system which updates booth layout with available and reserved flag every minute |
-| In some platform(fin-market), flea market vendors have to wait almost 3 days for acquiring user id                   | High    | High    |          1 | Develop a system which allows flea market vendors and lessors to register in no time      |
+| Problem                                                                                                              | Solution                                                                                  | Urgency | Clarity | Precedence |
+|:-------------------------------------------------------------------------------------------------------------------- |:----------------------------------------------------------------------------------------- |:------- |:------- |:---------- |
+| Flea market vendors have difficulty in finding the place to sell their merchandise                                   | Develop a web-based application that is easily accessible via the Internet                | High    | Medium  | 2          |
+| Flea market lessors want to find as much vendors as possible to rent booths in the flea market                       | Develop a system which allows flea market lessors to promote their booth area             | High    | High    | 1          |
+| It is a waste of booth area for both lessors and vendors if some vendors do not make a payment after the reservation | Develop a system which provides payment channel and also deposit-refund system            | High    | Medium  | 2          |
+| Flea market vendors do not know which booth area are already reserved                                                | Develop a system which updates booth layout with available and reserved flag every minute | Medium  | High    | 1          |
+| In some platform(fin-market), flea market vendors have to wait almost 3 days for acquiring user id                   | Develop a system which allows flea market vendors and lessors to register in no time      | High    | High    | 1          |
 
 *Table 3-1: Solution of each problem along with its urgency, clarity, and precedence*
 
@@ -109,15 +109,15 @@ The whole system consists of 4 smaller parts as follow:
 Our users are divided into two groups including flea market lessors who provide free booth area and flea market vendors who want to find the available booth area. The available actions for each type of user are explained below.
 
 1. Flea market lessors
-    * Can create or cancel event
-    * Can add or edit event information
-    * Can add or edit booth layout of their event
-    * Can set or edit the price, time frame, provided equipment, and restriction for each บู้ท(block, maybe?)
-    * Can view the current availability of their event
-    * Can set due date of deposit payment and full payment of their event
+    * Can create or cancel booth reservation
+    * Can add or edit booth area information
+    * Can add or edit booth layout of their booths
+    * Can set or edit the price, time frame, provided equipment, and restriction for each booth area
+    * Can view the current availability of each booth area
+    * Can set due date of deposit payment and full payment of each booth reservation
 2. Flea market vendors
-    * Can view event information and layout
-    * Can make a reservation on an available booth
+    * Can view each booth area information and booth layout
+    * Can make a reservation on an available booth area
     * Can cancel their reservation before the time limit set by the lessors
     * Can select the payment method
     * Can view their reservation status
@@ -132,7 +132,7 @@ Our users are divided into two groups including flea market lessors who provide 
 |                   | Search for flea market                        | Date<br>Address<br>Price range<br>Merchandise details                                                         | The flea market and booth layout that close to vendor’s demand.       |
 |                   | Reserve a booth                               | Accepted price<br>Merchandise details                                                                    | Lessor can view the property of vendors and decide to accept or reject. |
 
-
+*Table 7-1: Input and output of the system*
 
 ## 8. Constraints
 1. Time limitations
