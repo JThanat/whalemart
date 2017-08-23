@@ -22,6 +22,9 @@
 | Flea market vendors do not know which booth area are already reserved                                                | Medium  | High    |          1 | Develop a system which updates booth layout with available and reserved flag every minute |
 | In some platform(fin-market), flea market vendors have to wait almost 3 days for acquiring user id                   | High    | High    |          1 | Develop a system which allows flea market vendors and lessors to register in no time      |
 
+## 4. Objective
+The main objective of this system is to provide a market space matching platform which allows flea market vendor and flea market lessor to make an agreement on each booth area easily. 
+
 ## 4. Scope of the System
 The whole system consists of 4 smaller parts as follow:
 
