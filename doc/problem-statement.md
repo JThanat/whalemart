@@ -75,8 +75,8 @@ First, function for flea market lessors. To be able to curate the booth into a s
 Second, function for flea market vendors. This function allows flea market vendors to view all the available booth area. Flea market vendors can choose the interested booth location to get more information such as price, time slot, and so on. After they decide to rent this booth location, they can reserve it or cancel their reservation any time within the deposit payment period. 
 
 <p align="center">
-![To be system's user flow](./images/to-be-systems-user-flow.png)
-*Figure 5-1: To be system's user flow*
+<img src="./images/to-be-systems-user-flow.png" width="700"/><br>
+<i>Figure 5-1: To be system's user flow</i>
 </p>
 
 The last one is payment system. Flea market vendors are able to either pay by credit card or bank transfer. After a reservation is confirmed, to complete a transaction, flea market vendors have to deposit 30% of the total price and the remaining within the deposit payment and full payment period, respectively.
