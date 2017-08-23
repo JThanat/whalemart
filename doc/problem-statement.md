@@ -89,6 +89,18 @@ The whole system consists of 4 smaller parts as follow:
 
 ## 7. Input and Output of the System
 
+| User type          | Objective                                     | Input                                                                                                 | Output/Result                                                         |
+| ------------------ | --------------------------------------------- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| Flea market lessor | Register as new lessor in the system          | Name - Last name<br> Address<br> Phone number<br> E-mail<br> Payment gateway<br> Username<br> Password<br>                  | User ID                                                               |
+|                    | Login to the system                           | Username<br>Password                                                                                     | Lessor can access the service that system provided                    |
+|                    | Provide booth area in flea maket for rent | Booth Layout<br>Booth detail such as price, equipment and Address of flea market<br>Detail of flea market | Flea market vendor can found the market in the system                 |
+| Flea market vendor | Register as new vendor in the system          | Name - Last name<br>Address<br>Phone number<br>E-mail<br>Username<br>Password<br>                                        | Customer number                                                       |
+|                   | Login to the system                           | Username<br>Password                                                                                     | Vendor can access the service that system provided.                   |
+|                   | Search for flea market                        | Date<br>Address<br>Price range<br>Merchandise details                                                         | The flea market and booth layout that close to vendor’s demand.       |
+|                   | Reserve a booth                               | Accepted price<br>Merchandise details                                                                    | Lessor can see the property of vendor and decide to accept or reject. |
+
+
+
 ## 8. Constraints
 1. Time limitations
 
