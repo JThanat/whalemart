@@ -88,6 +88,21 @@ The whole system consists of 4 smaller parts as follow:
   - Flea market vendors can either pay by credit card or bank transfer
 
 ## 7. Input and Output of the System
+Our users are divided into two groups including flea market lessors who provide free booth area and flea market vendors who want to find the free booth area . The available actions for each type of user are explained below.
+
+1. Flea market lessors
+  - Can create or cancel event
+  - Can add or edit event information
+  - Can add or edit booth layout of their event
+  - Can set or edit the price, time frame, provided equipment, and restriction for each บู้ท(block, maybe?)
+  - Can view the current availability of their event
+  - Can set due date of deposit payment and full payment of their event
+2. Flea market vendors
+  - Can view event information and layout
+  - Can make a reservation on an available booth
+  - Can cancel their reservation before the time limit set by the lessors
+  - Can select the payment method
+  - Can view their reservation status
 
 ## 8. Constraints
 1. Time limitations
