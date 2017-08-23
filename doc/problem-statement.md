@@ -23,6 +23,12 @@
 | In some platform(fin-market), flea market vendors have to wait almost 3 days for acquiring user id                   | High    | High    |            | Develop a system which allows flea market vendors and lessors to register in no time      |
 
 ## 4. Scope of the System
+The whole system consists of 4 smaller parts as follow:
+
+1. Registration
+1. Function for flea market lessors
+1. Function for flea market vendors
+1. Payment
 
 ## 5. Input and Output of the System
 
