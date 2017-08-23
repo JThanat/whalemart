@@ -2,6 +2,7 @@
 
 [![section 1](https://img.shields.io/badge/section-1-ff69b4.svg)](#contributors)
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-green.svg)](https://github.com/RichardLitt/standard-readme)
+[![Build Status](https://travis-ci.org/we-inc/mms-snow-white-and-the-seven-pandas.svg?branch=master)](https://travis-ci.org/we-inc/mms-snow-white-and-the-seven-pandas)
 [![GitHub issues](https://img.shields.io/github/issues/we-inc/mms-snow-white-and-the-seven-pandas.svg?style=social&label=Issue)](https://github.com/we-inc/mms-snow-white-and-the-seven-pandas/issues)
 
 > A team project&#39;s repository as part of 2110423 Software Engineering course 1/2017
