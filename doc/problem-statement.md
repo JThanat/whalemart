@@ -2,16 +2,16 @@
 
 ### Authors
 
-| Student ID | Name                     | Contribution                                                                     |
-| ---------- | ------------------------ | -------------------------------------------------------------------------------- |
-| 5730329521 | Parinthorn Saithong (Leader)   | Solution, System Overview, System Scope                                          |
-| 5730243121 | Thanat Jatuphattharachat | Background and Significance of the Problem, System Overview, Definition of Terms |
-| 5730635521 | Sirinthra Chantharaj     | Solution, Objective, System Overview, System Scope                               |
-| 5731002421 | Korrawe Karunratanakul   | Input and Output of the System                                                   |
-| 5731004721 | Kawin Liaowongphuthorn   | Input and Output of the System                                                   |
-| 5731005321 | Kasidit Iamthong         | Background and Significance of the Problem                                       |
-| 5731012721 | Kosate Limpongsa         | Constraints                                                                      |
-| 5731091221 | Poomarin Phloyaphisut    | Constraints                                                                      |
+| Student ID | Name                          | Contribution                                                                     |
+|:---------- |:----------------------------- |:-------------------------------------------------------------------------------- |
+| 5730329521 | Parinthorn Saithong (Leader)  | Solution, System Overview, System Scope                                          |
+| 5730243121 | Thanat Jatuphattharachat      | Background and Significance of the Problem, System Overview, Definition of Terms |
+| 5730635521 | Sirinthra Chantharaj          | Solution, Objective, System Overview, System Scope                               |
+| 5731002421 | Korrawe Karunratanakul        | Input and Output of the System                                                   |
+| 5731004721 | Kawin Liaowongphuthorn        | Input and Output of the System                                                   |
+| 5731005321 | Kasidit Iamthong              | Background and Significance of the Problem                                       |
+| 5731012721 | Kosate Limpongsa              | Constraints                                                                      |
+| 5731091221 | Poomarin Phloyaphisut         | Constraints                                                                      |
 
 ### Date
 23 August 2017
@@ -20,7 +20,7 @@
 
 1. [Definition of Terms](#1-definition-of-terms)
 1. [Background and Significance of the Problem](#2-background-and-significance-of-the-problem)
-1. [Solution and its Benefits](#3-solution-and-its-benefits)
+1. [Solution](#3-solution)
 1. [Objective](#4-objective)
 1. [System Overview](#5-system-overview)
 1. [Scope of the System](#6-scope-of-the-system)
@@ -51,7 +51,7 @@ Online flea market booth rental and reservation system used by lessors to provid
 
 However, the current flea market booth rental and reservation is done using multiple platforms. This includes chat application such as Line and Messenger, Facebook, Email and bank money transfer service. Firstly, each vendor has to get the booth layout and booth detail from the announcement of each flea market Facebook page, Line official or other official communication channels. After that, each vendor has to fill out the application form and submit the application via the lessor official email and wait for the member ID. When they get the member ID, they will be able to apply for the booth and then wait for the result again. When the reserved booth area is ready, the vendors have to pay for a reservation deposit within the time limit. Therefore, this process consumes lots of time. Furthermore, they will not know other available booths or any up to date booth layout if they want to re-apply for the booth after being rejected. Sometimes, the reservation process is even worse. Each vendor has to reserve the booth with the lessor by chatting only. This is difficult for the vendors to get all the detail and is complicated for lessors to manage and reply all interested vendors.
 
-Nowadays, people are more familiar with online reservation systems such as plane ticket reservation, concert ticket reservation, hotel reservation, and movie ticket reservation. Therefore, online flea market booth rental and reservation system can solve the problems and improve the reservation process for both lessors and vendors as listed in [Table 3-1](#3-solution-and-its-benefits)
+Nowadays, people are more familiar with online reservation systems such as plane ticket reservation, concert ticket reservation, hotel reservation, and movie ticket reservation. Therefore, online flea market booth rental and reservation system can solve the problems and improve the reservation process for both lessors and vendors as listed in [Table 3-1](#3-solution)
 
 ## 3. Solution
 | Problem                                                                                                              | Urgency | Clarity | Precedence | Solution                                                                                  |
