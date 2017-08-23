@@ -2,18 +2,18 @@
 
 ## Table of Contents
 
-- [Background and Significance of the Problem](#background-and-significance-of-the-problem)
-- [Solution and its Benefits](#solution-and-its-benefits)
-- [Scope of the System](#scope-of-the-system)
-- [Input and Output of the System](#input-and-output-of-the-system)
-- [Constraints](#constraints)
+1. [Background and Significance of the Problem](#1. background-and-significance-of-the-problem)
+1. [Solution and its Benefits](#2. solution-and-its-benefits)
+1. [Scope of the System](#3. scope-of-the-system)
+1. [Input and Output of the System](#4. input-and-output-of-the-system)
+1. [Constraints](#5. constraints)
 
-## Background and Significance of the Problem
+## 1. Background and Significance of the Problem
 
-## Solution and its Benefits
+## 2. Solution
 
-## Scope of the System
+## 3. Scope of the System
 
-## Input and Output of the System
+## 4. Input and Output of the System
 
-## Constraints
+## 5. Constraints
