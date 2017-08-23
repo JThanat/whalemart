@@ -35,7 +35,7 @@ Online flea market booth rental and reservation system used by lessors to provid
 
 However, the current flea market booth rental and reservation is done using multiple platforms. This includes chat application such as Line and Messenger, Facebook, Email and bank money transfer service. Firstly, each vendor has to get the booth layout and booth detail from the announcement of each flea market Facebook page, Line official or other official communication channels. After that, each vendor has to fill out the application form and submit the application via the lessor official email and wait for the member ID. When they get the member ID, they will be able to apply for the booth and then wait for the result again. When the reserved booth area is ready, the vendors have to pay for a reservation deposit within the time limit. Therefore, this process consumes lots of time. Furthermore, they will not know other available booths or any up to date booth layout if they want to re-apply for the booth after being rejected. Sometimes, the reservation process is even worse. Each vendor has to reserve the booth with the lessor by chatting only. This is difficult for the vendors to get all the detail and is complicated for lessors to manage and reply all interested vendors.
 
-Nowadays, people are more familiar with online reservation systems such as plane ticket reservation, concert ticket reservation, hotel reservation, and movie ticket reservation. Therefore, online flea market booth rental and reservation system can solve the problems and improve the reservation process for both lessors and vendors as listed in Table 3.1
+Nowadays, people are more familiar with online reservation systems such as plane ticket reservation, concert ticket reservation, hotel reservation, and movie ticket reservation. Therefore, online flea market booth rental and reservation system can solve the problems and improve the reservation process for both lessors and vendors as listed in Table 3-1
 
 ## 3. Solution
 | Problem                                                                                                              | Urgency | Clarity | Precedence | Solution                                                                                  |
@@ -45,6 +45,8 @@ Nowadays, people are more familiar with online reservation systems such as plane
 | It is a waste of booth area for both lessors and vendors if some vendors do not make a payment after the reservation | High    | Medium  |          2 | Develop a system which provides payment channel and also deposit-refund system            |
 | Flea market vendors do not know which booth area are already reserved                                                | Medium  | High    |          1 | Develop a system which updates booth layout with available and reserved flag every minute |
 | In some platform(fin-market), flea market vendors have to wait almost 3 days for acquiring user id                   | High    | High    |          1 | Develop a system which allows flea market vendors and lessors to register in no time      |
+
+*Table 3-1: Solution of each problem along with its urgency, clarity, and precedence*
 
 ## 4. Objective
 The main objective of this system is to provide a market space matching platform which allows flea market vendor and flea market lessor to make an agreement on each booth area easily. 
@@ -62,47 +64,47 @@ The last one is payment system. Flea market vendors are able to either pay by cr
 The whole system consists of 4 smaller parts as follow:
 
 1. Registration
-  - Flea market lessors and vendors can register to the system
-  - Flea market lessors and vendors can log in to the system
-  - Flea market lessors and vendors can log out off the system
-  - Flea market lessors and vendors can edit their account
-  - Flea market lessors and vendors can delete their account
-1. Function for flea market lessors
-  - Flea market lessors can create booth area
-  - Flea market lessors can add booths’ information including:
-    - Price for each booth
-    - Time slot
-    - Provided equipment
-    - Agreement for using booth area
-  - Flea market lessors can edit booths’ information
-  - Flea market lessors can delete booths from the system
-  - Flea market lessors can view their booths’ status
-1. Function for flea market vendors
-  - Flea market vendors can view all booth area
-  - Flea market vendors can confirm their reservation
-  - Flea market vendors can cancel their reservation
-1. Payment
-  - Flea market lessors can set due date of deposit payment and full payment
-  - Flea market vendors have to deposit 30% of the price within deposit payment period after confirming a reservation 
-  - Flea market vendors can pay the remaining 70% of price before the full payment due date
-  - Flea market vendors can either pay by credit card or bank transfer
+    * Flea market lessors and vendors can register to the system
+    * Flea market lessors and vendors can log in to the system
+    * Flea market lessors and vendors can log out off the system
+    * Flea market lessors and vendors can edit their account
+    * Flea market lessors and vendors can delete their account
+2. Function for flea market lessors
+    * Flea market lessors can create booth area
+    * Flea market lessors can add booths’ information including:
+      * Price for each booth
+      * Time slot
+      * Provided equipment
+      * Agreement for using booth area
+    * Flea market lessors can edit booths’ information
+    * Flea market lessors can delete booths from the system
+    * Flea market lessors can view their booths’ status
+3. Function for flea market vendors
+    * Flea market vendors can view all booth area
+    * Flea market vendors can confirm their reservation
+    * Flea market vendors can cancel their reservation
+4. Payment
+    * Flea market lessors can set due date of deposit payment and full payment
+    * Flea market vendors have to deposit 30% of the price within deposit payment period after confirming a reservation 
+    * Flea market vendors can pay the remaining 70% of price before the full payment due date
+    * Flea market vendors can either pay by credit card or bank transfer
 
 ## 7. Input and Output of the System
 Our users are divided into two groups including flea market lessors who provide free booth area and flea market vendors who want to find the free booth area . The available actions for each type of user are explained below.
 
 1. Flea market lessors
-  - Can create or cancel event
-  - Can add or edit event information
-  - Can add or edit booth layout of their event
-  - Can set or edit the price, time frame, provided equipment, and restriction for each บู้ท(block, maybe?)
-  - Can view the current availability of their event
-  - Can set due date of deposit payment and full payment of their event
+    * Can create or cancel event
+    * Can add or edit event information
+    * Can add or edit booth layout of their event
+    * Can set or edit the price, time frame, provided equipment, and restriction for each บู้ท(block, maybe?)
+    * Can view the current availability of their event
+    * Can set due date of deposit payment and full payment of their event
 2. Flea market vendors
-  - Can view event information and layout
-  - Can make a reservation on an available booth
-  - Can cancel their reservation before the time limit set by the lessors
-  - Can select the payment method
-  - Can view their reservation status
+    * Can view event information and layout
+    * Can make a reservation on an available booth
+    * Can cancel their reservation before the time limit set by the lessors
+    * Can select the payment method
+    * Can view their reservation status
 
 | User type          | Objective                                     | Input                                                                                                 | Output/Result                                                         |
 | ------------------ | --------------------------------------------- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
@@ -130,7 +132,6 @@ Our users are divided into two groups including flea market lessors who provide 
     Total cost in development (estimate fully-development in 4 months) 785,000 Baht
 
 3. Hardware
-
     * The server must provide support all the time
     * The application must be available with higher than 99.9% available rate
     * The average latency response time must be lower than 250ms
