@@ -5,9 +5,11 @@
 1. [Definition of Terms](#1-definition-of-terms)
 1. [Background and Significance of the Problem](#2-background-and-significance-of-the-problem)
 1. [Solution and its Benefits](#3-solution-and-its-benefits)
-1. [Scope of the System](#4-scope-of-the-system)
-1. [Input and Output of the System](#5-input-and-output-of-the-system)
-1. [Constraints](#6-constraints)
+1. [Objective](#4-objective)
+1. [System Overview](#5-system-overview)
+1. [Scope of the System](#6-scope-of-the-system)
+1. [Input and Output of the System](#7-input-and-output-of-the-system)
+1. [Constraints](#8-constraints)
 
 ## 1. Definition of Terms
 
@@ -36,15 +38,60 @@ However, the current flea market booth rental and reservation is done using mult
 Nowadays, people are more familiar with online reservation systems such as plane ticket reservation, concert ticket reservation, hotel reservation, and movie ticket reservation. Therefore, online flea market booth rental and reservation system can solve the problems and improve the reservation process for both lessors and vendors as listed in Table 3.1
 
 ## 3. Solution
+| Problem                                                                                                              | Urgency | Clarity | Precedence | Solution                                                                                  |
+| -------------------------------------------------------------------------------------------------------------------- | ------- | ------- | ---------- | ----------------------------------------------------------------------------------------- |
+| Flea market vendors have difficulty in finding the place to sell their merchandise                                   | High    | Medium  |          2 | Develop a web-based application that is easily accessible via the Internet                |
+| Flea market lessors want to find as much vendors as possible to rent booths in the flea market                       | High    | High    |          1 | Develop a system which allows flea market lessors to promote their booth area             |
+| It is a waste of booth area for both lessors and vendors if some vendors do not make a payment after the reservation | High    | Medium  |          2 | Develop a system which provides payment channel and also deposit-refund system            |
+| Flea market vendors do not know which booth area are already reserved                                                | Medium  | High    |          1 | Develop a system which updates booth layout with available and reserved flag every minute |
+| In some platform(fin-market), flea market vendors have to wait almost 3 days for acquiring user id                   | High    | High    |          1 | Develop a system which allows flea market vendors and lessors to register in no time      |
 
-## 4. Scope of the System
+## 4. Objective
+The main objective of this system is to provide a market space matching platform which allows flea market vendor and flea market lessor to make an agreement on each booth area easily. 
 
-## 5. Input and Output of the System
+## 5. System Overview
+To solve these problems, we decided to develop a web-based application which is a platform for matching flea market vendors and available booth area. There are 3 main parts of our system.
 
-## 6. Constraints
+First, function for flea market lessors. To be able to curate the booth into a single place, we have to provide the system that allows flea market lessors to add their booth. Each booth should provide enough information for flea market vendors such as booth’s location, provided equipment, price, and so on.
 
+Second, function for flea market vendors. This function allows flea market vendors to view all the available booth area. Flea market vendors can choose the interested booth location to get more information such as price, time slot, and so on. After they decide to rent this booth location, they can reserve it or cancel their reservation any time within the deposit payment period. 
+
+The last one is payment system. Flea market vendors are able to either pay by credit card or bank transfer. After a reservation is confirmed, to complete a transaction, flea market vendors have to deposit 30% of the total price and the remaining within the deposit payment and full payment period, respectively.
+
+## 6. Scope of the System
+The whole system consists of 4 smaller parts as follow:
+
+1. Registration
+  - Flea market lessors and vendors can register to the system
+  - Flea market lessors and vendors can log in to the system
+  - Flea market lessors and vendors can log out off the system
+  - Flea market lessors and vendors can edit their account
+  - Flea market lessors and vendors can delete their account
+1. Function for flea market lessors
+  - Flea market lessors can create booth area
+  - Flea market lessors can add booths’ information including:
+    - Price for each booth
+    - Time slot
+    - Provided equipment
+    - Agreement for using booth area
+  - Flea market lessors can edit booths’ information
+  - Flea market lessors can delete booths from the system
+  - Flea market lessors can view their booths’ status
+1. Function for flea market vendors
+  - Flea market vendors can view all booth area
+  - Flea market vendors can confirm their reservation
+  - Flea market vendors can cancel their reservation
+1. Payment
+  - Flea market lessors can set due date of deposit payment and full payment
+  - Flea market vendors have to deposit 30% of the price within deposit payment period after confirming a reservation 
+  - Flea market vendors can pay the remaining 70% of price before the full payment due date
+  - Flea market vendors can either pay by credit card or bank transfer
+
+## 7. Input and Output of the System
+
+## 8. Constraints
 1. Time limitations
-    
+
     This project will be planned and developed in 3 months (by the end of November).
 
 2. Budget limitations
@@ -66,7 +113,7 @@ Nowadays, people are more familiar with online reservation systems such as plane
     * The minimum version of browser that application is fully support is Internet Explorer 9 or above and all modern browsers
     * The application is support with both mobile platform and screen platform
     * The application must be capable of rearranging the designed elements to fit in any screens
-    
+
 5. Personnel
 
     Our team consists of 8 people. Most of our team members have experience in developing and deploying web applications. So, planning and developing this project would be done with very few issues.
