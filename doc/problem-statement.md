@@ -135,12 +135,10 @@ Our users are divided into two groups including flea market lessors who provide 
 *Table 7-1: Input and output of the system*
 
 ## 8. Constraints
-1. Time limitations
-
+1. Time limitations<br>
     This project will be planned and developed in 3 months (by the end of November).
 
-2. Budget limitations
-
+2. Budget limitations<br>
     Since this system is developed from the ground up, new hardware needs to be purchased to support the developing process and to operate the system. The estimation of the expense is shown below.
     * MacBook Air 13” 2015 (x4) 300,000 Baht
     * Cloud server (CPU x8 cores 3.30 GHz and Memory 64 GB) 125,000 Baht
@@ -158,6 +156,5 @@ Our users are divided into two groups including flea market lessors who provide 
     * The application is support with both mobile platform and screen platform
     * The application must be capable of rearranging the designed elements to fit in any screens
 
-5. Personnel
-
+5. Personnel<br>
     Our team consists of 8 people. Most of our team members have experience in developing and deploying web applications. So, planning and developing this project would be done with very few issues.
