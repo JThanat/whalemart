@@ -64,6 +64,7 @@ The last one is payment system. Flea market vendors are able to either pay by cr
 The whole system consists of 4 smaller parts as follow:
 
 1. Registration
+<<<<<<< HEAD
     * Flea market lessors and vendors can register to the system
     * Flea market lessors and vendors can log in to the system
     * Flea market lessors and vendors can log out off the system
@@ -88,11 +89,38 @@ The whole system consists of 4 smaller parts as follow:
     * Flea market vendors have to deposit 30% of the price within deposit payment period after confirming a reservation 
     * Flea market vendors can pay the remaining 70% of price before the full payment due date
     * Flea market vendors can either pay by credit card or bank transfer
+=======
+  - Flea market lessors and vendors can register to the system
+  - Flea market lessors and vendors can log in to the system
+  - Flea market lessors and vendors can log out off the system
+  - Flea market lessors and vendors can edit their account
+  - Flea market lessors and vendors can delete their account
+2. Function for flea market lessors
+  - Flea market lessors can create booth area
+  - Flea market lessors can add booths’ information including:
+    - Price for each booth
+    - Time slot
+    - Provided equipment
+    - Agreement for using booth area
+  - Flea market lessors can edit booths’ information
+  - Flea market lessors can delete booths from the system
+  - Flea market lessors can view their booths’ status
+3. Function for flea market vendors
+  - Flea market vendors can view all booth area
+  - Flea market vendors can confirm their reservation
+  - Flea market vendors can cancel their reservation
+4. Payment
+  - Flea market lessors can set due date of deposit payment and full payment
+  - Flea market vendors have to deposit 30% of the price within deposit payment period after confirming a reservation 
+  - Flea market vendors can pay the remaining 70% of price before the full payment due date
+  - Flea market vendors can either pay by credit card or bank transfer
+>>>>>>> 2c4c85f0b9e35873ff2e48868708be5056e1ce7b
 
 ## 7. Input and Output of the System
-Our users are divided into two groups including flea market lessors who provide free booth area and flea market vendors who want to find the free booth area . The available actions for each type of user are explained below.
+Our users are divided into two groups including flea market lessors who provide free booth area and flea market vendors who want to find the available booth area. The available actions for each type of user are explained below.
 
 1. Flea market lessors
+<<<<<<< HEAD
     * Can create or cancel event
     * Can add or edit event information
     * Can add or edit booth layout of their event
@@ -105,16 +133,30 @@ Our users are divided into two groups including flea market lessors who provide 
     * Can cancel their reservation before the time limit set by the lessors
     * Can select the payment method
     * Can view their reservation status
+=======
+  - Can create or cancel booth reservation
+  - Can add or edit booth area information
+  - Can add or edit booth layout of their booths
+  - Can set or edit the price, time frame, provided equipment, and restriction for each booth area
+  - Can view the current availability of each booth area
+  - Can set due date of deposit payment and full payment of each booth reservation
+2. Flea market vendors
+  - Can view each booth area information and booth layout
+  - Can make a reservation on an available booth area
+  - Can cancel their reservation before the time limit set by the lessors
+  - Can select the payment method
+  - Can view their reservation status
+>>>>>>> 2c4c85f0b9e35873ff2e48868708be5056e1ce7b
 
 | User type          | Objective                                     | Input                                                                                                 | Output/Result                                                         |
 | ------------------ | --------------------------------------------- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
 | Flea market lessor | Register as new lessor in the system          | Name - Last name<br> Address<br> Phone number<br> E-mail<br> Payment gateway<br> Username<br> Password<br>                  | User ID                                                               |
 |                    | Login to the system                           | Username<br>Password                                                                                     | Lessor can access the service that system provided                    |
-|                    | Provide booth area in flea maket for rent | Booth Layout<br>Booth detail such as price, equipment and Address of flea market<br>Detail of flea market | Flea market vendor can found the market in the system                 |
+|                    | Provide booth area in flea maket for rent | Booth Layout<br>Booth detail such as price, equipment and Address of flea market<br>Detail of flea market | Flea market vendor can find the market and its available booth area in the system                 |
 | Flea market vendor | Register as new vendor in the system          | Name - Last name<br>Address<br>Phone number<br>E-mail<br>Username<br>Password<br>                                        | Customer number                                                       |
 |                   | Login to the system                           | Username<br>Password                                                                                     | Vendor can access the service that system provided.                   |
 |                   | Search for flea market                        | Date<br>Address<br>Price range<br>Merchandise details                                                         | The flea market and booth layout that close to vendor’s demand.       |
-|                   | Reserve a booth                               | Accepted price<br>Merchandise details                                                                    | Lessor can see the property of vendor and decide to accept or reject. |
+|                   | Reserve a booth                               | Accepted price<br>Merchandise details                                                                    | Lessor can view the property of vendors and decide to accept or reject. |
 
 
 
