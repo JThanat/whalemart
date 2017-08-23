@@ -67,7 +67,7 @@ The whole system consists of 4 smaller parts as follow:
   - Flea market lessors and vendors can log out off the system
   - Flea market lessors and vendors can edit their account
   - Flea market lessors and vendors can delete their account
-1. Function for flea market lessors
+2. Function for flea market lessors
   - Flea market lessors can create booth area
   - Flea market lessors can add booths’ information including:
     - Price for each booth
@@ -77,11 +77,11 @@ The whole system consists of 4 smaller parts as follow:
   - Flea market lessors can edit booths’ information
   - Flea market lessors can delete booths from the system
   - Flea market lessors can view their booths’ status
-1. Function for flea market vendors
+3. Function for flea market vendors
   - Flea market vendors can view all booth area
   - Flea market vendors can confirm their reservation
   - Flea market vendors can cancel their reservation
-1. Payment
+4. Payment
   - Flea market lessors can set due date of deposit payment and full payment
   - Flea market vendors have to deposit 30% of the price within deposit payment period after confirming a reservation 
   - Flea market vendors can pay the remaining 70% of price before the full payment due date
