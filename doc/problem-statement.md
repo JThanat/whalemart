@@ -25,6 +25,15 @@
 ## 4. Objective
 The main objective of this system is to provide a market space matching platform which allows flea market vendor and flea market lessor to make an agreement on each booth area easily. 
 
+## 5. System Overview
+To solve these problems, we decided to develop a web-based application which is a platform for matching flea market vendors and available booth area. There are 3 main parts of our system.
+
+First, function for flea market lessors. To be able to curate the booth into a single place, we have to provide the system that allows flea market lessors to add their booth. Each booth should provide enough information for flea market vendors such as booth’s location, provided equipment, price, and so on.
+
+Second, function for flea market vendors. This function allows flea market vendors to view all the available booth area. Flea market vendors can choose the interested booth location to get more information such as price, time slot, and so on. After they decide to rent this booth location, they can reserve it or cancel their reservation any time within the deposit payment period. 
+
+The last one is payment system. Flea market vendors are able to either pay by credit card or bank transfer. After a reservation is confirmed, to complete a transaction, flea market vendors have to deposit 30% of the total price and the remaining within the deposit payment and full payment period, respectively.
+
 ## 4. Scope of the System
 The whole system consists of 4 smaller parts as follow:
 
