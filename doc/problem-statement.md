@@ -34,7 +34,7 @@ Second, function for flea market vendors. This function allows flea market vendo
 
 The last one is payment system. Flea market vendors are able to either pay by credit card or bank transfer. After a reservation is confirmed, to complete a transaction, flea market vendors have to deposit 30% of the total price and the remaining within the deposit payment and full payment period, respectively.
 
-## 4. Scope of the System
+## 6. Scope of the System
 The whole system consists of 4 smaller parts as follow:
 
 1. Registration
@@ -42,6 +42,6 @@ The whole system consists of 4 smaller parts as follow:
 1. Function for flea market vendors
 1. Payment
 
-## 5. Input and Output of the System
+## 7. Input and Output of the System
 
-## 6. Constraints
+## 8. Constraints
