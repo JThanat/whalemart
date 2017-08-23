@@ -78,7 +78,14 @@ The whole system consists of 4 smaller parts as follow:
   - Flea market lessors can delete booths from the system
   - Flea market lessors can view their booths’ status
 1. Function for flea market vendors
+  - Flea market vendors can view all booth area
+  - Flea market vendors can confirm their reservation
+  - Flea market vendors can cancel their reservation
 1. Payment
+  - Flea market lessors can set due date of deposit payment and full payment
+  - Flea market vendors have to deposit 30% of the price within deposit payment period after confirming a reservation 
+  - Flea market vendors can pay the remaining 70% of price before the full payment due date
+  - Flea market vendors can either pay by credit card or bank transfer
 
 ## 7. Input and Output of the System
 
