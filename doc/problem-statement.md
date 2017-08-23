@@ -11,7 +11,29 @@
 
 ## 1. Definition of Terms
 
+- **Booth**: A small temporary tent or structure at flea market for each vendor to sell and promote their merchandise.
+- **Booth Area**: An area for each vendor to set up for selling their merchandise.
+- **Booth Layout**: A layout showing the arrangement of the booths in the market area.
+- **Booth Number**: A number used to specify the booth and its position.
+- **Member ID**: A number used to uniquely specify a vendor after booth reservation and registration.
+- **Deposit**: A first installment that vendors pay to lessor to reserve an available booth.
+- **Flea Market**: A type of market that rents or provides space to people who want to sell merchandise.
+- **Flea Market Lessor**: An owner of flea market who owns the area for rent.
+- **Flea Market Vendor**: A person who is interested in selling merchandise in the flea market area.
+- **Payment**: An action or process that vendors pay to lessors.
+- **Payment Amount**: A sum of money that a vendor should pay to a lessor.
+- **Payment Installment**: A sum of money due as one of several payments that vendors need to pay to the lessor.
+- **Payment Term**: A term and condition of a payment method.
+- **Register**: An action that vendor apply or reserve for a booth.
+
 ## 2. Background and Significance of the Problem
+Flea market has become a popular attraction in Thailand for both local people and travelers. Flea market has more than 14% market share over all the market in Thailand. This means there are more than 50,000 vendors currently in the market. Therefore, the booth management system is important for managing this amount of vendors.
+
+Online flea market booth rental and reservation system used by lessors to provide available booths for vendors should be simple and effective system. The vendors should be able to know available booth and booth layout in real time and make the reservation of the booth that they need as fast as possible. The system should also help vendors to simplify their reservation, payment and confirmation process. On the other hand, this system should reduce lessors' reservation management process and let the lessors consider vendors profile and arrange the booths easily. In addition, it should support payment verification for lessors in order to confirm renters’ payment.
+
+However, the current flea market booth rental and reservation is done using multiple platforms. This includes chat application such as Line and Messenger, Facebook, Email and bank money transfer service. Firstly, each vendor has to get the booth layout and booth detail from the announcement of each flea market Facebook page, Line official or other official communication channels. After that, each vendor has to fill out the application form and submit the application via the lessor official email and wait for the member ID. When they get the member ID, they will be able to apply for the booth and then wait for the result again. When the reserved booth area is ready, the vendors have to pay for a reservation deposit within the time limit. Therefore, this process consumes lots of time. Furthermore, they will not know other available booths or any up to date booth layout if they want to re-apply for the booth after being rejected. Sometimes, the reservation process is even worse. Each vendor has to reserve the booth with the lessor by chatting only. This is difficult for the vendors to get all the detail and is complicated for lessors to manage and reply all interested vendors.
+
+Nowadays, people are more familiar with online reservation systems such as plane ticket reservation, concert ticket reservation, hotel reservation, and movie ticket reservation. Therefore, online flea market booth rental and reservation system can solve the problems and improve the reservation process for both lessors and vendors as listed in Table 3.1
 
 ## 3. Solution
 
