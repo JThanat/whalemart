@@ -123,7 +123,7 @@ Our users are divided into two groups including flea market lessors who provide 
     * Can view their reservation status
 
 | User type          | Objective                                     | Input                                                                                                 | Output/Result                                                         |
-| ------------------ | --------------------------------------------- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+|:------------------ |:--------------------------------------------- |:----------------------------------------------------------------------------------------------------- |:--------------------------------------------------------------------- |
 | Flea market lessor | Register as new lessor in the system          | Name - Last name<br> Address<br> Phone number<br> E-mail<br> Payment gateway<br> Username<br> Password<br>                  | User ID                                                               |
 |                    | Login to the system                           | Username<br>Password                                                                                     | Lessor can access the service that system provided                    |
 |                    | Provide booth area in flea maket for rent | Booth Layout<br>Booth detail such as price, equipment and Address of flea market<br>Detail of flea market | Flea market vendor can find the market and its available booth area in the system                 |
