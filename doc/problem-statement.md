@@ -48,7 +48,21 @@ Nowadays, people are more familiar with online reservation systems such as plane
 The whole system consists of 4 smaller parts as follow:
 
 1. Registration
+  - Flea market lessors and vendors can register to the system
+  - Flea market lessors and vendors can log in to the system
+  - Flea market lessors and vendors can log out off the system
+  - Flea market lessors and vendors can edit their account
+  - Flea market lessors and vendors can delete their account
 1. Function for flea market lessors
+  - Flea market lessors can create booth area
+  - Flea market lessors can add booths’ information including:
+    - Price for each booth
+    - Time slot
+    - Provided equipment
+    - Agreement for using booth area
+  - Flea market lessors can edit booths’ information
+  - Flea market lessors can delete booths from the system
+  - Flea market lessors can view their booths’ status
 1. Function for flea market vendors
 1. Payment
 
@@ -57,7 +71,7 @@ The whole system consists of 4 smaller parts as follow:
 ## 6. Constraints
 
 1. Time limitations
-    
+
     This project will be planned and developed in 3 months (by the end of November).
 
 2. Budget limitations
@@ -79,7 +93,7 @@ The whole system consists of 4 smaller parts as follow:
     * The minimum version of browser that application is fully support is Internet Explorer 9 or above and all modern browsers
     * The application is support with both mobile platform and screen platform
     * The application must be capable of rearranging the designed elements to fit in any screens
-    
+
 5. Personnel
 
     Our team consists of 8 people. Most of our team members have experience in developing and deploying web applications. So, planning and developing this project would be done with very few issues.
