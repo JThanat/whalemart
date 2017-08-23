@@ -1,5 +1,21 @@
 # Problem Statement
 
+### Authors
+
+| Student ID | Name                     | Contribution                                                                     |
+| ---------- | ------------------------ | -------------------------------------------------------------------------------- |
+| 5730329521 | Parinthorn Saithong (Leader)   | Solution, System Overview, System Scope                                          |
+| 5730243121 | Thanat Jatuphattharachat | Background and Significance of the Problem, System Overview, Definition of Terms |
+| 5730635521 | Sirinthra Chantharaj     | Solution, Objective, System Overview, System Scope                               |
+| 5731002421 | Korrawe Karunratanakul   | Input and Output of the System                                                   |
+| 5731004721 | Kawin Liaowongphuthorn   | Input and Output of the System                                                   |
+| 5731005321 | Kasidit Iamthong         | Background and Significance of the Problem                                       |
+| 5731012721 | Kosate Limpongsa         | Constraints                                                                      |
+| 5731091221 | Poomarin Phloyaphisut    | Constraints                                                                      |
+
+### Date
+23 August 2017
+
 ## Table of Contents
 
 1. [Definition of Terms](#1-definition-of-terms)
