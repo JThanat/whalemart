@@ -4,13 +4,17 @@ services:
   db:
     image: postgres
     container_name: mms-postgres
+    ports:
+      - "5432:5432"
   web:
     build: .
-    command: python3 ./webserver/manage.py runserver 0.0.0.0:8000
+    command: python3 manage.py runserver 0.0.0.0:8000
     container_name: mms-webserver
     volumes:
-      - .:/webserver
+      - ./webserver:/webserver
     ports:
       - "8000:8000"
+    links:
+      - db
     depends_on:
       - db
