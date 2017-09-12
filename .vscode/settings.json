@@ -1,0 +1,15 @@
+{
+    "editor.insertSpaces": true,
+    "[typescript]": {
+        "editor.tabSize": 2,
+        "editor.rulers": [
+            100
+        ]
+    },
+    "[html]": {
+        "editor.tabSize": 2
+    },
+    "[json]": {
+        "editor.tabSize": 2
+    }
+}
