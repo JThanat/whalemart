@@ -10,7 +10,7 @@ import { environment } from '../../../environments/environment';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: UrlPrefixInterceptor, multi: true },
-    { provide: UrlPrefixInterceptor, useValue: environment.apiUrlPrefix }
+    { provide: API_URL_PREFIX, useValue: environment.apiUrlPrefix }
   ],
   exports: [
     HttpClientModule
