@@ -6,6 +6,25 @@ services:
     container_name: mms-postgres
     ports:
       - "5432:5432"
+    # environment:
+    #     - POSTGRES_PASSWORD=password                                                    
+    #     - POSTGRES_USER=username
+    #     - POSTGRES_DB=postgres
+    #     - PGDATA=/data/postgres
+    volumes:
+        - ./data/postgres:/data/postgres
+
+  pgadmin:
+    image: fenglc/pgadmin4
+    links:
+      - db:postgres
+    container_name: mms-pgadmin
+    volumes:
+       - ./data/pgadmin:/root/.pgadmin
+    ports:
+      - "5050:5050"
+    restart: unless-stopped
+
   web:
     build: .
     command: python3 manage.py runserver 0.0.0.0:8000
@@ -18,3 +37,4 @@ services:
       - db
     depends_on:
       - db
+    
