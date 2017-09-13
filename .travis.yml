@@ -10,12 +10,28 @@ cache:
     - ./frontend-webapp/node_modules
 
 before_install:
+  # Yarn
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.0.1
   - export PATH=$HOME/.yarn/bin:$PATH
+  # Docker
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  - sudo apt-get update
+  - sudo apt-get -y install docker-ce
+  # Docker Compose
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/1.11.1/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
 
 install:
-  - (cd frontend-webapp && yarn install)
+  - cd $TRAVIS_BUILD_DIR/frontend-webapp
+  - yarn install
+  - cd $TRAVIS_BUILD_DIR/webserver
+  - docker-compose up --build -d
 
 script:
-  - (cd frontend-webapp && yarn test --single-run --no-progress --browser=ChromeHeadless)
-  - (cd frontend-webapp && yarn e2e --no-progress --config=protractor-ci.conf.js)
+  - cd $TRAVIS_BUILD_DIR/frontend-webapp
+  - yarn test --single-run --no-progress --browser=ChromeHeadless)
+  - until ping -c1 http://localhost:8000/ping &>/dev/null; do :; done
+  - yarn e2e --no-progress --config=protractor-ci.conf.js
