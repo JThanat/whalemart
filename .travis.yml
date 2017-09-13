@@ -33,5 +33,4 @@ install:
 script:
   - cd $TRAVIS_BUILD_DIR/frontend-webapp
   - yarn test --single-run --no-progress --browser=ChromeHeadless
-  - until ping -c1 http://localhost:8000/ping &>/dev/null; do :; done
-  - yarn e2e --no-progress --config=protractor-ci.conf.js
+  - ../scripts/loop-ping-server.sh && yarn e2e --no-progress --config=protractor-ci.conf.js
