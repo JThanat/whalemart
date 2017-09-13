@@ -5,9 +5,9 @@ services:
     image: postgres
     container_name: mms-postgres
     ports:
-      - "5432:5432"
+      - "54321:5432"
     # environment:
-    #     - POSTGRES_PASSWORD=password                                                    
+    #     - POSTGRES_PASSWORD=password
     #     - POSTGRES_USER=username
     #     - POSTGRES_DB=postgres
     #     - PGDATA=/data/postgres
@@ -37,4 +37,4 @@ services:
       - db
     depends_on:
       - db
-    
+
