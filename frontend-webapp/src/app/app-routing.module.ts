@@ -6,6 +6,10 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     loadChildren: './home/home.module#HomeModule'
+  },
+  {
+    path: 'ping',
+    loadChildren: './ping/ping.module#PingModule'
   }
 ];
 
