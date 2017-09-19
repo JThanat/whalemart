@@ -75,7 +75,7 @@ First, function for flea market lessors. To be able to curate the booth into a s
 Second, function for flea market vendors. This function allows flea market vendors to view all the available booth area. Flea market vendors can choose the interested booth location to get more information such as price, time slot, and so on. After they decide to rent this booth location, they can reserve it or cancel their reservation any time within the deposit payment period. 
 
 <p align="center">
-<img src="./images/to-be-systems-user-flow.png" width="700"/><br>
+<img src="./images/problem-statement/to-be-systems-user-flow.png" width="700"/><br>
 <i>Figure 5-1: To be system's user flow</i>
 </p>
 
