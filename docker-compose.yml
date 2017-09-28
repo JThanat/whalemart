@@ -27,14 +27,14 @@ services:
 
   web:
     build: .
-    command: python3 manage.py runserver 0.0.0.0:8000
+    command: ["./wait_to_start.sh","python3", "manage.py", "runserver" ,"0.0.0.0:8000"]
     container_name: mms-webserver
     volumes:
       - ./webserver:/webserver
     ports:
       - "8000:8000"
-    links:
-      - db
     depends_on:
       - db
+    links:
+      - db:postgres
 
