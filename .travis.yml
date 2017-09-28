@@ -28,7 +28,7 @@ install:
   - cd $TRAVIS_BUILD_DIR/frontend-webapp
   - yarn install
   - cd $TRAVIS_BUILD_DIR/webserver
-  - docker-compose up --build
+  - docker-compose up --build -d
 
 script:
   - cd $TRAVIS_BUILD_DIR/frontend-webapp
