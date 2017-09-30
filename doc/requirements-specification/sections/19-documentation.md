@@ -30,9 +30,9 @@ Software requirements specification document is de facto this current one being 
 Design document is a document which being developed from the pre-defined system requirements in an analyze phase. This document describes how system works and provides brief explanation of the system. All information in this design document will be used for further development as well as deployment. The design document consists of the following subjects:
   1. Sample Screen of User Interfaces
   2. System Architecture
-    - Component Diagram
-    - Deployment Diagram
-    - Class Diagram (Attributes, Operations, Visibility)
+      - Component Diagram
+      - Deployment Diagram
+      - Class Diagram (Attributes, Operations, Visibility)
   3. Pseudocode for Major Methods (Operations)
   4. Access Control Table
 
@@ -44,6 +44,6 @@ Test plan is a document which describes a test plan to ensure that the system ca
   2. Test Results
   3. User Manual
   4. Appendix
-    - Limitations
-    - Deviations from the Design Document
-    - Soft Copy of All Documents
+      - Limitations
+      - Deviations from the Design Document
+      - Soft Copy of All Documents
