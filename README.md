@@ -21,7 +21,8 @@ TODO: Fill out this long description.
 ## Background
 
 ## Documents
-- [Problem Statement](./doc/problem-statement.md)
+- [Problem Statement](./doc/problem-statement/problem-statement.md)
+- [Requirements Specification](./doc/requirements-specification/requirements-specification.md)
 
 ## Install
 
