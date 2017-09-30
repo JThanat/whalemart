@@ -22,7 +22,7 @@ The objective of acceptance criteria is to consider that system can perform comp
     2.1 Acceptance criteria for functional requirements<br>
     For acceptance criteria in first group. It is acceptance criteria for functional requirements. It must test all users in different role in each user. How each user interacts to system and scope of functionality that user can do. List of acceptance criteria for functional requirements are shown as follows
 
-<table width="100%">
+<table>
    <tbody>
       <tr>
          <td width="70%">
@@ -39,7 +39,7 @@ The objective of acceptance criteria is to consider that system can perform comp
          </td>
       </tr>
       <tr>
-         <td colspan="4" width="100%">
+         <td colspan="4">
             Functionality of user
          </td>
       </tr>
@@ -68,7 +68,7 @@ The objective of acceptance criteria is to consider that system can perform comp
          <td>&nbsp;</td>
       </tr>
       <tr>
-         <td colspan="4" width="100%">
+         <td colspan="4">
             Functionality of vendor
          </td>
       </tr>
@@ -113,7 +113,7 @@ The objective of acceptance criteria is to consider that system can perform comp
          <td>&nbsp;</td>
       </tr>
       <tr>
-         <td colspan="4" width="100%">
+         <td colspan="4">
             Functionality of lessor
          </td>
       </tr>
@@ -184,10 +184,10 @@ The objective of acceptance criteria is to consider that system can perform comp
    </tbody>
 </table>
 
-  2.2 Acceptance criteria for qualitative requirements<br>
-  For acceptance criteria in second group. It is acceptance criteria for qualitative requirements for testing quality of our system. Acceptance criteria for qualitative requirements can split to 5 groups, such as usability and system environment, availability, security and privacy, maintainability and portability.
+    2.2 Acceptance criteria for qualitative requirements<br>
+    For acceptance criteria in second group. It is acceptance criteria for qualitative requirements for testing quality of our system. Acceptance criteria for qualitative requirements can split to 5 groups, such as usability and system environment, availability, security and privacy, maintainability and portability.
 
-<table width="100%">
+<table>
    <tbody>
       <tr>
          <td width="68%">
@@ -204,7 +204,7 @@ The objective of acceptance criteria is to consider that system can perform comp
          </td>
       </tr>
       <tr>
-         <td colspan="4" width="100%">
+         <td colspan="4">
             Usability and system environment
          </td>
       </tr>
@@ -241,7 +241,7 @@ The objective of acceptance criteria is to consider that system can perform comp
          <td>&nbsp;</td>
       </tr>
       <tr>
-         <td colspan="4" width="100%">
+         <td colspan="4">
             Availability
          </td>
       </tr>
@@ -262,7 +262,7 @@ The objective of acceptance criteria is to consider that system can perform comp
          <td>&nbsp;</td>
       </tr>
       <tr>
-         <td colspan="4" width="100%">
+         <td colspan="4">
             Security and privacy
          </td>
       </tr>
@@ -331,7 +331,7 @@ The objective of acceptance criteria is to consider that system can perform comp
          <td>&nbsp;</td>
       </tr>
       <tr>
-         <td colspan="4" width="100%">
+         <td colspan="4">
             Maintainability
          </td>
       </tr>
@@ -375,7 +375,7 @@ The objective of acceptance criteria is to consider that system can perform comp
   For acceptance criteria in third group. It can divide to 2 subjects, first subject is document deliverables which consist of problem statement, software requirements specification, design document and test plan, another subject is user manual deliverables.
 
 
-<table width="100%">
+<table>
    <tbody>
       <tr>
          <td width="68%">
@@ -392,7 +392,7 @@ The objective of acceptance criteria is to consider that system can perform comp
          </td>
       </tr>
       <tr>
-         <td colspan="4" width="100%">
+         <td colspan="4">
             Document deliverables
          </td>
       </tr>
@@ -421,7 +421,7 @@ The objective of acceptance criteria is to consider that system can perform comp
          <td>&nbsp;</td>
       </tr>
       <tr>
-         <td colspan="4" width="100%">
+         <td colspan="4">
             User manual deliverables
          </td>
       </tr>
