@@ -292,7 +292,7 @@ The objective of acceptance criteria is to consider that system can perform comp
           </tr>
           <tr>
             <td width="70%">
-                &nbsp;&nbsp;a. Vendor must able to access vendors&rsquo; data
+                &nbsp;&nbsp;&nbsp;&nbsp;a. Vendor must able to access vendors&rsquo; data
             </td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
@@ -300,7 +300,7 @@ The objective of acceptance criteria is to consider that system can perform comp
           </tr>
           <tr>
             <td width="70%">
-                &nbsp;&nbsp;b. Lessor must able to access lessors&rsquo; data and view vendor profile
+                &nbsp;&nbsp;&nbsp;&nbsp;b. Lessor must able to access lessors&rsquo; data and view vendor profile
             </td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
@@ -308,7 +308,7 @@ The objective of acceptance criteria is to consider that system can perform comp
           </tr>
           <tr>
             <td width="70%">
-                &nbsp;&nbsp;c. Admin must able to access vendor receipt
+                &nbsp;&nbsp;&nbsp;&nbsp;c. Admin must able to access vendor receipt
             </td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
