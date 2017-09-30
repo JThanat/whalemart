@@ -26,34 +26,26 @@ The objective of acceptance criteria is to consider that system can perform comp
    <tbody>
       <tr>
          <td width="70%">
-            <p><strong>Criteria</strong></p>
+            <strong>Criteria</strong>
          </td>
          <td>
-            <p style="text-align: center;"><strong>Pass</strong></p>
+            <strong style="text-align: center;">Pass</strong>
          </td>
          <td>
-            <p style="text-align: center;"><strong>Reject</strong></p>
+            <strong style="text-align: center;">Reject</strong>
          </td>
          <td>
-            <p style="text-align: center;"><strong>Comment</strong></p>
+            <strong style="text-align: center;">Comment</strong>
          </td>
       </tr>
       <tr>
          <td colspan="4" width="100%">
-            <p>Functionality of user</p>
+            Functionality of user
          </td>
       </tr>
       <tr>
          <td width="70%">
-            <p>1. User must able to register to our system</p>
-         </td>
-         <td>&nbsp;</td>
-         <td>&nbsp;</td>
-         <td>&nbsp;</td>
-      </tr>
-      <tr>
-         <td width="70%">
-            <p>2. User must able to login to our system</p>
+            1. User must able to register to our system
          </td>
          <td>&nbsp;</td>
          <td>&nbsp;</td>
@@ -61,20 +53,7 @@ The objective of acceptance criteria is to consider that system can perform comp
       </tr>
       <tr>
          <td width="70%">
-            <p>3. User must able to see market landing page</p>
-         </td>
-         <td>&nbsp;</td>
-         <td>&nbsp;</td>
-         <td>&nbsp;</td>
-      </tr>
-      <tr>
-         <td colspan="4" width="100%">
-            <p>Functionality of vendor</p>
-         </td>
-      </tr>
-      <tr>
-         <td width="70%">
-            <p>1. Vendor must able to reserve a booth</p>
+            2. User must able to login to our system
          </td>
          <td>&nbsp;</td>
          <td>&nbsp;</td>
@@ -82,31 +61,7 @@ The objective of acceptance criteria is to consider that system can perform comp
       </tr>
       <tr>
          <td width="70%">
-            <p>2. Vendor must able to select payment method before transferring.</p>
-         </td>
-         <td>&nbsp;</td>
-         <td>&nbsp;</td>
-         <td>&nbsp;</td>
-      </tr>
-      <tr>
-         <td width="70%">
-            <p>3. Vendor must able to upload receipt as proof of payment</p>
-         </td>
-         <td>&nbsp;</td>
-         <td>&nbsp;</td>
-         <td>&nbsp;</td>
-      </tr>
-      <tr>
-         <td width="70%">
-            <p>4. Vendor must able to customize their profile</p>
-         </td>
-         <td>&nbsp;</td>
-         <td>&nbsp;</td>
-         <td>&nbsp;</td>
-      </tr>
-      <tr>
-         <td width="70%">
-            <p>5. Vendor can become to a lessor</p>
+            3. User must able to see market landing page
          </td>
          <td>&nbsp;</td>
          <td>&nbsp;</td>
@@ -114,20 +69,12 @@ The objective of acceptance criteria is to consider that system can perform comp
       </tr>
       <tr>
          <td colspan="4" width="100%">
-            <p>Functionality of lessor</p>
+            Functionality of vendor
          </td>
       </tr>
       <tr>
          <td width="70%">
-            <p>1. Lessor must able to provide a bank account for receiving the money</p>
-         </td>
-         <td>&nbsp;</td>
-         <td>&nbsp;</td>
-         <td>&nbsp;</td>
-      </tr>
-      <tr>
-         <td width="70%">
-            <p>2. Lessor must able to create flea market</p>
+            1. Vendor must able to reserve a booth
          </td>
          <td>&nbsp;</td>
          <td>&nbsp;</td>
@@ -135,7 +82,7 @@ The objective of acceptance criteria is to consider that system can perform comp
       </tr>
       <tr>
          <td width="70%">
-            <p>3. Lessor must able to approve booth that vendors have reserved</p>
+            2. Vendor must able to select payment method before transferring.
          </td>
          <td>&nbsp;</td>
          <td>&nbsp;</td>
@@ -143,7 +90,7 @@ The objective of acceptance criteria is to consider that system can perform comp
       </tr>
       <tr>
          <td width="70%">
-            <p>4. Lessor must able to track payment status of each vendor in 2 periods</p>
+            3. Vendor must able to upload receipt as proof of payment
          </td>
          <td>&nbsp;</td>
          <td>&nbsp;</td>
@@ -151,7 +98,7 @@ The objective of acceptance criteria is to consider that system can perform comp
       </tr>
       <tr>
          <td width="70%">
-            <p>5. Lessor must able to provide booth layout</p>
+            4. Vendor must able to customize their profile
          </td>
          <td>&nbsp;</td>
          <td>&nbsp;</td>
@@ -159,7 +106,20 @@ The objective of acceptance criteria is to consider that system can perform comp
       </tr>
       <tr>
          <td width="70%">
-            <p>6. Lessor must able to customize their profile</p>
+            5. Vendor can become to a lessor
+         </td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+      </tr>
+      <tr>
+         <td colspan="4" width="100%">
+            Functionality of lessor
+         </td>
+      </tr>
+      <tr>
+         <td width="70%">
+            1. Lessor must able to provide a bank account for receiving the money
          </td>
          <td>&nbsp;</td>
          <td>&nbsp;</td>
@@ -167,7 +127,7 @@ The objective of acceptance criteria is to consider that system can perform comp
       </tr>
       <tr>
          <td width="70%">
-            <p>Functionality of admin</p>
+            2. Lessor must able to create flea market
          </td>
          <td>&nbsp;</td>
          <td>&nbsp;</td>
@@ -175,7 +135,47 @@ The objective of acceptance criteria is to consider that system can perform comp
       </tr>
       <tr>
          <td width="70%">
-            <p>1. Admin must able to verify a receipt</p>
+            3. Lessor must able to approve booth that vendors have reserved
+         </td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+      </tr>
+      <tr>
+         <td width="70%">
+            4. Lessor must able to track payment status of each vendor in 2 periods
+         </td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+      </tr>
+      <tr>
+         <td width="70%">
+            5. Lessor must able to provide booth layout
+         </td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+      </tr>
+      <tr>
+         <td width="70%">
+            6. Lessor must able to customize their profile
+         </td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+      </tr>
+      <tr>
+         <td width="70%">
+            Functionality of admin
+         </td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+      </tr>
+      <tr>
+         <td width="70%">
+            1. Admin must able to verify a receipt
          </td>
          <td>&nbsp;</td>
          <td>&nbsp;</td>
@@ -184,41 +184,33 @@ The objective of acceptance criteria is to consider that system can perform comp
    </tbody>
 </table>
 
-    2.2 Acceptance criteria for qualitative requirements<br>
-    For acceptance criteria in second group. It is acceptance criteria for qualitative requirements for testing quality of our system. Acceptance criteria for qualitative requirements can split to 5 groups, such as usability and system environment, availability, security and privacy, maintainability and portability.
+  2.2 Acceptance criteria for qualitative requirements<br>
+  For acceptance criteria in second group. It is acceptance criteria for qualitative requirements for testing quality of our system. Acceptance criteria for qualitative requirements can split to 5 groups, such as usability and system environment, availability, security and privacy, maintainability and portability.
 
 <table width="100%">
    <tbody>
       <tr>
          <td width="68%">
-            <p><strong>Criteria</strong></p>
+            <strong>Criteria</strong>
          </td>
          <td>
-            <p style="text-align: center;"><strong>Pass</strong></p>
+            <strong style="text-align: center;">Pass</strong>
          </td>
          <td>
-            <p style="text-align: center;"><strong>Reject</strong></p>
+            <strong style="text-align: center;">Reject</strong>
          </td>
          <td>
-            <p style="text-align: center;"><strong>Comment</strong></p>
+            <strong style="text-align: center;">Comment</strong>
          </td>
       </tr>
       <tr>
          <td colspan="4" width="100%">
-            <p>Usability and system environment</p>
+            Usability and system environment
          </td>
       </tr>
       <tr>
          <td width="68%">
-            <p>1. Language in user interface must be Thai and clearly explained.</p>
-         </td>
-         <td>&nbsp;</td>
-         <td>&nbsp;</td>
-         <td>&nbsp;</td>
-      </tr>
-      <tr>
-         <td width="68%">
-            <p>2. System must support main operating system such as Windows, MacOS and Linux</p>
+            1. Language in user interface must be Thai and clearly explained.
          </td>
          <td>&nbsp;</td>
          <td>&nbsp;</td>
@@ -226,7 +218,7 @@ The objective of acceptance criteria is to consider that system can perform comp
       </tr>
       <tr>
          <td width="68%">
-            <p>3. System must support completely in newest browser</p>
+            2. System must support main operating system such as Windows, MacOS and Linux
          </td>
          <td>&nbsp;</td>
          <td>&nbsp;</td>
@@ -234,20 +226,7 @@ The objective of acceptance criteria is to consider that system can perform comp
       </tr>
       <tr>
          <td width="68%">
-            <p>4. System must support various screen type and orientation especially mobile screen and desktop screen</p>
-         </td>
-         <td>&nbsp;</td>
-         <td>&nbsp;</td>
-         <td>&nbsp;</td>
-      </tr>
-      <tr>
-         <td colspan="4" width="100%">
-            <p>Availability</p>
-         </td>
-      </tr>
-      <tr>
-         <td width="68%">
-            <p>1. The available time of system must be 99% of whole time that system is still open</p>
+            3. System must support completely in newest browser
          </td>
          <td>&nbsp;</td>
          <td>&nbsp;</td>
@@ -255,7 +234,7 @@ The objective of acceptance criteria is to consider that system can perform comp
       </tr>
       <tr>
          <td width="68%">
-            <p>2. Mean time between failure of system must be at least 5 years</p>
+            4. System must support various screen type and orientation especially mobile screen and desktop screen
          </td>
          <td>&nbsp;</td>
          <td>&nbsp;</td>
@@ -263,20 +242,12 @@ The objective of acceptance criteria is to consider that system can perform comp
       </tr>
       <tr>
          <td colspan="4" width="100%">
-            <p>Security and privacy</p>
+            Availability
          </td>
       </tr>
       <tr>
          <td width="68%">
-            <p>1. System must use user&rsquo;s username and password to authenticate to our system</p>
-         </td>
-         <td>&nbsp;</td>
-         <td>&nbsp;</td>
-         <td>&nbsp;</td>
-      </tr>
-      <tr>
-         <td width="68%">
-            <p>2. System must save all logs history on our server</p>
+            1. The available time of system must be 99% of whole time that system is still open
          </td>
          <td>&nbsp;</td>
          <td>&nbsp;</td>
@@ -284,47 +255,7 @@ The objective of acceptance criteria is to consider that system can perform comp
       </tr>
       <tr>
          <td width="68%">
-            <p>3. User has right to access their data</p>
-         </td>
-         <td>&nbsp;</td>
-         <td>&nbsp;</td>
-         <td>&nbsp;</td>
-      </tr>
-      <tr>
-         <td width="68%">
-            <p>a. Vendor must able to access vendors&rsquo; data</p>
-         </td>
-         <td>&nbsp;</td>
-         <td>&nbsp;</td>
-         <td>&nbsp;</td>
-      </tr>
-      <tr>
-         <td width="68%">
-            <p>b. Lessor must able to access lessors&rsquo; data and view vendor profile</p>
-         </td>
-         <td>&nbsp;</td>
-         <td>&nbsp;</td>
-         <td>&nbsp;</td>
-      </tr>
-      <tr>
-         <td width="68%">
-            <p>c. Admin must able to access vendor receipt</p>
-         </td>
-         <td>&nbsp;</td>
-         <td>&nbsp;</td>
-         <td>&nbsp;</td>
-      </tr>
-      <tr>
-         <td width="68%">
-            <p>4. All data must not able to be edited from outside server</p>
-         </td>
-         <td>&nbsp;</td>
-         <td>&nbsp;</td>
-         <td>&nbsp;</td>
-      </tr>
-      <tr>
-         <td width="68%">
-            <p>5. Password must be encrypted inside database</p>
+            2. Mean time between failure of system must be at least 5 years
          </td>
          <td>&nbsp;</td>
          <td>&nbsp;</td>
@@ -332,20 +263,12 @@ The objective of acceptance criteria is to consider that system can perform comp
       </tr>
       <tr>
          <td colspan="4" width="100%">
-            <p>Maintainability</p>
+            Security and privacy
          </td>
       </tr>
       <tr>
          <td width="68%">
-            <p>1. System must easy to installation</p>
-         </td>
-         <td>&nbsp;</td>
-         <td>&nbsp;</td>
-         <td>&nbsp;</td>
-      </tr>
-      <tr>
-         <td width="68%">
-            <p>2. System must deliverable without any problem</p>
+            1. System must use user&rsquo;s username and password to authenticate to our system
          </td>
          <td>&nbsp;</td>
          <td>&nbsp;</td>
@@ -353,7 +276,7 @@ The objective of acceptance criteria is to consider that system can perform comp
       </tr>
       <tr>
          <td width="68%">
-            <p>Portability</p>
+            2. System must save all logs history on our server
          </td>
          <td>&nbsp;</td>
          <td>&nbsp;</td>
@@ -361,7 +284,84 @@ The objective of acceptance criteria is to consider that system can perform comp
       </tr>
       <tr>
          <td width="68%">
-            <p>1. System must work perfectly in different environment without any problem</p>
+            3. User has right to access their data
+         </td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+      </tr>
+      <tr>
+         <td width="68%">
+            a. Vendor must able to access vendors&rsquo; data
+         </td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+      </tr>
+      <tr>
+         <td width="68%">
+            b. Lessor must able to access lessors&rsquo; data and view vendor profile
+         </td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+      </tr>
+      <tr>
+         <td width="68%">
+            c. Admin must able to access vendor receipt
+         </td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+      </tr>
+      <tr>
+         <td width="68%">
+            4. All data must not able to be edited from outside server
+         </td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+      </tr>
+      <tr>
+         <td width="68%">
+            5. Password must be encrypted inside database
+         </td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+      </tr>
+      <tr>
+         <td colspan="4" width="100%">
+            Maintainability
+         </td>
+      </tr>
+      <tr>
+         <td width="68%">
+            1. System must easy to installation
+         </td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+      </tr>
+      <tr>
+         <td width="68%">
+            2. System must deliverable without any problem
+         </td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+      </tr>
+      <tr>
+         <td width="68%">
+            Portability
+         </td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+      </tr>
+      <tr>
+         <td width="68%">
+            1. System must work perfectly in different environment without any problem
          </td>
          <td>&nbsp;</td>
          <td>&nbsp;</td>
@@ -370,41 +370,35 @@ The objective of acceptance criteria is to consider that system can perform comp
    </tbody>
 </table>
 
-    2.3. Acceptance criteria for deliverables<br>
-    For acceptance criteria in third group. It can divide to 2 subjects, first subject is document deliverables which consist of problem statement, software requirements specification, design document and test plan, another subject is user manual deliverables.
+
+  2.3. Acceptance criteria for deliverables<br>
+  For acceptance criteria in third group. It can divide to 2 subjects, first subject is document deliverables which consist of problem statement, software requirements specification, design document and test plan, another subject is user manual deliverables.
+
 
 <table width="100%">
    <tbody>
       <tr>
          <td width="68%">
-            <p><strong>Criteria</strong></p>
+            <strong>Criteria</strong>
          </td>
          <td>
-            <p style="text-align: center;"><strong>Pass</strong></p>
+            <strong style="text-align: center;">Pass</strong>
          </td>
          <td>
-            <p style="text-align: center;"><strong>Reject</strong></p>
+            <strong style="text-align: center;">Reject</strong>
          </td>
          <td>
-            <p style="text-align: center;"><strong>Comment</strong></p>
+            <strong style="text-align: center;">Comment</strong>
          </td>
       </tr>
       <tr>
          <td colspan="4" width="100%">
-            <p>Document deliverables</p>
+            Document deliverables
          </td>
       </tr>
       <tr>
          <td width="68%">
-            <p>1. All documents are written in English</p>
-         </td>
-         <td>&nbsp;</td>
-         <td>&nbsp;</td>
-         <td>&nbsp;</td>
-      </tr>
-      <tr>
-         <td width="68%">
-            <p>2. All words in document must consistence by definition</p>
+            1. All documents are written in English
          </td>
          <td>&nbsp;</td>
          <td>&nbsp;</td>
@@ -412,7 +406,15 @@ The objective of acceptance criteria is to consider that system can perform comp
       </tr>
       <tr>
          <td width="68%">
-            <p>3. Document must contain table of contents, list of tables and list of figures</p>
+            2. All words in document must consistence by definition
+         </td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+      </tr>
+      <tr>
+         <td width="68%">
+            3. Document must contain table of contents, list of tables and list of figures
          </td>
          <td>&nbsp;</td>
          <td>&nbsp;</td>
@@ -420,20 +422,12 @@ The objective of acceptance criteria is to consider that system can perform comp
       </tr>
       <tr>
          <td colspan="4" width="100%">
-            <p>User manual deliverables</p>
+            User manual deliverables
          </td>
       </tr>
       <tr>
          <td width="68%">
-            <p>1. User manual must explain all role of user</p>
-         </td>
-         <td>&nbsp;</td>
-         <td>&nbsp;</td>
-         <td>&nbsp;</td>
-      </tr>
-      <tr>
-         <td width="68%">
-            <p>1. User manual must explain all functionality</p>
+            1. User manual must explain all role of user
          </td>
          <td>&nbsp;</td>
          <td>&nbsp;</td>
@@ -441,7 +435,15 @@ The objective of acceptance criteria is to consider that system can perform comp
       </tr>
       <tr>
          <td width="68%">
-            <p>2. User manual must include at least one figure for each functionality</p>
+            1. User manual must explain all functionality
+         </td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+      </tr>
+      <tr>
+         <td width="68%">
+            2. User manual must include at least one figure for each functionality
          </td>
          <td>&nbsp;</td>
          <td>&nbsp;</td>
