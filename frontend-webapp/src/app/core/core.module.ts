@@ -1,16 +1,15 @@
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
-
-import { ApiModule } from './api/api.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    ApiModule
+    HttpClientModule
   ],
   declarations: [],
   exports: [
-    ApiModule
+    HttpClientModule
   ]
 })
 export class CoreModule {

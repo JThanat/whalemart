@@ -16,7 +16,7 @@ export class PingComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.http.get<PingResult>('/ping/').subscribe(data => {
+    this.http.get<PingResult>('/api/ping/').subscribe(data => {
       this.pingData = data;
     }, err => {
       if (err instanceof HttpErrorResponse) {
