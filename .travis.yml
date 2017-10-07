@@ -4,6 +4,11 @@ language: node_js
 node_js:
   - "8.4.0"
 
+notifications:
+  slack:
+    rooms:
+      - secure: e3CjVTLXeS3FpB5GiJTdt7N16UX3d4a1d5nZwUXphIcdchhELY1JharqcMoqFH8KsADCskZNHxSwUNPA4Jm4yvagTeVQYkF/6eo8Dq0swmEB0AXDk/BESnjBhFg5n9CpOYDM2gku0efp+1ZdkiXd3EKqI4y8jjDzZXSVaE+Zm2wwlgTDOUHoI0t1R/K8q+fT2/VW6zM4slGkh+Sv1+hEisr8XJmvH5mnhnO6o/teUMRKWxzB/URkFiyR9J1dOu+WS0AvjbDXz1rajFqccSZL9vXdTvaaYMECXcibL+HjmsNuKppA2apbYh0wwn9nm35FcQuQwgHyAG4NSPFC4SJpU3djVwewXEHjcq6+ckrKaMQcVEYNYvbSfDMSX1I0HcZSicNbd/X0eNb0QFcHgLx5Hwhv0/97XhMyI3tT22mqkdzJv9ClGS+pf8VcyD7dGnJqHZjBHVriIc43voUVqMOZylXyU905OkcbykFD3/xh5Rb4ma6xkBSjHmAzBBM6XNfYgBYOx5yiEFLyj4vHzNevji2MHAdxdP5Qck2fSPu/jhivl0Gnhr9H0tBB0o2Thl1EeZ+J244Yh9P5sH3Z37IHiWFWnTtiDTPYvDhlR1ZUNh0lJT1lXLv5blaEpBGrV5CXbkJfIHHfs/qbggomyL58QNCdfD76Ju7ZmAytfeckK7E=
+
 cache:
   yarn: true
   directories:
