@@ -9,6 +9,9 @@
     "[html]": {
         "editor.tabSize": 2
     },
+    "[scss]": {
+        "editor.tabSize": 2
+    },
     "[json]": {
         "editor.tabSize": 2
     }

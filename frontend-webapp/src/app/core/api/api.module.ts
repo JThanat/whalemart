@@ -1,8 +1,8 @@
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { API_URL_PREFIX, UrlPrefixInterceptor } from './url-prefix-interceptor.service';
 import { environment } from '../../../environments/environment';
+import { API_URL_PREFIX, UrlPrefixInterceptor } from './url-prefix-interceptor.service';
 
 @NgModule({
   imports: [

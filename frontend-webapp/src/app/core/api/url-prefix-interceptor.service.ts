@@ -1,11 +1,10 @@
 import {
-  HttpInterceptor,
-  HttpRequest,
+  HttpEvent,
   HttpHandler,
-  HttpResponse,
-  HttpEvent
+  HttpInterceptor,
+  HttpRequest
 } from '@angular/common/http';
-import { Injectable, InjectionToken, Inject } from '@angular/core';
+import { Inject, Injectable, InjectionToken } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 export const API_URL_PREFIX = new InjectionToken<string>('API URL Prefix');

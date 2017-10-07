@@ -1,8 +1,8 @@
-import { TestBed, inject } from '@angular/core/testing';
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { inject, TestBed } from '@angular/core/testing';
 
-import { UrlPrefixInterceptor, API_URL_PREFIX } from './url-prefix-interceptor.service';
+import { API_URL_PREFIX, UrlPrefixInterceptor } from './url-prefix-interceptor.service';
 
 describe('UrlPrefixInterceptor', () => {
   beforeEach(() => {
