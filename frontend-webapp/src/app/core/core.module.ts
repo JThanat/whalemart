@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ApiModule } from './api/api.module';
@@ -13,4 +13,10 @@ import { ApiModule } from './api/api.module';
     ApiModule
   ]
 })
-export class CoreModule { }
+export class CoreModule {
+  constructor(@Optional() @SkipSelf() parentCoreModule: CoreModule) {
+    if (parentCoreModule) {
+      throw new Error('CoreModule can be imported once from AppModule.');
+    }
+  }
+}
