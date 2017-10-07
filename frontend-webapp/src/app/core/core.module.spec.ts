@@ -4,7 +4,7 @@ describe('CoreModule', () => {
   let coreModule: CoreModule;
 
   beforeEach(() => {
-    coreModule = new CoreModule();
+    coreModule = new CoreModule(null as any);
   });
 
   it('should create an instance', () => {

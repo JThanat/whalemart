@@ -14,7 +14,7 @@ import { ApiModule } from './api/api.module';
   ]
 })
 export class CoreModule {
-  constructor(@Optional() @SkipSelf() parentCoreModule: CoreModule) {
+  constructor( @Optional() @SkipSelf() parentCoreModule: CoreModule) {
     if (parentCoreModule) {
       throw new Error('CoreModule can be imported once from AppModule.');
     }
