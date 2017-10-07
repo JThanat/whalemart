@@ -1,0 +1,26 @@
+<h1>Login</h1>
+
+<form (submit)="login()" [formGroup]="loginForm">
+  <div *ngIf="errorReason" [ngSwitch]="errorReason">
+      <ng-template ngSwitchCase="INVALID_USERNAME_PASSWORD">Invalid username or password.</ng-template>
+      <ng-template ngSwitchDefault>Unknown error: {{ errorReason }}</ng-template>
+  </div>
+
+  <div>
+    Username:
+    <input type="text" placeholder="Username" formControlName="username" required>
+  </div>
+  <div *ngIf="loginForm.controls['username'].hasError('required') && (loginForm.controls['username'].touched || forceShowError)" class="form-error">
+    Please enter your username.
+  </div>
+
+  <div>
+    Password:
+    <input type="password" placeholder="Password" formControlName="password" required>
+  </div>
+  <div *ngIf="loginForm.controls['password'].hasError('required') && (loginForm.controls['password'].touched || forceShowError)" class="form-error">
+    Please enter your password.
+  </div>
+
+  <input type="submit" value="Login" [disabled]="loginForm.disabled">
+</form>
