@@ -38,3 +38,4 @@ script:
   - cd $TRAVIS_BUILD_DIR/frontend-webapp
   - yarn test --single-run --no-progress --browser=ChromeHeadless
   - ../scripts/loop-ping-server.sh && yarn e2e --no-progress --config=protractor-ci.conf.js
+  - yarn lint
