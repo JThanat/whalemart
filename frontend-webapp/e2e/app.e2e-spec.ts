@@ -1,3 +1,5 @@
+import { browser } from 'protractor';
+
 import { AppPage } from './app.po';
 
 describe('frontend-webapp App', () => {
@@ -5,6 +7,10 @@ describe('frontend-webapp App', () => {
 
   beforeEach(() => {
     page = new AppPage();
+  });
+
+  it('should have correct title message', async () => {
+    expect(await browser.getTitle()).toBe('Whalemart');
   });
 
   it('should display welcome message', () => {
