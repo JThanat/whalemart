@@ -11,7 +11,7 @@
 7. [Error Messages](./sections/7-error-messages.md)
 8. [Data Dictionary](./sections/8-data-dictionary.md)
 9. [Use-Case Diagram](./sections/9-use-case-diagram.md)
-10. [Use-Case Descriptions](./sections/10-use-case-descriptions.md)
+10. [Use-Case Descriptions](./sections/10-use-case-descriptions.pdf)
 11. [Activity Diagrams](./sections/11-activity-diagrams.md)
 12. [Sequence Diagrams](./sections/12-sequence-diagrams.md)
 13. [Class Diagram](./sections/13-class-diagram.md)
