@@ -70,7 +70,7 @@
 
 ## Propose Booth Reservation
 
-![Propose Booth Reservation](../images/activity-diagram/TO_BE_EDITED.svg)
+![Propose Booth Reservation](../images/activity-diagram/Propose%20Booth%20Reservation.svg)
 
 ## Confirm Approved Booth
 
@@ -78,11 +78,11 @@
 
 ## Confirm Rental
 
-![Confirm Rental](../images/activity-diagram/TO_BE_EDITED.svg)
+![Confirm Rental](../images/activity-diagram/Confirm%20Rental.svg)
 
 ## Make Full Payment
 
-![Make Full Payment](../images/activity-diagram/TO_BE_EDITED.svg)
+![Make Full Payment](../images/activity-diagram/Make%20Full%20Payment.svg)
 
 ## Pay Rental Fee
 
