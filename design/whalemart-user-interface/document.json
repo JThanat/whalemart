@@ -3,6 +3,62 @@
   "assets": {
     "_class": "assetCollection",
     "colors": [
+      {
+        "_class": "color",
+        "alpha": 1,
+        "blue": 0.2745098039215688,
+        "green": 0.207843137254902,
+        "red": 0.9176470588235294
+      },
+      {
+        "_class": "color",
+        "alpha": 1,
+        "blue": 0.6078431372549019,
+        "green": 0.1803921568627452,
+        "red": 0.4000000000000002
+      },
+      {
+        "_class": "color",
+        "alpha": 1,
+        "blue": 0.3882352941176471,
+        "green": 0.2509803921568627,
+        "red": 0.2901960784313725
+      },
+      {
+        "_class": "color",
+        "alpha": 1,
+        "blue": 0.803921568627451,
+        "green": 0.7372549019607842,
+        "red": 0.2627450980392156
+      },
+      {
+        "_class": "color",
+        "alpha": 1,
+        "blue": 0.06274509803921567,
+        "green": 0.04705882352941176,
+        "red": 0.1333333333333333
+      },
+      {
+        "_class": "color",
+        "alpha": 1,
+        "blue": 0.2787626072066546,
+        "green": 0.2704032583924116,
+        "red": 0.3163796768707483
+      },
+      {
+        "_class": "color",
+        "alpha": 1,
+        "blue": 0.5828321794132297,
+        "green": 0.5765829265203655,
+        "red": 0.6140784438775511
+      },
+      {
+        "_class": "color",
+        "alpha": 1,
+        "blue": 0.8654904095223702,
+        "green": 0.8623289251003136,
+        "red": 0.8812978316326531
+      }
     ],
     "gradients": [
     ],
@@ -15,6 +71,7 @@
     ]
   },
   "colorSpace": 0,
+  "do_objectID": "AE964C22-AEBB-4D9E-BA1E-98ED6145A11D",
   "enableLayerInteraction": true,
   "enableSliceInteraction": true,
   "foreignSymbols": [
@@ -31,6 +88,7 @@
     "version": 95
   },
   "pages": [
-    "Page 1"
+    "UI",
+    "Styleguide"
   ]
 }
