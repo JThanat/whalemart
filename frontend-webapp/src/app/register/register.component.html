@@ -3,6 +3,13 @@
 <form [formGroup]="registerForm" (submit)="register()">
   <div>
     <label>
+      Email
+      <input type="email" formControlName="email">
+    </label>
+  </div>
+
+  <div>
+    <label>
       First Name
       <input type="text" formControlName="firstName">
     </label>
@@ -17,13 +24,6 @@
 
   <div>
     <label>
-      Username
-      <input type="text" formControlName="username">
-    </label>
-  </div>
-
-  <div>
-    <label>
       Password
       <input type="password" formControlName="password">
     </label>
@@ -31,28 +31,10 @@
 
   <div>
     <label>
-      Confirm Password
-      <input type="password" formControlName="passwordConfirm">
-    </label>
-  </div>
-
-  <div>
-    <label>
-      Email
-      <input type="email" formControlName="email">
-    </label>
-  </div>
-
-  <div>
-    <label>
-      Phone No.
+      Phone
       <input type="text" formControlName="phone">
     </label>
   </div>
 
-  <button type="submit">Register</button>
+  <button type="submit" [disabled]="!registerForm.valid">Register</button>
 </form>
-
-<div *ngIf="registerForm.valid">VALID</div>
-<div *ngIf="registerForm.invalid">INVALID</div>
-<code><pre>{{ registerForm.value | json }}</pre></code>
