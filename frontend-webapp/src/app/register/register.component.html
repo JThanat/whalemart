@@ -1,0 +1,58 @@
+<h1>Register</h1>
+
+<form [formGroup]="registerForm" (submit)="register()">
+  <div>
+    <label>
+      First Name
+      <input type="text" formControlName="firstName">
+    </label>
+  </div>
+
+  <div>
+    <label>
+      Last Name
+      <input type="text" formControlName="lastName">
+    </label>
+  </div>
+
+  <div>
+    <label>
+      Username
+      <input type="text" formControlName="username">
+    </label>
+  </div>
+
+  <div>
+    <label>
+      Password
+      <input type="password" formControlName="password">
+    </label>
+  </div>
+
+  <div>
+    <label>
+      Confirm Password
+      <input type="password" formControlName="passwordConfirm">
+    </label>
+  </div>
+
+  <div>
+    <label>
+      Email
+      <input type="email" formControlName="email">
+    </label>
+  </div>
+
+  <div>
+    <label>
+      Phone No.
+      <input type="text" formControlName="phone">
+    </label>
+  </div>
+
+  <button type="submit">Register</button>
+</form>
+
+<div *ngIf="registerForm.valid">VALID</div>
+<div *ngIf="registerForm.invalid">INVALID</div>
+<code><pre>{{ registerForm.value | json }}</pre></code>
