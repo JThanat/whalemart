@@ -1,11 +1,19 @@
 <h1>Register</h1>
 
 <form [formGroup]="registerForm" (submit)="register()">
+  <div *ngIf="errorReason" [ngSwitch]="errorReason">
+      <ng-template ngSwitchCase="INVALID_USERNAME_PASSWORD">Invalid username or password.</ng-template>
+      <ng-template ngSwitchDefault>Unknown error: {{ errorReason }}</ng-template>
+  </div>
+
   <div>
     <label>
       Email
       <input type="email" formControlName="email">
     </label>
+  </div>
+  <div *ngIf="registerForm.controls['email'].hasError('email') && (registerForm.controls['email'].touched || forceShowError)" class="form-error">
+    Please enter valid email.
   </div>
 
   <div>
@@ -36,5 +44,5 @@
     </label>
   </div>
 
-  <button type="submit" [disabled]="!registerForm.valid">Register</button>
+  <button type="submit" [disabled]="isRegistering">Register</button>
 </form>
