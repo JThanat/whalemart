@@ -1,8 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { inject, TestBed } from '@angular/core/testing';
-import { of as observableOf } from 'rxjs/observable/of';
-import { _throw as observableThrow } from 'rxjs/observable/throw';
 
 import { UserInfo, UserService } from '../core/user/user.service';
 import {
@@ -12,7 +10,7 @@ import {
   LoginService
 } from './login.service';
 
-fdescribe('LoginService', () => {
+describe('LoginService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
@@ -20,17 +18,18 @@ fdescribe('LoginService', () => {
     });
   });
 
-  it('should return UserInfo correctly when the login credential is correct', inject(
-    [LoginService, UserService],
-    (loginService: LoginService, userService: UserService) => {
-      // TODO: Use HTTP mocking instead
-      spyOn(loginService, 'checkLogin').and.callFake((username: string, password: string) => {
-        expect(username).toBe('testusername');
-        expect(password).toBe('testpassword');
-        const loginServerResponse: LoginServerResponse = { success: true };
-        return observableOf(loginServerResponse);
-      });
+  const inj = (fn: (
+    loginService: LoginService,
+    httpMock: HttpTestingController,
+    userService: UserService
+  ) => void) => inject([LoginService, HttpTestingController, UserService], fn);
 
+  afterEach(inject(
+    [HttpTestingController], (httpMock: HttpTestingController) => httpMock.verify()
+  ));
+
+  it('should return UserInfo correctly when the login credential is correct', inj(
+    (loginService, httpMock, userService) => {
       expect(userService.userInfo.value).toBe(undefined);
 
       let isSuccess = false;
@@ -39,6 +38,10 @@ fdescribe('LoginService', () => {
         isSuccess = true;
       });
 
+      const req = httpMock.expectOne({ url: '/api/login/', method: 'POST' });
+      expect(req.request.body).toEqual({ username: 'testusername', password: 'testpassword' });
+      req.flush({ success: true } as LoginServerResponse);
+
       expect(isSuccess).toBe(true);
       expect(userService.userInfo.value).not.toBeUndefined();
       const userInfo = userService.userInfo.value as UserInfo;
@@ -46,17 +49,8 @@ fdescribe('LoginService', () => {
     }
   ));
 
-  it('should throw LoginError when the login credential is not correct', inject(
-    [LoginService, UserService],
-    (loginService: LoginService, userService: UserService) => {
-      // TODO: Use HTTP mocking instead
-      spyOn(loginService, 'checkLogin').and.returnValue(observableThrow(new HttpErrorResponse({
-        error: {
-          success: false,
-          reason: 'INVALID_USERNAME_PASSWORD'
-        } as LoginServerResponseError
-      })));
-
+  it('should throw LoginError when the login credential is not correct', inj(
+    (loginService, httpMock, userService) => {
       expect(userService.userInfo.value).toBe(undefined);
 
       let isError = false;
@@ -69,28 +63,31 @@ fdescribe('LoginService', () => {
         }
       });
 
+      const req = httpMock.expectOne({ url: '/api/login/', method: 'POST' });
+      expect(req.request.body).toEqual({ username: 'testusername', password: 'testpassword' });
+      req.flush({
+        success: false,
+        reason: 'INVALID_USERNAME_PASSWORD'
+      } as LoginServerResponseError, { status: 401, statusText: 'Unauthorized' });
+
       expect(isError).toBe(true);
       expect(userService.userInfo.value).toBeUndefined();
     }
   ));
 
-  it('should throw LoginError when there is an HTTP error', inject(
-    [LoginService, UserService],
-    (loginService: LoginService, userService: UserService) => {
-      // TODO: Use HTTP mocking instead
-      const errorResponse = new HttpErrorResponse({
-        error: {},
-        status: 0
-      });
-      spyOn(loginService, 'checkLogin').and.returnValue(observableThrow(errorResponse));
-
+  it('should throw LoginError when there is an HTTP error', inj(
+    (loginService, httpMock, userService) => {
       expect(userService.userInfo.value).toBe(undefined);
 
       let isError = false;
       loginService.login('testusername', 'testpassword').subscribe(() => fail(), err => {
-        expect(err).toBe(errorResponse);
+        expect(err instanceof HttpErrorResponse).toBe(true);
         isError = true;
       });
+
+      const req = httpMock.expectOne({ url: '/api/login/', method: 'POST' });
+      expect(req.request.body).toEqual({ username: 'testusername', password: 'testpassword' });
+      req.error(new ErrorEvent('some error'));
 
       expect(isError).toBe(true);
       expect(userService.userInfo.value).toBeUndefined();

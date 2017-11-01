@@ -2,6 +2,7 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 
 import { SharedModule } from '../shared/shared.module';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { UserService } from './user/user.service';
 
 @NgModule({
   imports: [
@@ -12,6 +13,9 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
   ],
   exports: [
     NavBarComponent
+  ],
+  providers: [
+    UserService
   ]
 })
 export class CoreModule {
