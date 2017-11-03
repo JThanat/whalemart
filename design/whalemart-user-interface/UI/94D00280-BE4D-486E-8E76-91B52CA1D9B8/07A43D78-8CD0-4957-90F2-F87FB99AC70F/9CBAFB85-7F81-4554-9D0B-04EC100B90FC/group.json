@@ -1,0 +1,53 @@
+{
+  "_class": "group",
+  "do_objectID": "9CBAFB85-7F81-4554-9D0B-04EC100B90FC",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "height": 73,
+    "width": 362,
+    "x": 0,
+    "y": 521
+  },
+  "hasClickThrough": false,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "layers": [
+    {
+      "class": "shapeGroup",
+      "id": "FDD92C74-9E62-4297-B9D0-768F1DEBE272"
+    },
+    {
+      "class": "text",
+      "id": "12E51687-51C5-4FF1-ADC4-AD183C2648BD"
+    },
+    {
+      "class": "group",
+      "id": "208E65AB-4D2A-4E9E-8A69-74CCA2803BC3"
+    }
+  ],
+  "name": "reserve-booth-box",
+  "nameIsFixed": true,
+  "resizingConstraint": 63,
+  "resizingType": 0,
+  "rotation": 0,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  }
+}

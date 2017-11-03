@@ -40,20 +40,6 @@
     "_class": "rulerData",
     "base": 0,
     "guides": [
-      100,
-      1340,
-      324,
-      354,
-      578,
-      608,
-      832,
-      862,
-      1086,
-      1116,
-      705,
-      735,
-      1310,
-      130
     ]
   },
   "includeBackgroundColorInExport": true,
@@ -66,11 +52,11 @@
   "layers": [
     {
       "class": "group",
-      "id": "B49D3A1E-B7AB-46C7-B023-0BA6C97E36D9"
+      "id": "CCF2D165-4DA1-4ADA-B7C5-9BAC4D746220"
     },
     {
       "class": "group",
-      "id": "CCF2D165-4DA1-4ADA-B7C5-9BAC4D746220"
+      "id": "B49D3A1E-B7AB-46C7-B023-0BA6C97E36D9"
     }
   ],
   "layout": {

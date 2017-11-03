@@ -23,7 +23,7 @@
   "isFlippedVertical": false,
   "isLocked": false,
   "isVisible": true,
-  "layerListExpandedType": 2,
+  "layerListExpandedType": 0,
   "layers": [
     {
       "class": "shapeGroup",
@@ -38,7 +38,7 @@
       "id": "F5F7613F-A44B-42F9-978F-C92F47CB6BF3"
     }
   ],
-  "name": "Group 8",
+  "name": "image",
   "nameIsFixed": false,
   "resizingConstraint": 63,
   "resizingType": 0,

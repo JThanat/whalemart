@@ -23,7 +23,7 @@
   "isFlippedVertical": false,
   "isLocked": false,
   "isVisible": true,
-  "layerListExpandedType": 2,
+  "layerListExpandedType": 0,
   "layers": [
     {
       "class": "shapeGroup",
@@ -39,15 +39,11 @@
     },
     {
       "class": "shapeGroup",
-      "id": "CB0B272C-0488-4416-8A4E-EC0DF6F38EBA"
-    },
-    {
-      "class": "shapeGroup",
       "id": "8A719FC1-03FB-4B8C-A42B-D257B0870B14"
     }
   ],
-  "name": "Group 2 Copy",
-  "nameIsFixed": false,
+  "name": "left",
+  "nameIsFixed": true,
   "resizingConstraint": 63,
   "resizingType": 0,
   "rotation": 0,

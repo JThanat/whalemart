@@ -1,0 +1,47 @@
+{
+  "_class": "bitmap",
+  "clippingMask": "{{0, 0}, {1, 1}}",
+  "do_objectID": "CAB92D78-4C8C-49D9-9E0B-2FDE9E80EB43",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "fillReplacesImage": false,
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": true,
+    "height": 98.45922072547718,
+    "width": 73.8444155441078,
+    "x": -4.453506319351634,
+    "y": 0.1633374046041409
+  },
+  "image": {
+    "_class": "MSJSONFileReference",
+    "_ref": "images/05bed225506e9657ff1326516417cb3fcfc8d507",
+    "_ref_class": "MSImageData"
+  },
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "name": "foodism360-397360",
+  "nameIsFixed": false,
+  "nineSliceCenterRect": "{{0, 0}, {0, 0}}",
+  "nineSliceScale": "{0, 0}",
+  "resizingConstraint": 63,
+  "resizingType": 0,
+  "rotation": 0,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  }
+}

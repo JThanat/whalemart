@@ -1,0 +1,49 @@
+{
+  "_class": "group",
+  "do_objectID": "8C5DEAEB-BD94-4E0D-8FCB-3C9AEF595A60",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "height": 46,
+    "width": 107,
+    "x": 463.0908966883926,
+    "y": 264.9233090706553
+  },
+  "hasClickThrough": false,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "layers": [
+    {
+      "class": "shapeGroup",
+      "id": "7D1884E9-46C3-4C25-98EB-C4B0CBB665E6"
+    },
+    {
+      "class": "text",
+      "id": "9F5E4F7D-19B0-447B-882D-39A8FFCF3ED7"
+    }
+  ],
+  "name": "add-product-button",
+  "nameIsFixed": true,
+  "resizingConstraint": 63,
+  "resizingType": 0,
+  "rotation": 0,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  }
+}

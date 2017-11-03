@@ -13,8 +13,8 @@
   "frame": {
     "_class": "rect",
     "constrainProportions": false,
-    "height": 232,
-    "width": 621,
+    "height": 366,
+    "width": 814,
     "x": 891,
     "y": 20
   },
@@ -23,23 +23,27 @@
   "isFlippedVertical": false,
   "isLocked": false,
   "isVisible": true,
-  "layerListExpandedType": 2,
+  "layerListExpandedType": 0,
   "layers": [
     {
       "class": "text",
       "id": "E328D20A-EC33-45C0-BF5A-E2D981B39AF7"
     },
     {
-      "class": "group",
-      "id": "E00D3AB4-DEBA-4537-91F8-93E8CD61C0CA"
-    },
-    {
       "class": "text",
       "id": "EDC36724-04DE-4202-AB08-B0AF2F63FD3E"
+    },
+    {
+      "class": "group",
+      "id": "C7E805E4-88BF-4886-8FE4-017AB1980011"
+    },
+    {
+      "class": "group",
+      "id": "E00D3AB4-DEBA-4537-91F8-93E8CD61C0CA"
     }
   ],
-  "name": "Group 15",
-  "nameIsFixed": false,
+  "name": "text-over",
+  "nameIsFixed": true,
   "resizingConstraint": 63,
   "resizingType": 0,
   "rotation": 0,

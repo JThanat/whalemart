@@ -23,7 +23,7 @@
   "isFlippedVertical": false,
   "isLocked": false,
   "isVisible": true,
-  "layerListExpandedType": 2,
+  "layerListExpandedType": 0,
   "layers": [
     {
       "class": "group",
@@ -46,8 +46,8 @@
       "id": "A0D907A3-9D1C-4659-B83D-AC80451BE198"
     }
   ],
-  "name": "Group 9",
-  "nameIsFixed": false,
+  "name": "content",
+  "nameIsFixed": true,
   "resizingConstraint": 63,
   "resizingType": 0,
   "rotation": 0,

@@ -23,12 +23,8 @@
   "isFlippedVertical": false,
   "isLocked": false,
   "isVisible": true,
-  "layerListExpandedType": 0,
+  "layerListExpandedType": 1,
   "layers": [
-    {
-      "class": "text",
-      "id": "BBE3FE93-6172-49B7-BEDF-91A0CEEDF836"
-    },
     {
       "class": "group",
       "id": "7D6575D9-628F-4211-8610-6CD3E365172E"
@@ -44,10 +40,14 @@
     {
       "class": "group",
       "id": "76A2FF83-C4BE-49F1-BBD6-9A66786D6EA5"
+    },
+    {
+      "class": "text",
+      "id": "BBE3FE93-6172-49B7-BEDF-91A0CEEDF836"
     }
   ],
-  "name": "Group 2 Copy",
-  "nameIsFixed": false,
+  "name": "shades-of-grey",
+  "nameIsFixed": true,
   "resizingConstraint": 63,
   "resizingType": 0,
   "rotation": 0,

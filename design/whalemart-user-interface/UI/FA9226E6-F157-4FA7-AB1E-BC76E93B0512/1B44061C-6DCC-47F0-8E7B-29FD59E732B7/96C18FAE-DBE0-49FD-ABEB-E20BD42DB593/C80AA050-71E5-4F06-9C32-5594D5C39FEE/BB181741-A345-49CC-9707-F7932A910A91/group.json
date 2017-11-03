@@ -23,22 +23,26 @@
   "isFlippedVertical": false,
   "isLocked": false,
   "isVisible": true,
-  "layerListExpandedType": 2,
+  "layerListExpandedType": 0,
   "layers": [
     {
       "class": "text",
       "id": "D1A6ABF2-1BCF-44FA-B8D8-B1BE901A2C73"
     },
     {
-      "class": "group",
-      "id": "5177758E-7549-4AF1-B702-D539415DB543"
+      "class": "text",
+      "id": "53AAD498-DC1F-4A91-842E-346A2903895F"
+    },
+    {
+      "class": "text",
+      "id": "24EF7D98-C3DB-4DF8-BCB7-86FBDDC101CF"
     },
     {
       "class": "group",
-      "id": "F16E1E25-030D-488B-A19E-4DFF7ECFA37C"
+      "id": "F38D8532-7DD6-4CD9-88DD-B7C5B92AE261"
     }
   ],
-  "name": "Group 10",
+  "name": "description",
   "nameIsFixed": false,
   "resizingConstraint": 63,
   "resizingType": 0,

@@ -25,15 +25,15 @@
   "isFlippedVertical": false,
   "isLocked": false,
   "isVisible": true,
-  "layerListExpandedType": 1,
+  "layerListExpandedType": 0,
   "layers": [
     {
       "class": "rectangle",
       "id": "C14FB59D-8A2F-4982-ADD2-A0A18761AC52"
     }
   ],
-  "name": "Rectangle 3 Copy",
-  "nameIsFixed": false,
+  "name": "ovalay",
+  "nameIsFixed": true,
   "resizingConstraint": 63,
   "resizingType": 0,
   "rotation": 0,

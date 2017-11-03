@@ -23,7 +23,7 @@
   "isFlippedVertical": false,
   "isLocked": false,
   "isVisible": true,
-  "layerListExpandedType": 0,
+  "layerListExpandedType": 1,
   "layers": [
     {
       "class": "text",
@@ -38,7 +38,7 @@
       "id": "453F4802-A2BB-4CA3-9793-24FF562CC0CA"
     }
   ],
-  "name": "Group Copy 3",
+  "name": "color-4",
   "nameIsFixed": false,
   "resizingConstraint": 63,
   "resizingType": 0,

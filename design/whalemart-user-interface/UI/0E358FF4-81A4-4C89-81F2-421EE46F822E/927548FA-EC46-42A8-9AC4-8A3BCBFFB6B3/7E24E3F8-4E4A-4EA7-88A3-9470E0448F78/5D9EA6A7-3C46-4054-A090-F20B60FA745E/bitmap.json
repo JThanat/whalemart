@@ -1,0 +1,47 @@
+{
+  "_class": "bitmap",
+  "clippingMask": "{{0, 0}, {1, 1}}",
+  "do_objectID": "5D9EA6A7-3C46-4054-A090-F20B60FA745E",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "fillReplacesImage": false,
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": true,
+    "height": 206.9141927349373,
+    "width": 330.956802199196,
+    "x": -160.3025566412811,
+    "y": -75.49332323865858
+  },
+  "image": {
+    "_class": "MSJSONFileReference",
+    "_ref": "images/6f8d387b6d844f10089d2709d389450d8fe5f609",
+    "_ref_class": "MSImageData"
+  },
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "name": "benjamin-hung-340383",
+  "nameIsFixed": false,
+  "nineSliceCenterRect": "{{0, 0}, {0, 0}}",
+  "nineSliceScale": "{0, 0}",
+  "resizingConstraint": 63,
+  "resizingType": 0,
+  "rotation": 0,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  }
+}

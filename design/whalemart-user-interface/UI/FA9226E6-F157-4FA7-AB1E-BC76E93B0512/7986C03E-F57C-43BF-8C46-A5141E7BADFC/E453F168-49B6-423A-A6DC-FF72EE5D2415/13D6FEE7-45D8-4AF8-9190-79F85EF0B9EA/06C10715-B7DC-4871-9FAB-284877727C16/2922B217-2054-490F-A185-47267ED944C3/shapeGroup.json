@@ -25,15 +25,15 @@
   "isFlippedVertical": false,
   "isLocked": false,
   "isVisible": true,
-  "layerListExpandedType": 1,
+  "layerListExpandedType": 0,
   "layers": [
     {
       "class": "rectangle",
       "id": "816A7E0A-D59C-4FE7-BEBC-EC8B5ED2BC93"
     }
   ],
-  "name": "Rectangle 7",
-  "nameIsFixed": false,
+  "name": "ovalay",
+  "nameIsFixed": true,
   "resizingConstraint": 63,
   "resizingType": 0,
   "rotation": 0,

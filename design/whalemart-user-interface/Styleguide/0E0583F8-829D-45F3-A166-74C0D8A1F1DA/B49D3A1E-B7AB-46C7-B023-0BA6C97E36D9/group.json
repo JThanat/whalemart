@@ -23,12 +23,8 @@
   "isFlippedVertical": false,
   "isLocked": false,
   "isVisible": true,
-  "layerListExpandedType": 0,
+  "layerListExpandedType": 1,
   "layers": [
-    {
-      "class": "text",
-      "id": "E8BD32F4-8176-4A21-B23F-435C95DCFC70"
-    },
     {
       "class": "group",
       "id": "DCB9EF56-479A-4A57-BA40-864D845556CA"
@@ -44,10 +40,14 @@
     {
       "class": "group",
       "id": "4F4ACBFC-41CC-4225-B877-BC4317D3C85A"
+    },
+    {
+      "class": "text",
+      "id": "E8BD32F4-8176-4A21-B23F-435C95DCFC70"
     }
   ],
-  "name": "Group 2",
-  "nameIsFixed": false,
+  "name": "brand-color",
+  "nameIsFixed": true,
   "resizingConstraint": 63,
   "resizingType": 0,
   "rotation": 0,

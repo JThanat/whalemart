@@ -34,8 +34,8 @@
       "id": "5F416BED-13A5-4C72-82A8-D3CAC40004A7"
     }
   ],
-  "name": "Group 13 Copy",
-  "nameIsFixed": false,
+  "name": "market-2",
+  "nameIsFixed": true,
   "resizingConstraint": 63,
   "resizingType": 0,
   "rotation": 0,

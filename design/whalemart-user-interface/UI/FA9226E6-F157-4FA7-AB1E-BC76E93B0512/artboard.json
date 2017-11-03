@@ -20,7 +20,7 @@
   "frame": {
     "_class": "rect",
     "constrainProportions": false,
-    "height": 1808,
+    "height": 1781,
     "width": 1440,
     "x": -341,
     "y": -199
@@ -41,11 +41,11 @@
   "isFlippedVertical": false,
   "isLocked": false,
   "isVisible": true,
-  "layerListExpandedType": 2,
+  "layerListExpandedType": 1,
   "layers": [
     {
-      "class": "group",
-      "id": "D792A1C0-38A3-457B-8C3D-966B242D7444"
+      "class": "symbolInstance",
+      "id": "B8C92E7D-6F60-450F-9C55-27D35C97D89A"
     },
     {
       "class": "group",
@@ -60,8 +60,8 @@
       "id": "4AE0CB69-5853-43C7-BEBE-A0081F67952F"
     },
     {
-      "class": "group",
-      "id": "BB216CF1-A23D-4095-9470-D1001847B125"
+      "class": "symbolInstance",
+      "id": "8AD35A51-1947-44EB-9EEB-25A3C21CD52E"
     }
   ],
   "name": "feed",

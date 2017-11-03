@@ -1,0 +1,49 @@
+{
+  "_class": "group",
+  "do_objectID": "9875ADE3-C026-49D7-9645-A5357C30E11D",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "height": 48,
+    "width": 43,
+    "x": 31.51835808551368,
+    "y": 27.64333074034266
+  },
+  "hasClickThrough": false,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "layers": [
+    {
+      "class": "shapeGroup",
+      "id": "DA5EF870-2B7C-44BC-8E89-62B4B0C527E6"
+    },
+    {
+      "class": "group",
+      "id": "49DA0402-A7DB-4D48-8796-96605B35D508"
+    }
+  ],
+  "name": "pay-100-icon",
+  "nameIsFixed": true,
+  "resizingConstraint": 63,
+  "resizingType": 0,
+  "rotation": 0,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  }
+}

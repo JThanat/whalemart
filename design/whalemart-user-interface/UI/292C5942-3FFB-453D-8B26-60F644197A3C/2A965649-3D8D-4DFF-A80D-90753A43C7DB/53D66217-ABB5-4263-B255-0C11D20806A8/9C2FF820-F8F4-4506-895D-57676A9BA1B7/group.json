@@ -1,0 +1,49 @@
+{
+  "_class": "group",
+  "do_objectID": "9C2FF820-F8F4-4506-895D-57676A9BA1B7",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "height": 41,
+    "width": 108,
+    "x": 233,
+    "y": 15.80126462702947
+  },
+  "hasClickThrough": false,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "layers": [
+    {
+      "class": "shapeGroup",
+      "id": "AAF34562-6170-483C-9F51-D7A7E375B25D"
+    },
+    {
+      "class": "text",
+      "id": "7DF645E7-D0CC-49B4-B65D-B75561593C94"
+    }
+  ],
+  "name": "reserve-button",
+  "nameIsFixed": true,
+  "resizingConstraint": 63,
+  "resizingType": 0,
+  "rotation": 0,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  }
+}

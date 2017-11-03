@@ -1,0 +1,49 @@
+{
+  "_class": "group",
+  "do_objectID": "09788254-210C-427F-9BBB-799C6BDCDABA",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "height": 34,
+    "width": 33,
+    "x": 90,
+    "y": 65
+  },
+  "hasClickThrough": false,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "layers": [
+    {
+      "class": "shapeGroup",
+      "id": "D8F8CCC4-8D67-47FC-8190-8A616BFB674E"
+    },
+    {
+      "class": "group",
+      "id": "2DB422B8-96C0-47CC-A43E-7C3A053553EA"
+    }
+  ],
+  "name": "pin-mark",
+  "nameIsFixed": true,
+  "resizingConstraint": 63,
+  "resizingType": 0,
+  "rotation": 0,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  }
+}

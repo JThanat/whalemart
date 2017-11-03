@@ -23,7 +23,7 @@
   "isFlippedVertical": false,
   "isLocked": false,
   "isVisible": true,
-  "layerListExpandedType": 2,
+  "layerListExpandedType": 0,
   "layers": [
     {
       "class": "group",
@@ -31,15 +31,15 @@
     },
     {
       "class": "group",
-      "id": "4FA7CECE-417C-429C-B8B1-9EF61361BDDC"
+      "id": "A0D41D02-FF05-4B39-BC1E-BDA457D96157"
     },
     {
       "class": "group",
-      "id": "A0D41D02-FF05-4B39-BC1E-BDA457D96157"
+      "id": "4FA7CECE-417C-429C-B8B1-9EF61361BDDC"
     }
   ],
-  "name": "Group 13",
-  "nameIsFixed": false,
+  "name": "market-1",
+  "nameIsFixed": true,
   "resizingConstraint": 63,
   "resizingType": 0,
   "rotation": 0,

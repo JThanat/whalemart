@@ -34,8 +34,8 @@
       "id": "9FA98050-3D98-4007-A0E5-DAB531D581D2"
     }
   ],
-  "name": "Group 5",
-  "nameIsFixed": false,
+  "name": "tag",
+  "nameIsFixed": true,
   "resizingConstraint": 63,
   "resizingType": 0,
   "rotation": 0,

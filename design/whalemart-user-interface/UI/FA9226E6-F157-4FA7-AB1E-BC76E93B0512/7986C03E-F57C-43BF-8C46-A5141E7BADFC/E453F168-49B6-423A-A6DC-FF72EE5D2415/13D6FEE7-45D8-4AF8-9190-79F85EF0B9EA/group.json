@@ -23,7 +23,7 @@
   "isFlippedVertical": false,
   "isLocked": false,
   "isVisible": true,
-  "layerListExpandedType": 2,
+  "layerListExpandedType": 0,
   "layers": [
     {
       "class": "group",
@@ -34,8 +34,8 @@
       "id": "8F65FCB8-68F1-47F8-99D8-DE7C5AC2F0EA"
     }
   ],
-  "name": "Group 13 Copy 4",
-  "nameIsFixed": false,
+  "name": "market-5",
+  "nameIsFixed": true,
   "resizingConstraint": 63,
   "resizingType": 0,
   "rotation": 0,

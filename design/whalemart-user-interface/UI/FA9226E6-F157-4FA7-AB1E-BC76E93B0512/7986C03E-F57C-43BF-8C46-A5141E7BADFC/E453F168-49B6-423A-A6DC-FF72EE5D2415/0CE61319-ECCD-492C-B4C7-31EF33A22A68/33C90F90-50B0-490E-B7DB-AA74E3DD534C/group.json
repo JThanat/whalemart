@@ -30,15 +30,19 @@
       "id": "005DC05A-26BA-46B8-81B8-C30B109081C1"
     },
     {
-      "class": "group",
-      "id": "F5D8184D-7D3A-425E-911C-27EFE1EA94C8"
+      "class": "text",
+      "id": "C26F1DAA-23EC-4A16-B047-5A09AC2CDAFD"
+    },
+    {
+      "class": "text",
+      "id": "EDBC6957-FF63-4815-95A4-3B5FC82277E0"
     },
     {
       "class": "group",
-      "id": "CF1D260F-6DA7-4CE6-B987-87A4289592CE"
+      "id": "3F1CD586-BFFD-4CA0-AF53-D81DBE7EF664"
     }
   ],
-  "name": "Group 10",
+  "name": "description",
   "nameIsFixed": false,
   "resizingConstraint": 63,
   "resizingType": 0,

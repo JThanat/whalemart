@@ -34,8 +34,8 @@
       "id": "A8E9FC3F-EAB1-4FA6-B559-A4D4F08B5ECB"
     }
   ],
-  "name": "Group 17",
-  "nameIsFixed": false,
+  "name": "show-all",
+  "nameIsFixed": true,
   "resizingConstraint": 63,
   "resizingType": 0,
   "rotation": 0,

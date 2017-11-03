@@ -1,0 +1,50 @@
+{
+  "_class": "symbolInstance",
+  "do_objectID": "749BBC26-23A1-4045-923C-36C2897C35E7",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "height": 53,
+    "width": 317,
+    "x": 1.222120125788024,
+    "y": 195
+  },
+  "horizontalSpacing": 0,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "masterInfluenceEdgeMaxXPadding": 1,
+  "masterInfluenceEdgeMaxYPadding": 2,
+  "masterInfluenceEdgeMinXPadding": 1,
+  "masterInfluenceEdgeMinYPadding": 2,
+  "name": "booth-draggable-item-4",
+  "nameIsFixed": false,
+  "overrides": {
+    "356CB082-570F-4204-91EB-80AC93FA7402": "500",
+    "36C16E88-BCC0-40C8-BB8E-5FD23696593F": "J04",
+    "83649DB5-0521-4EFE-85C6-8B5C941CDF43": "4"
+  },
+  "resizingConstraint": 63,
+  "resizingType": 0,
+  "rotation": 0,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  },
+  "symbolID": "E75F5CFC-D2C4-433C-94DC-74EAB4A3A1A5",
+  "verticalSpacing": 0
+}
