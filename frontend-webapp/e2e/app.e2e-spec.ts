@@ -10,7 +10,7 @@ describe('frontend-webapp App', () => {
   });
 
   it('should have correct title message', async () => {
-    page.navigateTo();
+    await page.navigateTo();
     expect(await browser.getTitle()).toBe('Whalemart');
   });
 
