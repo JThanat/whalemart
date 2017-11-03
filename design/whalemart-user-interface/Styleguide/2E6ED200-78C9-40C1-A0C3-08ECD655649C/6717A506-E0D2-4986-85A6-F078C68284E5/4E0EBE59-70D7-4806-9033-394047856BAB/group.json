@@ -1,0 +1,57 @@
+{
+  "_class": "group",
+  "do_objectID": "4E0EBE59-70D7-4806-9033-394047856BAB",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "height": 50,
+    "width": 191,
+    "x": 0,
+    "y": 51.04296875
+  },
+  "hasClickThrough": false,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 1,
+  "layers": [
+    {
+      "class": "shapeGroup",
+      "id": "727C7A11-662E-4A0A-8B1A-EC68A609C9EC"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "B9CE63A6-F3C6-4A93-85F5-ECA3258ABC0D"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "70826CEC-6404-466B-B2F2-259C6C6CFB11"
+    },
+    {
+      "class": "group",
+      "id": "9F5DFD9B-143C-4573-959E-58D8C0C8BA76"
+    }
+  ],
+  "name": "tooltip",
+  "nameIsFixed": true,
+  "resizingConstraint": 63,
+  "resizingType": 0,
+  "rotation": 0,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  }
+}

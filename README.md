@@ -15,6 +15,7 @@ TODO: Fill out this long description.
 - [Documents](#documents)
 - [Install](#install)
 - [Usage](#usage)
+- [Contributing Design](#contributing-design)
 - [Contributors](#contributors)
 - [License](#license)
 
@@ -33,6 +34,23 @@ TODO: Fill out this long description.
 
 ```
 ```
+
+## Contributing Design
+Our design team uses [Sketch](https://www.sketchapp.com/) as a design tool for prototyping high-fidelity user interface. However, due to the limitation of versioning sketch's binary files on Git, we decided to use Kactus, the design version control, as a complement to facilitate design workflow. For further information on Kactus, please visit https://kactus.io/help/how-to/.
+
+In order to collaborate, first, you have to clone this repository and access all available design work products inside the [`design`](./design) directory. 
+
+After installing Kactus, you can regenerate a sketch file from JSON by directly clicking the `Regenerate Sketch File` button inside the Kactus app.
+
+<p align="center">
+<img src="./doc/images/kactus-regenerate-sketch-file.png" width="700"/><br>
+<i>Figure 1: Regenerating sketch file in Kactus
+</i>
+</p>
+
+When you make some changes to sketch files, Kactus watches those files and re-parses them automatically. Please note that at this step Kactus is required to be opened. This parsed (or exploded) view of your sketch file is what git tracks. So, you can use your preferred Git client to commit your work and push to the remote as usual.
+
+You can also peek and leave comments on the current Whalemart's UI at https://sketch.cloud/s/QbQAG/p/ui.
 
 ## Contributors
 <div>

@@ -1,0 +1,49 @@
+{
+  "_class": "group",
+  "do_objectID": "020B1725-A82F-4939-AE81-0865FAE43F27",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "height": 51,
+    "width": 137,
+    "x": 79,
+    "y": 966
+  },
+  "hasClickThrough": false,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "layers": [
+    {
+      "class": "shapeGroup",
+      "id": "E012D70D-6A36-4C15-8821-479248B0BC5A"
+    },
+    {
+      "class": "text",
+      "id": "1F3FB5FC-C927-409B-ABAC-4A533CC6FA46"
+    }
+  ],
+  "name": "pay-button",
+  "nameIsFixed": true,
+  "resizingConstraint": 63,
+  "resizingType": 0,
+  "rotation": 0,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  }
+}

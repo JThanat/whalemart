@@ -1,0 +1,61 @@
+{
+  "_class": "group",
+  "do_objectID": "B816AC72-0BF6-40B0-ACF1-CAD01170E973",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "height": 248,
+    "width": 319,
+    "x": 21,
+    "y": 38
+  },
+  "hasClickThrough": false,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "layers": [
+    {
+      "class": "group",
+      "id": "6AA8E059-0DC9-42A1-B95B-EF26B354F950"
+    },
+    {
+      "class": "symbolInstance",
+      "id": "7934D876-CB13-4DBC-9EA7-DB9920028192"
+    },
+    {
+      "class": "symbolInstance",
+      "id": "F03D3344-8754-49DB-BDEC-0CEA7159BEF4"
+    },
+    {
+      "class": "symbolInstance",
+      "id": "4E0C3D57-C23C-4B45-8B29-F16F1DC1FF59"
+    },
+    {
+      "class": "symbolInstance",
+      "id": "749BBC26-23A1-4045-923C-36C2897C35E7"
+    }
+  ],
+  "name": "selected-booth-box",
+  "nameIsFixed": true,
+  "resizingConstraint": 63,
+  "resizingType": 0,
+  "rotation": 0,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  }
+}

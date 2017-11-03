@@ -1,0 +1,57 @@
+{
+  "_class": "group",
+  "do_objectID": "401A834C-8122-4807-9002-8DA3B03E8A4C",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "height": 96,
+    "width": 600,
+    "x": 0,
+    "y": 0
+  },
+  "hasClickThrough": false,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "layers": [
+    {
+      "class": "shapeGroup",
+      "id": "4ECED569-F855-475B-A223-4F2C95A8C570"
+    },
+    {
+      "class": "group",
+      "id": "96777CD6-0E93-4A16-B0B4-0A05F06F55CF"
+    },
+    {
+      "class": "text",
+      "id": "9F59039E-7C6A-4A45-AC64-A5E6B7CB1F94"
+    },
+    {
+      "class": "text",
+      "id": "87705F8B-5B8C-499D-92F6-30E45C2A9DE0"
+    }
+  ],
+  "name": "pay-30",
+  "nameIsFixed": true,
+  "resizingConstraint": 63,
+  "resizingType": 0,
+  "rotation": 0,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  }
+}
