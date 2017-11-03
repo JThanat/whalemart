@@ -3,7 +3,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HomeComponent } from './home.component';
 
 describe('HomeComponent', () => {
-  let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
 
   beforeEach(async(() => {
@@ -11,12 +10,6 @@ describe('HomeComponent', () => {
       declarations: [HomeComponent]
     }).compileComponents();
   }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(HomeComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
 
   it('should render a title in a h1 tag', async(() => {
     fixture = TestBed.createComponent(HomeComponent);
