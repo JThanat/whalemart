@@ -34,6 +34,7 @@
     "@angular/compiler-cli": "5.0.2",
     "@angular/language-service": "5.0.2",
     "@types/jasmine": "~2.8.2",
+    "@types/facebook-js-sdk": "2.8.3",
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "~8.0.53",
     "codelyzer": "~4.0.0",

@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AlertService } from '../core/alert/alert.service';
+import { FacebookLoginService } from './facebook-login.service';
 import { InvalidLoginCredentialError, LoginService } from './login.service';
 
 @Component({
@@ -13,10 +14,15 @@ import { InvalidLoginCredentialError, LoginService } from './login.service';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
+  isFb = false;
+  fbAccessToken: string | undefined = undefined;
+  fbUserId: string | undefined = undefined;
+
   constructor(
     private loginService: LoginService,
     private router: Router,
-    private alert: AlertService
+    private alert: AlertService,
+    private fbLoginService: FacebookLoginService
   ) { }
 
   ngOnInit() {
@@ -24,6 +30,8 @@ export class LoginComponent implements OnInit {
       email: new FormControl('', [Validators.email]),
       password: new FormControl('', [Validators.required])
     }, { updateOn: 'blur' });
+
+    this.fbLoginService.ensureFbScriptLoad();
   }
 
   login() {
@@ -51,6 +59,15 @@ export class LoginComponent implements OnInit {
         });
       } else {
         throw err;
+      }
+    });
+  }
+
+  loginWithFacebook() {
+    this.fbLoginService.loginFacebook().subscribe(result => {
+      if (result.success) {
+        this.isFb = true;
+        this.fbAccessToken = result.fbAccessToken;
       }
     });
   }
