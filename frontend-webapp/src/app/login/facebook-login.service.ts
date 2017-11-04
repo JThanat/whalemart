@@ -1,10 +1,12 @@
 /// <reference path="../../../node_modules/@types/facebook-js-sdk/index.d.ts" />
 
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
-import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
-import { filter, first, map, mergeMap } from 'rxjs/operators';
+import { of as observableOf } from 'rxjs/observable/of';
+import { _throw as observableThrow } from 'rxjs/observable/throw';
+import { catchError, filter, first, map, mapTo, mergeMap } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 
@@ -13,6 +15,7 @@ let isFbScriptLoadingIssued = false;
 interface FacebookLoginResult {
   success: true;
   fbAccessToken: string;
+  requireRegistration: boolean;
 }
 
 interface FacebookLoginResultError {
@@ -27,10 +30,10 @@ export class FacebookLoginService {
   private isScriptLoaded = new BehaviorSubject(false);
 
   /**
-   * An observable that will fire once when the script is already loaded, or when the script loading
-   * is finished.
+   * An observable that will fire once with the FB object when the script is already loaded, or when
+   * the script loading is finished.
    */
-  private fbObject = this.isScriptLoaded.pipe(
+  fbObject = this.isScriptLoaded.pipe(
     filter(isLoaded => isLoaded),
     first(),
     map(() => FB) // Cannot use mapTo operator: FB object might not be available on initial load.
@@ -38,13 +41,10 @@ export class FacebookLoginService {
 
   private isLoginDialogOpening = false;
 
-  constructor(
-    @Inject(DOCUMENT) private document: Document,
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) { }
+  constructor(private http: HttpClient) { }
 
   ensureFbScriptLoad() {
-    if (isFbScriptLoadingIssued === false && isPlatformBrowser(this.platformId)) {
+    if (isFbScriptLoadingIssued === false) {
       isFbScriptLoadingIssued = true;
 
       // Following code is adapted from https://developers.facebook.com/docs/javascript/quickstart
@@ -67,7 +67,7 @@ export class FacebookLoginService {
         js = d.createElement(s); js.id = id;
         js.src = "https://connect.facebook.net/en_US/sdk.js";
         fjs.parentNode!.insertBefore(js, fjs);
-      }(this.document, 'script' as 'script', 'facebook-jssdk'));
+      }(document, 'script' as 'script', 'facebook-jssdk'));
       // tslint:enable
     }
   }
@@ -79,18 +79,37 @@ export class FacebookLoginService {
     this.isLoginDialogOpening = true;
     return this.fbObject.pipe(
       mergeMap(fb => new Promise<facebook.AuthResponse>(resolve => { fb.login(resolve); })),
-      map(loginResult => {
+      mergeMap(loginResult => {
         this.isLoginDialogOpening = false;
-        if (loginResult.status === 'connected') {
+
+        if (loginResult.status !== 'connected') {
+          const result: FacebookLoginResultError = { success: false };
+          return observableOf(result);
+        }
+
+        const accessToken = loginResult.authResponse.accessToken;
+        return this.isTokenValid(accessToken).pipe(map(isTokenValid => {
           const result: FacebookLoginResult = {
             success: true,
-            fbAccessToken: loginResult.authResponse.accessToken
+            fbAccessToken: accessToken,
+            requireRegistration: !isTokenValid
           };
           return result;
-        } else {
-          const result: FacebookLoginResultError = { success: false };
-          return result;
+        }));
+      })
+    );
+  }
+
+  private isTokenValid(accessToken: string) {
+    return this.http.post('/api/api-token-verify/', { token: accessToken }).pipe(
+      mapTo(true),
+      catchError(err => {
+        if (err instanceof HttpErrorResponse) {
+          if (err.status >= 400 && err.status < 500) {
+            return observableOf(true);
+          }
         }
+        return observableThrow(err);
       })
     );
   }
