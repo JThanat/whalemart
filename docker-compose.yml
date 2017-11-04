@@ -27,7 +27,6 @@ services:
 
   web:
     build: .
-    command: ["./wait_to_start.sh","python3", "manage.py", "runserver" ,"0.0.0.0:8000"]
     container_name: mms-webserver
     volumes:
       - ./webserver:/webserver
