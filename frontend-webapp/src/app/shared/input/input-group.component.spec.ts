@@ -17,7 +17,7 @@ describe('InputGroupComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(InputGroupComponent);
     component = fixture.componentInstance;
-    component.appInput = new InputDirective(null as any, null as any);
+    component.appInput = new InputDirective(null as any, null as any, null as any);
     fixture.detectChanges();
   });
 
