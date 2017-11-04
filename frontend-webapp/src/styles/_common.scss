@@ -1,5 +1,15 @@
 // Override Boostrap variables here before the imports
 
+$primary: #EA3546;
+$secondary: #662E9B;
+$other-1: #4A4063;
+$other-2: #43BCCD;
+
+$dark: #220C10;
+$dark-gray: #514547;
+$grey: #9D9395;
+$light-gray: #E1DCDD;
+
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
 @import '~bootstrap/scss/mixins';
