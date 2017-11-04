@@ -4,6 +4,10 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+import { InputErrorComponent } from './input/input-error.component';
+import { InputGroupComponent } from './input/input-group.component';
+import { InputDirective } from './input/input.directive';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -11,12 +15,19 @@ import { RouterModule } from '@angular/router';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  declarations: [],
+  declarations: [
+    InputGroupComponent,
+    InputDirective,
+    InputErrorComponent
+  ],
   exports: [
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    InputGroupComponent,
+    InputDirective,
+    InputErrorComponent
   ]
 })
 export class SharedModule { }
