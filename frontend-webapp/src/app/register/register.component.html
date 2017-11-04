@@ -1,48 +1,47 @@
-<h1>Register</h1>
+<div class="container">
+  <h1>Register</h1>
 
-<form [formGroup]="registerForm" (submit)="register()">
-  <div *ngIf="errorReason" [ngSwitch]="errorReason">
-      <ng-template ngSwitchCase="INVALID_USERNAME_PASSWORD">Invalid username or password.</ng-template>
-      <ng-template ngSwitchDefault>Unknown error: {{ errorReason }}</ng-template>
-  </div>
+  <form [formGroup]="registerForm" (submit)="register()">
+    <div *ngIf="errorReason" [ngSwitch]="errorReason">
+        <ng-template ngSwitchCase="INVALID_USERNAME_PASSWORD">Invalid username or password.</ng-template>
+        <ng-template ngSwitchDefault>Unknown error: {{ errorReason }}</ng-template>
+    </div>
 
-  <div>
-    <label>
-      Email
-      <input type="email" formControlName="email">
-    </label>
-  </div>
-  <div *ngIf="registerForm.controls['email'].hasError('email') && (registerForm.controls['email'].touched || forceShowError)" class="form-error">
-    Please enter valid email.
-  </div>
+    <app-input-group label="Email Address">
+      <input appInput type="email" class="form-control" formControlName="email" placeholder="Email Address">
+      <app-input-error *ngIf="registerForm.controls['email'].hasError('email')">
+        Please enter your valid email.
+      </app-input-error>
+    </app-input-group>
 
-  <div>
-    <label>
-      First Name
-      <input type="text" formControlName="firstName">
-    </label>
-  </div>
+    <app-input-group label="First Name">
+      <input appInput type="text" class="form-control" formControlName="firstName" placeholder="First Name">
+      <app-input-error *ngIf="registerForm.controls['firstName'].hasError('required')">
+        Please enter your first name.
+      </app-input-error>
+    </app-input-group>
 
-  <div>
-    <label>
-      Last Name
-      <input type="text" formControlName="lastName">
-    </label>
-  </div>
+    <app-input-group label="Last Name">
+      <input appInput type="text" class="form-control" formControlName="lastName" placeholder="Last Name">
+      <app-input-error *ngIf="registerForm.controls['lastName'].hasError('required')">
+        Please enter your last name.
+      </app-input-error>
+    </app-input-group>
 
-  <div>
-    <label>
-      Password
-      <input type="password" formControlName="password">
-    </label>
-  </div>
+    <app-input-group label="Password">
+      <input appInput type="password" class="form-control" formControlName="password" placeholder="Password">
+      <app-input-error *ngIf="registerForm.controls['password'].hasError('required')">
+        Please enter password.
+      </app-input-error>
+    </app-input-group>
 
-  <div>
-    <label>
-      Phone
-      <input type="text" formControlName="phone">
-    </label>
-  </div>
+    <app-input-group label="Phone No.">
+      <input appInput type="text" class="form-control" formControlName="phone" placeholder="Phone No.">
+      <app-input-error *ngIf="registerForm.controls['phone'].hasError('required')">
+        Please enter your phone number.
+      </app-input-error>
+    </app-input-group>
 
-  <button type="submit" [disabled]="isRegistering">Register</button>
-</form>
+    <button type="submit" class="btn btn-primary" [disabled]="isRegistering">Register</button>
+  </form>
+</div>
