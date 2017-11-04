@@ -11,8 +11,6 @@ import { LoginError, LoginService } from './login.service';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  forceShowError = false;
-  isLoggingIn = false;
   errorReason: string | undefined = undefined;
 
   constructor(private loginService: LoginService, private router: Router) { }
@@ -25,8 +23,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.forceShowError = true;
-    this.isLoggingIn = true;
     this.errorReason = undefined;
     this.loginForm.disable();
 
@@ -38,7 +34,6 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/']);
     }, err => {
       this.loginForm.enable();
-      this.isLoggingIn = false;
       if (err instanceof LoginError) {
         this.errorReason = err.reason;
       } else {

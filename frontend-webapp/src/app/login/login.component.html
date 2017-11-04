@@ -1,26 +1,26 @@
-<h1>Login</h1>
+<div class="container">
+  <h1>Login</h1>
 
-<form (submit)="login()" [formGroup]="loginForm">
-  <div *ngIf="errorReason" [ngSwitch]="errorReason">
+  <form (submit)="login()" [formGroup]="loginForm">
+    <div *ngIf="errorReason" [ngSwitch]="errorReason">
       <ng-template ngSwitchCase="INVALID_USERNAME_PASSWORD">Invalid username or password.</ng-template>
       <ng-template ngSwitchDefault>Unknown error: {{ errorReason }}</ng-template>
-  </div>
+    </div>
 
-  <div>
-    Username:
-    <input type="text" placeholder="Username" formControlName="username" required>
-  </div>
-  <div *ngIf="loginForm.controls['username'].hasError('required') && (loginForm.controls['username'].touched || forceShowError)" class="form-error">
-    Please enter your username.
-  </div>
+    <app-input-group label="Username">
+      <input appInput type="text" class="form-control" placeholder="Username" formControlName="username" required>
+      <app-input-error *ngIf="loginForm.controls['username'].hasError('required')">
+        Please enter your username.
+      </app-input-error>
+    </app-input-group>
 
-  <div>
-    Password:
-    <input type="password" placeholder="Password" formControlName="password" required>
-  </div>
-  <div *ngIf="loginForm.controls['password'].hasError('required') && (loginForm.controls['password'].touched || forceShowError)" class="form-error">
-    Please enter your password.
-  </div>
+    <app-input-group label="Password">
+      <input appInput type="password" class="form-control" placeholder="Password" formControlName="password" required>
+      <app-input-error *ngIf="loginForm.controls['password'].hasError('required')">
+        Please enter your password.
+      </app-input-error>
+    </app-input-group>
 
-  <input type="submit" value="Login" [disabled]="loginForm.disabled">
-</form>
+    <button class="btn btn-primary" type="submit" [disabled]="loginForm.disabled">Login</button>
+  </form>
+</div>
