@@ -26,7 +26,7 @@ services:
     restart: unless-stopped
 
   web:
-    build: .
+    build: ./webserver
     container_name: mms-webserver
     volumes:
       - ./webserver:/webserver
