@@ -5,8 +5,8 @@ RUN apt-get update && apt-get install -f -y postgresql-client
 RUN mkdir /webserver
 
 WORKDIR /webserver
-ADD ./webserver/requirements.txt /webserver/
+COPY requirements.txt /webserver/
 RUN pip install -r requirements.txt
 
-ADD ./webserver/docker_entrypoint.sh /webserver/
+COPY docker_entrypoint.sh /webserver/
 ENTRYPOINT ["/webserver/docker_entrypoint.sh"]
