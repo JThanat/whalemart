@@ -25,7 +25,7 @@ services:
       - "5050:5050"
     restart: unless-stopped
 
-  web:
+  webserver:
     build: ./webserver
     container_name: mms-webserver
     volumes:
@@ -37,3 +37,14 @@ services:
     links:
       - db:postgres
 
+  frontend_webapp:
+    build: ./frontend-webapp
+    container_name: mms-frontend-webapp
+    volumes:
+      - ./frontend-webapp:/frontend-webapp
+    ports:
+      - "4200:4200"
+    depends_on:
+      - webserver
+    links:
+      - webserver:api
