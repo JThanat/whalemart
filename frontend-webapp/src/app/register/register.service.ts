@@ -36,9 +36,15 @@ export class RegisterService {
   constructor(private http: HttpClient) { }
 
   register(params: RegisterParams): Observable<true> {
-    return this.http.post<RegisterServerResponse>('/api/register/', params).pipe(
+    return this.http.post<RegisterServerResponse>('/api/users/', {
+        email: params.email,
+        first_name: params.firstName,
+        last_name: params.lastName,
+        password: params.password,
+        phone: params.phone
+    }).pipe(
       map(() => true),
-      catchError(err => {
+      catchError((err: any) => {
         if (err instanceof HttpErrorResponse) {
           const errorBody = err.error as RegisterServerResponseError;
           if (errorBody.success === false) {
