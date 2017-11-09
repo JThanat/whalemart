@@ -5,9 +5,6 @@ notifications:
   slack:
     secure: CW+HTTRGL/zYkune4nL+k5ZwkFe9aeoHMFMjRkKaROk2u9hP/swz714N7X++v+3PpevdboDttGUajMmWtiKLIH+T+l8NBOsLgqVaFGlg0CFRirAQmw/xUtqvBkQQXtHgPq8DuBekRQhNiBkL0uWJvRw4SvNuso5l9/MDLE3sS6TlAHyiMRz2b1P9ydhZseJJ3ATFpLyAvvADd+rvJnIFgcL3rgS8hXjhU3AHmXDUg+XLwjQfawGWa6xB0cckn6Kdc8dsZ3DiETWTSdu4ihtIh3xU9cv6NhfWSXasxaleBQkuTwECirG9E7+WBHDvPtNsXauPJCOEB8VT0597eJQG/I4HbX8X3Gq/VYudz9aHCc7Qs6AnleowgKA6PxAFesliniX8/fW0fvrDHzrXK+ro5GraUTkg7ifX9hcz76NrlulA5ZIBr7NvD0eVsaocbED88Qz0nwBYL/6RZQhaCCNWSbUceMeImm7wkcudSl0nZDxx5xfjBqRc92Uzq0uO+wJs6T7VWC/5uv2u6iyJVId1rUPqquig4j9LuXSYbU1zJua2u+Jdbo8uvpupGele7Rw1tVVrKpJzXYG/Do4+nh3amWl7cthT1XsPuQFUxoNc1q+8ryAVSAf5ADxKJ2w0iGdlPDgHPTZ2XTSHsPuBgcEbjHAHPnjfpAWPopz0+sRilGU=
 
-env:
-  - COMPOSE_PROJECT_NAME=whalemart
-
 before_install:
   # Docker
   - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -21,10 +18,11 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 install:
-  - cd $TRAVIS_BUILD_DIR && docker-compose up --build -d
+  - cd $TRAVIS_BUILD_DIR
+  - docker-compose up --build -d
 
 script:
-  - cd $TRAVIS_BUILD_DIR && docker exec whalemart_frontend_webapp_1 yarn test:ci
+  - docker-compose exec frontend_webapp yarn test:ci
   - $TRAVIS_BUILD_DIR/scripts/loop-ping-server.sh
-  - cd $TRAVIS_BUILD_DIR && docker exec whalemart_frontend_webapp_1 yarn e2e:ci
-  - cd $TRAVIS_BUILD_DIR && docker exec whalemart_frontend_webapp_1 yarn lint
+  - docker-compose exec frontend_webapp yarn e2e:ci
+  - docker-compose exec frontend_webapp yarn lint
