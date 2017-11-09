@@ -3,7 +3,8 @@ const { config } = require('./protractor.conf');
 config.capabilities = {
   browserName: 'chrome',
   chromeOptions: {
-    args: ['--headless', '--disable-gpu']
+    binary: require('puppeteer').executablePath(),
+    args: ['--headless', '--disable-gpu', '--no-sandbox', '--disable-setuid-sandbox']
   }
 };
 
