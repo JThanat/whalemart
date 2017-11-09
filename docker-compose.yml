@@ -37,7 +37,8 @@ services:
   frontend_webapp:
     build: ./frontend-webapp
     volumes:
-      - ./frontend-webapp:/frontend-webapp
+      - ./frontend-webapp/e2e:/frontend-webapp/e2e
+      - ./frontend-webapp/src:/frontend-webapp/src
     ports:
       - "4200:4200"
     depends_on:
