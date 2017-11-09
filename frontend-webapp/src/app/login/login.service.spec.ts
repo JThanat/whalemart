@@ -33,19 +33,19 @@ describe('LoginService', () => {
       expect(userService.userInfo.value).toBe(undefined);
 
       let isSuccess = false;
-      loginService.login('testusername', 'testpassword').subscribe(result => {
-        expect(result.username).toBe('testusername');
+      loginService.login('test@abc.com', 'testpassword').subscribe(result => {
+        expect(result.email).toBe('test@abc.com');
         isSuccess = true;
       });
 
       const req = httpMock.expectOne({ url: '/api/login/', method: 'POST' });
-      expect(req.request.body).toEqual({ username: 'testusername', password: 'testpassword' });
+      expect(req.request.body).toEqual({ email: 'test@abc.com', password: 'testpassword' });
       req.flush({ success: true } as LoginServerResponse);
 
       expect(isSuccess).toBe(true);
       expect(userService.userInfo.value).not.toBeUndefined();
       const userInfo = userService.userInfo.value as UserInfo;
-      expect(userInfo.username).toBe('testusername');
+      expect(userInfo.email).toBe('test@abc.com');
     }
   ));
 
@@ -54,9 +54,9 @@ describe('LoginService', () => {
       expect(userService.userInfo.value).toBe(undefined);
 
       let isError = false;
-      loginService.login('testusername', 'testpassword').subscribe(() => fail(), err => {
+      loginService.login('test@abc.com', 'testpassword').subscribe(() => fail(), err => {
         if (err instanceof LoginError) {
-          expect(err.reason).toBe('INVALID_USERNAME_PASSWORD');
+          expect(err.reason).toBe('INVALID_EMAIL_PASSWORD');
           isError = true;
         } else {
           fail();
@@ -64,10 +64,10 @@ describe('LoginService', () => {
       });
 
       const req = httpMock.expectOne({ url: '/api/login/', method: 'POST' });
-      expect(req.request.body).toEqual({ username: 'testusername', password: 'testpassword' });
+      expect(req.request.body).toEqual({ email: 'test@abc.com', password: 'testpassword' });
       req.flush({
         success: false,
-        reason: 'INVALID_USERNAME_PASSWORD'
+        reason: 'INVALID_EMAIL_PASSWORD'
       } as LoginServerResponseError, { status: 401, statusText: 'Unauthorized' });
 
       expect(isError).toBe(true);
@@ -80,13 +80,13 @@ describe('LoginService', () => {
       expect(userService.userInfo.value).toBe(undefined);
 
       let isError = false;
-      loginService.login('testusername', 'testpassword').subscribe(() => fail(), err => {
+      loginService.login('test@abc.com', 'testpassword').subscribe(() => fail(), err => {
         expect(err instanceof HttpErrorResponse).toBe(true);
         isError = true;
       });
 
       const req = httpMock.expectOne({ url: '/api/login/', method: 'POST' });
-      expect(req.request.body).toEqual({ username: 'testusername', password: 'testpassword' });
+      expect(req.request.body).toEqual({ email: 'test@abc.com', password: 'testpassword' });
       req.error(new ErrorEvent('some error'));
 
       expect(isError).toBe(true);

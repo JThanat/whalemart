@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = new FormGroup({
-      username: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.email]),
       password: new FormControl('', [Validators.required])
     });
   }
@@ -26,11 +26,11 @@ export class LoginComponent implements OnInit {
     this.errorReason = undefined;
     this.loginForm.disable();
 
-    const username = this.loginForm.value.username as string;
+    const email = this.loginForm.value.email as string;
     const password = this.loginForm.value.password as string;
-    this.loginService.login(username, password).subscribe(userInfo => {
+    this.loginService.login(email, password).subscribe(userInfo => {
       // TODO: Switch to proper centralized alert service
-      alert(`Login successfully as ${userInfo.username}.`);
+      alert(`Login successfully as ${userInfo.email}.`);
       this.router.navigate(['/']);
     }, err => {
       this.loginForm.enable();

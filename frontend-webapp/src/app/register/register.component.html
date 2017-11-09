@@ -3,7 +3,7 @@
 
   <form [formGroup]="registerForm" (submit)="register()">
     <div *ngIf="errorReason" [ngSwitch]="errorReason">
-        <ng-template ngSwitchCase="INVALID_USERNAME_PASSWORD">Invalid username or password.</ng-template>
+        <ng-template ngSwitchCase="INVALID_EMAIL_PASSWORD">Invalid email or password.</ng-template>
         <ng-template ngSwitchDefault>Unknown error: {{ errorReason }}</ng-template>
     </div>
 

@@ -3,14 +3,14 @@
 
   <form (submit)="login()" [formGroup]="loginForm">
     <div *ngIf="errorReason" [ngSwitch]="errorReason">
-      <ng-template ngSwitchCase="INVALID_USERNAME_PASSWORD">Invalid username or password.</ng-template>
+      <ng-template ngSwitchCase="INVALID_EMAIL_PASSWORD">Invalid email or password.</ng-template>
       <ng-template ngSwitchDefault>Unknown error: {{ errorReason }}</ng-template>
     </div>
 
-    <app-input-group label="Username">
-      <input appInput type="text" class="form-control" placeholder="Username" formControlName="username" required>
-      <app-input-error *ngIf="loginForm.controls['username'].hasError('required')">
-        Please enter your username.
+    <app-input-group label="Email">
+      <input appInput type="email" class="form-control" placeholder="Email" formControlName="email" required>
+      <app-input-error *ngIf="loginForm.controls['email'].hasError('email')">
+        Please enter your email.
       </app-input-error>
     </app-input-group>
 

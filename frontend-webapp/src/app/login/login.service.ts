@@ -10,7 +10,7 @@ export interface LoginServerResponse {
   success: true;
 }
 
-export type LoginErrorReason = 'INVALID_USERNAME_PASSWORD';
+export type LoginErrorReason = 'INVALID_EMAIL_PASSWORD';
 
 export interface LoginServerResponseError {
   success: false;
@@ -29,10 +29,10 @@ export class LoginError {
 export class LoginService {
   constructor(private http: HttpClient, private userService: UserService) { }
 
-  login(username: string, password: string): Observable<UserInfo> {
-    return this.http.post<LoginServerResponse>('/api/login/', { username, password }).pipe(
+  login(email: string, password: string): Observable<UserInfo> {
+    return this.http.post<LoginServerResponse>('/api/login/', { email, password }).pipe(
       map(result => {
-        const userInfo: UserInfo = { username };
+        const userInfo: UserInfo = { email };
         this.userService.userInfo.next(userInfo);
         return userInfo;
       }),
