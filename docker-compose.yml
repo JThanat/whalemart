@@ -3,7 +3,6 @@ version: '3'
 services:
   db:
     image: postgres
-    container_name: mms-postgres
     ports:
       - "54321:5432"
     # environment:
@@ -18,7 +17,6 @@ services:
     image: fenglc/pgadmin4
     links:
       - db:postgres
-    container_name: mms-pgadmin
     volumes:
        - ./data/pgadmin:/root/.pgadmin
     ports:
@@ -27,7 +25,6 @@ services:
 
   webserver:
     build: ./webserver
-    container_name: mms-webserver
     volumes:
       - ./webserver:/webserver
     ports:
@@ -39,7 +36,6 @@ services:
 
   frontend_webapp:
     build: ./frontend-webapp
-    container_name: mms-frontend-webapp
     volumes:
       - ./frontend-webapp:/frontend-webapp
     ports:
