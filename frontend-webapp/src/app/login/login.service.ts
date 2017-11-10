@@ -13,7 +13,7 @@ export interface LoginServerResponse {
 export type LoginErrorReason = 'INVALID_EMAIL_PASSWORD';
 
 export interface LoginServerResponseError {
-  non_field_errors: LoginErrorReason[];
+  non_field_errors: string[];
 }
 
 export class LoginError {

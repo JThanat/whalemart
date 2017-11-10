@@ -35,6 +35,22 @@ export class UserService {
     });
   }
 
+  getCurrentUserInfo(): UserInfo | undefined {
+    let currentUserInfo;
+    let isInitialized = false;
+
+    this.userInfo.subscribe(userInfo => {
+      currentUserInfo = userInfo;
+      isInitialized = true;
+    }).unsubscribe();
+
+    if (!isInitialized) {
+      throw new Error('Cannot get current UserInfo: userInfo is not available yet');
+    }
+
+    return currentUserInfo;
+  }
+
   private getInitialUserInfo(): Observable<UserInfo | undefined> {
     const val = this.keyValueStore.get(storedUserInfoKey);
     if (val === undefined) {

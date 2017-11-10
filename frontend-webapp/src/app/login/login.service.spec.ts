@@ -10,11 +10,25 @@ import {
   LoginService
 } from './login.service';
 
+class MockUserService {
+  private currentUserInfo: UserInfo | undefined = undefined;
+  userInfo = { next: (newUserInfo: UserInfo) => { this.currentUserInfo = newUserInfo; } };
+
+  getCurrentUserInfo() {
+    return this.currentUserInfo;
+  }
+}
+
 describe('LoginService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [LoginService, UserService]
+      imports: [
+        HttpClientTestingModule
+      ],
+      providers: [
+        LoginService,
+        { provide: UserService, useClass: MockUserService }
+      ]
     });
   });
 
@@ -30,7 +44,7 @@ describe('LoginService', () => {
 
   it('should return UserInfo correctly when the login credential is correct', inj(
     (loginService, httpMock, userService) => {
-      expect(userService.userInfo.value).toBe(undefined);
+      expect(userService.getCurrentUserInfo()).toBe(undefined);
 
       let isSuccess = false;
       loginService.login('test@abc.com', 'testpassword').subscribe(result => {
@@ -38,20 +52,20 @@ describe('LoginService', () => {
         isSuccess = true;
       });
 
-      const req = httpMock.expectOne({ url: '/api/login/', method: 'POST' });
-      expect(req.request.body).toEqual({ email: 'test@abc.com', password: 'testpassword' });
-      req.flush({ success: true } as LoginServerResponse);
+      const req = httpMock.expectOne({ url: '/api/api-token-auth/', method: 'POST' });
+      expect(req.request.body).toEqual({ username: 'test@abc.com', password: 'testpassword' });
+      req.flush({ token: 'testtoken' } as LoginServerResponse);
 
       expect(isSuccess).toBe(true);
-      expect(userService.userInfo.value).not.toBeUndefined();
-      const userInfo = userService.userInfo.value as UserInfo;
+      expect(userService.getCurrentUserInfo()).not.toBeUndefined();
+      const userInfo = userService.getCurrentUserInfo() as UserInfo;
       expect(userInfo.email).toBe('test@abc.com');
     }
   ));
 
   it('should throw LoginError when the login credential is not correct', inj(
     (loginService, httpMock, userService) => {
-      expect(userService.userInfo.value).toBe(undefined);
+      expect(userService.getCurrentUserInfo()).toBe(undefined);
 
       let isError = false;
       loginService.login('test@abc.com', 'testpassword').subscribe(() => fail(), err => {
@@ -63,21 +77,20 @@ describe('LoginService', () => {
         }
       });
 
-      const req = httpMock.expectOne({ url: '/api/login/', method: 'POST' });
-      expect(req.request.body).toEqual({ email: 'test@abc.com', password: 'testpassword' });
+      const req = httpMock.expectOne({ url: '/api/api-token-auth/', method: 'POST' });
+      expect(req.request.body).toEqual({ username: 'test@abc.com', password: 'testpassword' });
       req.flush({
-        success: false,
-        reason: 'INVALID_EMAIL_PASSWORD'
-      } as LoginServerResponseError, { status: 401, statusText: 'Unauthorized' });
+        non_field_errors: ['Unable to log in with provided credentials.']
+      } as LoginServerResponseError, { status: 400, statusText: 'Bad Request' });
 
       expect(isError).toBe(true);
-      expect(userService.userInfo.value).toBeUndefined();
+      expect(userService.getCurrentUserInfo()).toBeUndefined();
     }
   ));
 
   it('should throw LoginError when there is an HTTP error', inj(
     (loginService, httpMock, userService) => {
-      expect(userService.userInfo.value).toBe(undefined);
+      expect(userService.getCurrentUserInfo()).toBe(undefined);
 
       let isError = false;
       loginService.login('test@abc.com', 'testpassword').subscribe(() => fail(), err => {
@@ -85,12 +98,12 @@ describe('LoginService', () => {
         isError = true;
       });
 
-      const req = httpMock.expectOne({ url: '/api/login/', method: 'POST' });
-      expect(req.request.body).toEqual({ email: 'test@abc.com', password: 'testpassword' });
+      const req = httpMock.expectOne({ url: '/api/api-token-auth/', method: 'POST' });
+      expect(req.request.body).toEqual({ username: 'test@abc.com', password: 'testpassword' });
       req.error(new ErrorEvent('some error'));
 
       expect(isError).toBe(true);
-      expect(userService.userInfo.value).toBeUndefined();
+      expect(userService.getCurrentUserInfo()).toBeUndefined();
     }
   ));
 });

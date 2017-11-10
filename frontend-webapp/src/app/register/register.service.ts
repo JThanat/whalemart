@@ -1,10 +1,9 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AbstractControl, AsyncValidatorFn } from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
-import { of as observableOf } from 'rxjs/observable/of';
 import { _throw as observableThrow } from 'rxjs/observable/throw';
-import { catchError, map, mapTo } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 interface RegisterParams {
   email: string;
@@ -33,17 +32,16 @@ export class RegisterError {
   }
 }
 
+interface EmailValidateServerResponse {
+  is_ok: boolean;
+}
+
 @Injectable()
 export class RegisterService {
-  readonly emailValidator: AsyncValidatorFn = (formControl: AbstractControl) =>
-    this.validateEmail(formControl.value as string).pipe(
-      map(isValid => {
-        if (isValid) {
-          return null;
-        }
-        return { emailDuplicate: true };
-      })
-    )
+  readonly emailValidator = (formControl: AbstractControl) =>
+    this.validateEmailDuplication(formControl.value as string).pipe(map(
+      isValid => isValid ? null : { emailDuplicate: true }
+    ))
 
   constructor(private http: HttpClient) { }
 
@@ -65,18 +63,12 @@ export class RegisterService {
         }
         return observableThrow(err);
       })
-      );
+    );
   }
 
-  private validateEmail(email: string): Observable<boolean> {
-    return this.http.get('/api/users/validate-email/', { params: { email } }).pipe(
-      mapTo(true),
-      catchError((err: any) => {
-        if (err instanceof HttpErrorResponse && err.status >= 400 && err.status < 500) {
-          return observableOf(false);
-        }
-        return observableThrow(err) as Observable<boolean>;
-      })
-    );
+  private validateEmailDuplication(email: string): Observable<boolean> {
+    return this.http.get<EmailValidateServerResponse>('/api/validate-email/', {
+      params: { email }
+    }).pipe(map(result => result.is_ok));
   }
 }
