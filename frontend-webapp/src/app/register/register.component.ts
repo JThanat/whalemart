@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { RegisterError, RegisterService } from './register.service';
@@ -15,20 +15,16 @@ export class RegisterComponent implements OnInit {
   isRegistering = false;
   errorReason: string | undefined = undefined;
 
-  constructor(
-    private fb: FormBuilder,
-    private registerService: RegisterService,
-    private router: Router
-  ) { }
+  constructor(private registerService: RegisterService, private router: Router) { }
 
   ngOnInit() {
-    this.registerForm = this.fb.group({
-      email: this.fb.control('', [Validators.email]),
-      firstName: this.fb.control('', [Validators.required]),
-      lastName: this.fb.control('', [Validators.required]),
-      password: this.fb.control('', [Validators.required]),
-      phone: this.fb.control('', [Validators.required])
-    });
+    this.registerForm = new FormGroup({
+      email: new FormControl('', [Validators.email]),
+      firstName: new FormControl('', [Validators.required]),
+      lastName: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
+      phone: new FormControl('', [Validators.required])
+    }, { updateOn: 'blur' });
   }
 
   register() {
