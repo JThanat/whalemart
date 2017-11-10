@@ -34,7 +34,7 @@ urlpatterns = [
     url(r'^ping/', ping_views.Ping.as_view()),
     url(r'^validate-email/(?P<username>.+)/$', user_views.ValidateUserEmailView.as_view()),
     url(r'^admin/', admin.site.urls),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     # JWT
     url(r'^api-token-auth/', obtain_jwt_token),
     url(r'^api-token-refresh/', refresh_jwt_token),
