@@ -1,13 +1,9 @@
 from django.contrib.auth import get_user_model
-
-from django.shortcuts import get_object_or_404
-
 from rest_framework import viewsets
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from apps.users.serializers import UserSerializer
-
-from rest_framework.views import APIView
 
 User = get_user_model()
 
@@ -24,6 +20,7 @@ class ValidateUserEmailView(APIView):
     """
     API endpoint that allows email to be checked before created
     """
+
     def get(self, request, *args, **kwargs):
         username = kwargs['username']
         user = User.objects.filter(username=username)
