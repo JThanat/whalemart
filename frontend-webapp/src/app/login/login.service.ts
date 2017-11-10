@@ -35,20 +35,23 @@ export class LoginService {
         password
       })
       .pipe(
-      map(result => {
-        const userInfo: UserInfo = { email };
-        this.userService.userInfo.next(userInfo);
-        return userInfo;
-      }),
-      catchError(err => {
-        if (err instanceof HttpErrorResponse) {
-          const errorBody = err.error as LoginServerResponseError;
-          if (Array.isArray(errorBody.non_field_errors)) {
-            return observableThrow(new LoginError('INVALID_EMAIL_PASSWORD'));
+        map(result => {
+          const userInfo: UserInfo = {
+            token: result.token,
+            email
+          };
+          this.userService.userInfo.next(userInfo);
+          return userInfo;
+        }),
+        catchError(err => {
+          if (err instanceof HttpErrorResponse) {
+            const errorBody = err.error as LoginServerResponseError;
+            if (Array.isArray(errorBody.non_field_errors)) {
+              return observableThrow(new LoginError('INVALID_EMAIL_PASSWORD'));
+            }
           }
-        }
-        return observableThrow(err);
-      })
-    );
+          return observableThrow(err);
+        })
+      );
   }
 }
