@@ -14,5 +14,6 @@
     },
     "[json]": {
         "editor.tabSize": 2
-    }
+    },
+    "typescript.tsdk": "frontend-webapp/node_modules/typescript/lib"
 }
