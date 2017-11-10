@@ -38,4 +38,12 @@ describe('KeyValueStore', () => {
     expect(sessionStorage.getItem('prefix_hello')).toBe('NEWWORLD');
     expect(keyValueStore.get('hello')).toBe('NEWWORLD');
   });
+
+  it('should have default prefix as blank', () => {
+    const keyValueStore = new KeyValueStore(sessionStorage, null);
+
+    keyValueStore.set('hello', 'world');
+    expect(sessionStorage.getItem('hello')).toBe('world');
+    expect(keyValueStore.get('hello')).toBe('world');
+  });
 });
