@@ -16,7 +16,7 @@ interface RegisterServerResponse {
   success: true;
 }
 
-export type RegisterErrorReason = 'DUPLICATE_EMAIL' | 'INVALID';
+export type RegisterErrorReason = 'INVALID';
 
 interface RegisterServerResponseError {
   success: false;
