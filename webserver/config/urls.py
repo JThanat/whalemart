@@ -17,13 +17,12 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework import routers
-from apps.users import views as user_views
-from apps.ping import views as ping_views
-
 from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework_jwt.views import refresh_jwt_token
 from rest_framework_jwt.views import verify_jwt_token
 
+from apps.ping import views as ping_views
+from apps.users import views as user_views
 
 router = routers.DefaultRouter()
 router.register(r'users', user_views.UserViewSet)
@@ -33,6 +32,7 @@ router.register(r'users', user_views.UserViewSet)
 urlpatterns = [
     url(r'^', include(router.urls)),
     url(r'^ping/', ping_views.Ping.as_view()),
+    url(r'^validate-email/(?P<username>.+)/$', user_views.ValidateUserEmailView.as_view()),
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     # JWT
