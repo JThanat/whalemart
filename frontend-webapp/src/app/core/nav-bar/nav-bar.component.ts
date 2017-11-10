@@ -13,8 +13,7 @@ export class NavBarComponent implements OnInit {
   isMenuOpened = false;
   userName: Observable<string | undefined>;
 
-  constructor(private userService: UserService) {
-  }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
     this.userName = this.userService.userInfo.pipe(
