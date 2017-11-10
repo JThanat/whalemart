@@ -1,26 +1,30 @@
-<div class="container">
-  <h1>Login</h1>
+<div class="container mb-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-9 col-md-6 col-lg-5 col-xl-5">
+      <h1 class="display-4 mt-5">Login</h1>
 
-  <form (submit)="login()" [formGroup]="loginForm">
-    <div *ngIf="errorReason" [ngSwitch]="errorReason">
-      <ng-template ngSwitchCase="INVALID_EMAIL_PASSWORD">Invalid email or password.</ng-template>
-      <ng-template ngSwitchDefault>Unknown error: {{ errorReason }}</ng-template>
+      <form (submit)="login()" [formGroup]="loginForm">
+        <div *ngIf="errorReason" [ngSwitch]="errorReason">
+          <ng-template ngSwitchCase="INVALID_EMAIL_PASSWORD">Invalid email or password.</ng-template>
+          <ng-template ngSwitchDefault>Unknown error: {{ errorReason }}</ng-template>
+        </div>
+
+        <app-input-group label="Email">
+          <input appInput type="email" class="form-control" placeholder="Email" formControlName="email" required>
+          <app-input-error *ngIf="loginForm.controls['email'].hasError('email')">
+            Please enter your email.
+          </app-input-error>
+        </app-input-group>
+
+        <app-input-group label="Password">
+          <input appInput type="password" class="form-control" placeholder="Password" formControlName="password" required>
+          <app-input-error *ngIf="loginForm.controls['password'].hasError('required')">
+            Please enter your password.
+          </app-input-error>
+        </app-input-group>
+
+        <button class="btn btn-primary btn-lg" type="submit" [disabled]="loginForm.disabled">Login</button>
+      </form>
     </div>
-
-    <app-input-group label="Email">
-      <input appInput type="email" class="form-control" placeholder="Email" formControlName="email" required>
-      <app-input-error *ngIf="loginForm.controls['email'].hasError('email')">
-        Please enter your email.
-      </app-input-error>
-    </app-input-group>
-
-    <app-input-group label="Password">
-      <input appInput type="password" class="form-control" placeholder="Password" formControlName="password" required>
-      <app-input-error *ngIf="loginForm.controls['password'].hasError('required')">
-        Please enter your password.
-      </app-input-error>
-    </app-input-group>
-
-    <button class="btn btn-primary" type="submit" [disabled]="loginForm.disabled">Login</button>
-  </form>
+  </div>
 </div>
