@@ -28,11 +28,13 @@ from rest_framework_jwt.views import verify_jwt_token
 router = routers.DefaultRouter()
 router.register(r'users', user_views.UserViewSet)
 
+
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     url(r'^', include(router.urls)),
     url(r'^ping/', ping_views.Ping.as_view()),
+    url(r'^validate-email/(?P<username>.+)/$',user_views.ValidateUserEmailView.as_view()),
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     # JWT
