@@ -50,3 +50,6 @@ class Market(models.Model):
     # Derived Price Range
     min_price = models.DecimalField(verbose_name='Minimum Price', blank=True, null=False)
     max_price = models.DecimalField(verbose_name='Maximum Price', blank=True, null=False)
+
+    # Cover Photo
+    cover_photo = models.ImageField(verbose_name='Cover Image', upload_to='cover_photos/%Y/%m/%d')
