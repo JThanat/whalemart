@@ -24,6 +24,7 @@ _Whalemart_ is a market space matching platform which allows flea market vendor 
 
 - [Problem Statement](./doc/problem-statement/problem-statement.md)
 - [Requirements Specification](./doc/requirements-specification/requirements-specification.md)
+- [Design Document](./doc/design-document/design-document.md)
 
 ## Developing
 
