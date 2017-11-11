@@ -1,4 +1,4 @@
-FROM node:8.9.0
+FROM node:8.9.1
 
 # Manually install dependencies for running Chrome bundled with Puppeteer.
 # See https://github.com/GoogleChrome/puppeteer/issues/290 for more info.
