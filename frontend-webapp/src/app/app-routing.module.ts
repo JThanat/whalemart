@@ -5,7 +5,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    loadChildren: './home/home.module#HomeModule'
+    loadChildren: './feed/feed.module#FeedModule'
   },
   {
     path: 'ping',
