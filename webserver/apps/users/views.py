@@ -23,7 +23,7 @@ class ValidateUserEmailView(APIView):
 
     def get(self, request, *args, **kwargs):
         username = request.query_params.get('email', None)
-        
+
         if not username:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
