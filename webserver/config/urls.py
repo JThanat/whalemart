@@ -24,6 +24,7 @@ from rest_framework_jwt.views import verify_jwt_token
 from apps.ping import views as ping_views
 from apps.users import views as user_views
 from apps.lessors import views as lessor_views
+from apps.bank_accounts import views as bank_accounts_views
 
 router = routers.DefaultRouter()
 router.register(r'users', user_views.UserViewSet)
@@ -44,4 +45,7 @@ urlpatterns = [
     # Lessor
     url(r'^become_lessor/', lessor_views.BecomeALessorView.as_view()),
     url(r'^lessor/info/', lessor_views.LessorInfoView.as_view()),
+
+    # Bank account
+    url(r'^bank_account/', bank_accounts_views.BankAccountInfoView.as_view()),
 ]
