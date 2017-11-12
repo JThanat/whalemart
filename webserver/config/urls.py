@@ -23,6 +23,7 @@ from rest_framework_jwt.views import verify_jwt_token
 
 from apps.ping import views as ping_views
 from apps.users import views as user_views
+from apps.lessors import views as lessor_views
 
 router = routers.DefaultRouter()
 router.register(r'users', user_views.UserViewSet)
@@ -39,4 +40,8 @@ urlpatterns = [
     url(r'^api-token-auth/', obtain_jwt_token),
     url(r'^api-token-refresh/', refresh_jwt_token),
     url(r'^api-token-verify/', verify_jwt_token),
+
+    # Lessor
+    url(r'^become_lessor/', lessor_views.BecomeALessorView.as_view()),
+    url(r'^lessor/info/', lessor_views.LessorInfoView.as_view()),
 ]

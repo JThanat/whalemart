@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
 
-    'apps.ping'
+    'apps.ping',
+    'apps.lessors',
 ]
 
 AUTH_USER_MODEL = 'users.User'
