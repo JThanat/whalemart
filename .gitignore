@@ -82,3 +82,6 @@ fabric.properties
 
 # Ignore sketch files
 *.sketch
+
+# Ignore virtualenv
+.venv
