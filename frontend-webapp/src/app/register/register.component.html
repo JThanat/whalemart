@@ -4,11 +4,6 @@
       <h1 class="display-4 mt-5">สมัครสมาชิก</h1>
 
       <form [formGroup]="registerForm" (submit)="register()">
-        <div *ngIf="errorReason" [ngSwitch]="errorReason">
-          <ng-template ngSwitchCase="INVALID">ข้อมูลไม่ถูกต้อง</ng-template>
-          <ng-template ngSwitchDefault>เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ: {{ errorReason }}</ng-template>
-        </div>
-
         <app-input-group label="อีเมล">
           <input appInput type="email" class="form-control" formControlName="email" placeholder="อีเมล">
           <app-input-error *ngIf="registerForm.controls['email'].hasError('email')">

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 
+import { AlertService } from '../alert/alert.service';
 import { UserService } from '../user/user.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class NavBarComponent implements OnInit {
   isMenuOpened = false;
   userName: Observable<string | undefined>;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private alert: AlertService) { }
 
   ngOnInit() {
     this.userName = this.userService.userInfo.pipe(
@@ -23,5 +24,6 @@ export class NavBarComponent implements OnInit {
 
   logout() {
     this.userService.userInfo.next(undefined);
+    this.alert.show({ message: `ออกจากระบบสำเร็จ`, type: 'success' });
   }
 }

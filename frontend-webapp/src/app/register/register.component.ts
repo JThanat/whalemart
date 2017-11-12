@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { AlertService } from '../core/alert/alert.service';
 import { RegisterError, RegisterService } from './register.service';
 
 @Component({
@@ -13,9 +14,12 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   forceShowError = false;
   isRegistering = false;
-  errorReason: string | undefined = undefined;
 
-  constructor(private registerService: RegisterService, private router: Router) { }
+  constructor(
+    private registerService: RegisterService,
+    private router: Router,
+    private alert: AlertService
+  ) { }
 
   ngOnInit() {
     this.registerForm = new FormGroup({
@@ -39,18 +43,29 @@ export class RegisterComponent implements OnInit {
 
     const { email, firstName, lastName, password, phone } = this.registerForm.value;
     this.registerService.register({ email, firstName, lastName, password, phone }).subscribe(() => {
-      // TODO: Switch to proper centralized alert service
-      alert(`Register successfully.`);
+      this.alert.show({ message: 'สมัครสมาชิกสำเร็จ', type: 'success' });
       this.router.navigate(['/']);
     }, err => {
       this.registerForm.enable();
       this.isRegistering = false;
       if (err instanceof RegisterError) {
-        this.errorReason = err.reason;
+        switch (err.reason) {
+          case 'INVALID': {
+            this.alert.show({
+              message: 'ข้อมูลไม่ถูกต้อง',
+              type: 'danger'
+            });
+            break;
+          }
+          default: {
+            this.alert.show({
+              message: `เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ: ${err.reason}`,
+              type: 'danger'
+            });
+          }
+        }
       } else {
-        this.errorReason = undefined;
-        // TODO: Properly handle an error
-        console.error(err);
+        throw err;
       }
     });
   }
