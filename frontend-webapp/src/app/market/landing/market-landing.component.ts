@@ -1,16 +1,8 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-market-landing',
   templateUrl: './market-landing.component.html',
-  styleUrls: ['./market-landing.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./market-landing.component.scss']
 })
-export class MarketLandingComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-}
+export class MarketLandingComponent { }
