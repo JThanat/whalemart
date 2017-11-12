@@ -11,6 +11,5 @@ class User(AbstractUser):
     facebook_token = models.CharField(verbose_name='Facebook Token', max_length=255, blank=True)
 
     # Vendor profile
-
     def __str__(self):
         return '%s' % self.email
