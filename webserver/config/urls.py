@@ -42,6 +42,6 @@ urlpatterns = [
     url(r'^api-token-verify/', verify_jwt_token),
 
     # Lessor
-    url(r'^become_lessor/', lessor_views.BecomeALessorView.as_view()),
+    url(r'^become-lessor/', lessor_views.BecomeALessorView.as_view()),
     url(r'^lessor/info/', lessor_views.LessorInfoView.as_view()),
 ]
