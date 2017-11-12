@@ -1,0 +1,54 @@
+<div class="container mb-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-9 col-md-6 col-lg-5 col-xl-5">
+      <h1 class="display-4 mt-5">สมัครสมาชิก</h1>
+
+      <form [formGroup]="registerForm" (submit)="register()">
+        <div *ngIf="errorReason" [ngSwitch]="errorReason">
+          <ng-template ngSwitchCase="INVALID">ข้อมูลไม่ถูกต้อง</ng-template>
+          <ng-template ngSwitchDefault>เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ: {{ errorReason }}</ng-template>
+        </div>
+
+        <app-input-group label="อีเมล">
+          <input appInput type="email" class="form-control" formControlName="email" placeholder="อีเมล">
+          <app-input-error *ngIf="registerForm.controls['email'].hasError('email')">
+            กรุณากรอกอีเมลที่ถูกต้อง
+          </app-input-error>
+          <app-input-error *ngIf="registerForm.controls['email'].hasError('emailDuplicate')">
+            อีเมลดังกล่าวเคยถูกใช้ไปแล้ว กรุณาใช้อีเมลอื่น
+          </app-input-error>
+        </app-input-group>
+
+        <app-input-group label="ชื่อจริง">
+          <input appInput type="text" class="form-control" formControlName="firstName" placeholder="ชื่อจริง">
+          <app-input-error *ngIf="registerForm.controls['firstName'].hasError('required')">
+            กรุณากรอกชื่อจริง
+          </app-input-error>
+        </app-input-group>
+
+        <app-input-group label="นามสกุล">
+          <input appInput type="text" class="form-control" formControlName="lastName" placeholder="นามสกุล">
+          <app-input-error *ngIf="registerForm.controls['lastName'].hasError('required')">
+            กรุณากรอกนามสกุล
+          </app-input-error>
+        </app-input-group>
+
+        <app-input-group label="รหัสผ่าน">
+          <input appInput type="password" class="form-control" formControlName="password" placeholder="รหัสผ่าน">
+          <app-input-error *ngIf="registerForm.controls['password'].hasError('required')">
+            กรุณากรอกรหัสผ่าน
+          </app-input-error>
+        </app-input-group>
+
+        <app-input-group label="เบอร์โทรศัพท์">
+          <input appInput type="text" class="form-control" formControlName="phone" placeholder="เบอร์โทรศัพท์">
+          <app-input-error *ngIf="registerForm.controls['phone'].hasError('required')">
+            กรุณากรอกเบอร์โทรศัพท์
+          </app-input-error>
+        </app-input-group>
+
+        <button type="submit" class="btn btn-primary" [disabled]="isRegistering">สมัครสมาชิก</button>
+      </form>
+    </div>
+  </div>
+</div>

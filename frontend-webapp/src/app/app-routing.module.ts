@@ -10,6 +10,14 @@ const routes: Routes = [
   {
     path: 'ping',
     loadChildren: './ping/ping.module#PingModule'
+  },
+  {
+    path: 'login',
+    loadChildren: './login/login.module#LoginModule'
+  },
+  {
+    path: 'register',
+    loadChildren: './register/register.module#RegisterModule'
   }
 ];
 

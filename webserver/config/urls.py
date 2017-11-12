@@ -33,7 +33,7 @@ router.register(r'users', user_views.UserViewSet)
 urlpatterns = [
     url(r'^', include(router.urls)),
     url(r'^ping/', ping_views.Ping.as_view()),
-    url(r'^validate-email/(?P<username>.+)/$', user_views.ValidateUserEmailView.as_view()),
+    url(r'^validate-email/', user_views.ValidateUserEmailView.as_view()),
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     # JWT
