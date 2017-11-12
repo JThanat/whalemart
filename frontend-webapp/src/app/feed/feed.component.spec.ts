@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FeedComponent } from './feed.component';
 
 describe('FeedComponent', () => {
+  let component: FeedComponent;
   let fixture: ComponentFixture<FeedComponent>;
 
   beforeEach(async(() => {
@@ -11,10 +12,13 @@ describe('FeedComponent', () => {
     }).compileComponents();
   }));
 
-  it('should render a title in a h1 tag', async(() => {
+  beforeEach(() => {
     fixture = TestBed.createComponent(FeedComponent);
+    component = fixture.componentInstance;
     fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Whalemart');
-  }));
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });
