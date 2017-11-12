@@ -16,7 +16,7 @@ class BecomeALessorView(APIView):
 
     def post(self, request):
         data = request.data
-        data['user_id'] = request.user.id
+        data['user'] = request.user.id
         serializer = LessorSerializer(data = data)
         if serializer.is_valid():
             serializer.save()
@@ -29,7 +29,6 @@ class LessorInfoView(APIView):
     """
 
     def get(self, request, **kwargs):
-        user_id = request.user.id
-        user = User.objects.get(id = user_id)
+        user = get_object_or_404(User, id = request.user.id)
         lessor = get_object_or_404(Lessor, user = user)
         return Response(LessorSerializer(lessor).data)

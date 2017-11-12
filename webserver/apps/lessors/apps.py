@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class LessorsConfig(AppConfig):
-    name = 'lessors'
+    name = 'apps.lessors'
