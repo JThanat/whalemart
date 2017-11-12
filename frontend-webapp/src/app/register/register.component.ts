@@ -12,8 +12,6 @@ import { RegisterError, RegisterService } from './register.service';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
-  forceShowError = false;
-  isRegistering = false;
 
   constructor(
     private registerService: RegisterService,
@@ -32,14 +30,11 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    this.forceShowError = true;
-
     if (!this.registerForm.valid) {
       return;
     }
 
     this.registerForm.disable();
-    this.isRegistering = true;
 
     const { email, firstName, lastName, password, phone } = this.registerForm.value;
     this.registerService.register({ email, firstName, lastName, password, phone }).subscribe(() => {
@@ -47,7 +42,6 @@ export class RegisterComponent implements OnInit {
       this.router.navigate(['/']);
     }, err => {
       this.registerForm.enable();
-      this.isRegistering = false;
       if (err instanceof RegisterError) {
         switch (err.reason) {
           case 'INVALID': {
