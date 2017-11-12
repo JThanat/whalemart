@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { SharedModule } from '../../shared/shared.module';
 
 import { MarketLandingRoutingModule } from './market-landing-routing.module';
 import { MarketLandingComponent } from './market-landing.component';
 
 @NgModule({
   imports: [
-    CommonModule,
+    SharedModule,
     MarketLandingRoutingModule
   ],
   declarations: [MarketLandingComponent]
