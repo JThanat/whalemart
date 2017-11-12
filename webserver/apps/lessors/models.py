@@ -6,6 +6,7 @@ class Lessor(models.Model):
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
+        verbose_name='User',
     )
 
     def __str__(self):
