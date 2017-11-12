@@ -4,4 +4,6 @@ import { Component } from '@angular/core';
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.scss']
 })
-export class FeedComponent { }
+export class FeedComponent {
+  carouselLooper = [0, 1, 2, 3];
+}
