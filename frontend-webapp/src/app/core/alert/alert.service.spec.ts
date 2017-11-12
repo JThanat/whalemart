@@ -1,6 +1,6 @@
 import { AlertService } from './alert.service';
 
-fdescribe('AlertService', () => {
+describe('AlertService', () => {
   it('should initially return an observable of undefined', () => {
     const alertSpy = jasmine.createSpy('alertSpy');
     const uut = new AlertService();
