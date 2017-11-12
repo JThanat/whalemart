@@ -4,6 +4,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 
+import { AlertService } from '../core/alert/alert.service';
 import { RegisterComponent } from './register.component';
 import { RegisterService } from './register.service';
 
@@ -20,7 +21,11 @@ describe('RegisterComponent', () => {
       ],
       declarations: [RegisterComponent],
       providers: [
-        RegisterService
+        RegisterService,
+        {
+          provide: AlertService,
+          useFactory: () => jasmine.createSpyObj('MockAlertService', ['show', 'close'])
+        }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();

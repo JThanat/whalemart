@@ -3,6 +3,7 @@ import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
+import { AlertService } from '../alert/alert.service';
 import { UserInfo, UserService } from '../user/user.service';
 import { NavBarComponent } from './nav-bar.component';
 
@@ -19,7 +20,13 @@ describe('NavBarComponent', () => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       declarations: [NavBarComponent],
-      providers: [{ provide: UserService, useClass: MockUserService }]
+      providers: [
+        { provide: UserService, useClass: MockUserService },
+        {
+          provide: AlertService,
+          useFactory: () => jasmine.createSpyObj('MockAlertService', ['show'])
+        }
+      ]
     }).compileComponents();
   }));
 
