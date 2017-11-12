@@ -145,7 +145,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-# STATIC_URL = '/static/'
+STATIC_URL = '/static/'
 
 # Static Media files (images)
 # References https://stackoverflow.com/questions/5871730/need-a-minimal-django-file-upload-example/24066179#_=_
