@@ -27,6 +27,8 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.loginForm.updateValueAndValidity();
+
     this.alert.close();
     this.loginForm.disable();
 
