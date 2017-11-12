@@ -1,9 +1,9 @@
 # Snow White and the Seven Pandas
 
 [![section 1](https://img.shields.io/badge/section-1-ff69b4.svg?style=flat-square)](#contributors)
-[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 [![Travis branch](https://img.shields.io/travis/we-inc/mms-snow-white-and-the-seven-pandas/master.svg?style=flat-square)](https://travis-ci.org/we-inc/mms-snow-white-and-the-seven-pandas)
 [![GitHub issues](https://img.shields.io/github/issues/we-inc/mms-snow-white-and-the-seven-pandas.svg?style=flat-square&label=Issue)](https://github.com/we-inc/mms-snow-white-and-the-seven-pandas/issues)
+[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
 > A team project&#39;s repository as part of 2110423 Software Engineering course 1/2017
 
@@ -11,14 +11,11 @@ _Whalemart_ is a market space matching platform which allows flea market vendor 
 
 ## Table of Contents
 
-- [Background](#background)
 - [Documents](#documents)
 - [Developing](#developing)
 - [Contributing Design](#contributing-design)
 - [Contributors](#contributors)
 - [License](#license)
-
-## Background
 
 ## Documents
 
