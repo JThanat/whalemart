@@ -49,8 +49,8 @@ Run `docker-compose up --build` within project folder. The development environme
 You can then access the followings:
 
 - Webapp (build using [Angular](angular.io)) via [localhost:4200](http://localhost:4200)
-- API Server (built using [Django REST framework](http://www.django-rest-framework.org/) via [localhost:8000](http://localhost:8000)
-- [pgAdmin](https://www.pgadmin.org/) via [localhost:5050](http://localhost:5050) for GUI database access
+- API Server (built using [Django REST framework](http://www.django-rest-framework.org/)) via [localhost:8000](http://localhost:8000)
+- [pgAdmin](https://www.pgadmin.org/) via [localhost:5050](http://localhost:5050) for Postgres database GUI access
   - Username: `pgadmin4@pgadmin.org`
   - Password: `admin`
   - Database username: `postgres`
