@@ -1,0 +1,47 @@
+@import '~styles/common';
+
+.alert-container, .backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.backdrop {
+  height: 10rem;
+  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
+  pointer-events: none;
+  z-index: $zindex-modal-backdrop - 1;
+}
+
+.alert-container {
+  z-index: $zindex-modal - 1;
+}
+
+.alert {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  font-size: 1.15rem;
+  background: #FFF;
+  color: $white;
+  padding: map-get($spacers, 3) map-get($spacers, 4);
+  border-radius: 0 0 $border-radius $border-radius;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+  p {
+    margin-bottom: 0;
+  }
+  &.alert-info {
+    background: $info;
+  }
+  &.alert-success {
+    background: $success;
+  }
+  &.alert-warning {
+    background: $warning;
+  }
+  &.alert-danger {
+    background: $danger;
+  }
+}
