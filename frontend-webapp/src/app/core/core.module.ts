@@ -9,6 +9,7 @@ import { MarketService } from './market/market.service';
 import { NavBarModule } from './nav-bar/nav-bar.module';
 import { SearchBackButtonService } from './search/search-back-button.service';
 import { UserService } from './user/user.service';
+import { UtilsModule } from './utils/utils.module';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { UserService } from './user/user.service';
     LocalDbModule,
     AlertModule,
     IconModule,
-    NavBarModule
+    NavBarModule,
+    UtilsModule
   ],
   declarations: [
     FooterComponent
@@ -25,7 +27,8 @@ import { UserService } from './user/user.service';
     FooterComponent,
     AlertModule,
     IconModule,
-    NavBarModule
+    NavBarModule,
+    UtilsModule
   ],
   providers: [
     UserService,
