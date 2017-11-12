@@ -71,8 +71,7 @@ You can then access the followings:
 
 1. **Consider** having each commit representing only _single_ logical change.
 2. **Do** having the first line of the commit message be a summary of the commit.
-3. **Do** capitalize the first line of the commit message.
-4. **Don't** end the first line with a period, e.g. `Add Facebook login API` (without trailing period).
+3. **Do** capitalize the first line of the commit message, and **don't** end the first line with a period, e.g. `Add Facebook login API` (without trailing period).
 5. **Do** use [imperative mood](https://chris.beams.io/posts/git-commit/#imperative) for the first line of th commit message.
 
 ## Contributing Design
