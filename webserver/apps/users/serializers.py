@@ -6,7 +6,16 @@ from .models import CreditCard
 
 User = get_user_model()
 
+
+class CreditCardSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CreditCard
+        fields = ('card_number', 'card_holder_name', 'type', 'expiry_date', 'verification_no')
+
+
 class UserSerializer(serializers.ModelSerializer):
+    credit_cards = CreditCardSerializer(many=True)
+
     class Meta:
         model = User
         fields = ('id', 'email', 'password', 'first_name', 'last_name', 'phone', 'facebook_token')
