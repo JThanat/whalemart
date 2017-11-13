@@ -4,11 +4,19 @@ describe('IntercomponentDataService', () => {
   it('should be able to get a value', () => {
     const uut = new IntercomponentDataService();
 
+    expect(uut.has('test')).toBe(false);
+
     uut.set('test', 'foo');
+    expect(uut.has('test')).toBe(true);
+
     expect(uut.get('test')).toBe('foo');
+    expect(uut.has('test')).toBe(false);
 
     uut.set('test', 'bar');
+    expect(uut.has('test')).toBe(true);
+
     expect(uut.get('test')).toBe('bar');
+    expect(uut.has('test')).toBe(false);
   });
 
   it('should throw error on setting using same key twice', () => {

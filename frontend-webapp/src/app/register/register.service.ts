@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
+import { OperatorFunction } from 'rxjs/interfaces';
 import { Observable } from 'rxjs/Observable';
 import { _throw as observableThrow } from 'rxjs/observable/throw';
 import { catchError, map } from 'rxjs/operators';
@@ -11,6 +12,10 @@ interface RegisterParams {
   lastName: string;
   password: string;
   phone: string;
+}
+
+interface FacebookRegisterParams extends RegisterParams {
+  fbAccessToken: string;
 }
 
 interface RegisterServerResponse {
@@ -33,13 +38,36 @@ export class RegisterService {
   constructor(private http: HttpClient) { }
 
   register(params: RegisterParams): Observable<true> {
-    return this.http.post<RegisterServerResponse>('/api/register/', {
+    const body = {
       email: params.email,
       first_name: params.firstName,
       last_name: params.lastName,
       password: params.password,
       phone: params.phone
-    }).pipe(
+    };
+
+    return this.http.post<RegisterServerResponse>('/api/users/', body).pipe(
+      this.mapRegisterResponse()
+    );
+  }
+
+  registerWithFacebook(params: FacebookRegisterParams): Observable<true> {
+    const body = {
+      email: params.email,
+      first_name: params.firstName,
+      last_name: params.lastName,
+      password: params.password,
+      phone: params.phone,
+      facebook_token: params.fbAccessToken
+    };
+
+    return this.http.post<RegisterServerResponse>('/api/users/', body).pipe(
+      this.mapRegisterResponse()
+    );
+  }
+
+  private mapRegisterResponse(): OperatorFunction<RegisterServerResponse, true> {
+    return serverResponse => serverResponse.pipe(
       map(() => true),
       catchError((err: any) => {
         if (err instanceof HttpErrorResponse) {

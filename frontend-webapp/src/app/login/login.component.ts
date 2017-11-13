@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AlertService } from '../core/alert/alert.service';
+import { IntercomponentDataService } from '../core/utils/intercomponent-data.service';
 import { FacebookLoginService } from './facebook-login.service';
 import { InvalidLoginCredentialError, LoginService } from './login.service';
 
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
     private loginService: LoginService,
     private router: Router,
     private alert: AlertService,
-    private fbLoginService: FacebookLoginService
+    private fbLoginService: FacebookLoginService,
+    private intercomponentDataService: IntercomponentDataService
   ) { }
 
   ngOnInit() {
@@ -65,7 +67,14 @@ export class LoginComponent implements OnInit {
 
   loginWithFacebook() {
     this.fbLoginService.loginFacebook().subscribe(result => {
-      if (result.success) {
+      if (!result.success) {
+        return;
+      }
+
+      if (result.requireRegistration) {
+        this.intercomponentDataService.set('fbRegister', result.registrationInfo);
+        this.router.navigate(['/register/facebook']);
+      } else {
         this.isFb = true;
         this.fbAccessToken = result.fbAccessToken;
       }

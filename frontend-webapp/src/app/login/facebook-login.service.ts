@@ -9,14 +9,26 @@ import { _throw as observableThrow } from 'rxjs/observable/throw';
 import { catchError, filter, first, map, mapTo, mergeMap } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
+import { IntercomponentDataMap } from '../core/utils/intercomponent-data.service';
 
 let isFbScriptLoadingIssued = false;
 
-interface FacebookLoginResult {
+interface FacebookLoginResultNoRegistrationNeeded {
   success: true;
   fbAccessToken: string;
-  requireRegistration: boolean;
+  requireRegistration: false;
 }
+
+interface FacebookLoginResultRegistrationNeeded {
+  success: true;
+  fbAccessToken: string;
+  requireRegistration: true;
+  registrationInfo: IntercomponentDataMap['fbRegister'];
+}
+
+type FacebookLoginResult =
+  FacebookLoginResultNoRegistrationNeeded |
+  FacebookLoginResultRegistrationNeeded;
 
 interface FacebookLoginResultError {
   success: false;
@@ -56,7 +68,7 @@ export class FacebookLoginService {
           appId: environment.facebook.appId,
           cookie: true,
           xfbml: true,
-          version: 'v2.10'
+          version: 'v2.11'
         });
         FB.AppEvents.logPageView();
       };
@@ -77,39 +89,74 @@ export class FacebookLoginService {
       throw new Error('Cannot open more than one login dialog simultaneously');
     }
     this.isLoginDialogOpening = true;
+
     return this.fbObject.pipe(
-      mergeMap(fb => new Promise<facebook.AuthResponse>(resolve => { fb.login(resolve); })),
+      mergeMap(fb => new Promise<facebook.AuthResponse>(resolve => {
+        fb.login(resolve, { scope: 'public_profile,email' });
+      })),
       mergeMap(loginResult => {
         this.isLoginDialogOpening = false;
 
         if (loginResult.status !== 'connected') {
-          const result: FacebookLoginResultError = { success: false };
-          return observableOf(result);
+          return observableOf({ success: false } as FacebookLoginResultError);
         }
 
         const accessToken = loginResult.authResponse.accessToken;
-        return this.isTokenValid(accessToken).pipe(map(isTokenValid => {
-          const result: FacebookLoginResult = {
-            success: true,
-            fbAccessToken: accessToken,
-            requireRegistration: !isTokenValid
-          };
-          return result;
+        return this.isRegistered(accessToken).pipe(mergeMap(isTokenValid => {
+          if (isTokenValid) {
+            return observableOf({
+              success: true,
+              fbAccessToken: accessToken,
+              requireRegistration: false
+            } as FacebookLoginResult);
+          } else {
+            const userId = loginResult.authResponse.userID;
+            return this.getRegistrationInformation(accessToken, userId).pipe(map(info => {
+              return {
+                success: true,
+                fbAccessToken: accessToken,
+                requireRegistration: true,
+                registrationInfo: info
+              } as FacebookLoginResult;
+            }));
+          }
         }));
       })
     );
   }
 
-  private isTokenValid(accessToken: string) {
+  private isRegistered(accessToken: string) {
     return this.http.post('/api/api-token-verify/', { token: accessToken }).pipe(
-      mapTo(true),
-      catchError(err => {
-        if (err instanceof HttpErrorResponse) {
-          if (err.status >= 400 && err.status < 500) {
-            return observableOf(true);
+        mapTo(true),
+        catchError(err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status >= 400 && err.status < 500) {
+              return observableOf(true);
+            }
           }
-        }
-        return observableThrow(err);
+          return observableThrow(err);
+        })
+      );
+  }
+
+  getRegistrationInformation(fbAccessToken: string, userId: string)
+    : Observable<IntercomponentDataMap['fbRegister']> {
+    return this.fbObject.pipe(
+      mergeMap(fb => new Promise<{
+        first_name: string;
+        last_name: string;
+        email?: string;
+      }>(resolve => {
+        fb.api('/me', { fields: 'first_name,last_name,email' }, resolve);
+      })),
+      map(info => {
+        return {
+          fbAccessToken,
+          firstName: info.first_name,
+          lastName: info.last_name,
+          email: info.email,
+          profileImageUrl: `https://graph.facebook.com/v2.11/${userId}/picture?type=large`,
+        };
       })
     );
   }
