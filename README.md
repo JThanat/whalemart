@@ -87,7 +87,7 @@ After installing Kactus, you can regenerate a sketch file from JSON by directly 
 
 When you make some changes to sketch files, Kactus watches those files and re-parses them automatically. Please note that at this step Kactus is required to be opened. This parsed (or exploded) view of your sketch file is what git tracks. So, you can use your preferred Git client to commit your work and push to the remote as usual.
 
-You can also peek and leave comments on the current Whalemart's UI at [https://sketch.cloud/s/QbQAG/p/ui](https://sketch.cloud/s/QbQAG/p/ui).
+You can also peek and leave comments on the current Whalemart's UI at [https://sketch.cloud/s/ELk4v/ui/](https://sketch.cloud/s/ELk4v/ui/).
 
 ## Contributors
 
