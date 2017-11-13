@@ -16,24 +16,31 @@ class CreditCardSerializer(serializers.ModelSerializer):
         }
 
 
+class RegistrationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'email', 'password', 'first_name', 'last_name', 'phone', 'facebook_token')
+        extra_kwargs = {
+            'password': {'write_only': True},
+            'is_verified': {'read_only': True},
+        }
+
+    def create(self, validated_data):
+        validated_data['username'] = validated_data['email']
+        validated_data['password'] = make_password(validated_data['password'])
+        return User.objects.create(**validated_data)
+
+
 class UserSerializer(serializers.ModelSerializer):
     credit_cards = CreditCardSerializer(many=True)
 
     class Meta:
         model = User
-        fields = ('id', 'email', 'first_name', 'last_name', 'phone', 'facebook_token', 'is_verified', 'profile_image')
+        fields = ('id', 'email', 'first_name', 'last_name', 'phone', 'is_verified', 'profile_image', 'credit_cards')
         extra_kwargs = {
-            'is_verified': {'read_only': True}
+            'is_verified': {'read_only': True},
+            'email': {'read_only': True},
         }
-
-    def create(self, validated_data):
-        credit_cards_data = validated_data.pop('credit_cards', None)
-        validated_data['username'] = validated_data['email']
-        validated_data['password'] = make_password(validated_data['password'])
-        user = User.objects.create(**validated_data)
-        for credit_card_data in credit_cards_data:
-            CreditCard.objects.create(user=user, **credit_card_data)
-        return user
 
     def update(self, instance, validated_data):
         credit_cards_data = validated_data.pop('credit_cards', None)
