@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { InputErrorComponent } from './input/input-error.component';
 import { InputGroupComponent } from './input/input-group.component';
 import { InputDirective } from './input/input.directive';
+import { SvgIconComponent } from './svg-icon/svg-icon.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { InputDirective } from './input/input.directive';
   declarations: [
     InputGroupComponent,
     InputDirective,
-    InputErrorComponent
+    InputErrorComponent,
+    SvgIconComponent
   ],
   exports: [
     CommonModule,
@@ -27,7 +29,8 @@ import { InputDirective } from './input/input.directive';
     HttpClientModule,
     InputGroupComponent,
     InputDirective,
-    InputErrorComponent
+    InputErrorComponent,
+    SvgIconComponent
   ]
 })
 export class SharedModule { }
