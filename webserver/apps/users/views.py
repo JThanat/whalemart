@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.hashers import make_password
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -36,11 +37,25 @@ class ValidateUserEmailView(APIView):
 
 
 @api_view()
+def login_username(request, *args, **kwargs):
+    username = request.query_params.get('username', None)
+    password = request.query_params.get('password', None)
+    try:
+        user = User.objects.get(username=username)
+        if user.password == make_password(password):
+            request.user = user
+            return Response({'is_success': True})
+        return Response({'is_success': False})
+    except User.DoesNotExist:
+        return Response({'is_success': False})
+
+
+@api_view()
 def login_facebook(request, *args, **kwargs):
     facebook_token = request.query_params.get('facebook_token', None)
     try:
         user = User.objects.get(facebook_token=facebook_token)
         request.user = user
-        return Response({'is_logged_in': True})
+        return Response({'is_success': True})
     except User.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+        return Response({'is_success': False})
