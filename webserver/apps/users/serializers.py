@@ -10,7 +10,10 @@ User = get_user_model()
 class CreditCardSerializer(serializers.ModelSerializer):
     class Meta:
         model = CreditCard
-        fields = ('card_number', 'card_holder_name', 'type', 'expiry_date', 'verification_no')
+        fields = ('id', 'card_number', 'card_holder_name', 'type', 'expiry_date', 'verification_no')
+        extra_kwargs = {
+            'id': {'read_only': False, 'required': False}
+        }
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -36,4 +39,19 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
     def update(self, instance, validated_data):
-        pass
+        credit_cards_data = validated_data.pop('credit_cards', None)
+        instance = super(UserSerializer, self).update(instance, validated_data)
+        for credit_card_data in credit_cards_data:
+            credit_card_id = credit_card_data.get('id', None)
+            if credit_card_id:
+                credit_card_obj = CreditCard.objects.get(id=credit_card_id)
+                credit_card_obj.card_number = credit_card_data.get('card_number', credit_card_obj.card_number)
+                credit_card_obj.card_holder_name = credit_card_data.get('card_holder_name',
+                                                                        credit_card_obj.card_holder_name)
+                credit_card_obj.type = credit_card_data.get('type', credit_card_obj.type)
+                credit_card_obj.expiry_date = credit_card_data.get('expiry_date', credit_card_obj.expiry_date)
+                credit_card_obj.verification_no = credit_card_data.get('verification_no', credit_card_obj.verification_no)
+                credit_card_obj.save()
+            else:
+                CreditCard.objects.create(user=instance, **credit_card_data)
+        return instance
