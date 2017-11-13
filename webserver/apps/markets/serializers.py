@@ -40,6 +40,9 @@ class MarketSerializer(serializers.ModelSerializer):
         cover_photo = validated_data.pop('cover_photo')
         scene_photos = validated_data.pop('scene_photos')
 
+        validated_data['created_user'] = self.context.get('request').user
+        validated_data['updated_user'] = self.context.get('request').user
+
         market = Market.objects.create(**validated_data)
 
         CoverPhoto.objects.create(market=market, **cover_photo)
