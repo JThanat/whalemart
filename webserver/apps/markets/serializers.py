@@ -10,6 +10,7 @@ class CoverPhotoSerializer(serializers.ModelSerializer):
         model = CoverPhoto
         fields = ('image',)
 
+
 class CoverPhotoThumbnailSerializer(serializers.ModelSerializer):
     class Meta:
         model = CoverPhoto
@@ -24,7 +25,7 @@ class SceneSerializer(serializers.ModelSerializer):
 
 class MarketSerializer(serializers.ModelSerializer):
     tags = TagSerializer(many=True)
-    cover_photo = CoverPhotoSerializer()
+    cover_photo = CoverPhotoSerializer(many=True)
     scene_photos = SceneSerializer(many=True)
 
     class Meta:
@@ -33,7 +34,7 @@ class MarketSerializer(serializers.ModelSerializer):
                   'contact_person_fullname', 'contact_person_phone_number', 'contact_person_email', 'location',
                   'location_latitude', 'location_longitude', 'term_and_condition', 'deposit_payment_due',
                   'full_payment_due', 'reservation_due_date', 'estimate_visitor', 'min_price', 'max_price',
-                  'layout_photo', 'provided_accessories','cover_photo','scene_photos','tags')
+                  'layout_photo', 'provided_accessories', 'cover_photo', 'scene_photos', 'tags', 'created_user')
 
     def create(self, validated_data):
         tags_data = validated_data.pop('tags')
@@ -45,7 +46,7 @@ class MarketSerializer(serializers.ModelSerializer):
 
         market = Market.objects.create(**validated_data)
 
-        CoverPhoto.objects.create(market=market, **cover_photo)
+        CoverPhoto.objects.create(market=market, *cover_photo)
 
         for tag in tags_data:
             Tag.objects.create(market=market, **tag)
@@ -53,13 +54,15 @@ class MarketSerializer(serializers.ModelSerializer):
         for scene_photo in scene_photos:
             Scene.objects.create(market=market, **scene_photo)
 
+        return market
+
 
 class MarketFeedSerializer(serializers.ModelSerializer):
     tags = TagSerializer(many=True)
-    cover_photo = CoverPhotoThumbnailSerializer()
+    cover_photo = CoverPhotoThumbnailSerializer(many=True)
 
     class Meta:
         model = Market
         fields = ('name', 'caption', 'description', 'opening_date', 'closing_date', 'opening_time', 'closing_time',
-                  'contact_person_fullname', 'location','reservation_due_date', 'min_price', 'max_price', 'cover_photo','tags')
-
+                  'contact_person_fullname', 'location', 'reservation_due_date', 'min_price', 'max_price',
+                  'cover_photo', 'tags')
