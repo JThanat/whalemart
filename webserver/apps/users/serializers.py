@@ -21,15 +21,10 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'email', 'first_name', 'last_name', 'phone', 'facebook_token', 'credit_cards')
-        # extra_kwargs = {
-        #     'password': {'write_only': True}
-        # }
-
-    # def validate(self, data):
-        # data['username'] = data['email']
-        # data['password'] = make_password(data['password'])
-        # return data
+        fields = ('id', 'email', 'first_name', 'last_name', 'phone', 'facebook_token', 'is_verified', 'profile_image')
+        extra_kwargs = {
+            'is_verified': {'read_only': True}
+        }
 
     def create(self, validated_data):
         credit_cards_data = validated_data.pop('credit_cards', None)
