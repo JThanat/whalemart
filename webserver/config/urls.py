@@ -26,7 +26,8 @@ from apps.users import views as user_views
 from apps.lessors import views as lessor_views
 
 router = routers.DefaultRouter()
-router.register(r'users', user_views.UserViewSet)
+router.register(r'register', user_views.RegistrationViewSet)
+router.register(r'vendor-profile', user_views.UserViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
