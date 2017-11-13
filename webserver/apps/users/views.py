@@ -12,6 +12,16 @@ User = get_user_model()
 class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
+    Example:
+    {
+        "id": 1,
+        "email": "sirinthra.cc@gmail.com",
+        "first_name": "Sirinthra",
+        "last_name": "Chantharaj",
+        "phone": "123456789",
+        "facebook_token": "1",
+        "credit_cards": [{"card_number": "1", "card_holder_name": "2", "type": 1, "expiry_date": "2017-05-16", "verification_no": "1"}]
+    }
     """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
