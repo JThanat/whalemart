@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.decorators import api_view
 
 from apps.users.serializers import UserSerializer
 
@@ -32,3 +33,14 @@ class ValidateUserEmailView(APIView):
             return Response({'is_ok': True})
         else:
             return Response({'is_ok': False})
+
+
+@api_view()
+def login_facebook(request, *args, **kwargs):
+    facebook_token = request.query_params.get('facebook_token', None)
+    try:
+        user = User.objects.get(facebook_token=facebook_token)
+        request.user = user
+        return Response({'is_logged_in': True})
+    except User.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
