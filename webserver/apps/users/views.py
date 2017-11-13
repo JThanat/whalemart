@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password, check_password
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -42,7 +42,7 @@ def login_username(request, *args, **kwargs):
     password = request.query_params.get('password', None)
     try:
         user = User.objects.get(username=username)
-        if user.password == make_password(password):
+        if check_password(password, user.password):
             request.user = user
             return Response({'is_success': True})
         return Response({'is_success': False})
