@@ -16,7 +16,7 @@ class User(AbstractUser):
 
 
 class CreditCard(models.Model):
-    user = models.ForeignKey('user.User', verbose_name='User')
+    user = models.ForeignKey('users.User', verbose_name='User')
     card_number = models.CharField(verbose_name='Card Number', max_length=20)
     card_holder_name = models.CharField(verbose_name='Card Holder Name', max_length=50)
     MASTER_CARD = 1
