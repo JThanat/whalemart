@@ -23,6 +23,7 @@ from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework_jwt.views import refresh_jwt_token
 from rest_framework_jwt.views import verify_jwt_token
 
+from apps.lessors import views as lessor_views
 from apps.markets import views as market_views
 from apps.ping import views as ping_views
 from apps.users import views as user_views
@@ -44,4 +45,8 @@ urlpatterns = [
                   url(r'^api-token-auth/', obtain_jwt_token),
                   url(r'^api-token-refresh/', refresh_jwt_token),
                   url(r'^api-token-verify/', verify_jwt_token),
+
+                  # Lessor
+                  url(r'^become-lessor/', lessor_views.BecomeALessorView.as_view()),
+                  url(r'^lessor/info/', lessor_views.LessorInfoView.as_view()),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
