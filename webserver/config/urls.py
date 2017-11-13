@@ -30,6 +30,7 @@ from apps.users import views as user_views
 router = routers.DefaultRouter()
 router.register(r'users', user_views.UserViewSet)
 router.register(r'markets', market_views.MarketViewSet, base_name='markets')
+router.register(r'market-feed', market_views.MarketFeedViewSet, base_name='feed')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
