@@ -67,10 +67,10 @@ def login_username(request, *args, **kwargs):
         user = User.objects.get(username=username)
         if check_password(password, user.password):
             request.user = user
-            return Response({'is_success': True})
-        return Response({'is_success': False})
+            return Response({'is_success': True}, status=status.HTTP_200_OK)
+        return Response({'is_success': False}, status=status.HTTP_400_BAD_REQUEST)
     except User.DoesNotExist:
-        return Response({'is_success': False})
+        return Response({'is_success': False}, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view()
@@ -79,14 +79,6 @@ def login_facebook(request, *args, **kwargs):
     try:
         user = User.objects.get(facebook_token=facebook_token)
         request.user = user
-        return Response({'is_success': True})
+        return Response({'is_success': True}, status=status.HTTP_200_OK)
     except User.DoesNotExist:
-        return Response({'is_success': False})
-
-
-class CreditCardViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint of credit card
-    """
-    queryset = CreditCard.objects.all()
-    serializer_class = CreditCardSerializer
+        return Response({'is_success': False}, status=status.HTTP_400_BAD_REQUEST)
