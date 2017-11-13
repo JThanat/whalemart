@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     'apps.ping',
     'apps.lessors',
+    'apps.credit_cards'
 ]
 
 AUTH_USER_MODEL = 'users.User'
