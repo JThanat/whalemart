@@ -32,8 +32,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
 class RegistrationViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows users to be viewed or edited.
-    ### *Authentication*\n
+    Authentication Urls
         `/login-facebook/?facebook_token=<facebook_token>`: login with facebook
         `/login-username/?username=<username>&password=<password>`: login with username and password
     """
