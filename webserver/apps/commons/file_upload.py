@@ -25,7 +25,7 @@ def create_thumb_name(filename):
     return "{name}_thumb.{extension}".format(name=new_name, extension=extension)
 
 
-def create_thumbnail(input_image, thumbnail_size=(600, 400)):
+def create_thumbnail(input_image, thumbnail_size=(600, 600)):
     if not input_image:
         return
     img = Image.open(input_image)
@@ -47,7 +47,10 @@ class UploadedImage(models.Model):
     image = models.ImageField(verbose_name="Uploaded Image", upload_to=random_filename)
 
     # thumbnail
-    thumbnail = models.ImageField(verbose_name="Thumb Nail")
+    thumbnail = models.ImageField(verbose_name="Thumb Nail", blank=True)
+
+    class Meta:
+        abstract = True
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
