@@ -28,6 +28,7 @@ from apps.bank_accounts import views as bank_accounts_views
 
 router = routers.DefaultRouter()
 router.register(r'users', user_views.UserViewSet)
+router.register(r'bank-account', bank_accounts_views.BankAccountInfoViewSet, base_name='bank-account')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
@@ -45,7 +46,4 @@ urlpatterns = [
     # Lessor
     url(r'^become-lessor/', lessor_views.BecomeALessorView.as_view()),
     url(r'^lessor/info/', lessor_views.LessorInfoView.as_view()),
-
-    # Bank account
-    url(r'^bank_account/', bank_accounts_views.BankAccountInfoView.as_view()),
 ]
