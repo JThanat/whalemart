@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     'apps.markets',
     'apps.accessories',
     'apps.tags',
-    'apps.scenes',
 
     'django.contrib.admin',
     'django.contrib.auth',
