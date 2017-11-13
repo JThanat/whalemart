@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 
-from .serializers import UserSerializer, CreditCardSerializer
+from .serializers import RegistrationSerializer, UserSerializer, CreditCardSerializer
 from .models import CreditCard
 
 User = get_user_model()
@@ -14,19 +14,31 @@ User = get_user_model()
 class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
-    Example:
-    {
-        "id": 1,
-        "email": "sirinthra.cc@gmail.com",
-        "first_name": "Sirinthra",
-        "last_name": "Chantharaj",
-        "phone": "123456789",
-        "facebook_token": "1",
-        "credit_cards": [{"card_number": "1", "card_holder_name": "2", "type": 1, "expiry_date": "2017-05-16", "verification_no": "1"}]
-    }
+    credit_cards data example:
+    "credit_cards": [
+        {
+            "id": 10,
+            "card_number": "1",
+            "card_holder_name": "2",
+            "type": 1,
+            "expiry_date": "2017-05-16",
+            "verification_no": "1"
+        }
+    ]
     """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
+
+
+class RegistrationViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    ### *Authentication*\n
+        `/login-facebook/?facebook_token=<facebook_token>`: login with facebook
+        `/login-username/?username=<username>&password=<password>`: login with username and password
+    """
+    queryset = User.objects.all().order_by('-date_joined')
+    serializer_class = RegistrationSerializer
 
 
 class ValidateUserEmailView(APIView):
