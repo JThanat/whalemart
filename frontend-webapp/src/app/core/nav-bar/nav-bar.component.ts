@@ -1,6 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ActivationStart,
+  ChildActivationStart,
+  RouteConfigLoadStart,
+  Router
+} from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
+import { Subscription } from 'rxjs/Subscription';
 
 import { AlertService } from '../alert/alert.service';
 import { UserService } from '../user/user.service';
@@ -10,19 +17,38 @@ import { UserService } from '../user/user.service';
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.scss']
 })
-export class NavBarComponent implements OnInit {
+export class NavBarComponent implements OnInit, OnDestroy {
   isMenuOpened = false;
   userName: Observable<string | undefined>;
 
-  constructor(private userService: UserService, private alert: AlertService) { }
+  private routerSubcription: Subscription;
+
+  constructor(
+    private userService: UserService,
+    private alert: AlertService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.userName = this.userService.userInfo.pipe(
       map(userInfo => userInfo ? userInfo.email : undefined)
     );
+
+    this.routerSubcription = this.router.events.subscribe(event => {
+      if (event instanceof RouteConfigLoadStart ||
+        event instanceof ChildActivationStart ||
+        event instanceof ActivationStart) {
+        this.isMenuOpened = false;
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.routerSubcription.unsubscribe();
   }
 
   logout() {
+    this.isMenuOpened = false;
     this.userService.userInfo.next(undefined);
     this.alert.show({ message: `ออกจากระบบสำเร็จ`, type: 'success' });
   }
