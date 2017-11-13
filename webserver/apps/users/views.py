@@ -3,7 +3,8 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from apps.users.serializers import UserSerializer
+from .serializers import UserSerializer, CreditCardSerializer
+from .models import CreditCard
 
 User = get_user_model()
 
@@ -32,3 +33,11 @@ class ValidateUserEmailView(APIView):
             return Response({'is_ok': True})
         else:
             return Response({'is_ok': False})
+
+
+class CreditCardViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint of credit card
+    """
+    queryset = CreditCard.objects.all()
+    serializer_class = CreditCardSerializer
