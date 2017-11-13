@@ -28,8 +28,12 @@ class UserSerializer(serializers.ModelSerializer):
         data['password'] = make_password(data['password'])
         return data
 
+    def create(self, validated_data):
+        credit_cards_data = validated_data.pop('credit_cards', None)
+        user = User.objects.create(**validated_data)
+        for credit_card_data in credit_cards_data:
+            CreditCard.objects.create(user=user, **credit_card_data)
+        return user
 
-class CreditCardSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CreditCard
-        fields = ('card_number', 'card_holder_name', 'type', 'expiry_date', 'verification_no')
+    def update(self, instance, validated_data):
+        pass
