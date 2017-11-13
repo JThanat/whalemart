@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'apps.users',
     'apps.markets',
     'apps.tags',
+    'apps.commons',
 
     'django.contrib.admin',
     'django.contrib.auth',
