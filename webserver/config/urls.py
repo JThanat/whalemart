@@ -20,7 +20,6 @@ from rest_framework import routers
 from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework_jwt.views import refresh_jwt_token
 from rest_framework_jwt.views import verify_jwt_token
-from django.contrib.auth.views import logout
 
 from apps.ping import views as ping_views
 from apps.users import views as user_views
@@ -43,7 +42,7 @@ urlpatterns = [
     url(r'^validate-email/', user_views.ValidateUserEmailView.as_view()),
     url(r'^login-facebook/', user_views.login_facebook),
     url(r'^login-username/', user_views.login_username),
-    url(r'^logout/', logout),
+    url(r'^logout/', user_views.logout),
     url(r'^current-user/', user_views.get_current_user),
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
