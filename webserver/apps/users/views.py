@@ -71,10 +71,11 @@ def login_username(request, *args, **kwargs):
         user = User.objects.get(username=username)
         if check_password(password, user.password):
             request.user = user
-            return Response({'is_success': True}, status=status.HTTP_200_OK)
-        return Response({'is_success': False}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'first_name': user.first_name, 'last_name': user.last_name, 'email': user.email},
+                            status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
     except User.DoesNotExist:
-        return Response({'is_success': False}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST',])
@@ -87,12 +88,17 @@ def login_facebook(request, *args, **kwargs):
     try:
         user = User.objects.get(facebook_token=facebook_token)
         request.user = user
-        return Response({'is_success': True}, status=status.HTTP_200_OK)
+        return Response({'first_name': user.first_name, 'last_name': user.last_name, 'email': user.email},
+                        status=status.HTTP_200_OK)
     except User.DoesNotExist:
-        return Response({'is_success': False}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST',])
 def logout(request, *args, **kwargs):
     request.user = AnonymousUser
-    return Response({'is_success': True}, status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_200_OK)
+
+
+# @api_view(['GET',])
+# def l
