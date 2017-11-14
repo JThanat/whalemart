@@ -3,22 +3,23 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of as observableOf } from 'rxjs/observable/of';
 import { _throw as observableThrow } from 'rxjs/observable/throw';
-import { catchError, mapTo } from 'rxjs/operators';
+import { catchError, map, mapTo } from 'rxjs/operators';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
-
-import { KeyValueStore } from '../local-db/key-value-store.service';
-
-interface StoredUserInfo {
-  readonly email: string;
-  readonly token: string;
-}
 
 /**
  * An immutable interface representing current user state.
  */
-export type UserInfo = StoredUserInfo;
+export interface UserInfo {
+  readonly firstName: string;
+  readonly lastName: string;
+  readonly email: string;
+}
 
-const storedUserInfoKey = 'userInfo';
+export interface UserInfoServerResponse {
+  first_name: string;
+  last_name: string;
+  email: string;
+}
 
 @Injectable()
 export class UserService {
@@ -28,8 +29,7 @@ export class UserService {
    */
   readonly userInfo = new ReplaySubject<UserInfo | undefined>(1);
 
-  constructor(private keyValueStore: KeyValueStore, private http: HttpClient) {
-    this.registerUserTokenAutoSaver();
+  constructor(private http: HttpClient) {
     this.getInitialUserInfo().subscribe(userInfo => {
       this.userInfo.next(userInfo);
     });
@@ -51,15 +51,21 @@ export class UserService {
     return currentUserInfo;
   }
 
-  private getInitialUserInfo(): Observable<UserInfo | undefined> {
-    const val = this.keyValueStore.get(storedUserInfoKey);
-    if (val === undefined) {
-      return observableOf(undefined);
-    }
-    const storedUserInfo = JSON.parse(val) as StoredUserInfo;
+  logout() {
+    // This API returns no body, so we have to set to text to prevent JSON parsing.
+    return this.http.post('/api/logout/', null, { responseType: 'text' })
+      .pipe(mapTo(true));
+  }
 
-    return this.http.post('/api/api-token-verify/', { token: storedUserInfo.token }).pipe(
-      mapTo(storedUserInfo),
+  private getInitialUserInfo(): Observable<UserInfo | undefined> {
+    return this.http.get<UserInfoServerResponse>('/api/current-user/').pipe(
+      map(result => {
+        return {
+          firstName: result.first_name,
+          lastName: result.last_name,
+          email: result.email
+        };
+      }),
       catchError((err: any) => {
         if (err instanceof HttpErrorResponse && err.status >= 400 && err.status < 500) {
           return observableOf(undefined);
@@ -67,19 +73,5 @@ export class UserService {
         return observableThrow(err) as Observable<UserInfo | undefined>;
       })
     );
-  }
-
-  private registerUserTokenAutoSaver() {
-    this.userInfo.subscribe(userInfo => {
-      if (userInfo === undefined) {
-        this.keyValueStore.delete(storedUserInfoKey);
-      } else {
-        const storedUserInfo: StoredUserInfo = {
-          email: userInfo.email,
-          token: userInfo.token
-        };
-        this.keyValueStore.set(storedUserInfoKey, JSON.stringify(storedUserInfo));
-      }
-    });
   }
 }

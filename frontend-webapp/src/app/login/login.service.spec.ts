@@ -4,9 +4,8 @@ import { inject, TestBed } from '@angular/core/testing';
 
 import { UserInfo, UserService } from '../core/user/user.service';
 import {
-  LoginError,
+  InvalidLoginCredentialError,
   LoginServerResponse,
-  LoginServerResponseError,
   LoginService
 } from './login.service';
 
@@ -52,14 +51,20 @@ describe('LoginService', () => {
         isSuccess = true;
       });
 
-      const req = httpMock.expectOne({ url: '/api/api-token-auth/', method: 'POST' });
+      const req = httpMock.expectOne({ url: '/api/login-username/', method: 'POST' });
       expect(req.request.body).toEqual({ username: 'test@abc.com', password: 'testpassword' });
-      req.flush({ token: 'testtoken' } as LoginServerResponse);
+      req.flush({
+        email: 'test@abc.com',
+        first_name: 'Foo',
+        last_name: 'Bar'
+      } as LoginServerResponse);
 
       expect(isSuccess).toBe(true);
-      expect(userService.getCurrentUserInfo()).not.toBeUndefined();
-      const userInfo = userService.getCurrentUserInfo() as UserInfo;
-      expect(userInfo.email).toBe('test@abc.com');
+      expect(userService.getCurrentUserInfo()).toEqual({
+        email: 'test@abc.com',
+        firstName: 'Foo',
+        lastName: 'Bar'
+      } as UserInfo);
     }
   ));
 
@@ -69,19 +74,13 @@ describe('LoginService', () => {
 
       let isError = false;
       loginService.login('test@abc.com', 'testpassword').subscribe(() => fail(), err => {
-        if (err instanceof LoginError) {
-          expect(err.reason).toBe('INVALID_EMAIL_PASSWORD');
-          isError = true;
-        } else {
-          fail();
-        }
+        expect(err instanceof InvalidLoginCredentialError).toBe(true);
+        isError = true;
       });
 
-      const req = httpMock.expectOne({ url: '/api/api-token-auth/', method: 'POST' });
+      const req = httpMock.expectOne({ url: '/api/login-username/', method: 'POST' });
       expect(req.request.body).toEqual({ username: 'test@abc.com', password: 'testpassword' });
-      req.flush({
-        non_field_errors: ['Unable to log in with provided credentials.']
-      } as LoginServerResponseError, { status: 400, statusText: 'Bad Request' });
+      req.flush(null, { status: 400, statusText: 'Bad Request' });
 
       expect(isError).toBe(true);
       expect(userService.getCurrentUserInfo()).toBeUndefined();
@@ -98,7 +97,7 @@ describe('LoginService', () => {
         isError = true;
       });
 
-      const req = httpMock.expectOne({ url: '/api/api-token-auth/', method: 'POST' });
+      const req = httpMock.expectOne({ url: '/api/login-username/', method: 'POST' });
       expect(req.request.body).toEqual({ username: 'test@abc.com', password: 'testpassword' });
       req.error(new ErrorEvent('some error'));
 
