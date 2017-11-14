@@ -1,3 +1,5 @@
+import re
+
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
@@ -24,6 +26,11 @@ class RegistrationSerializer(serializers.ModelSerializer):
             'password': {'write_only': True},
             'is_verified': {'read_only': True},
         }
+
+    def validate_phone(self, data):
+        if (data is None) or re.match(r"^\+?\d{9,15}$", data):
+            return data
+        raise serializers.ValidationError('Phone number should be in format +123456789')
 
     def create(self, validated_data):
         validated_data['username'] = validated_data['email']
