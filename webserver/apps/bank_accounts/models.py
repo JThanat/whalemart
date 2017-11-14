@@ -17,10 +17,10 @@ class BankAccount(models.Model):
         ('GSB', 'Government Savings Bank'),
         ('GHB', 'Government Housing Bank'),
     )
-    account_name = models.CharField(verbose_name='Account Name', max_length=30)
+    account_name = models.CharField(verbose_name='Account Name', max_length=100)
     account_id = models.CharField(verbose_name='Account ID', max_length=20, unique=True)
     bank = models.CharField(verbose_name='Bank', max_length=5, choices=BANK_CHOICES)
-    branch = models.CharField(verbose_name='Branch', max_length=20)
+    branch = models.CharField(verbose_name='Branch', max_length=100)
 
     lessor = models.ForeignKey(
         Lessor,
