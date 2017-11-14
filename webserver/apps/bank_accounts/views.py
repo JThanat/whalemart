@@ -36,7 +36,6 @@ class BankAccountInfoViewSet(viewsets.ViewSet):
 
     def destroy(self, request, pk=None):
         lessor = get_object_or_404(Lessor, user=request.user.id)
-        bank_account = BankAccount.objects.get(lessor=lessor, pk=pk)
         try:
             bank_account = BankAccount.objects.get(lessor=lessor, pk=pk)
             bank_account.delete()
