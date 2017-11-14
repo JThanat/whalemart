@@ -1,0 +1,8 @@
+@import '~styles/common';
+@import '~styles/helper';
+
+label {
+  @extend ._font-heading;
+  @extend ._font-regular;
+  color: $dark-gray;
+}

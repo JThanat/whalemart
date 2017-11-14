@@ -1,16 +1,19 @@
 @import '~styles/common';
+@import '~styles/helper';
 
 .search-section {
   .lead-1 {
+    @extend ._font-heading;
+    @extend ._font-bold;
     margin: 4rem 0 0.5rem 0;
-    font-weight: bold;
     font-size: 2rem;
     white-space: nowrap;
     line-height: 2.5rem;
   }
   .lead-2 {
+    @extend ._font-heading;
+    @extend ._font-bold;
     color: $primary;
-    font-weight: bold;
     font-size: 1.8rem;
     margin-bottom: 3rem;
   }
@@ -35,8 +38,9 @@
     left: 35%;
     bottom: 1rem;
     .name {
-      font-size: 1.2rem;
-      font-weight: bold;
+      @extend ._font-heading;
+      @extend ._font-bold;
+      font-size: 1.3rem;
     }
     .location, .date {
       font-size: 0.9rem;
@@ -65,6 +69,8 @@
     border-radius: $border-radius-sm;
     position: relative;
     .expire-note {
+      @extend ._font-heading;
+      @extend ._font-regular;
       background: $white;
       color: $primary;
       position: absolute;
@@ -72,7 +78,6 @@
       bottom: -0.2rem;
       font-size: 0.9rem;
       padding: 0.25rem 0.5rem 0.25rem 1rem;
-      font-weight: bold;
       border-radius: 1rem 0 0 1rem;
       box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.05);
       z-index: 1;
@@ -82,12 +87,12 @@
     margin-bottom: 0;
     &.location {
       color: $gray;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
     }
     &.name {
+      @extend ._font-heading;
+      @extend ._font-bold;
       color: $dark-gray;
-      font-family: $headings-font-family;
-      font-weight: bold;
       font-size: 1.1rem;
     }
     &.date {
@@ -102,11 +107,11 @@
 }
 
 .section-title {
-  @include clearfix;
-  h2 {
-    float: left;
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   a {
-    @include float-right;
+    @extend ._font-heading;
+    @extend ._font-regular;
   }
 }

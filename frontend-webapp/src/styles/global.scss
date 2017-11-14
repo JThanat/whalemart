@@ -40,3 +40,29 @@
 @import '~bootstrap/scss/popover';
 // @import '~bootstrap/scss/carousel';
 @import '~bootstrap/scss/utilities';
+
+html {
+  @extend ._font-body;
+  @extend ._font-regular;
+  font-size: 15px;
+}
+
+h1, h2, h3 {
+  @extend ._font-heading;
+  @extend ._font-bold;
+}
+
+.form-control-lg {
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+}
+
+.btn-lg {
+  padding: 0.8rem 1.2rem;
+  font-size: 1rem;
+}
+
+.btn {
+  @extend ._font-heading;
+  @extend ._font-regular;
+}
