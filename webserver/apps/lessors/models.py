@@ -12,7 +12,7 @@ class Lessor(models.Model):
     organization_email = models.EmailField(verbose_name="Organization Email", max_length=254, blank=True)
     organization_phone_number = models.CharField(
         verbose_name="Organization Phone Number",
-        min_length=9, max_length=15, blank=True
+        max_length=15, blank=True
     )
 
     user = models.OneToOneField(
