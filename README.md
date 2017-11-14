@@ -61,7 +61,7 @@ You can then access the followings:
 #### Branching
 
 1. **Consider** branch out feature branch from `master` branch for easier management.
-2. **Do** use kebab casing for branch name, e.g. `facebook-login-api`.
+2. **Do** use kebab casing for branch name, and **consider** prefix branch name with _backend_ or _frontend_. For example, `backend/facebook-login-api` and `frontend/market-page`.
 8. **Consider** making a [PR](https://help.github.com/articles/about-pull-requests/) and having someone review your code instead of merging directly to a `master` branch.
 
 #### Commits
