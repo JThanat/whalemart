@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 counter=1
 echo "Begin"
