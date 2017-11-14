@@ -6,4 +6,4 @@ from .models import Booth
 class BoothSerializer(serializers.ModelSerializer):
     class Meta:
         model = Booth
-        fields = ('booth_number', 'rental_free', 'user')
+        fields = ('booth_number', 'rental_fee', 'user')
