@@ -14,8 +14,8 @@ class BankAccountInfoViewSet(viewsets.ViewSet):
     """
     GET  `bank-account`: Display bank account information of active lessor
     POST `bank-account`: Add bank account to active lessor
-    GET  `bank-account/{id}`: Display bank account at id
-    DELETE `bank-account/{id}`: Delete bank account at id
+    GET  `bank-account/{id}`: Get bank account #id
+    DELETE `bank-account/{id}`: Delete bank account #id
     """
     serializer_class = BankAccountSerializer
 
