@@ -25,7 +25,7 @@ class SceneSerializer(serializers.ModelSerializer):
 
 class MarketSerializer(serializers.ModelSerializer):
     tags = TagSerializer(many=True)
-    cover_photo = CoverPhotoSerializer(many=True)
+    cover_photo = CoverPhotoSerializer()
     scene_photos = SceneSerializer(many=True)
 
     class Meta:
@@ -34,7 +34,8 @@ class MarketSerializer(serializers.ModelSerializer):
                   'contact_person_fullname', 'contact_person_phone_number', 'contact_person_email', 'location',
                   'location_latitude', 'location_longitude', 'term_and_condition', 'deposit_payment_due',
                   'full_payment_due', 'reservation_due_date', 'estimate_visitor', 'min_price', 'max_price',
-                  'layout_photo', 'provided_accessories', 'cover_photo', 'scene_photos', 'tags', 'created_user')
+                  'layout_photo', 'provided_accessories', 'cover_photo', 'scene_photos', 'tags')
+
 
     def create(self, validated_data):
         tags_data = validated_data.pop('tags')
@@ -46,7 +47,7 @@ class MarketSerializer(serializers.ModelSerializer):
 
         market = Market.objects.create(**validated_data)
 
-        CoverPhoto.objects.create(market=market, *cover_photo)
+        CoverPhoto.objects.create(market=market, **cover_photo)
 
         for tag in tags_data:
             Tag.objects.create(market=market, **tag)
@@ -59,7 +60,7 @@ class MarketSerializer(serializers.ModelSerializer):
 
 class MarketFeedSerializer(serializers.ModelSerializer):
     tags = TagSerializer(many=True)
-    cover_photo = CoverPhotoThumbnailSerializer(many=True)
+    cover_photo = CoverPhotoThumbnailSerializer()
 
     class Meta:
         model = Market
