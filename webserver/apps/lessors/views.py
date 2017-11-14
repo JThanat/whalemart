@@ -7,10 +7,11 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.decorators import list_route
 
-from apps.lessors.serializers import LessorSerializer, LessorEditSerializaer
+from apps.lessors.serializers import LessorSerializer, LessorEditSerializer
 from .models import Lessor
 
 User = get_user_model()
+
 
 class BecomeALessorViewSet(viewsets.GenericViewSet):
     """
@@ -27,6 +28,7 @@ class BecomeALessorViewSet(viewsets.GenericViewSet):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class LessorViewSet(viewsets.ViewSet):
     """
     Display infomation of lessor
@@ -34,9 +36,9 @@ class LessorViewSet(viewsets.ViewSet):
     * GET `lessor` - Get lessor information
     * POST `lessor/change` - Update lessor information
     """
-    serializer_class = LessorEditSerializaer
+    serializer_class = LessorEditSerializer
 
-    def list(self, request, **kwargs):
+    def list(self, request):
         user = get_object_or_404(User, id=request.user.id)
         lessor = get_object_or_404(Lessor, user=user)
         return Response(LessorSerializer(lessor).data)
@@ -45,7 +47,7 @@ class LessorViewSet(viewsets.ViewSet):
     def change(self, request):
         user = get_object_or_404(User, id=request.user.id)
         lessor = get_object_or_404(Lessor, user=user)
-        serializer = LessorEditSerializaer(lessor, data=request.data, partial=True)
+        serializer = LessorEditSerializer(lessor, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

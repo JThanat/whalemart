@@ -7,17 +7,20 @@ import re
 
 User = get_user_model()
 
-class LessorEditSerializaer(serializers.ModelSerializer):
+
+class LessorEditSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lessor
         fields = ('lessor_name',)
 
+
 class LessorSerializer(serializers.ModelSerializer):
-    user = serializers.HiddenField(default=0) 
-    
+    user = serializers.HiddenField(default=0)
+
     class Meta:
         model = Lessor
-        fields = ('lessor_name', 'user', 'is_organization', 'organization_name', 'organization_contact_name', 'organization_email', 'organization_phone_number')
+        fields = ('lessor_name', 'user', 'is_organization', 'organization_name', 'organization_contact_name',
+                  'organization_email', 'organization_phone_number')
         extra_kwargs = {
             'organization_name': {'required': False},
             'organization_contact_name': {'required': False},
@@ -54,4 +57,5 @@ class LessorSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError('Organization email should not be empty')
             elif data['organization_phone_number'] is None:
                 raise serializers.ValidationError('Organization phone number should not be empty')
+
         return data
