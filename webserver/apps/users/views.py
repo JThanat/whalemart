@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import check_password
+from django.contrib.auth.models import AnonymousUser
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -89,3 +90,9 @@ def login_facebook(request, *args, **kwargs):
         return Response({'is_success': True}, status=status.HTTP_200_OK)
     except User.DoesNotExist:
         return Response({'is_success': False}, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST',])
+def logout(request, *args, **kwargs):
+    request.user = AnonymousUser
+    return Response({'is_success': True}, status=status.HTTP_200_OK)
