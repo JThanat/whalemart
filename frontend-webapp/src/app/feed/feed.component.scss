@@ -3,7 +3,7 @@
 
 .search-section {
   .lead-1 {
-    @extend ._font-heading;
+    font-family: $headings-font-family;
     @extend ._font-bold;
     margin: 4rem 0 0.5rem 0;
     font-size: 2rem;
@@ -11,7 +11,7 @@
     line-height: 2.5rem;
   }
   .lead-2 {
-    @extend ._font-heading;
+    font-family: $headings-font-family;
     @extend ._font-bold;
     color: $primary;
     font-size: 1.8rem;
@@ -38,7 +38,7 @@
     left: 35%;
     bottom: 1rem;
     .name {
-      @extend ._font-heading;
+      font-family: $headings-font-family;
       @extend ._font-bold;
       font-size: 1.3rem;
     }
@@ -69,7 +69,7 @@
     border-radius: $border-radius-sm;
     position: relative;
     .expire-note {
-      @extend ._font-heading;
+      font-family: $headings-font-family;
       @extend ._font-regular;
       background: $white;
       color: $primary;
@@ -90,7 +90,7 @@
       font-size: 0.9rem;
     }
     &.name {
-      @extend ._font-heading;
+      font-family: $headings-font-family;
       @extend ._font-bold;
       color: $dark-gray;
       font-size: 1.1rem;
@@ -111,7 +111,7 @@
   justify-content: space-between;
   align-items: center;
   a {
-    @extend ._font-heading;
+    font-family: $headings-font-family;
     @extend ._font-regular;
   }
 }

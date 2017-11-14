@@ -2,7 +2,7 @@
 @import '~styles/helper';
 
 label {
-  @extend ._font-heading;
+  font-family: $headings-font-family;
   @extend ._font-regular;
   color: $dark-gray;
 }
