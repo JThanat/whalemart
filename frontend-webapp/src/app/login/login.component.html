@@ -4,11 +4,6 @@
       <h1 class="display-4 mt-5">เข้าสู่ระบบ</h1>
 
       <form (submit)="login()" [formGroup]="loginForm">
-        <div *ngIf="errorReason" [ngSwitch]="errorReason">
-          <ng-template ngSwitchCase="INVALID_EMAIL_PASSWORD">อีเมลหรือรหัสผ่านไม่ถูกต้อง</ng-template>
-          <ng-template ngSwitchDefault>เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ: {{ errorReason }}</ng-template>
-        </div>
-
         <app-input-group label="อีเมล">
           <input appInput type="email" class="form-control" placeholder="อีเมล" formControlName="email" required>
           <app-input-error *ngIf="loginForm.controls['email'].hasError('email')">

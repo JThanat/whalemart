@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { AlertService } from '../core/alert/alert.service';
 import { LoginError, LoginService } from './login.service';
 
 @Component({
@@ -11,9 +12,12 @@ import { LoginError, LoginService } from './login.service';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  errorReason: string | undefined = undefined;
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(
+    private loginService: LoginService,
+    private router: Router,
+    private alert: AlertService
+  ) { }
 
   ngOnInit() {
     this.loginForm = new FormGroup({
@@ -23,23 +27,37 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.errorReason = undefined;
+    this.loginForm.updateValueAndValidity();
+
+    this.alert.close();
     this.loginForm.disable();
 
     const email = this.loginForm.value.email as string;
     const password = this.loginForm.value.password as string;
     this.loginService.login(email, password).subscribe(userInfo => {
-      // TODO: Switch to proper centralized alert service
-      alert(`Login successfully as ${userInfo.email}.`);
+      this.alert.show({ message: `เข้าสู่ระบบสำเร็จ`, type: 'success' });
       this.router.navigate(['/']);
     }, err => {
       this.loginForm.enable();
       if (err instanceof LoginError) {
-        this.errorReason = err.reason;
+        switch (err.reason) {
+          case 'INVALID_EMAIL_PASSWORD': {
+            this.alert.show({
+              message: 'อีเมลหรือรหัสผ่านไม่ถูกต้อง',
+              type: 'danger'
+            });
+            break;
+          }
+          default: {
+            this.alert.show({
+              message: `เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ: ${err.reason}`,
+              type: 'danger'
+            });
+            break;
+          }
+        }
       } else {
-        this.errorReason = undefined;
-        // TODO: Properly handle an error
-        console.error(err);
+        throw err;
       }
     });
   }

@@ -1,0 +1,153 @@
+@import '~styles/common';
+
+.header {
+  h1 {
+    font-weight: bold;
+    font-size: 1.6rem;
+    margin: 0;
+  }
+  .lead {
+    font-size: 1.1rem;
+    margin-bottom: 0;
+  }
+  .location, .date {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+  }
+}
+
+.cover-image-container {
+  background: $light-gray;
+  height: 25rem;
+}
+
+.nav-wrapper {
+  background: $white;
+  z-index: 1;
+  border-bottom: 1px solid $light-gray;
+  position: sticky;
+  top: 0;
+  .nav-link {
+    padding-top: map-get($spacers, 3);
+    padding-bottom: map-get($spacers, 3);
+  }
+}
+
+.main-content {
+  h2 {
+    color: $primary;
+    font-weight: bold;
+    font-size: 1.3rem;
+    margin-bottom: map-get($spacers, 4);
+  }
+
+  h3 {
+    color: $dark-gray;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-top: map-get($spacers, 4);
+    margin-bottom: map-get($spacers, 3);
+  }
+
+  hr {
+    margin-top: map-get($spacers, 5);
+    margin-bottom: map-get($spacers, 5);
+  }
+
+  .date, .time {
+    margin-bottom: 0;
+  }
+
+  .lease-info {
+    dd, dt {
+      margin-top: map-get($spacers, 2);
+      margin-bottom: map-get($spacers, 2);
+    }
+  }
+
+  .location-map-container {
+    background: $light-gray;
+    height: 15rem;
+  }
+
+  .market-map-container {
+    background: $light-gray;
+    height: 40rem;
+  }
+
+  .market-lessor-image {
+    width: 5rem;
+    height: 5rem;
+    background: $light-gray;
+    border-radius: 50%;
+  }
+
+  .lessor-contact {
+    p {
+      margin-bottom: 0.2rem;
+      &.name {
+        font-weight: bold;
+      }
+    }
+  }
+
+  .side-content {
+    position: sticky;
+    top: 5rem;
+  }
+
+  .scene-carousel {
+    .image-container {
+      background: $light-gray;
+      height: 30rem;
+      border-radius: $border-radius;
+    }
+    .btn {
+      padding: 0;
+      background: 0;
+      height: 1.8rem;
+      font-weight: bold;
+      &.selected {
+        background: $secondary;
+        color: $white;
+      }
+    }
+    .image-selector {
+      .btn {
+        width: 1.8rem;
+        margin-left: map-get($spacers, 1);
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+
+  .cta-container {
+    border: 1px solid $light-gray;
+    padding: map-get($spacers, 3) map-get($spacers, 4);
+    .price {
+      p {
+        margin-bottom: 0;
+      }
+      .min {
+        color: $primary;
+      }
+      .max {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+.related-markets {
+  h2 {
+    font-weight: bold;
+    font-size: 1.6rem;
+    margin: 0;
+  }
+  .market {
+    background: $light-gray;
+    height: 15rem;
+  }
+}

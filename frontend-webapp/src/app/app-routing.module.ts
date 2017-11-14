@@ -5,7 +5,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    loadChildren: './home/home.module#HomeModule'
+    loadChildren: './feed/feed.module#FeedModule'
   },
   {
     path: 'ping',
@@ -18,6 +18,11 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: './register/register.module#RegisterModule'
+  },
+  {
+    path: 'market/:id',
+    pathMatch: 'full',
+    loadChildren: './market/landing/market-landing.module#MarketLandingModule'
   }
 ];
 

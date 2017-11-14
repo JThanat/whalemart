@@ -7,8 +7,15 @@ $other-2: #43BCCD;
 
 $dark: #220C10;
 $dark-gray: #514547;
-$grey: #9D9395;
+$gray: #9D9395;
 $light-gray: #E1DCDD;
+
+$input-btn-focus-color: rgba($dark-gray, 0.25);
+$input-focus-border-color: lighten($dark-gray, 25%);
+
+$border-radius: .125rem;
+$border-radius-lg: .15rem;
+$border-radius: .1rem;
 
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';

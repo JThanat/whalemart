@@ -1,6 +1,7 @@
 from django.db import models
 from apps.users.models import User
 
+
 class Lessor(models.Model):
     lessor_name = models.CharField(verbose_name='Lessor Name', max_length=100)
     user = models.OneToOneField(

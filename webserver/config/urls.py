@@ -29,6 +29,8 @@ router = routers.DefaultRouter()
 router.register(r'users', user_views.UserViewSet)
 router.register(r'become-lessor', lessor_views.BecomeALessorViewSet, base_name='become-lessor')
 router.register(r'lessor', lessor_views.LessorViewSet, base_name='lessor')
+router.register(r'register', user_views.RegistrationViewSet)
+router.register(r'vendor-profile', user_views.UserViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
@@ -36,6 +38,8 @@ urlpatterns = [
     url(r'^', include(router.urls)),
     url(r'^ping/', ping_views.Ping.as_view()),
     url(r'^validate-email/', user_views.ValidateUserEmailView.as_view()),
+    url(r'^login-facebook/', user_views.login_facebook),
+    url(r'^login-username/', user_views.login_username),
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     # JWT
