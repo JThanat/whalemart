@@ -19,7 +19,7 @@ class CreditCardSerializer(serializers.ModelSerializer):
 class RegistrationSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'email', 'password', 'first_name', 'last_name', 'phone', 'facebook_token')
+        fields = ('email', 'password', 'first_name', 'last_name', 'phone', 'facebook_token')
         extra_kwargs = {
             'password': {'write_only': True},
             'is_verified': {'read_only': True},
