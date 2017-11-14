@@ -23,6 +23,7 @@ install:
 
 script:
   - docker-compose exec frontend_webapp yarn test:ci
+  - docker-compose logs
   - $TRAVIS_BUILD_DIR/scripts/loop-ping-server.sh
   - docker-compose exec frontend_webapp yarn e2e:ci
   - docker-compose exec frontend_webapp yarn lint
