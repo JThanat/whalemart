@@ -1,0 +1,112 @@
+@import '~styles/common';
+
+.search-section {
+  .lead-1 {
+    margin: 4rem 0 0.5rem 0;
+    font-weight: bold;
+    font-size: 2rem;
+    white-space: nowrap;
+    line-height: 2.5rem;
+  }
+  .lead-2 {
+    color: $primary;
+    font-weight: bold;
+    font-size: 1.8rem;
+    margin-bottom: 3rem;
+  }
+}
+
+.cool-carousel-item {
+  position: relative;
+  height: 18rem;
+  .img-container {
+    background: $light-gray;
+    position: absolute;
+    border-radius: $border-radius-sm;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 55%;
+  }
+  .card {
+    box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.1);
+    position: absolute;
+    right: 0;
+    left: 35%;
+    bottom: 1rem;
+    .name {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    .location, .date {
+      font-size: 0.9rem;
+      margin-bottom: map-get($spacers, 2);
+      color: $gray;
+    }
+    .price {
+      font-size: 1.1rem;
+      color: $primary;
+      margin-bottom: 0;
+      font-weight: bold;
+    }
+    .card-footer {
+      background: theme-color-level(secondary, -11);
+      color: $secondary;
+      font-weight: bold;
+    }
+  }
+}
+
+.carousel-item {
+  .img-container {
+    height: 10rem;
+    background: $light-gray;
+    margin-bottom: map-get($spacers, 3);
+    border-radius: $border-radius-sm;
+    position: relative;
+    .expire-note {
+      background: $white;
+      color: $primary;
+      position: absolute;
+      right: 0;
+      bottom: -0.2rem;
+      font-size: 0.9rem;
+      padding: 0.25rem 0.5rem 0.25rem 1rem;
+      font-weight: bold;
+      border-radius: 1rem 0 0 1rem;
+      box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.05);
+      z-index: 1;
+    }
+  }
+  p {
+    margin-bottom: 0;
+    &.location {
+      color: $gray;
+      font-size: 0.8rem;
+    }
+    &.name {
+      color: $dark-gray;
+      font-family: $headings-font-family;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+    &.date {
+      font-size: 0.9rem;
+    }
+    &.price {
+      margin-top: map-get($spacers, 1);
+      font-size: 0.9rem;
+      color: $secondary;
+    }
+  }
+}
+
+.section-title {
+  @include clearfix;
+  h2 {
+    float: left;
+  }
+  a {
+    @include float-right;
+  }
+}

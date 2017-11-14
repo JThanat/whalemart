@@ -1,0 +1,100 @@
+<section class="search-section mt-3 mb-5 py-4">
+  <div class="container">
+    <p class="lead-1">ตลาดสุดฮิตมากมาย<wbr> รอให้คุณมาจับจอง</p>
+    <p class="lead-2">ค้นหาตลาดง่ายๆ แค่ปลายนิ้ว</p>
+    <form [formGroup]="searchForm" class="row align-items-end">
+      <div class="col-12 col-lg-5">
+        <app-input-group label="ชื่อตลาดหรือสถานที่">
+          <input appInput type="text" class="form-control btn-lg" placeholder="ชื่อตลาดหรือสถานที่">
+        </app-input-group>
+      </div>
+      <div class="col-12 col-lg-4">
+        <app-input-group label="ช่วงวันจัดตลาด">
+          <input appInput type="text" class="form-control btn-lg" placeholder="ตั้งแต่วันที่ &ndash; ถึงวันที่">
+        </app-input-group>
+      </div>
+      <div class="col-12 col-lg-3 mb-3 mt-2">
+        <button type="submit" class="btn btn-lg btn-primary">ค้นหาตลาด</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<div class="container mb-3">
+  <div class="section-title">
+    <h2>ตลาดนัดแนะนำ</h2>
+  </div>
+</div>
+
+<!-- TODO: Properly implement carousel -->
+<div class="container mb-5">
+  <div class="row">
+    <div class="col-12 col-lg-6" *ngFor="let i of coolCarouselLooper">
+      <div class="cool-carousel-item mb-4">
+        <div class="img-container"></div>
+        <div class="card">
+          <div class="card-body">
+            <h4 class="name">ตลาดนัดถนนรัชาดาภิเษก</h4>
+            <p class="location">ถนนรัชดาภิเษก กทม.</p>
+            <p class="date">วันที่ 18&ndash;24 ธันวาคม 2560</p>
+            <div class="d-flex justify-content-between align-items-center mt-3">
+              <p class="price">เริ่มต้น 1,200฿</p>
+              <a routerLink="/" class="btn btn-primary">ดูเพิ่มเติม</a>
+            </div>
+          </div>
+          <div class="card-footer">
+            มีคนจองตลาดนี้แล้ว 84 คน
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="container mb-3">
+    <div class="section-title">
+      <h2>ตลาดนัดชิวยามค่ำคืน</h2>
+      <a routerLink="/">ดูทั้งหมด ></a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-sm-6 col-lg-3 mb-5" *ngFor="let i of carouselLooper">
+        <div class="carousel-item">
+          <div class="img-container">
+            <div class="expire-note">หมดเขตจองในอีก 3 วัน</div>
+          </div>
+          <p class="location">ถนนรัชดาภิเศก กทม.</p>
+          <p class="name">ตลาดนัดถนนรัชาดาภิเสก</p>
+          <p class="date">วันที่ 18&ndash;24 ธันวาคม 2560</p>
+          <p class="price">เริ่มต้น 1,200฿</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container mb-3">
+    <div class="section-title">
+      <h2>ตลาดนัดใต้แสงแดดประเทศไทย</h2>
+      <a routerLink="/">ดูทั้งหมด ></a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-sm-6 col-lg-3 mb-5" *ngFor="let i of carouselLooper">
+        <div class="carousel-item">
+          <div class="img-container"></div>
+          <p class="location">ถนนรัชดาภิเศก กทม.</p>
+          <p class="name">ตลาดนัดถนนรัชาดาภิเสก</p>
+          <p class="date">วันที่ 18&ndash;24 ธันวาคม 2560</p>
+          <p class="price">เริ่มต้น 1,200฿</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

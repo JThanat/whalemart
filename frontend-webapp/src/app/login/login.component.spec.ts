@@ -4,6 +4,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 
+import { AlertService } from '../core/alert/alert.service';
 import { UserService } from '../core/user/user.service';
 import { LoginComponent } from './login.component';
 import { LoginService } from './login.service';
@@ -26,7 +27,11 @@ describe('LoginComponent', () => {
       declarations: [LoginComponent],
       providers: [
         { provide: LoginService, useClass: MockLoginService },
-        UserService
+        UserService,
+        {
+          provide: AlertService,
+          useFactory: () => jasmine.createSpyObj('MockAlertService', ['show', 'close'])
+        }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();

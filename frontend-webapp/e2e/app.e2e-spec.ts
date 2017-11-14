@@ -13,9 +13,4 @@ describe('frontend-webapp App', () => {
     await page.navigateTo();
     expect(await browser.getTitle()).toBe('Whalemart');
   });
-
-  it('should display welcome message', () => {
-    page.navigateTo();
-    expect(page.getDisplayTitleText()).toEqual('Whalemart');
-  });
 });
