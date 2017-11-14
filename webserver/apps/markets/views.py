@@ -36,6 +36,14 @@ class MarketViewSet(viewsets.ModelViewSet):
 
 
 class MarketFeedViewSet(viewsets.GenericViewSet):
+    """
+    ### Search
+    `/?search=<search_string>`: search with name or location
+    ### Filter Params
+    `min_price`, `max_price`: price range\n
+    `morning`, `afternoon`, `evening`, `night`: true/false\n
+    `min_date`, `max_date`: date range
+    """
     serializer_class = MarketFeedSerializer
     queryset = Market.objects.all().order_by('-created_at')
     filter_backends = (filters.SearchFilter,)
