@@ -58,10 +58,10 @@ class ValidateUserEmailView(APIView):
             return Response({'is_ok': False})
 
 
-@api_view()
+@api_view(['POST',])
 def login_username(request, *args, **kwargs):
-    username = request.query_params.get('username', None)
-    password = request.query_params.get('password', None)
+    username = request.data.get('username', None)
+    password = request.data.get('password', None)
     try:
         user = User.objects.get(username=username)
         if check_password(password, user.password):
@@ -72,9 +72,9 @@ def login_username(request, *args, **kwargs):
         return Response({'is_success': False}, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view()
+@api_view(['POST',])
 def login_facebook(request, *args, **kwargs):
-    facebook_token = request.query_params.get('facebook_token', None)
+    facebook_token = request.data.get('facebook_token', None)
     try:
         user = User.objects.get(facebook_token=facebook_token)
         request.user = user
