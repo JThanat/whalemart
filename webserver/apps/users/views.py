@@ -60,6 +60,10 @@ class ValidateUserEmailView(APIView):
 
 @api_view(['POST',])
 def login_username(request, *args, **kwargs):
+    """
+    ### Required
+    `username`, `password`
+    """
     username = request.data.get('username', None)
     password = request.data.get('password', None)
     try:
@@ -74,6 +78,10 @@ def login_username(request, *args, **kwargs):
 
 @api_view(['POST',])
 def login_facebook(request, *args, **kwargs):
+    """
+    ### Required
+    `facebook_token`
+    """
     facebook_token = request.data.get('facebook_token', None)
     try:
         user = User.objects.get(facebook_token=facebook_token)
