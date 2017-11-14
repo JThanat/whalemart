@@ -8,7 +8,9 @@ class Lessor(models.Model):
     is_organization = models.BooleanField(verbose_name="Is Organization", default=False)
 
     organization_name = models.CharField(verbose_name="Organization Name", max_length=100, blank=True, default='')
-    organization_contact_name = models.CharField(verbose_name="Organization Contact Name", max_length=100, blank=True, default='')
+    organization_contact_name = models.CharField(
+        verbose_name="Organization Contact Name", max_length=100, blank=True, default=''
+    )
     organization_email = models.EmailField(
         verbose_name="Organization Email", max_length=254, blank=True, default=''
     )
