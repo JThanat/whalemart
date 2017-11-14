@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 
     'apps.ping',
     'apps.lessors',
+    'apps.bank_accounts',
 ]
 
 AUTH_USER_MODEL = 'users.User'
@@ -149,7 +150,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# Static Media files (images)
-# References https://stackoverflow.com/questions/5871730/need-a-minimal-django-file-upload-example/24066179#_=_
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 MEDIA_URL = '/media/'
