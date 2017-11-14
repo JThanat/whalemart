@@ -1,13 +1,15 @@
+@import '~bootstrap/scss/variables';
+
 /* ==========================================================================
     Typography
    ========================================================================== */
 
 ._font-heading {
-  font-family: 'Lato', 'Mitr', sans-serif;
+  font-family: 'Lato', 'Mitr', sans-serif !important;
 }
 
 ._font-body {
-  font-family: 'Thonburi', 'Tahoma', sans-serif;
+  font-family: $font-family-sans-serif !important;
 }
 
 ._font-light {
