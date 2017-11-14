@@ -4,7 +4,7 @@ from apps.lessors.models import Lessor
 # Create your models here.
 class BankAccount(models.Model):
     BANK_CHOICES = (
-        ('BBL', 'Bankok Bank'),
+        ('BBL', 'Bangkok Bank'),
         ('BBC', 'Bangkok Bank of Commerce'),
         ('KTB', 'Krung Thai Bank'),
         ('BAY', 'Bank of Ayudhya'),
