@@ -62,27 +62,26 @@ class MarketFeedViewSet(viewsets.GenericViewSet):
 
     def filter_queryset(self, queryset):
         query_params = self.request.query_params
-        min_price = query_params.get('min-price', None)
-        max_price = query_params.get('max-price', None)
-        opening_time = query_params.get('opening-time', None)
-        min_opening_date = query_params.get('min-opening-date', None)
-        max_opening_date = query_params.get('max-opening-date', None)
-        sort_by = query_params.get('sort-by', None)
+        min_price = query_params.get('min_price', None)
+        max_price = query_params.get('max_price', None)
+        # TODO: Wait for Aof-sama to define
+        morning = query_params.get('morning', None)
+        afternoon = query_params.get('afternoon', None)
+        evening = query_params.get('evening', None)
+        night = query_params.get('night', None)
+
+        min_date = query_params.get('min_date', None)
+        max_date = query_params.get('max_date', None)
+        sort_by = query_params.get('sort_by', None)
 
         if min_price:
             queryset = queryset.exclude(max_price_lt=min_price)
         if max_price:
             queryset = queryset.exclude(min_price_gt=max_price)
-        if min_opening_date:
-            queryset = queryset.exclude(closing_date_lt=min_opening_date)
-        if max_opening_date:
-            queryset = queryset.exclude(opening_date_gt=max_opening_date)
+        if min_date:
+            queryset = queryset.exclude(closing_date_lt=min_date)
+        if max_date:
+            queryset = queryset.exclude(opening_date_gt=max_date)
         if sort_by:
             queryset = queryset.sort_by(sort_by)
-        # if date:
-        #     if not product or not master_contract:
-        #         raise serializers.ValidationError(_('Please provide product and master_contract'))
-        #     queryset = queryset.filter(start_date__lte=date).order_by('-start_date')
-        #     if len(queryset) != 0:
-        #         queryset = [queryset[0],]
         return queryset
