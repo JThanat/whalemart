@@ -1,10 +1,10 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import check_password
-from django.contrib.auth.models import AnonymousUser
 from rest_framework import viewsets, mixins, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
+from django.contrib import auth
 
 from .serializers import RegistrationSerializer, UserSerializer
 
@@ -78,7 +78,7 @@ def login_username(request, *args, **kwargs):
     try:
         user = User.objects.get(username=username)
         if check_password(password, user.password):
-            request.user = user
+            auth.login(request, user)
             return Response({'first_name': user.first_name, 'last_name': user.last_name, 'email': user.email},
                             status=status.HTTP_200_OK)
         return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -95,7 +95,7 @@ def login_facebook(request, *args, **kwargs):
     facebook_token = request.data.get('facebook_token', None)
     try:
         user = User.objects.get(facebook_token=facebook_token)
-        request.user = user
+        auth.login(request, user)
         return Response({'first_name': user.first_name, 'last_name': user.last_name, 'email': user.email},
                         status=status.HTTP_200_OK)
     except User.DoesNotExist:
@@ -104,7 +104,8 @@ def login_facebook(request, *args, **kwargs):
 
 @api_view(['POST',])
 def logout(request, *args, **kwargs):
-    request.user = AnonymousUser
+    # request.user = AnonymousUser
+    auth.logout(request)
     return Response(status=status.HTTP_200_OK)
 
 
