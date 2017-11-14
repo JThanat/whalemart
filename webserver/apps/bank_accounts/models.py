@@ -1,7 +1,6 @@
 from django.db import models
 from apps.lessors.models import Lessor
 
-# Create your models here.
 class BankAccount(models.Model):
     BANK_CHOICES = (
         ('BBL', 'Bangkok Bank'),
