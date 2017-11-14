@@ -100,5 +100,10 @@ def logout(request, *args, **kwargs):
     return Response(status=status.HTTP_200_OK)
 
 
-# @api_view(['GET',])
-# def l
+@api_view(['GET',])
+def get_current_user(request, *args, **kwargs):
+    if request.user.is_anonymous():
+        return Response('Please login', status=status.HTTP_400_BAD_REQUEST)
+    user = request.user
+    return Response({'first_name': user.first_name, 'last_name': user.last_name, 'email': user.email},
+                    status=status.HTTP_200_OK)
