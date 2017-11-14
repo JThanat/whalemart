@@ -1,0 +1,28 @@
+/* ==========================================================================
+    Typography
+   ========================================================================== */
+
+._font-heading {
+  font-family: 'Lato', 'Mitr', sans-serif;
+}
+
+._font-body {
+  font-family: 'Thonburi', 'Tahoma', sans-serif;
+}
+
+._font-light {
+  font-weight: 200 !important;
+}
+
+._font-regular {
+  font-weight: normal !important;
+}
+
+._font-bold {
+  font-weight: bold !important;
+}
+
+strong,
+b {
+  @extend ._font-bold;
+}
