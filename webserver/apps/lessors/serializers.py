@@ -42,7 +42,6 @@ class LessorSerializer(serializers.ModelSerializer):
         raise serializers.ValidationError('Phone number should be in format +123456789')
 
     def validate(self, data):
-        print(data)
         try:
             Lessor.objects.get(user=data['user'])
         except ObjectDoesNotExist:
