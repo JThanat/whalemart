@@ -3,7 +3,7 @@ from apps.users.models import User
 
 
 class Lessor(models.Model):
-    lessor_name = models.CharField(verbose_name='Lessor Name', ma_length=100)
+    lessor_name = models.CharField(verbose_name='Lessor Name', max_length=100)
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
