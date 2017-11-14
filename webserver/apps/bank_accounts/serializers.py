@@ -9,7 +9,7 @@ class BankAccountSerializer(serializers.ModelSerializer):
         fields = ('account_name', 'account_id', 'bank', 'branch', 'lessor')
 
     def validate_account_id(self, data):
-        if not re.match(r'^[0-9]+$', data):
+        if not re.match(r'^\d+$', data):
             raise serializers.ValidationError('Account id should be all number')
         if len(data) < 10:
             raise serializers.ValidationError('Account id should contains atleast 10 characters')
