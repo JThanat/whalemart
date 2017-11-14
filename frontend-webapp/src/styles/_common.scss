@@ -17,8 +17,42 @@ $border-radius: .125rem;
 $border-radius-lg: .15rem;
 $border-radius: .1rem;
 
-$headings-font-family: 'Lato', 'Mitr', sans-serif !important;
+$headings-font-family: 'Lato', 'Mitr', sans-serif;
+$headings-font-weight: bold;
+
+$input-btn-padding-y-lg: 0.8rem;
+$input-btn-padding-x-lg: 1.4rem;
 
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
 @import '~bootstrap/scss/mixins';
+
+// Custom mixins
+@mixin font-weight($weight) {
+  $normalized-weights: (
+    light: 200,
+    regular: 400,
+    bold: 700
+  );
+  
+  $output: $weight;
+  @if map-has-key($normalized-weights, $weight) {
+    $output: map-get($normalized-weights, $weight);
+  }
+  
+  font-weight: $output;
+}
+
+@mixin font-family($type) {
+  $types: (
+    heading: $headings-font-family,
+    body: $font-family-sans-serif
+  );
+
+  $output: $font-family-sans-serif;
+  @if map-has-key($types, $type) {
+    $output: map-get($types, $type);
+  }
+
+  font-family: $output;
+}

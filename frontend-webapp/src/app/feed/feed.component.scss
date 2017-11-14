@@ -1,18 +1,17 @@
 @import '~styles/common';
-@import '~styles/helper';
 
 .search-section {
   .lead-1 {
-    font-family: $headings-font-family;
-    @extend ._font-bold;
+    @include font-family(heading);
+    @include font-weight(bold);
     margin: 4rem 0 0.5rem 0;
     font-size: 2rem;
     white-space: nowrap;
     line-height: 2.5rem;
   }
   .lead-2 {
-    font-family: $headings-font-family;
-    @extend ._font-bold;
+    @include font-family(heading);
+    @include font-weight(bold);
     color: $primary;
     font-size: 1.8rem;
     margin-bottom: 3rem;
@@ -38,8 +37,8 @@
     left: 35%;
     bottom: 1rem;
     .name {
-      font-family: $headings-font-family;
-      @extend ._font-bold;
+      @include font-family(heading);
+      @include font-weight(bold);
       font-size: 1.3rem;
     }
     .location, .date {
@@ -69,8 +68,8 @@
     border-radius: $border-radius-sm;
     position: relative;
     .expire-note {
-      font-family: $headings-font-family;
-      @extend ._font-regular;
+      @include font-family(heading);
+      @include font-weight(regular);
       background: $white;
       color: $primary;
       position: absolute;
@@ -90,8 +89,8 @@
       font-size: 0.9rem;
     }
     &.name {
-      font-family: $headings-font-family;
-      @extend ._font-bold;
+      @include font-family(heading);
+      @include font-weight(bold);
       color: $dark-gray;
       font-size: 1.1rem;
     }
@@ -111,7 +110,7 @@
   justify-content: space-between;
   align-items: center;
   a {
-    font-family: $headings-font-family;
-    @extend ._font-regular;
+    @include font-family(heading);
+    @include font-weight(regular);
   }
 }

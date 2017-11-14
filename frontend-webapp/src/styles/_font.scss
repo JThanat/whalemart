@@ -22,7 +22,7 @@
 	src: url('/assets/fonts/Lato/subset-Lato-Bold.eot?#iefix') format('embedded-opentype'),
 		url('/assets/fonts/Lato/subset-Lato-Bold.woff') format('woff'),
 		url('/assets/fonts/Lato/subset-Lato-Bold.ttf') format('truetype');
-  font-weight: normal;
+  font-weight: 400;
   font-style: normal;
 }
 
@@ -33,7 +33,7 @@
 	src: url('/assets/fonts/Lato/subset-Lato-Black.eot?#iefix') format('embedded-opentype'),
 		url('/assets/fonts/Lato/subset-Lato-Black.woff') format('woff'),
 		url('/assets/fonts/Lato/subset-Lato-Black.ttf') format('truetype');
-  font-weight: bold;
+  font-weight: 700;
   font-style: normal;
 }
 
@@ -57,7 +57,7 @@
 	src: url('/assets/fonts/Mitr/subset-Mitr-Regular.eot?#iefix') format('embedded-opentype'),
 		url('/assets/fonts/Mitr/subset-Mitr-Regular.woff') format('woff'),
 		url('/assets/fonts/Mitr/subset-Mitr-Regular.ttf') format('truetype');
-  font-weight: normal;
+  font-weight: 400;
   font-style: normal;
 }
 
@@ -68,6 +68,6 @@
 	src: url('/assets/fonts/Mitr/subset-Mitr-Medium.eot?#iefix') format('embedded-opentype'),
 		url('/assets/fonts/Mitr/subset-Mitr-Medium.woff') format('woff'),
 		url('/assets/fonts/Mitr/subset-Mitr-Medium.ttf') format('truetype');
-  font-weight: bold;
+  font-weight: 700;
   font-style: normal;
 }

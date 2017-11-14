@@ -1,6 +1,5 @@
 @import './common';
 @import './font';
-@import './helper';
 
 // Modified from '~bootstrap/scss/bootstrap'.
 // Import what we only want from Bootstrap.
@@ -41,28 +40,17 @@
 // @import '~bootstrap/scss/carousel';
 @import '~bootstrap/scss/utilities';
 
-html {
-  font-family: $font-family-sans-serif;
-  @extend ._font-regular;
-  font-size: 15px;
-}
-
-h1, h2, h3 {
-  font-family: $headings-font-family;
-  @extend ._font-bold;
-}
-
-.form-control-lg {
-  padding: 0.8rem 1rem;
-  font-size: 1rem;
-}
-
 .btn-lg {
-  padding: 0.8rem 1.2rem;
   font-size: 1rem;
 }
 
 .btn {
-  font-family: $headings-font-family;
-  @extend ._font-regular;
+  @include font-family(heading);
+  @include font-weight(regular);
+}
+
+label {
+  @include font-family(heading);
+  @include font-weight(regular);
+  color: $dark-gray;
 }
