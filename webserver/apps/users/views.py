@@ -1,20 +1,18 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.models import AnonymousUser
-from rest_framework import viewsets, status
+from rest_framework import viewsets, mixins, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 
-from .serializers import RegistrationSerializer, UserSerializer, CreditCardSerializer
-from .models import CreditCard
+from .serializers import RegistrationSerializer, UserSerializer
 
 User = get_user_model()
 
 
 class UserViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows users to be viewed or edited.
     credit_cards data example:
     "credit_cards": [
         {
@@ -31,21 +29,27 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
 
-class RegistrationViewSet(viewsets.ModelViewSet):
+class RegistrationViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     """
     Authentication Urls
-        `/login-facebook/?facebook_token=<facebook_token>`: login with facebook
-        `/login-username/?username=<username>&password=<password>`: login with username and password
+    `/login-facebook/`: login with facebook
+    `/login-username/`: login with username and password
     """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = RegistrationSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response({'is_success': True}, status=status.HTTP_201_CREATED, headers=headers)
 
 
 class ValidateUserEmailView(APIView):
     """
     API endpoint that allows email to be checked before created
     """
-
     def get(self, request, *args, **kwargs):
         username = request.query_params.get('email', None)
         
@@ -57,6 +61,10 @@ class ValidateUserEmailView(APIView):
             return Response({'is_ok': True})
         else:
             return Response({'is_ok': False})
+
+
+# @api_view(['POST'],)
+# def register(request, *args, **kwargs):
 
 
 @api_view(['POST',])
