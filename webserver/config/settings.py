@@ -33,9 +33,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'apps.users',
-    'apps.markets',
-    'apps.tags',
-    'apps.commons',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -49,6 +46,9 @@ INSTALLED_APPS = [
     'apps.ping',
     'apps.lessors',
     'apps.bank_accounts',
+    'apps.markets',
+    'apps.tags',
+    'apps.commons',
 ]
 
 AUTH_USER_MODEL = 'users.User'
