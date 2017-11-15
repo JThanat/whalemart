@@ -3,3 +3,7 @@
 .navbar {
   box-shadow: 0 0 1rem transparentize($black, 0.85);
 }
+
+a {
+  @include font-family(heading);
+}
