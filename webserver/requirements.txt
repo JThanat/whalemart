@@ -7,3 +7,4 @@ pytz==2017.2
 Pillow==4.3.0
 django-filter==1.1.0
 Markdown==2.6.9
+FormEncode==2.0.0a1
