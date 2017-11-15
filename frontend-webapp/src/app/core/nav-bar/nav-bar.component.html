@@ -12,6 +12,9 @@
         <li class="nav-item active">
           <a class="nav-link" href="#">ลงตลาดให้เช่า</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/become-lessor">กลายมาเป็นผู้ให้เช่าตลาด</a>
+        </li>
         <ng-container *ngIf="(userName | async) as name; else loggedIn">
           <span class="navbar-text">{{ name }}</span>
           <li class="nav-item">

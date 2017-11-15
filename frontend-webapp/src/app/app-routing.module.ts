@@ -23,7 +23,12 @@ const routes: Routes = [
     path: 'market/:id',
     pathMatch: 'full',
     loadChildren: './market/landing/market-landing.module#MarketLandingModule'
-  }
+  },
+  {
+    path: 'become-lessor',
+    pathMatch: 'full',
+    loadChildren: './become-lessor/become-lessor.module#BecomeLessorModule'
+  },
 ];
 
 @NgModule({
