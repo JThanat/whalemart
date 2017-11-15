@@ -31,5 +31,4 @@ export class DateRangePipe implements PipeTransform {
 
     return startStr + ' – ' + endStr;
   }
-
 }
