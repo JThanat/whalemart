@@ -2,14 +2,15 @@
   <div class="container navbar">
     <div class="main-nav">
       <a class="logo" routerLink="/">
-        <img src="/assets/icons/whalemart-logo-with-name.svg" height="35">
+        <img class="d-none d-lg-block" src="/assets/icons/whalemart-logo-with-name.svg" height="35">
+        <img class="d-lg-none" src="/assets/icons/whalemart-logo.svg" height="35">
       </a>
 
       <app-nav-bar-search-box *ngIf="isShowNavBarSearchBox()"></app-nav-bar-search-box>
 
-      <a class="hamburger btn btn-outline-primary my-2 my-sm-0" routerLink="#">เมนู</a>
+      <a class="hamburger d-md-none btn btn-outline-primary my-2 my-sm-0" routerLink="#">เมนู</a>
       
-      <div class="menu-list" [class.show]="isMenuOpened">
+      <div class="menu-list d-none d-md-block" [class.show]="isMenuOpened">
         <ul class="">
           <li class="nav-item active">
             <a class="nav-link" href="#">ลงตลาดให้เช่า</a>

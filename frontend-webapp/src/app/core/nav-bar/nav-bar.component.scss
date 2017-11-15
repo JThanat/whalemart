@@ -18,11 +18,7 @@
       margin-right: 1rem; 
     }
     > .menu-list {
-      display: none;
-      @include media-breakpoint-up(sm) {
-        display: initial;
-        margin-left: auto;
-      }
+      margin-left: auto;
       ul {
         display: flex;
         align-items: center;
@@ -43,9 +39,6 @@
 
     > .hamburger {
       margin-left: auto;
-      @include media-breakpoint-up(sm) {
-        display: none;
-      }
     }
   }
 
