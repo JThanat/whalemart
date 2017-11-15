@@ -48,8 +48,8 @@ describe('NavBarComponent', () => {
 
     expect(userName).toBe(undefined);
 
-    userService.userInfo.next({ email: 'test@abcde.com', token: 'TESTTOKEN' });
-    expect(userName).toBe('test@abcde.com');
+    userService.userInfo.next({ email: 'test@abcde.com', firstName: 'John', lastName: 'Cena' });
+    expect(userName).toBe('John');
   });
 
   it('should open and close navbar on clicking toggle button', () => {

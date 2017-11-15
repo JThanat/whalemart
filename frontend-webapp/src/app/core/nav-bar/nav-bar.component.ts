@@ -31,7 +31,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.userName = this.userService.userInfo.pipe(
-      map(userInfo => userInfo ? userInfo.email : undefined)
+      map(userInfo => userInfo ? userInfo.firstName : undefined)
     );
 
     this.routerSubcription = this.router.events.subscribe(event => {
@@ -49,7 +49,11 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   logout() {
     this.isMenuOpened = false;
-    this.userService.userInfo.next(undefined);
-    this.alert.show({ message: `ออกจากระบบสำเร็จ`, type: 'success' });
+    this.userService.logout().subscribe(() => {
+      this.alert.show({ message: `ออกจากระบบสำเร็จ`, type: 'success' });
+    }, err => {
+      // TODO: Handle error
+      console.error(err);
+    });
   }
 }

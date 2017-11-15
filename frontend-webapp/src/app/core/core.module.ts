@@ -3,6 +3,7 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { AlertModule } from './alert/alert.module';
 import { FooterComponent } from './footer/footer.component';
+import { IconModule } from './icon/icon.module';
 import { LocalDbModule } from './local-db/local-db.module';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { UserService } from './user/user.service';
@@ -11,7 +12,8 @@ import { UserService } from './user/user.service';
   imports: [
     SharedModule,
     LocalDbModule,
-    AlertModule
+    AlertModule,
+    IconModule
   ],
   declarations: [
     NavBarComponent,
@@ -20,7 +22,8 @@ import { UserService } from './user/user.service';
   exports: [
     NavBarComponent,
     FooterComponent,
-    AlertModule
+    AlertModule,
+    IconModule
   ],
   providers: [
     UserService

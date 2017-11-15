@@ -14,23 +14,10 @@ interface RegisterParams {
 }
 
 interface RegisterServerResponse {
-  success: true;
+  is_success: true;
 }
 
-export type RegisterErrorReason = 'INVALID';
-
-interface RegisterServerResponseError {
-  success: false;
-  reason: RegisterErrorReason;
-}
-
-export class RegisterError {
-  reason: RegisterErrorReason | string;
-
-  constructor(reason: RegisterErrorReason | string) {
-    this.reason = reason;
-  }
-}
+export class RegisterError { }
 
 interface EmailValidateServerResponse {
   is_ok: boolean;
@@ -46,7 +33,7 @@ export class RegisterService {
   constructor(private http: HttpClient) { }
 
   register(params: RegisterParams): Observable<true> {
-    return this.http.post<RegisterServerResponse>('/api/users/', {
+    return this.http.post<RegisterServerResponse>('/api/register/', {
       email: params.email,
       first_name: params.firstName,
       last_name: params.lastName,
@@ -56,9 +43,8 @@ export class RegisterService {
       map(() => true),
       catchError((err: any) => {
         if (err instanceof HttpErrorResponse) {
-          const errorBody = err.error as RegisterServerResponseError;
-          if (errorBody.success === false) {
-            return observableThrow(new RegisterError(errorBody.reason));
+          if (err.status >= 400 && err.status < 500) {
+            return observableThrow(new RegisterError());
           }
         }
         return observableThrow(err);

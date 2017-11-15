@@ -40,6 +40,9 @@
           <app-input-error *ngIf="registerForm.controls['phone'].hasError('required')">
             กรุณากรอกเบอร์โทรศัพท์
           </app-input-error>
+          <app-input-error *ngIf="registerForm.controls['phone'].hasError('pattern')">
+            กรุณากรอกเบอร์โทรศัพท์ที่อยู่ในรูปแบบ 0812345678
+          </app-input-error>
         </app-input-group>
 
         <button type="submit" class="btn btn-primary btn-lg" [disabled]="registerForm.disabled">สมัครสมาชิก</button>

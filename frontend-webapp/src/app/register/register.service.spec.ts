@@ -42,7 +42,7 @@ describe('RegisterService', () => {
         isOK = true;
       });
 
-      const req = httpMock.expectOne({ url: '/api/users/', method: 'POST' });
+      const req = httpMock.expectOne({ url: '/api/register/', method: 'POST' });
       expect(req.request.body).toEqual({
         email: 'test@abc.com',
         first_name: 'Whalemart',
@@ -60,15 +60,11 @@ describe('RegisterService', () => {
         let isError = true;
 
         registerService.register(registerParamsSample).subscribe(() => fail(), err => {
-          if (err instanceof RegisterError) {
-            expect(err.reason).toBe('INVALID');
-            isError = true;
-          } else {
-            fail();
-          }
+          expect(err instanceof RegisterError).toBe(true);
+          isError = true;
         });
 
-        const req = httpMock.expectOne({ url: '/api/users/', method: 'POST' });
+        const req = httpMock.expectOne({ url: '/api/register/', method: 'POST' });
         req.flush({
           success: false,
           reason: 'INVALID'
@@ -87,7 +83,7 @@ describe('RegisterService', () => {
           isError = true;
         });
 
-        const req = httpMock.expectOne({ url: '/api/users/', method: 'POST' });
+        const req = httpMock.expectOne({ url: '/api/register/', method: 'POST' });
         req.error(new ErrorEvent('some error'));
 
         expect(isError).toBe(true);
