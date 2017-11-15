@@ -16,8 +16,9 @@ const svgIconNames: string[] = [];
       provide: SVG_ICON_DEFINITIONS,
       useFactory: (domSanitizer: DomSanitizer) => svgIconNames.map(svgIconName => ({
         key: svgIconName,
-        fileUrl: domSanitizer.bypassSecurityTrustResourceUrl(`/assets/icon/${svgIconName}.svg`)
-      }))
+        fileUrl: domSanitizer.bypassSecurityTrustResourceUrl(`/assets/icons/${svgIconName}.svg`)
+      })),
+      deps: [DomSanitizer]
     }
   ]
 })
