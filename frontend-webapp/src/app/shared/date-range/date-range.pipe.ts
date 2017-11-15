@@ -5,7 +5,6 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'dateRange'
 })
 export class DateRangePipe implements PipeTransform {
-
   constructor(private datePipe: DatePipe) {}
 
   transform(value: Date[], args?: any): string | null {
