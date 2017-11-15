@@ -28,5 +28,9 @@
         </ng-template>
       </ul>
     </div>
+
+    <div>
+      <ng-container [cdkPortalOutlet]="getSubNavBarPortal() | async"></ng-container>
+    </div>
   </div>
 </nav>

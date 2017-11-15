@@ -5,7 +5,7 @@ import { AlertModule } from './alert/alert.module';
 import { FooterComponent } from './footer/footer.component';
 import { IconModule } from './icon/icon.module';
 import { LocalDbModule } from './local-db/local-db.module';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { NavBarModule } from './nav-bar/nav-bar.module';
 import { UserService } from './user/user.service';
 
 @NgModule({
@@ -13,17 +13,17 @@ import { UserService } from './user/user.service';
     SharedModule,
     LocalDbModule,
     AlertModule,
-    IconModule
+    IconModule,
+    NavBarModule
   ],
   declarations: [
-    NavBarComponent,
     FooterComponent
   ],
   exports: [
-    NavBarComponent,
     FooterComponent,
     AlertModule,
-    IconModule
+    IconModule,
+    NavBarModule
   ],
   providers: [
     UserService
