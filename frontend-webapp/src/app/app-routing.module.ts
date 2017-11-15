@@ -23,6 +23,11 @@ const routes: Routes = [
     path: 'market/:id',
     pathMatch: 'full',
     loadChildren: './market/landing/market-landing.module#MarketLandingModule'
+  },
+  {
+    path: 'search',
+    pathMatch: 'full',
+    loadChildren: './search/search.module#SearchModule'
   }
 ];
 

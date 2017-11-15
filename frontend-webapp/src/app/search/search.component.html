@@ -1,0 +1,18 @@
+<div class="container mt-5">
+  <form [formGroup]="searchForm">
+    <input type="text" class="form-control form-control-lg" formControlName="query" placeholder="ชื่อตลาดหรือสถานที่">
+  </form>
+
+  <ng-container *ngIf="(searchResult | async) as result; else noSearchQuery">
+    <div class="row" *ngIf="result.length > 0; else emptySearchResult">
+      <div class="col-xs-12">
+        <code><pre>{{ result | json }}</pre></code>
+      </div>
+    </div>
+    <ng-template #emptySearchResult>
+      ไม่พบตลาดที่ตรงตามคำค้น
+    </ng-template>
+  </ng-container>
+
+  <ng-template #noSearchQuery>กรุณากรอกคำค้นหา</ng-template>
+</div>
