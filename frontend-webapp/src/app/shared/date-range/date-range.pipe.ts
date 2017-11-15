@@ -19,17 +19,17 @@ export class DateRangePipe implements PipeTransform {
 
     const endStr: string | null = this.datePipe.transform(endDate, 'd LLLL y');
 
-    let startStr: string | null = this.datePipe.transform(startDate, 'd');
+    let startStr: string | null;
     if (startYear !== endYear) {
-      startStr = this.datePipe.transform(startDate, 'd LLLL y') + ' – ';
+      startStr = this.datePipe.transform(startDate, 'd LLLL y');
     } else if (startMonth !== endMonth) {
-      startStr = this.datePipe.transform(startDate, 'd LLLL') + ' – ';
+      startStr = this.datePipe.transform(startDate, 'd LLLL');
     } else if (startDay !== endDay) {
-      startStr = this.datePipe.transform(startDate, 'd') + ' – ';
+      startStr = this.datePipe.transform(startDate, 'd');
     } else {
-      startStr = '';
+      return endStr;
     }
 
-    return startStr + endStr;
+    return `${startStr} – ${endStr}`;
   }
 }
