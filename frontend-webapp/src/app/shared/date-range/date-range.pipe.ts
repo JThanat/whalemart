@@ -24,10 +24,10 @@ export class DateRangePipe implements PipeTransform {
       startStr = this.datePipe.transform(startDate, 'd LLLL y');
     } else if (startMonth !== endMonth) {
       startStr = this.datePipe.transform(startDate, 'd LLLL');
-    } else if (startDay === endDay) {
-      return endStr;
+    } else if (startDay !== endDay) {
+      return startStr + ' – ' + endStr;
     }
 
-    return startStr + ' – ' + endStr;
+    return endStr;
   }
 }
