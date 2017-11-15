@@ -6,6 +6,7 @@
       </a>
 
       <a class="hamburger btn btn-outline-primary my-2 my-sm-0" routerLink="#">เมนู</a>
+      <app-nav-bar-search-box *ngIf="isShowNavBarSearchBox()"></app-nav-bar-search-box>
 
       <div class="menu-list" [class.show]="isMenuOpened">
         <ul class="">

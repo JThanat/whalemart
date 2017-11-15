@@ -62,4 +62,8 @@ export class NavBarComponent implements OnInit, OnDestroy {
       console.error(err);
     });
   }
+
+  isShowNavBarSearchBox() {
+    return this.router.url !== '/';
+  }
 }

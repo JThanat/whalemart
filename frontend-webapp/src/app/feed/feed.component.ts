@@ -59,14 +59,10 @@ export class FeedComponent implements OnInit {
   ngOnInit() {
     this.searchForm = new FormGroup({
       searchQuery: new FormControl('')
-    }, { updateOn: 'submit' });
+    });
   }
 
   search() {
-    if (!this.searchForm.valid) {
-      return;
-    }
-
     this.router.navigate(['/search'], {
       queryParams: {
         q: this.searchForm.value.searchQuery

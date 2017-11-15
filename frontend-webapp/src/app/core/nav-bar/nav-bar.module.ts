@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../../shared/shared.module';
+import { NavBarSearchBoxComponent } from './nav-bar-search-box.component';
 import { NavBarComponent } from './nav-bar.component';
 import { SubNavBarService } from './sub-nav-bar.service';
 
@@ -9,7 +10,8 @@ import { SubNavBarService } from './sub-nav-bar.service';
     SharedModule
   ],
   declarations: [
-    NavBarComponent
+    NavBarComponent,
+    NavBarSearchBoxComponent
   ],
   exports: [
     NavBarComponent
