@@ -3,11 +3,10 @@
 </ng-container>
 
 <div class="container mt-5">
-
   <ng-container *ngIf="(searchResult | async) as result; else noSearchQuery">
     <div class="row" *ngIf="result.length > 0; else emptySearchResult">
-      <div class="col-xs-12">
-        <code><pre>{{ result | json }}</pre></code>
+      <div class="col-12 col-sm-6 col-lg-3 mb-5" *ngFor="let market of result; trackBy: marketTrackByFn" @marketInOut>
+        <app-market-item [market]="market"></app-market-item>
       </div>
     </div>
     <ng-template #emptySearchResult>

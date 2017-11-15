@@ -1,14 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-export interface Market {
-  expireDay?: number;
-  imageURL: string;
-  name: string;
-  location: string;
-  startDate: Date;
-  endDate: Date;
-  price: number;
-}
+import { Market } from '../../core/market/market.service';
 
 @Component({
   selector: 'app-market-item',
@@ -23,6 +15,6 @@ export class MarketComponent {
     startDate: new Date(),
     endDate: new Date(),
     location: 'ถนนนิวยอร์ก',
-    price: 1200
+    minPrice: 1200
   };
 }

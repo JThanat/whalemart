@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { debounceTime, map } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, first, map } from 'rxjs/operators';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs/Subscription';
   templateUrl: './nav-bar-search-box.component.html',
   styleUrls: ['./nav-bar-search-box.component.scss']
 })
-export class NavBarSearchBoxComponent implements OnInit {
+export class NavBarSearchBoxComponent implements OnInit, OnDestroy {
   searchForm: FormGroup;
 
   private queryParamUpdater: Subscription;
@@ -21,7 +21,8 @@ export class NavBarSearchBoxComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParamMap.pipe(
-      map(queryParamMap => queryParamMap.get('q') || '')
+      map(queryParamMap => queryParamMap.get('q') || ''),
+      first()
     ).subscribe(q => {
       this.searchForm = new FormGroup({
         query: new FormControl(q)
@@ -29,7 +30,8 @@ export class NavBarSearchBoxComponent implements OnInit {
     });
 
     this.queryParamUpdater = this.searchForm.valueChanges.pipe(
-      map(() => this.searchForm.value.query),
+      map(() => this.searchForm.value.query as string),
+      distinctUntilChanged(),
       debounceTime(300)
     ).subscribe(queryString => {
       this.router.navigate(['/search'], {
@@ -39,5 +41,9 @@ export class NavBarSearchBoxComponent implements OnInit {
         queryParamsHandling: 'merge'
       });
     });
+  }
+
+  ngOnDestroy() {
+    this.queryParamUpdater.unsubscribe();
   }
 }

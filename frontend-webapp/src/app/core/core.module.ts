@@ -5,6 +5,7 @@ import { AlertModule } from './alert/alert.module';
 import { FooterComponent } from './footer/footer.component';
 import { IconModule } from './icon/icon.module';
 import { LocalDbModule } from './local-db/local-db.module';
+import { MarketService } from './market/market.service';
 import { NavBarModule } from './nav-bar/nav-bar.module';
 import { UserService } from './user/user.service';
 
@@ -26,7 +27,8 @@ import { UserService } from './user/user.service';
     NavBarModule
   ],
   providers: [
-    UserService
+    UserService,
+    MarketService
   ]
 })
 export class CoreModule {

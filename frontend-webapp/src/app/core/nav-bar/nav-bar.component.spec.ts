@@ -1,14 +1,23 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { of as observableOf } from 'rxjs/observable/of';
 
 import { AlertService } from '../alert/alert.service';
 import { UserInfo, UserService } from '../user/user.service';
 import { NavBarComponent } from './nav-bar.component';
+import { SubNavBarService } from './sub-nav-bar.service';
 
 class MockUserService {
   userInfo = new BehaviorSubject<UserInfo | undefined>(undefined);
+}
+
+class MockSubNavBarService {
+  getAttachingSubNavBarPortal() {
+    return observableOf(undefined);
+  }
 }
 
 describe('NavBarComponent', () => {
@@ -25,8 +34,10 @@ describe('NavBarComponent', () => {
         {
           provide: AlertService,
           useFactory: () => jasmine.createSpyObj('MockAlertService', ['show'])
-        }
-      ]
+        },
+        { provide: SubNavBarService, useClass: MockSubNavBarService }
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
 
