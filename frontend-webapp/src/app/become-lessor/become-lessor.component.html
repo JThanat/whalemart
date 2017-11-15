@@ -3,7 +3,13 @@
     <div class="col-12 col-sm-9 col-md-6 col-lg-5 col-xl-5">
       <h1 class="display-4 mt-5">กลายมาเป็นผู้ให้เช่า</h1>
 
-      <form [formGroup]="registerForm" (submit)="register()">
+      <form [formGroup]="">
+        <app-input-group label="ชื่อผู้ให้เช่า">
+          <input type="text" class="form-control" formControlName="lessorName" placeholder="ตลาดปากน้ำ">
+        </app-input-group>
+      </form>
+      
+      <!-- <form>
         <app-input-group label="อีเมล">
           <input appInput type="email" class="form-control" formControlName="email" placeholder="อีเมล">
           <app-input-error *ngIf="">
@@ -43,7 +49,7 @@
         </app-input-group>
 
         <button type="submit" class="btn btn-primary btn-lg">สมัครสมาชิก</button>
-      </form>
+      </form> -->
     </div>
   </div>
 </div>
