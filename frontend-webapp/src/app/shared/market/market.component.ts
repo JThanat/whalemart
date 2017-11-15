@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 export interface Market {
-  expireDay: number;
+  expireDay?: number;
   imageURL: string;
   name: string;
   location: string;
