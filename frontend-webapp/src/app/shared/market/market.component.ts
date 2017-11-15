@@ -16,8 +16,4 @@ export class MarketComponent implements OnInit {
   @Input() price: number;
 
   constructor() {}
-
-  ngOnInit() {
-  }
-
 }
