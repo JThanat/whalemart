@@ -1,0 +1,10 @@
+@import '~styles/common';
+
+:host {
+  .active {
+    backgrond: $secondary;
+    color: $light-gray;
+  }
+  .page-block {
+  }
+}
