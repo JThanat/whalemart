@@ -21,13 +21,15 @@ export class DateRangePipe implements PipeTransform {
 
     let startStr: string | null = this.datePipe.transform(startDate, 'd');
     if (startYear !== endYear) {
-      startStr = this.datePipe.transform(startDate, 'd LLLL y');
+      startStr = this.datePipe.transform(startDate, 'd LLLL y') + ' – ';
     } else if (startMonth !== endMonth) {
-      startStr = this.datePipe.transform(startDate, 'd LLLL');
+      startStr = this.datePipe.transform(startDate, 'd LLLL') + ' – ';
     } else if (startDay !== endDay) {
-      return startStr + ' – ' + endStr;
+      startStr = this.datePipe.transform(startDate, 'd') + ' – ';
+    } else {
+      startStr = '';
     }
 
-    return endStr;
+    return startStr + endStr;
   }
 }
