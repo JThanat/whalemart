@@ -1,11 +1,8 @@
-<div class="container mt-5">
-  <form [formGroup]="searchForm">
-    <input type="text" class="form-control form-control-lg" formControlName="query" placeholder="ชื่อตลาดหรือสถานที่">
-  </form>
+<ng-container *appSubNavBar>
+  ช่วงราคา วันจัดตลาด ช่วงเวลาที่ตลาดเปิด
+</ng-container>
 
-  <ng-container *appSubNavBar>
-    ช่วงราคา วันจัดตลาด ช่วงเวลาที่ตลาดเปิด
-  </ng-container>
+<div class="container mt-5">
 
   <ng-container *ngIf="(searchResult | async) as result; else noSearchQuery">
     <div class="row" *ngIf="result.length > 0; else emptySearchResult">

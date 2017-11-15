@@ -5,6 +5,8 @@
       <img src="/assets/icons/whalemart-logo-with-name.svg" height="35">
     </a>
 
+    <app-nav-bar-search-box *ngIf="isShowNavBarSearchBox()"></app-nav-bar-search-box>
+
     <button class="navbar-toggler" type="button" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" [attr.aria-expanded]="isMenuOpened" aria-label="Toggle navigation" (click)="isMenuOpened = !isMenuOpened">
       <span class="navbar-toggler-icon"></span>
     </button>
