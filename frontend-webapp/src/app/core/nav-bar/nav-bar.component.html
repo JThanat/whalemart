@@ -1,13 +1,14 @@
 <div class="navbar-wrapper">
   <div class="container navbar">
     <div class="main-nav">
-      <a class="" routerLink="/">
+      <a class="logo" routerLink="/">
         <img src="/assets/icons/whalemart-logo-with-name.svg" height="35">
       </a>
 
-      <a class="hamburger btn btn-outline-primary my-2 my-sm-0" routerLink="#">เมนู</a>
       <app-nav-bar-search-box *ngIf="isShowNavBarSearchBox()"></app-nav-bar-search-box>
 
+      <a class="hamburger btn btn-outline-primary my-2 my-sm-0" routerLink="#">เมนู</a>
+      
       <div class="menu-list" [class.show]="isMenuOpened">
         <ul class="">
           <li class="nav-item active">

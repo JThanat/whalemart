@@ -11,14 +11,17 @@
   > .main-nav {
     width: 100%;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     height: 60px;
 
+    > .logo {
+      margin-right: 1rem; 
+    }
     > .menu-list {
       display: none;
       @include media-breakpoint-up(sm) {
         display: initial;
+        margin-left: auto;
       }
       ul {
         display: flex;
@@ -39,6 +42,7 @@
     }
 
     > .hamburger {
+      margin-left: auto;
       @include media-breakpoint-up(sm) {
         display: none;
       }
