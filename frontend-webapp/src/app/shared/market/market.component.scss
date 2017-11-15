@@ -1,6 +1,6 @@
 @import '~styles/common';
 
-.market-item {
+:host {
   .img-container {
     height: 10rem;
     background-color: $light-gray;

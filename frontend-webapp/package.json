@@ -7,7 +7,7 @@
     "start": "ng serve --aot --proxy-config proxy-config.json --host 0.0.0.0",
     "build": "ng build",
     "test": "ng test",
-    "test:ci": "ng test --single-run --no-progress --browser=ChromeCI",
+    "test:ci": "ng test --single-run --no-progress --browser=ChromeCI --sourcemaps=false",
     "lint": "ng lint --type-check",
     "e2e": "ng e2e --proxy-config proxy-config.json",
     "e2e:ci": "yarn e2e --no-progress --config=protractor-ci.conf.js"
