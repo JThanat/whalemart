@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of as observableOf } from 'rxjs/observable/of';
 import { _throw as observableThrow } from 'rxjs/observable/throw';
-import { catchError, map, mapTo } from 'rxjs/operators';
+import { catchError, map, mapTo, tap } from 'rxjs/operators';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 /**
@@ -54,6 +54,7 @@ export class UserService {
   logout() {
     // This API returns no body, so we have to set to text to prevent JSON parsing.
     return this.http.post('/api/logout/', null, { responseType: 'text' })
+      .pipe(tap(() => this.userInfo.next(undefined)))
       .pipe(mapTo(true));
   }
 
