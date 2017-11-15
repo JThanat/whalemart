@@ -4,8 +4,8 @@ import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-
 import { LOCALE_ID } from '@angular/core';
+
 import { DateRangePipe } from './date-range/date-range.pipe';
 import { InputErrorComponent } from './input/input-error.component';
 import { InputGroupComponent } from './input/input-group.component';
@@ -41,7 +41,8 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
     InputDirective,
     InputErrorComponent,
     SvgIconComponent,
-    MarketComponent
+    MarketComponent,
+    DateRangePipe
   ],
   providers: [
     DatePipe,
