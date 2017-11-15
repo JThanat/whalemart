@@ -1,6 +1,12 @@
 @import '~styles/common';
 
 .search-section {
+  @include media-breakpoint-up(lg) {
+    background-image: url('/assets/images/bg-under-search-section@2x.jpg');
+    background-size: 1183px 497px;
+    background-position: top right;
+    background-repeat: no-repeat;
+  }
   .lead-1 {
     @include font-family(heading);
     @include font-weight(bold);
@@ -8,6 +14,9 @@
     font-size: 2rem;
     white-space: nowrap;
     line-height: 2.5rem;
+    @include media-breakpoint-up(lg) {
+      margin: 6rem 0 0.5rem 0;
+    }
   }
   .lead-2 {
     @include font-family(heading);
@@ -133,17 +142,5 @@
   }
   > .link-icon {
     margin-top: 2px;
-  }
-}
-
-@include media-breakpoint-up(lg) {
-  .search-section {
-    background-image: url('/assets/images/bg-under-search-section@2x.jpg');
-    background-size: 1183px 497px;
-    background-position: top right;
-    background-repeat: no-repeat;
-    .lead-1 {
-      margin: 6rem 0 0.5rem 0;
-    }
   }
 }
