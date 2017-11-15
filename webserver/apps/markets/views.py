@@ -1,3 +1,5 @@
+from datetime import time
+
 from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.response import Response
@@ -83,6 +85,12 @@ class MarketFeedViewSet(viewsets.GenericViewSet):
             queryset = queryset.exclude(closing_date_lt=min_date)
         if max_date:
             queryset = queryset.exclude(opening_date_gt=max_date)
+        queryset = self.filter_part_of_the_day(
+            queryset, morning, afternoon, evening, night)
         if sort_by:
             queryset = queryset.sort_by(sort_by)
         return queryset
+
+    def filter_part_of_the_day(self, queryset, morning, afternoon, evening, night):
+        # MORNING_START_TIME = time()
+        pass
