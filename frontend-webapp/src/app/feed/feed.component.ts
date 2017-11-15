@@ -9,7 +9,8 @@ import {
   trigger
 } from '@angular/animations';
 import { Component, HostBinding, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './feed.component.html',
