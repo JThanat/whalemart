@@ -1,8 +1,12 @@
+import { registerLocaleData } from '@angular/common';
+import localeTh from '@angular/common/locales/th';
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
+
+registerLocaleData(localeTh);
 
 if (environment.production) {
   enableProdMode();
