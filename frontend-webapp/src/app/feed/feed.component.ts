@@ -53,7 +53,11 @@ export class FeedComponent implements OnInit {
   coolCarouselLooper = [0, 1];
   searchForm: FormGroup;
 
+  // You can remove this data late
+  dumpCurrentDate: Date;
+
   ngOnInit() {
     this.searchForm = new FormGroup({});
+    this.dumpCurrentDate = new Date();
   }
 }

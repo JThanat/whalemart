@@ -1,0 +1,49 @@
+@import '~styles/common';
+
+.market-item {
+  .img-container {
+    height: 10rem;
+    background-color: $light-gray;
+    background-size: cover;
+    background-position: center;
+    margin-bottom: map-get($spacers, 3);
+    border-radius: $border-radius-sm;
+    position: relative;
+    .expire-note {
+      @include font-family(heading);
+      @include font-weight(regular);
+      background: $white;
+      color: $primary;
+      position: absolute;
+      right: 0;
+      bottom: -0.2rem;
+      font-size: 0.9rem;
+      padding: 0.25rem 0.5rem 0.25rem 1rem;
+      border-radius: 1rem 0 0 1rem;
+      box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.05);
+      z-index: 1;
+    }
+  }
+  p {
+    margin-bottom: 0;
+    &.location {
+      color: $gray;
+      @include font-weight(light);
+      font-size: 0.9rem;
+    }
+    &.name {
+      @include font-family(heading);
+      @include font-weight(bold);
+      color: $dark-gray;
+      font-size: 1.1rem;
+    }
+    &.date {
+      font-size: 0.9rem;
+    }
+    &.price {
+      margin-top: map-get($spacers, 1);
+      font-size: 0.9rem;
+      color: $secondary;
+    }
+  }
+}

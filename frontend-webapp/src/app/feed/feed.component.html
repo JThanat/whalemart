@@ -63,15 +63,16 @@
     <div class="container">
       <div class="row">
         <div class="col-12 col-sm-6 col-lg-3 mb-5" *ngFor="let i of carouselLooper">
-          <div class="carousel-item">
-            <div class="img-container">
-              <div class="expire-note">หมดเขตจองในอีก 3 วัน</div>
-            </div>
-            <p class="location">ถนนรัชดาภิเศก กทม.</p>
-            <p class="name">ตลาดนัดถนนรัชดาภิเษก</p>
-            <p class="date">วันที่ 18&ndash;24 ธันวาคม 2560</p>
-            <p class="price">เริ่มต้น 1,200฿</p>
-          </div>
+          <app-market-item
+            imageURL="https://www.petful.com/wp-content/uploads/2013/04/160490011_b0cecf8fa1_z.jpg"
+            expireDay="3"
+            marketName="ตลาดอิอิ"
+            [startDate]="dumpCurrentDate"
+            [endDate]="dumpCurrentDate"
+            location="ถนนรัชดาภิเษก กทม."
+            name="ตลาดนัดถนนรัชดาภิเษก"
+            price="1200"
+            ></app-market-item>
         </div>
       </div>
     </div>
@@ -88,13 +89,15 @@
     <div class="container">
       <div class="row">
         <div class="col-12 col-sm-6 col-lg-3 mb-5" *ngFor="let i of carouselLooper">
-          <div class="carousel-item">
-            <div class="img-container"></div>
-            <p class="location">ถนนรัชดาภิเษก กทม.</p>
-            <p class="name">ตลาดนัดถนนรัชดาภิเษก</p>
-            <p class="date">วันที่ 18&ndash;24 ธันวาคม 2560</p>
-            <p class="price">เริ่มต้น 1,200฿</p>
-          </div>
+          <app-market-item
+            imageURL="https://www.petful.com/wp-content/uploads/2013/04/160490011_b0cecf8fa1_z.jpg"
+            marketName="ตลาดอุอุ"
+            [startDate]="dumpCurrentDate"
+            [endDate]="dumpCurrentDate"
+            location="ถนนรัชดาภิเษก กทม."
+            name="ตลาดนัดถนนรัชดาภิเษก"
+            price="1200"
+            ></app-market-item>
         </div>
       </div>
     </div>
