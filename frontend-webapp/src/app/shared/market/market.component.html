@@ -4,6 +4,6 @@
   </div>
   <p class="location">{{location}}</p>
   <p class="name">{{marketName}}</p>
-  <p class="date">วันที่ {{ startDate | date:'d' }}&ndash;{{ endDate | date:'d LLLL y':'':'TH' }}</p>
-  <p class="price">เริ่มต้น {{price | number:'.0' }}฿</p>
+  <p class="date">วันที่ {{ [startDate, endDate] | dateRange }}</p>
+  <p class="price">เริ่มต้น {{ price | number:'.0' }}฿</p>
 </div>

@@ -1,8 +1,5 @@
-import { registerLocaleData } from '@angular/common';
-import localeTh from '@angular/common/locales/th';
 import { Component, Input, OnInit } from '@angular/core';
-
-registerLocaleData(localeTh);
+import { DateRangePipe } from '../date-range/date-range.pipe';
 
 @Component({
   selector: 'app-market-item',
@@ -19,8 +16,9 @@ export class MarketComponent implements OnInit {
   @Input() endDate: Date;
   @Input() price: number;
 
-  constructor() {
-  }
+  constructor(
+    private dateRangePipe: DateRangePipe
+  ) {}
 
   ngOnInit() {
   }
