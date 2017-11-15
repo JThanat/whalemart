@@ -8,8 +8,7 @@ export class DateRangePipe implements PipeTransform {
   constructor(private datePipe: DatePipe) {}
 
   transform(value: Date[], args?: any): string | null {
-    const startDate: Date = value[0];
-    const endDate: Date = value[1];
+    const [startDate, endDate] = value;
 
     const startDay: number = startDate.getDay();
     const endDay: number = endDate.getDay();
