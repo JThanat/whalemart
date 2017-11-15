@@ -42,9 +42,14 @@
       font-size: 1.3rem;
     }
     .location, .date {
+      display: flex;
+      align-items: center;
       font-size: 0.9rem;
       margin-bottom: map-get($spacers, 2);
       color: $gray;
+      > app-svg-icon {
+        margin-right: 0.3rem;
+      }
     }
     .price {
       font-size: 1.1rem;
@@ -53,9 +58,14 @@
       font-weight: bold;
     }
     .card-footer {
+      display: flex;
+      align-items: center;
       background: theme-color-level(secondary, -11);
       color: $secondary;
       font-weight: bold;
+      > app-svg-icon {
+        margin-right: 0.3rem;
+      }
     }
   }
 }
@@ -112,5 +122,16 @@
   a {
     @include font-family(heading);
     @include font-weight(regular);
+  }
+}
+
+.link-with-icon {
+  display: flex;
+  align-items: center;
+  > .link-text {
+    margin-right: 0.3rem;
+  }
+  > .link-icon {
+    margin-top: 2px;
   }
 }
