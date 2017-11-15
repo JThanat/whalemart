@@ -16,6 +16,7 @@ Including another URLconf
 
 from django.conf import settings
 from django.conf.urls import url, include
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.conf.urls.static import static
 from rest_framework import routers
@@ -23,6 +24,7 @@ from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework_jwt.views import refresh_jwt_token
 from rest_framework_jwt.views import verify_jwt_token
 
+from apps.markets import views as market_views
 from apps.ping import views as ping_views
 from apps.users import views as user_views
 from apps.lessors import views as lessor_views
@@ -37,6 +39,8 @@ router.register(r'lessor', lessor_views.LessorViewSet, base_name='lessor')
 router.register(r'register', user_views.RegistrationViewSet)
 router.register(r'vendor-profile', user_views.UserViewSet)
 router.register(r'product', product_views.ProduceViewSet, base_name='product')
+router.register(r'markets', market_views.MarketViewSet, base_name='markets')
+router.register(r'market-feed', market_views.MarketFeedViewSet, base_name='feed')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
