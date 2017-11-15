@@ -4,7 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { SharedModule } from '../../shared/shared.module';
 import { SVG_ICON_DEFINITIONS, SvgIconRegistry } from './svg-icon-registry.service';
 
-const svgIconNames = ['test'];
+const svgIconNames = ['whalemart-logo-with-name'];
 
 @NgModule({
   imports: [
