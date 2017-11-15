@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 export interface Market {
   expireDay: number;
   imageURL: string;
-  marketName: string;
+  name: string;
   location: string;
   startDate: Date;
   endDate: Date;
@@ -19,7 +19,7 @@ export class MarketComponent {
   @Input() market: Market = {
     imageURL: 'https://www.petful.com/wp-content/uploads/2013/04/160490011_b0cecf8fa1_z.jpg',
     expireDay: 3,
-    marketName: 'ตลาดอิอิ',
+    name: 'ตลาดอิอิ',
     startDate: new Date(),
     endDate: new Date(),
     location: 'ถนนนิวยอร์ก',
