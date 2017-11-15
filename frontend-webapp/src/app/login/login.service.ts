@@ -32,7 +32,7 @@ export class LoginService {
         }),
         catchError(err => {
           if (err instanceof HttpErrorResponse) {
-            if (err.status === 400) {
+            if (err.status >= 400 && err.status < 500) {
               return observableThrow(new InvalidLoginCredentialError());
             }
           }
