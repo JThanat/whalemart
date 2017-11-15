@@ -18,13 +18,13 @@ export class DateRangePipe implements PipeTransform {
     const startYear: number = startDate.getFullYear();
     const endYear: number = startDate.getFullYear();
 
-    const endStr: string | null = this.datePipe.transform(endDate, 'd LLLL y', '', 'th');
+    const endStr: string | null = this.datePipe.transform(endDate, 'd LLLL y');
 
-    let startStr: string | null = this.datePipe.transform(startDate, 'd', '', 'th');
+    let startStr: string | null = this.datePipe.transform(startDate, 'd');
     if (startYear !== endYear) {
-      startStr = this.datePipe.transform(startDate, 'd LLLL y', '', 'th');
+      startStr = this.datePipe.transform(startDate, 'd LLLL y');
     } else if (startMonth !== endMonth) {
-      startStr = this.datePipe.transform(startDate, 'd LLLL', '', 'th');
+      startStr = this.datePipe.transform(startDate, 'd LLLL');
     } else if (startDay === endDay) {
       return endStr;
     }
