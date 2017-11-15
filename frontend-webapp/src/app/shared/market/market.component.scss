@@ -28,7 +28,6 @@
     margin-bottom: 0;
     &.location {
       color: $gray;
-      @include font-weight(light);
       font-size: 0.9rem;
     }
     &.name {
