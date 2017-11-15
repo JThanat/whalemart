@@ -15,12 +15,9 @@ class LessorEditSerializer(serializers.ModelSerializer):
 
 
 class LessorSerializer(serializers.ModelSerializer):
-    user = serializers.HiddenField(default=0)
-
     class Meta:
         model = Lessor
-        fields = ('lessor_name', 'user', 'is_organization', 'organization_name', 'organization_contact_name',
-                  'organization_email', 'organization_phone_number')
+        fields = '__all__'
         extra_kwargs = {
             'organization_name': {'required': False},
             'organization_contact_name': {'required': False},
@@ -37,17 +34,12 @@ class LessorSerializer(serializers.ModelSerializer):
         return instance
 
     def validate_organization_phone_number(self, data):
-        if (data is None) or re.match(r"^\+?\d{9,15}$", data):
+        if (data is '') or (data is None) or re.match(r"^\+?\d{9,15}$", data):
             return data
         raise serializers.ValidationError('Phone number should be in format +123456789')
 
     def validate(self, data):
-        try:
-            Lessor.objects.get(user=data['user'])
-        except ObjectDoesNotExist:
-            raise serializers.ValidationError('This user already registered as lessor')
-
-        if data['is_organization'] == True:
+        if data['is_organization']:
             if data['organization_name'] is None:
                 raise serializers.ValidationError('Organization name should not be empty')
             elif data['organization_contact_name'] is None:
@@ -58,3 +50,10 @@ class LessorSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError('Organization phone number should not be empty')
 
         return data
+
+
+class LessorInputSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Lessor
+        fields = ('lessor_name', 'is_organization', 'organization_name', 'organization_contact_name',
+                  'organization_email', 'organization_phone_number')
