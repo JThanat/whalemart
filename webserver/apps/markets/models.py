@@ -53,8 +53,10 @@ class Market(ControlModel):
     estimate_visitor = models.IntegerField(verbose_name='Estimated Visitors', blank=True, null=True)
 
     # Derived Price Range
-    min_price = models.DecimalField(verbose_name='Minimum Price', max_digits=20, decimal_places=5, blank=True, null=False)
-    max_price = models.DecimalField(verbose_name='Maximum Price', max_digits=20, decimal_places=5,blank=True, null=False)
+    min_price = models.DecimalField(verbose_name='Minimum Price', max_digits=20, decimal_places=5, blank=True,
+                                    null=False)
+    max_price = models.DecimalField(verbose_name='Maximum Price', max_digits=20, decimal_places=5, blank=True,
+                                    null=False)
 
     # Cover Photo
     layout_photo = models.ImageField(verbose_name='Layout Image', upload_to='cover_photos/%Y/%m/%d')
@@ -64,9 +66,10 @@ class Market(ControlModel):
 
 
 class CoverPhoto(UploadedImage):
-    market = models.OneToOneField('markets.Market', related_name='cover_photo', on_delete=models.CASCADE, primary_key=True)
+    market = models.OneToOneField('markets.Market', related_name='cover_photo', on_delete=models.CASCADE,
+                                  primary_key=True)
 
 
 class Scene(models.Model):
-    market = models.ForeignKey('markets.Market', related_name='scene_photos' ,on_delete=models.CASCADE)
-    scene_image = models.ImageField(verbose_name='Scene_Image', upload_to='cover_photos/%Y/%m/%d')
+    market = models.ForeignKey('markets.Market', related_name='scene_photos', on_delete=models.CASCADE)
+    scene_image = models.ImageField(verbose_name='Scene Image', upload_to='scene_photo/%Y/%m/%d')
