@@ -6,7 +6,6 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./market.component.scss']
 })
 export class MarketComponent implements OnInit {
-
   @Input() expireDay: number;
   @Input() imageURL: string;
   @Input() marketName: string;
@@ -14,6 +13,4 @@ export class MarketComponent implements OnInit {
   @Input() startDate: Date;
   @Input() endDate: Date;
   @Input() price: number;
-
-  constructor() {}
 }
