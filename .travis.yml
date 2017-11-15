@@ -7,7 +7,7 @@ notifications:
 
 branches:
   only:
-    - master
+  - master
 
 before_install:
   # Docker
