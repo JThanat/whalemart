@@ -1,10 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA, Pipe, PipeTransform } from '@angular/core';
 
-import { CommonModule } from '@angular/common';
-import { DatePipe } from '@angular/common';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { DateRangePipe } from '../date-range/date-range.pipe';
 import { MarketComponent } from './market.component';
+
+@Pipe({
+  name: 'dateRange'
+})
+export class MockDateRangePipe implements PipeTransform {
+  transform(value: Date[], ...args: any[]) {
+    return value.map(date => date.toUTCString());
+  }
+}
 
 describe('MarketComponent', () => {
   let component: MarketComponent;
@@ -12,10 +18,13 @@ describe('MarketComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ CommonModule ],
-      declarations: [ MarketComponent, DateRangePipe ],
+      imports: [ ],
+      declarations: [
+        MarketComponent,
+        MockDateRangePipe
+      ],
       schemas: [ NO_ERRORS_SCHEMA ],
-      providers: [ DatePipe ]
+      providers: [  ]
     })
     .compileComponents();
   }));

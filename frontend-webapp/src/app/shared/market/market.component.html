@@ -1,7 +1,7 @@
-<div class="img-container" [style.backgroundImage]="'url(' + imageURL + ')'">
-  <div *ngIf="expireDay" class="expire-note">หมดเขตจองในอีก {{expireDay}} วัน</div>
+<div class="img-container" [style.backgroundImage]="'url(' + market.imageURL + ')'">
+  <div *ngIf="market.expireDay" class="expire-note">หมดเขตจองในอีก {{ market.expireDay }} วัน</div>
 </div>
-<p class="location"><app-svg-icon key="location-pin"></app-svg-icon>  {{ location }}</p>
+<p class="location"><app-svg-icon key="location-pin"></app-svg-icon>  {{ market.location }}</p>
 <p class="name">{{ marketName }}</p>
-<p class="date">วันที่ {{ [startDate, endDate] | dateRange }}</p>
-<p class="price">เริ่มต้น {{ price | number:'.0' }}฿</p>
+<p class="date">วันที่ {{ [market.startDate, market.endDate] | dateRange }}</p>
+<p class="price">เริ่มต้น {{ market.price | number:'.0' }}฿</p>
