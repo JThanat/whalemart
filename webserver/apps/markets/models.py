@@ -64,7 +64,7 @@ class Market(ControlModel):
 
 
 class CoverPhoto(UploadedImage):
-    market = models.ForeignKey('markets.Market', related_name='cover_photo', on_delete=models.CASCADE, primary_key=True)
+    market = models.OneToOneField('markets.Market', related_name='cover_photo', on_delete=models.CASCADE, primary_key=True)
 
 
 class Scene(models.Model):
