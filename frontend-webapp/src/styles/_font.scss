@@ -1,0 +1,73 @@
+/* ==========================================================================
+   Font face
+   ========================================================================== */
+
+/* Lato
+   -------------------------------------------------------------------------- */
+@font-face {
+  // Lato-Regular
+	font-family: 'Lato';
+	src: url('/assets/fonts/Lato/subset-Lato-Regular.eot');
+	src: url('/assets/fonts/Lato/subset-Lato-Regular.eot?#iefix') format('embedded-opentype'),
+		url('/assets/fonts/Lato/subset-Lato-Regular.woff') format('woff'),
+		url('/assets/fonts/Lato/subset-Lato-Regular.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;  
+}
+
+@font-face {
+  // Lato-Bold
+	font-family: 'Lato';
+	src: url('/assets/fonts/Lato/subset-Lato-Bold.eot');
+	src: url('/assets/fonts/Lato/subset-Lato-Bold.eot?#iefix') format('embedded-opentype'),
+		url('/assets/fonts/Lato/subset-Lato-Bold.woff') format('woff'),
+		url('/assets/fonts/Lato/subset-Lato-Bold.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  // Lato-Black
+	font-family: 'Lato';
+	src: url('/assets/fonts/Lato/subset-Lato-Black.eot');
+	src: url('/assets/fonts/Lato/subset-Lato-Black.eot?#iefix') format('embedded-opentype'),
+		url('/assets/fonts/Lato/subset-Lato-Black.woff') format('woff'),
+		url('/assets/fonts/Lato/subset-Lato-Black.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Mitr
+   -------------------------------------------------------------------------- */
+@font-face {
+  // Mitr-Light
+	font-family: 'Mitr';
+	src: url('/assets/fonts/Mitr/subset-Mitr-Light.eot');
+	src: url('/assets/fonts/Mitr/subset-Mitr-Light.eot?#iefix') format('embedded-opentype'),
+		url('/assets/fonts/Mitr/subset-Mitr-Light.woff') format('woff'),
+		url('/assets/fonts/Mitr/subset-Mitr-Light.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  // Mitr-Regular
+	font-family: 'Mitr';
+	src: url('/assets/fonts/Mitr/subset-Mitr-Regular.eot');
+	src: url('/assets/fonts/Mitr/subset-Mitr-Regular.eot?#iefix') format('embedded-opentype'),
+		url('/assets/fonts/Mitr/subset-Mitr-Regular.woff') format('woff'),
+		url('/assets/fonts/Mitr/subset-Mitr-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  // Mitr-Medium
+	font-family: 'Mitr';
+	src: url('/assets/fonts/Mitr/subset-Mitr-Medium.eot');
+	src: url('/assets/fonts/Mitr/subset-Mitr-Medium.eot?#iefix') format('embedded-opentype'),
+		url('/assets/fonts/Mitr/subset-Mitr-Medium.woff') format('woff'),
+		url('/assets/fonts/Mitr/subset-Mitr-Medium.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}

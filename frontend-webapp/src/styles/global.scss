@@ -1,4 +1,5 @@
 @import './common';
+@import './font';
 
 // Modified from '~bootstrap/scss/bootstrap'.
 // Import what we only want from Bootstrap.
@@ -38,3 +39,23 @@
 @import '~bootstrap/scss/popover';
 // @import '~bootstrap/scss/carousel';
 @import '~bootstrap/scss/utilities';
+
+.form-control-lg {
+  padding: 0.8rem 1.4rem;
+  font-size: 1rem;
+}
+
+.btn-lg {
+  font-size: 1rem;
+}
+
+.btn {
+  @include font-family(heading);
+  @include font-weight(regular);
+}
+
+label {
+  @include font-family(heading);
+  @include font-weight(regular);
+  color: $dark-gray;
+}
