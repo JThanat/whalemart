@@ -54,7 +54,23 @@ export class FeedComponent implements OnInit {
   coolCarouselLooper = [0, 1];
   searchForm: FormGroup;
 
+  constructor(private router: Router) {}
+
   ngOnInit() {
-    this.searchForm = new FormGroup({});
+    this.searchForm = new FormGroup({
+      searchQuery: new FormControl('')
+    }, { updateOn: 'submit' });
+  }
+
+  search() {
+    if (!this.searchForm.valid) {
+      return;
+    }
+
+    this.router.navigate(['/search'], {
+      queryParams: {
+        q: this.searchForm.value.searchQuery
+      }
+    });
   }
 }
