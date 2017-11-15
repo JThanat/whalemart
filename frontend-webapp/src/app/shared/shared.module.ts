@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { LOCALE_ID } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { LOCALE_ID } from '@angular/core';
 
 import { DateRangePipe } from './date-range/date-range.pipe';
 import { InputErrorComponent } from './input/input-error.component';
