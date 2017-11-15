@@ -1,0 +1,7 @@
+@import '~styles/common';
+
+label {
+  @include font-family(heading);
+  @include font-weight(regular);
+  color: $dark-gray;
+}

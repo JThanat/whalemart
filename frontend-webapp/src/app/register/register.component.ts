@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit {
       firstName: new FormControl('', [Validators.required]),
       lastName: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
-      phone: new FormControl('', [Validators.required])
+      phone: new FormControl('', [Validators.required, Validators.pattern(/\+?\d{9,15}$/)])
     }, { updateOn: 'blur' });
   }
 
@@ -41,25 +41,11 @@ export class RegisterComponent implements OnInit {
     const { email, firstName, lastName, password, phone } = this.registerForm.value;
     this.registerService.register({ email, firstName, lastName, password, phone }).subscribe(() => {
       this.alert.show({ message: 'สมัครสมาชิกสำเร็จ', type: 'success' });
-      this.router.navigate(['/']);
+      this.router.navigate(['/login']);
     }, err => {
       this.registerForm.enable();
       if (err instanceof RegisterError) {
-        switch (err.reason) {
-          case 'INVALID': {
-            this.alert.show({
-              message: 'ข้อมูลไม่ถูกต้อง',
-              type: 'danger'
-            });
-            break;
-          }
-          default: {
-            this.alert.show({
-              message: `เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ: ${err.reason}`,
-              type: 'danger'
-            });
-          }
-        }
+        this.alert.show({ message: 'เกิดข้อผิดพลาด', type: 'danger' });
       } else {
         throw err;
       }

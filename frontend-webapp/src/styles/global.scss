@@ -53,9 +53,3 @@
   @include font-family(heading);
   @include font-weight(regular);
 }
-
-label {
-  @include font-family(heading);
-  @include font-weight(regular);
-  color: $dark-gray;
-}

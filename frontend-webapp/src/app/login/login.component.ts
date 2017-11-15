@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AlertService } from '../core/alert/alert.service';
-import { LoginError, LoginService } from './login.service';
+import { InvalidLoginCredentialError, LoginService } from './login.service';
 
 @Component({
   selector: 'app-login',
@@ -28,6 +28,11 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.loginForm.updateValueAndValidity();
+    console.log(this.loginForm.value);
+
+    if (!this.loginForm.valid) {
+      return;
+    }
 
     this.alert.close();
     this.loginForm.disable();
@@ -39,23 +44,11 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/']);
     }, err => {
       this.loginForm.enable();
-      if (err instanceof LoginError) {
-        switch (err.reason) {
-          case 'INVALID_EMAIL_PASSWORD': {
-            this.alert.show({
-              message: 'อีเมลหรือรหัสผ่านไม่ถูกต้อง',
-              type: 'danger'
-            });
-            break;
-          }
-          default: {
-            this.alert.show({
-              message: `เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ: ${err.reason}`,
-              type: 'danger'
-            });
-            break;
-          }
-        }
+      if (err instanceof InvalidLoginCredentialError) {
+        this.alert.show({
+          message: 'อีเมลหรือรหัสผ่านไม่ถูกต้อง',
+          type: 'danger'
+        });
       } else {
         throw err;
       }
