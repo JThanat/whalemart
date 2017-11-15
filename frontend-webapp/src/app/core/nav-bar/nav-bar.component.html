@@ -1,36 +1,35 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white">
-  <div class="container justify-content-between">
-    <!-- TODO: Replace with actual logo. -->
-    <a class="navbar-brand" routerLink="/">
-      <img src="/assets/icons/whalemart-logo-with-name.svg" height="35">
-    </a>
+<div class="navbar-wrapper">
+  <div class="container navbar">
+    <div class="main-nav">
+      <a class="" routerLink="/">
+        <img src="/assets/icons/whalemart-logo-with-name.svg" height="35">
+      </a>
 
-    <button class="navbar-toggler" type="button" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" [attr.aria-expanded]="isMenuOpened" aria-label="Toggle navigation" (click)="isMenuOpened = !isMenuOpened">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+      <a class="hamburger btn btn-outline-primary my-2 my-sm-0" routerLink="#">เมนู</a>
 
-    <div class="collapse navbar-collapse" [class.show]="isMenuOpened" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">ลงตลาดให้เช่า</a>
-        </li>
-        <ng-container *ngIf="(userName | async) as name; else loggedIn">
-          <span class="navbar-text">{{ name }}</span>
-          <li class="nav-item">
-            <button class="btn btn-link my-2 my-sm-0" (click)="logout()">ออกจากระบบ</button>
+      <div class="menu-list" [class.show]="isMenuOpened">
+        <ul class="">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">ลงตลาดให้เช่า</a>
           </li>
-        </ng-container>
-        <ng-template #loggedIn>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="login">เข้าสู่ระบบ</a>
-          </li>
-          <a class="btn btn-outline-primary my-2 my-sm-0" routerLink="register">สมัครสมาชิก</a>
-        </ng-template>
-      </ul>
+          <ng-container *ngIf="(userName | async) as name; else loggedIn">
+            <span class="navbar-text">{{ name }}</span>
+            <li class="nav-item">
+              <button class="btn btn-link my-2 my-sm-0" (click)="logout()">ออกจากระบบ</button>
+            </li>
+          </ng-container>
+          <ng-template #loggedIn>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="login">เข้าสู่ระบบ</a>
+            </li>
+            <a class="btn btn-outline-primary my-2 my-sm-0" routerLink="register">สมัครสมาชิก</a>
+          </ng-template>
+        </ul>
+      </div>
     </div>
 
-    <div>
+    <div class="sub-nav">
       <ng-container [cdkPortalOutlet]="getSubNavBarPortal() | async"></ng-container>
     </div>
   </div>
-</nav>
+</div>
