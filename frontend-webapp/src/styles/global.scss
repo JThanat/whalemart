@@ -54,8 +54,6 @@
   @include font-weight(regular);
 }
 
-label {
+a {
   @include font-family(heading);
-  @include font-weight(regular);
-  color: $dark-gray;
 }
