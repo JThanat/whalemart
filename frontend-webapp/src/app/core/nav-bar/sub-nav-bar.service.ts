@@ -12,8 +12,6 @@ export class SubNavBarService {
       throw new Error('Cannot attach more than one sub nav bar simultaneously');
     }
 
-    console.log(subNavBarTemplate, subNavBarViewContainerRef);
-
     const portal = new TemplatePortal(subNavBarTemplate, subNavBarViewContainerRef);
     this.attachingSubNavBarPortal.next(portal);
     this.isAttaching = true;

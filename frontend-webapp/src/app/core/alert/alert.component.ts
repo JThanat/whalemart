@@ -13,7 +13,7 @@ import { Alert, AlertService } from './alert.service';
     trigger('alertInOut', [
       state('*', style({ opacity: 1, transform: 'translateY(0)' })),
       transition(':enter', [
-        style({ opacity: 1, transform: 'translateY(-100%)' }),
+        style({ opacity: 0, transform: 'translateY(-100%)' }),
         animate('250ms cubic-bezier(0.215, 0.61, 0.355, 1)')
       ]),
       transition(':leave', [
