@@ -1,10 +1,32 @@
 @import '~styles/common';
 
-:host {
+.wrapper {
+  display: flex;
+  justify-content: center;
   .active {
-    backgrond: $secondary;
-    color: $light-gray;
+    background: $secondary;
+    color: #FFF;
   }
   .page-block {
+    cursor: pointer;
+    display: inline-block;
+    padding: 0.35em 0.8em;
+    border-radius: 0.2em;
+    margin: 2px;
+    &:hover {
+      background: $light-gray;
+    }
+  }
+  .active.page-block {
+    &:hover {
+      background: $secondary;
+    }
+  }
+  .dot {
+    @include font-family(light);
+    @extend .page-block;
+    &:hover {
+      background: none;
+    }
   }
 }

@@ -1,7 +1,9 @@
-<div class="page-block">1</div>
-<div class="page-block">...</div>
-<div class="page-block">3</div>
-<div class="page-block">4</div>
-<div class="page-block">5</div>
-<div class="page-block">...</div>
-<div class="page-block">10</div>
+<div class="wrapper">
+  <div *ngIf="showLeft" class="page-block" [class.active]="min == current">{{min}}</div>
+  <div *ngIf="showDotLeft" class="dot">...</div>
+  <div *ngFor="let num of numCenter" class="page-block" [class.active]="num == current">
+    {{num}}
+  </div>
+  <div *ngIf="showDotRight" class="dot">...</div>
+  <div *ngIf="showRight" class="page-block" [class.active]="max == current">{{max}}</div>
+</div>
