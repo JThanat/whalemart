@@ -1,4 +1,5 @@
 @import '~styles/common';
+@import '~styles/global';
 
 .wrapper {
   display: flex;
@@ -10,8 +11,8 @@
   .page-block {
     cursor: pointer;
     display: inline-block;
-    padding: 0.35em 0.8em;
-    border-radius: 0.2em;
+    padding: 0.35rem 0.8rem;
+    border-radius: $border-radius;
     margin: 2px;
     &:hover {
       background: $light-gray;

@@ -12,16 +12,12 @@ export class PaginationComponent implements OnInit, OnChanges {
   public showRight: boolean;
   public showDotRight: boolean;
 
-  @Input() min: number;
+  @Input() min = 1;
   @Input() max: number;
   @Input() current: number;
   @Input() padding = 1;
 
   updateParams() {
-    this.min = +this.min;
-    this.max = +this.max;
-    this.current = +this.current;
-
     if (this.current < this.min) {
       this.current = this.min;
     } else if (this.current > this.max) {
