@@ -7,6 +7,7 @@ import { IconModule } from './icon/icon.module';
 import { LocalDbModule } from './local-db/local-db.module';
 import { MarketService } from './market/market.service';
 import { NavBarModule } from './nav-bar/nav-bar.module';
+import { SearchBackButtonService } from './search/search-back-button.service';
 import { UserService } from './user/user.service';
 
 @NgModule({
@@ -28,7 +29,8 @@ import { UserService } from './user/user.service';
   ],
   providers: [
     UserService,
-    MarketService
+    MarketService,
+    SearchBackButtonService
   ]
 })
 export class CoreModule {

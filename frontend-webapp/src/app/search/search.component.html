@@ -12,6 +12,9 @@
       <span>ช่วงเวลาที่ตลาดเปิด</span>
       <app-svg-icon key="arrow-head-down" width="12"></app-svg-icon>
     </div>
+    <button *ngIf="canGoBack()" type="button" class="ml-auto btn btn-link" (click)="goBack()">
+      ปิดการค้นหา
+    </button>
   </div>
 </ng-container>
 
@@ -32,7 +35,7 @@
             <li>เปลี่ยนช่วงวันจัดตลาด</li>
             <li>เปลี่ยนตัวกรองผลการค้นหา หรือเอาตัวกรองผลการค้นหาบางอันออก</li>
           </ul>
-          <a class="btn btn-primary my-2 my-sm-0" routerLink="#">เอาตัวกรองทั้งหมดออก</a>
+          <button type="button" class="btn btn-primary my-2 my-sm-0" routerLink="#">เอาตัวกรองทั้งหมดออก</button>
         </div>
       </div>
     </ng-template>

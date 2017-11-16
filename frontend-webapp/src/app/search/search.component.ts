@@ -13,6 +13,7 @@ import {
 } from 'rxjs/operators';
 
 import { Market, MarketService } from '../core/market/market.service';
+import { SearchBackButtonService } from '../core/search/search-back-button.service';
 
 @Component({
   selector: 'app-search',
@@ -42,7 +43,8 @@ export class SearchComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private marketService: MarketService
+    private marketService: MarketService,
+    private searchBackButtonService: SearchBackButtonService
   ) { }
 
   ngOnInit() {
@@ -62,5 +64,13 @@ export class SearchComponent implements OnInit {
       publishReplay(1)
       // TODO: Remove casting when https://github.com/ReactiveX/rxjs/issues/2972 is closed.
     ) as ConnectableObservable<Market[] | undefined>).refCount();
+  }
+
+  canGoBack() {
+    return this.searchBackButtonService.canGoBack();
+  }
+
+  goBack() {
+    return this.searchBackButtonService.goBack();
   }
 }
