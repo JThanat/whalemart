@@ -1,4 +1,4 @@
-import { Directive, HostBinding, Optional } from '@angular/core';
+import { Directive, HostBinding, Input, Optional } from '@angular/core';
 import {
   AbstractControlDirective,
   FormControlDirective,
@@ -11,8 +11,8 @@ import {
 })
 export class InputDirective {
   private controlDirective: AbstractControlDirective | null | undefined;
-
   @HostBinding('id') inputId: string;
+  @Input() hideValidation = false;
 
   constructor(
     private formGroupDirective: FormGroupDirective,
@@ -24,7 +24,7 @@ export class InputDirective {
 
   @HostBinding('class.is-valid')
   get isValid() {
-    if (this.controlDirective) {
+    if (this.controlDirective && !this.hideValidation) {
       return this.controlDirective.valid;
     }
     return undefined;
@@ -32,7 +32,7 @@ export class InputDirective {
 
   @HostBinding('class.is-invalid')
   get isInvalid() {
-    if (this.controlDirective) {
+    if (this.controlDirective && !this.hideValidation) {
       return this.controlDirective.invalid &&
         (this.controlDirective.touched || this.formGroupDirective.submitted);
     }

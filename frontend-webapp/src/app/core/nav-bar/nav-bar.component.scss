@@ -1,9 +1,60 @@
 @import '~styles/common';
 
-.navbar {
+:host {
+  background: $white;
+  z-index: $zindex-fixed;
   box-shadow: 0 0 1rem transparentize($black, 0.85);
+}
+
+.navbar {
+  display: flex;
+  flex-direction: column;
+
+  > .main-nav {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: 3.75rem;
+
+    > .logo {
+      margin-right: 1rem;
+    }
+
+    > .menu-list {
+      margin-left: auto;
+      ul {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        margin: 0;
+        li {
+          list-style: none;
+          margin-left: 1rem;
+          a {
+            color: $dark-gray;
+          }
+        }
+      }
+      .btn {
+        margin-left: 1rem;
+      }
+    }
+
+    > app-nav-bar-search-box {
+      margin-right: 1rem;
+    }
+
+    > .hamburger {
+      margin-left: auto;
+    }
+  }
+
+  > .sub-nav {
+    width: 100%;
+  }
 }
 
 a {
   @include font-family(heading);
+  font-size: 0.9rem;
 }
