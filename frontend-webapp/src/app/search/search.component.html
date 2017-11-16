@@ -15,7 +15,7 @@
   </div>
 </ng-container>
 
-<div class="container mt-5">
+<div class="container mt-5 mb-5">
   <ng-container *ngIf="(searchResult | async) as result; else noSearchQuery">
     <div class="row" *ngIf="result.length > 0; else emptySearchResult">
       <div class="col-12 col-sm-6 col-lg-3 mb-5" *ngFor="let market of result; trackBy: marketTrackByFn" @marketInOut>
@@ -23,7 +23,16 @@
       </div>
     </div>
     <ng-template #emptySearchResult>
-      ไม่พบตลาดที่ตรงตามคำค้น
+      <h3>ไม่พบตลาดที่ตรงตามคำค้น</h3>
+      <div class="no-result-suggestion">
+        ลองเปลี่ยนการค้นหา หรือทำตามคำแนะด้านล่าง
+        <ul>
+          <li>ตรวจสอบชื่อตลาด หรือสถานที่ที่ต้องการค้นหา</li>
+          <li>เปลี่ยนช่วงวันจัดตลาด</li>
+          <li>เปลี่ยนตัวกรองผลการค้นหา หรือเอาตัวกรองผลการค้นหาบางอันออก</li>
+        </ul>
+        <a class="btn btn-primary my-2 my-sm-0" routerLink="#">เอาตัวกรองทั้งหมดออก</a>
+      </div>
     </ng-template>
   </ng-container>
 
