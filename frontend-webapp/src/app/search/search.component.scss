@@ -34,3 +34,9 @@
 .no-result-suggestion {
   line-height: 1.8rem;
 }
+
+.empty-search-result, .no-search-query {
+  > h3 {
+    color: $primary;
+  }
+}

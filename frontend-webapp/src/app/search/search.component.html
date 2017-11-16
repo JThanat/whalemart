@@ -23,18 +23,32 @@
       </div>
     </div>
     <ng-template #emptySearchResult>
-      <h3>ไม่พบตลาดที่ตรงตามคำค้น</h3>
-      <div class="no-result-suggestion">
-        ลองเปลี่ยนการค้นหา หรือทำตามคำแนะด้านล่าง
-        <ul>
-          <li>ตรวจสอบชื่อตลาด หรือสถานที่ที่ต้องการค้นหา</li>
-          <li>เปลี่ยนช่วงวันจัดตลาด</li>
-          <li>เปลี่ยนตัวกรองผลการค้นหา หรือเอาตัวกรองผลการค้นหาบางอันออก</li>
-        </ul>
-        <a class="btn btn-primary my-2 my-sm-0" routerLink="#">เอาตัวกรองทั้งหมดออก</a>
+      <div class="empty-search-result">
+        <h3>ไม่พบตลาดที่ตรงตามคำค้น</h3>
+        <div class="no-result-suggestion">
+          ลองเปลี่ยนการค้นหา หรือทำตามคำแนะด้านล่าง
+          <ul>
+            <li>ตรวจสอบชื่อตลาด หรือสถานที่ที่ต้องการค้นหา</li>
+            <li>เปลี่ยนช่วงวันจัดตลาด</li>
+            <li>เปลี่ยนตัวกรองผลการค้นหา หรือเอาตัวกรองผลการค้นหาบางอันออก</li>
+          </ul>
+          <a class="btn btn-primary my-2 my-sm-0" routerLink="#">เอาตัวกรองทั้งหมดออก</a>
+        </div>
       </div>
     </ng-template>
   </ng-container>
 
-  <ng-template #noSearchQuery>กรุณากรอกคำค้นหา</ng-template>
+  <ng-template #noSearchQuery>
+    <div class="no-search-query">
+      <h3>กรุณากรอกคำค้นหา</h3>
+      <div class="no-result-suggestion">
+        คุณสามารถค้นหาตลาดได้ง่ายๆ จากการ
+        <ul>
+          <li>ระบุชื่อตลาด หรือสถานที่</li>
+          <li>เลือกช่วงวันจัดตลาด</li>
+          <li>เพิ่มตัวกรองต่างๆ เพื่อตัดตลาดที่ไม่ต้องการออกจากผลการค้นหา</li>
+        </ul>
+      </div>
+    </div>
+  </ng-template>
 </div>
