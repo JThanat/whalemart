@@ -61,6 +61,7 @@ class MarketFeedViewSet(viewsets.GenericViewSet):
         return Response(serializer.data)
 
     def filter_queryset(self, queryset):
+        queryset = super(MarketFeedViewSet, self).filter_queryset(queryset)
         query_params = self.request.query_params
         min_price = query_params.get('min_price', None)
         max_price = query_params.get('max_price', None)
