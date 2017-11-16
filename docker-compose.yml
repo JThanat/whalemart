@@ -5,20 +5,15 @@ services:
     image: postgres
     ports:
       - "54321:5432"
-    # environment:
-    #     - POSTGRES_PASSWORD=password
-    #     - POSTGRES_USER=username
-    #     - POSTGRES_DB=postgres
-    #     - PGDATA=/data/postgres
     volumes:
-        - ./data/postgres:/data/postgres
+        - ./data/postgres:/var/lib/postgresql/data
 
   pgadmin:
     image: fenglc/pgadmin4
     links:
       - db:postgres
     volumes:
-       - ./data/pgadmin:/root/.pgadmin
+       - ./data/pgadmin:/var/lib/pgadmin4
     ports:
       - "5050:5050"
     restart: unless-stopped
