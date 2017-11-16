@@ -66,4 +66,4 @@ class MarketFeedSerializer(serializers.ModelSerializer):
         model = Market
         fields = ('name', 'caption', 'description', 'opening_date', 'closing_date', 'opening_time', 'closing_time',
                   'contact_person_fullname', 'location', 'reservation_due_date', 'min_price', 'max_price',
-                  'cover_photo', 'tags')
+                  'cover_photo', 'tags', 'id')
