@@ -45,10 +45,6 @@ export class PaginationComponent implements OnInit, OnChanges {
     }
   }
 
-  ngOnInit() {
-    this.updateParams();
-  }
-
   ngOnChanges() {
     this.updateParams();
   }
