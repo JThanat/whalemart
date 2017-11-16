@@ -14,18 +14,13 @@
     &:hover {
       background: $light-gray;
     }
-  }
-  .btn.active {
-    &:hover {
+    &.active {
       background: $secondary;
     }
   }
   .dot {
     text-align: center;
     width: 2.2rem;
-    @include font-family(light);
-    &:hover {
-      background: none;
-    }
+    @include font-weight(light);
   }
 }
