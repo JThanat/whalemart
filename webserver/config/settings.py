@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'apps.ping',
     'apps.lessors',
     'apps.bank_accounts',
+    'apps.products',
     'apps.markets',
     'apps.tags',
     'apps.commons',

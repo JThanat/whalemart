@@ -18,6 +18,7 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.conf.urls.static import static
 from rest_framework import routers
 from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework_jwt.views import refresh_jwt_token
@@ -28,6 +29,7 @@ from apps.ping import views as ping_views
 from apps.users import views as user_views
 from apps.lessors import views as lessor_views
 from apps.bank_accounts import views as bank_accounts_views
+from apps.products import views as product_views
 
 router = routers.DefaultRouter()
 router.register(r'users', user_views.UserViewSet)
@@ -36,6 +38,7 @@ router.register(r'become-lessor', lessor_views.BecomeALessorViewSet, base_name='
 router.register(r'lessor', lessor_views.LessorViewSet, base_name='lessor')
 router.register(r'register', user_views.RegistrationViewSet)
 router.register(r'vendor-profile', user_views.UserViewSet)
+router.register(r'product', product_views.ProduceViewSet, base_name='product')
 router.register(r'markets', market_views.MarketViewSet, base_name='markets')
 router.register(r'market-feed', market_views.MarketFeedViewSet, base_name='feed')
 
