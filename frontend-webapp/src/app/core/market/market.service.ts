@@ -40,7 +40,7 @@ interface SearchParams {
   query: string;
 }
 
-const minShowExpireTimespan = 7; // days
+const minShowExpireTimespanInDays = 90;
 
 @Injectable()
 export class MarketService {
@@ -57,7 +57,7 @@ export class MarketService {
   }
 
   private transformResponse(serverMarket: MarketServerResponse): Market {
-    // TODO: Use data from server instead.
+    // TODO: Calculate expire day from server instead.
     const millisecondsInDay = 1000 * 60 * 60 * 24;
     const dueDate = new Date(serverMarket.reservation_due_date).getTime();
     const expireDay = Math.ceil((dueDate - Date.now()) / millisecondsInDay);
@@ -68,8 +68,9 @@ export class MarketService {
       startDate: new Date(serverMarket.opening_date),
       endDate: new Date(serverMarket.closing_date),
       minPrice: Number(serverMarket.min_price),
-      expireDay: expireDay > minShowExpireTimespan ? expireDay : undefined,
-      imageURL: serverMarket.cover_photo.thumbnail
+      expireDay: (0 < expireDay && expireDay <= minShowExpireTimespanInDays)
+        ? expireDay : undefined,
+      imageURL: serverMarket.cover_photo.thumbnail.replace('4200', '8000')
     };
   }
 }
