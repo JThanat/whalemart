@@ -78,13 +78,13 @@ class MarketFeedViewSet(viewsets.GenericViewSet):
         sort_by = query_params.get('sort_by', None)
 
         if min_price:
-            queryset = queryset.exclude(max_price_lt=min_price)
+            queryset = queryset.exclude(max_price__lt=min_price)
         if max_price:
-            queryset = queryset.exclude(min_price_gt=max_price)
+            queryset = queryset.exclude(min_price__gt=max_price)
         if min_date:
-            queryset = queryset.exclude(closing_date_lt=min_date)
+            queryset = queryset.exclude(closing_date__lt=min_date)
         if max_date:
-            queryset = queryset.exclude(opening_date_gt=max_date)
+            queryset = queryset.exclude(opening_date__gt=max_date)
         queryset = self.filter_part_of_the_day(
             queryset, morning, afternoon, evening, night)
         if sort_by:
@@ -93,4 +93,4 @@ class MarketFeedViewSet(viewsets.GenericViewSet):
 
     def filter_part_of_the_day(self, queryset, morning, afternoon, evening, night):
         # MORNING_START_TIME = time()
-        pass
+        return queryset
