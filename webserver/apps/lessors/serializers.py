@@ -34,19 +34,19 @@ class LessorSerializer(serializers.ModelSerializer):
         return instance
 
     def validate_organization_phone_number(self, data):
-        if (data is '') or (data is None) or re.match(r"^\+?\d{9,15}$", data):
+        if (data is '') or re.match(r"^\+?\d{9,15}$", data):
             return data
         raise serializers.ValidationError('Phone number should be in format +123456789')
 
     def validate(self, data):
         if data['is_organization']:
-            if data['organization_name'] is None:
+            if data['organization_name'] is '':
                 raise serializers.ValidationError('Organization name should not be empty')
-            elif data['organization_contact_name'] is None:
+            elif data['organization_contact_name'] is '':
                 raise serializers.ValidationError('Organization contact name should not be empty')
-            elif data['organization_email'] is None:
+            elif data['organization_email'] is '':
                 raise serializers.ValidationError('Organization email should not be empty')
-            elif data['organization_phone_number'] is None:
+            elif data['organization_phone_number'] is '':
                 raise serializers.ValidationError('Organization phone number should not be empty')
 
         return data
