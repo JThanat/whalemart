@@ -9,7 +9,8 @@ const svgIconNames = [
   'arrow-head-right',
   'location-pin',
   'date',
-  'person-circle'
+  'person-circle',
+  'arrow-head-down'
 ];
 
 @NgModule({
