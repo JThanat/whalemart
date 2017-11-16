@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-pagination',
@@ -32,7 +32,7 @@ export class PaginationComponent implements OnInit, OnChanges {
     this.showRight = (this.max - this.current > this.padding);
 
     this.showDotLeft = (this.current - this.min > this.padding + 1);
-    this.showDotRight = (this.max - this.current > this.padding + 1); 
+    this.showDotRight = (this.max - this.current > this.padding + 1);
 
     const centerLeft = Math.max(
       Math.min(this.current - this.padding, this.max - this.padding * 2),
