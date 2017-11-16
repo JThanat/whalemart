@@ -27,17 +27,17 @@ export class PaginationComponent implements OnInit, OnChanges {
     this.showLeft = (this.current - this.min > this.padding);
     this.showRight = (this.max - this.current > this.padding);
 
-    this.showDotLeft = (this.current - this.min > this.padding + 1);
-    this.showDotRight = (this.max - this.current > this.padding + 1);
-
     const centerLeft = Math.max(
-      Math.min(this.current - this.padding, this.max - this.padding * 2),
+      this.current - this.padding,
       this.min
     );
     const centerRight = Math.min(
-      Math.max(this.current + this.padding, this.min + this.padding * 2),
+      this.current + this.padding,
       this.max
     );
+
+    this.showDotLeft = this.min + 1 < centerLeft;
+    this.showDotRight = this.max - 1 > centerRight;
 
     this.numCenter = [];
     for (let i = centerLeft; i <= centerRight; i++) {
