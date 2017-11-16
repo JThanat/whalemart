@@ -53,6 +53,8 @@ You can then access the followings:
 - [pgAdmin](https://www.pgadmin.org/) via [localhost:5050](http://localhost:5050) for Postgres database GUI access
   - Username: `pgadmin4@pgadmin.org`
   - Password: `admin`
+  - Host Name: `db`
+  - Port: `5432`
   - Database username: `postgres`
   - Database password: `postgres`
 
