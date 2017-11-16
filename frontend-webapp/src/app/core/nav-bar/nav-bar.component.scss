@@ -1,10 +1,8 @@
 @import '~styles/common';
 
 :host {
-  z-index: 1030;
-}
-
-.navbar-wrapper {
+  background: $white;
+  z-index: $zindex-fixed;
   box-shadow: 0 0 1rem transparentize($black, 0.85);
 }
 
@@ -19,7 +17,7 @@
     height: 60px;
 
     > .logo {
-      margin-right: 1rem; 
+      margin-right: 1rem;
     }
 
     > .menu-list {
