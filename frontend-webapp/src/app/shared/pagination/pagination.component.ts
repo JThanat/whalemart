@@ -45,7 +45,5 @@ export class PaginationComponent implements OnChanges {
     }
   }
 
-  ngOnChanges() {
-    this.updateParams();
-  }
+  ngOnChanges() { this.updateParams(); }
 }
