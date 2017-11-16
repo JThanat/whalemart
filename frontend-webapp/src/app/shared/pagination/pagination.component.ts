@@ -17,7 +17,7 @@ export class PaginationComponent implements OnChanges {
   @Input() current: number;
   @Input() padding = 1;
 
-  updateParams() {
+  ngOnChanges() {
     if (this.current < this.min) {
       this.current = this.min;
     } else if (this.current > this.max) {
@@ -44,6 +44,4 @@ export class PaginationComponent implements OnChanges {
       this.numCenter.push(i);
     }
   }
-
-  ngOnChanges() { this.updateParams(); }
 }
