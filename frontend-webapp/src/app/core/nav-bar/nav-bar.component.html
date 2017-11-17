@@ -7,9 +7,9 @@
 
     <app-nav-bar-search-box *ngIf="isShowNavBarSearchBox()"></app-nav-bar-search-box>
 
-    <a class="hamburger d-md-none btn btn-outline-primary my-2 my-sm-0" routerLink="#">เมนู</a>
+    <button type="button" class="hamburger d-md-none btn btn-outline-primary my-2 my-sm-0" (click)="toggleMenu()">เมนู</button>
 
-    <div class="menu-list d-none d-md-block" [class.show]="isMenuOpened">
+    <div class="menu-list d-md-block" [class.d-none]="!isMenuOpened">
       <ul class="">
         <li class="nav-item active">
           <a class="nav-link" href="#">ลงตลาดให้เช่า</a>
