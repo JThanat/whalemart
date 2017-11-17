@@ -1,0 +1,26 @@
+@import '~styles/common';
+@import '~styles/global';
+
+:host {
+  display: flex;
+  justify-content: center;
+  .active {
+    background: $secondary;
+    color: #FFF;
+  }
+  .btn {
+    cursor: pointer;
+    width: 2.2rem;
+    &:hover {
+      background: $light-gray;
+    }
+    &.active {
+      background: $secondary;
+    }
+  }
+  .dot {
+    text-align: center;
+    width: 2.2rem;
+    @include font-weight(light);
+  }
+}

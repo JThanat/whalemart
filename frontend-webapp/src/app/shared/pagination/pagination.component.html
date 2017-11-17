@@ -1,0 +1,11 @@
+<button *ngIf="showLeft" class="btn" (click)="go(min)" [class.active]="min === current">
+  {{ min }}
+</button>
+<div *ngIf="showLeft" class="dot">...</div>
+<button *ngFor="let num of centers" class="btn" (click)="go(num)" [class.active]="num === current">
+  {{ num }}
+</button>
+<div *ngIf="showRight" class="dot">...</div>
+<button *ngIf="showRight" class="btn" (click)="go(max)" [class.active]="max === current">
+  {{ max }}
+</button>
