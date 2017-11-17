@@ -126,12 +126,12 @@ export class FacebookLoginService {
   }
 
   private isRegistered(accessToken: string) {
-    return this.http.post('/api/api-token-verify/', { token: accessToken }).pipe(
+    return this.http.post('/api/login-facebook/', { facebook_token: accessToken }).pipe(
         mapTo(true),
         catchError(err => {
           if (err instanceof HttpErrorResponse) {
             if (err.status >= 400 && err.status < 500) {
-              return observableOf(true);
+              return observableOf(false);
             }
           }
           return observableThrow(err);
@@ -155,7 +155,7 @@ export class FacebookLoginService {
           firstName: info.first_name,
           lastName: info.last_name,
           email: info.email,
-          profileImageUrl: `https://graph.facebook.com/v2.11/${userId}/picture?type=large`,
+          profileImageUrl: `https://graph.facebook.com/v2.11/${userId}/picture?type=large`
         };
       })
     );

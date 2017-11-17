@@ -46,7 +46,7 @@ export class RegisterService {
       phone: params.phone
     };
 
-    return this.http.post<RegisterServerResponse>('/api/users/', body).pipe(
+    return this.http.post<RegisterServerResponse>('/api/register/', body).pipe(
       this.mapRegisterResponse()
     );
   }
@@ -61,7 +61,7 @@ export class RegisterService {
       facebook_token: params.fbAccessToken
     };
 
-    return this.http.post<RegisterServerResponse>('/api/users/', body).pipe(
+    return this.http.post<RegisterServerResponse>('/api/register/', body).pipe(
       this.mapRegisterResponse()
     );
   }
