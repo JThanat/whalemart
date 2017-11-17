@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { By } from '@angular/platform-browser';
 import { PaginationComponent } from './pagination.component';
 
 fdescribe('PaginationComponent', () => {
@@ -236,7 +237,31 @@ fdescribe('PaginationComponent', () => {
     expectPaginationProps(component, false, [4, 5, 6, 7, 8, 9, 10, 11, 12], false);
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should remove dot when number is adjacent', () => {
+    component.min = 10;
+    component.current = 12;
+    component.max = 14;
+    component.ngOnChanges();
+    fixture.detectChanges();
+
+    expectPaginationProps(component, false, [10, 11, 12, 13, 14], false);
+  });
+
+  it('should output when trigger button', () => {
+    component.min = 5;
+    component.current = 6;
+    component.max = 7;
+
+    const navigateSpy = jasmine.createSpy();
+    component.navigate.subscribe(navigateSpy);
+
+    component.ngOnChanges();
+    fixture.detectChanges();
+
+    const button = fixture.debugElement.query(By.css('.btn'));
+    button.nativeElement.click();
+
+    expect(navigateSpy).toHaveBeenCalledTimes(1);
+    expect(navigateSpy.calls.mostRecent().args).toEqual([5]);
   });
 });
