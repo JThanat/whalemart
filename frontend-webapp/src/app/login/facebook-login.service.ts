@@ -6,9 +6,10 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { of as observableOf } from 'rxjs/observable/of';
 import { _throw as observableThrow } from 'rxjs/observable/throw';
-import { catchError, filter, first, map, mapTo, mergeMap } from 'rxjs/operators';
+import { catchError, filter, first, map, mergeMap } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
+import { UserInfo, UserInfoServerResponse, UserService } from '../core/user/user.service';
 import { IntercomponentDataMap } from '../core/utils/intercomponent-data.service';
 
 let isFbScriptLoadingIssued = false;
@@ -34,6 +35,8 @@ interface FacebookLoginResultError {
   success: false;
 }
 
+export type FacebookLoginServerResponse = UserInfoServerResponse;
+
 @Injectable()
 export class FacebookLoginService {
   /**
@@ -53,7 +56,7 @@ export class FacebookLoginService {
 
   private isLoginDialogOpening = false;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private userService: UserService) { }
 
   ensureFbScriptLoad() {
     if (isFbScriptLoadingIssued === false) {
@@ -102,14 +105,16 @@ export class FacebookLoginService {
         }
 
         const accessToken = loginResult.authResponse.accessToken;
-        return this.isRegistered(accessToken).pipe(mergeMap(isTokenValid => {
-          if (isTokenValid) {
+        return this.getUserDetail(accessToken).pipe(mergeMap(userInfo => {
+          if (userInfo) {
+            this.userService.userInfo.next(userInfo);
             return observableOf({
               success: true,
               fbAccessToken: accessToken,
               requireRegistration: false
             } as FacebookLoginResult);
           } else {
+            // Not registered yet.
             const userId = loginResult.authResponse.userID;
             return this.getRegistrationInformation(accessToken, userId).pipe(map(info => {
               return {
@@ -125,18 +130,34 @@ export class FacebookLoginService {
     );
   }
 
-  private isRegistered(accessToken: string) {
-    return this.http.post('/api/login-facebook/', { facebook_token: accessToken }).pipe(
-        mapTo(true),
-        catchError(err => {
-          if (err instanceof HttpErrorResponse) {
-            if (err.status >= 400 && err.status < 500) {
-              return observableOf(false);
-            }
+  /**
+   * Gets user detail associated with specified with given accessToken.
+   *
+   * @param accessToken Facebook access token.
+   * @returns an observable of UserInfo, or `undefined` if the user has not registered with
+   * specified Facebook account.
+   */
+  private getUserDetail(accessToken: string): Observable<UserInfo | undefined> {
+    return this.http.post<FacebookLoginServerResponse>('/api/login-facebook/', {
+      facebook_token: accessToken
+    }).pipe(
+      map(result => {
+        const userInfo: UserInfo = {
+          firstName: result.first_name,
+          lastName: result.last_name,
+          email: result.email
+        };
+        return userInfo;
+      }),
+      catchError(err => {
+        if (err instanceof HttpErrorResponse) {
+          if (err.status >= 400 && err.status < 500) {
+            return observableOf(false);
           }
-          return observableThrow(err);
-        })
-      );
+        }
+        return observableThrow(err);
+      })
+    );
   }
 
   getRegistrationInformation(fbAccessToken: string, userId: string)
