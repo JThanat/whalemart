@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
     const email = this.loginForm.value.email as string;
     const password = this.loginForm.value.password as string;
     this.loginService.login(email, password).subscribe(userInfo => {
-      this.alert.show({ message: `เข้าสู่ระบบสำเร็จ`, type: 'success' });
+      this.alert.show({ message: 'เข้าสู่ระบบสำเร็จ', type: 'success' });
       this.router.navigate(['/']);
     }, err => {
       this.loginForm.enable();
@@ -75,8 +75,8 @@ export class LoginComponent implements OnInit {
         this.intercomponentDataService.set('fbRegister', result.registrationInfo);
         this.router.navigate(['/register/facebook']);
       } else {
-        this.isFb = true;
-        this.fbAccessToken = result.fbAccessToken;
+        this.alert.show({ message: 'เข้าสู่ระบบสำเร็จ', type: 'success' });
+        this.router.navigate(['/']);
       }
     });
   }
