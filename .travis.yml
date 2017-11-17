@@ -30,4 +30,5 @@ script:
   - $TRAVIS_BUILD_DIR/scripts/loop-ping-server.sh
   - docker-compose exec frontend_webapp yarn e2e:ci
   - docker-compose exec frontend_webapp yarn lint
+  - docker-compose exec webserver python3 manage.py loaddata dump.json
   - docker-compose logs
