@@ -115,16 +115,12 @@ class MarketFeedViewSet(viewsets.GenericViewSet):
 
         if morning:
             morning_markets = Market.objects.raw_as_qs(self.make_sql_query(MORNING_START_TIME, MORNING_END_TIME))
-            # morning_markets = morning_markets.raw_as_qs()
         if afternoon:
             afternoon_markets = Market.objects.raw_as_qs(self.make_sql_query(AFTERNOON_START_TIME, AFTERNOON_END_TIME))
-            # afternoon_markets = list(afternoon_markets)
         if evening:
             evening_markets = Market.objects.raw_as_qs(self.make_sql_query(EVENING_START_TIME, EVENING_END_TIME))
-            # evening_markets = list(evening_markets)
         if night:
             night_markets = Market.objects.raw_as_qs(self.make_sql_query(NIGHT_START_TIME, NIGHT_END_TIME))
-            # night_markets = list(night_markets)
         return morning_markets.union(afternoon_markets, evening_markets, night_markets).intersection(queryset)
 
     def make_sql_query(self, start_time, end_time):
