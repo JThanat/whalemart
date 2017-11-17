@@ -86,18 +86,20 @@ class MarketFeedViewSet(viewsets.GenericViewSet):
             queryset = queryset.exclude(closing_date__lt=min_date)
         if max_date:
             queryset = queryset.exclude(opening_date__gt=max_date)
-        queryset = self.filter_part_of_the_day(
-            queryset, morning, afternoon, evening, night)
+        filtered_queryset = queryset
+        print(filtered_queryset)
+        filtered_queryset = self.filter_part_of_the_day(
+            filtered_queryset, morning, afternoon, evening, night)
         if sort_by:
-            queryset = queryset.sort_by(sort_by)
-        return queryset
+            filtered_queryset = filtered_queryset.sort_by(sort_by)
+        return filtered_queryset
 
     def filter_part_of_the_day(self, queryset, morning, afternoon, evening, night):
         MORNING_START_TIME = '2017-01-01 4:00:00'
         MORNING_END_TIME = '2017-01-01 12:00:00'
         AFTERNOON_START_TIME = '2017-01-01 12:00:00'
         AFTERNOON_END_TIME = '2017-01-01 18:00:00'
-        EVENING_START_TIME = '2017-01-01 15.30:00:00'
+        EVENING_START_TIME = '2017-01-01 15:30:00'
         EVENING_END_TIME = '2017-01-01 21:00:00'
         NIGHT_START_TIME = '2017-01-01 18:00:00'
         NIGHT_END_TIME = '2017-01-02 4:00:00'
@@ -111,18 +113,18 @@ class MarketFeedViewSet(viewsets.GenericViewSet):
             return queryset
 
         if morning:
-            morning_markets = queryset.raw(self.make_sql_query(MORNING_START_TIME, MORNING_END_TIME))
+            morning_markets = Market.objects.raw(self.make_sql_query(MORNING_START_TIME, MORNING_END_TIME))
             morning_markets = list(morning_markets)
         if afternoon:
-            afternoon_markets = queryset.raw(self.make_sql_query(AFTERNOON_START_TIME, AFTERNOON_END_TIME))
+            afternoon_markets = Market.objects.raw(self.make_sql_query(AFTERNOON_START_TIME, AFTERNOON_END_TIME))
             afternoon_markets = list(afternoon_markets)
         if evening:
-            evening_markets = queryset.raw(self.make_sql_query(EVENING_START_TIME, EVENING_END_TIME))
+            evening_markets = Market.objects.raw(self.make_sql_query(EVENING_START_TIME, EVENING_END_TIME))
             evening_markets = list(evening_markets)
         if night:
-            night_markets = queryset.raw(self.make_sql_query(NIGHT_START_TIME, NIGHT_END_TIME))
+            night_markets = Market.objects.raw(self.make_sql_query(NIGHT_START_TIME, NIGHT_END_TIME))
             night_markets = list(night_markets)
-        return morning_markets + afternoon_markets + evening_markets + night_markets
+        return list(set(morning_markets + afternoon_markets + evening_markets + night_markets).intersection(queryset))
 
     def make_sql_query(self, start_time, end_time):
         time_interval = str(self.get_time_interval(start_time, end_time))
