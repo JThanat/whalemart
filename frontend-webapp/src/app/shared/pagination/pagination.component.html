@@ -1,7 +1,11 @@
-<button *ngIf="showLeft" class="btn" [class.active]="min === current">{{ min }}</button>
+<button *ngIf="showLeft" class="btn" [class.active]="left === current">
+  {{ left }}
+</button>
 <div *ngIf="showDotLeft" class="dot">...</div>
-<button *ngFor="let num of numCenter" class="btn" [class.active]="num === current">
+<button *ngFor="let num of center" class="btn" [class.active]="num === current">
   {{ num }}
 </button>
 <div *ngIf="showDotRight" class="dot">...</div>
-<button *ngIf="showRight" class="btn" [class.active]="max === current">{{ max }}</button>
+<button *ngIf="showRight" class="btn" [class.active]="right === current">
+  {{ right }}
+</button>
