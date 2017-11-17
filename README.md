@@ -58,6 +58,12 @@ You can then access the followings:
   - Database username: `postgres`
   - Database password: `postgres`
 
+### Import Data
+- Copy `dump_images` to `/webserver` folder and name it as `media`.
+- Start your docker-compose or webserver and db service. 
+- Exec into webserver docker by calling `docker exec -it <container> /bin/bash`
+- run `python3 manage.py loaddata dump.json` 
+
 ### Git Convention
 
 #### Branching
