@@ -3,9 +3,11 @@ from django.db import models
 
 from apps.commons.control_model import ControlModel
 from apps.commons.file_upload import UploadedImage
+from apps.markets.managers import MarketManager
 
 
 class Market(ControlModel):
+    objects = MarketManager()
     # Money Transfer Status
     NOT_TRANSFERRED = 0
     IN_PROGRESS = 1

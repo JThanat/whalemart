@@ -1,3 +1,4 @@
+import { PortalModule } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
@@ -11,6 +12,7 @@ import { InputErrorComponent } from './input/input-error.component';
 import { InputGroupComponent } from './input/input-group.component';
 import { InputDirective } from './input/input.directive';
 import { MarketComponent } from './market/market.component';
+import { SubNavBarDirective } from './sub-nav-bar/sub-nav-bar.directive';
 import { SvgIconComponent } from './svg-icon/svg-icon.component';
 
 @NgModule({
@@ -22,13 +24,15 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
     HttpClientXsrfModule.withOptions({
       cookieName: 'csrftoken',
       headerName: 'X-CSRFToken'
-    })
+    }),
+    PortalModule
   ],
   declarations: [
     InputGroupComponent,
     InputDirective,
     InputErrorComponent,
     SvgIconComponent,
+    SubNavBarDirective,
     MarketComponent,
     DateRangePipe
   ],
@@ -41,6 +45,8 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
     InputDirective,
     InputErrorComponent,
     SvgIconComponent,
+    PortalModule,
+    SubNavBarDirective,
     MarketComponent,
     DateRangePipe
   ],

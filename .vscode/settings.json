@@ -15,5 +15,6 @@
     "[json]": {
         "editor.tabSize": 2
     },
-    "typescript.tsdk": "frontend-webapp/node_modules/typescript/lib"
+    "typescript.tsdk": "frontend-webapp/node_modules/typescript/lib",
+    "tslint.configFile": "frontend-webapp/tslint.json"
 }

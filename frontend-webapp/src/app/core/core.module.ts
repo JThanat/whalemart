@@ -5,7 +5,9 @@ import { AlertModule } from './alert/alert.module';
 import { FooterComponent } from './footer/footer.component';
 import { IconModule } from './icon/icon.module';
 import { LocalDbModule } from './local-db/local-db.module';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { MarketService } from './market/market.service';
+import { NavBarModule } from './nav-bar/nav-bar.module';
+import { SearchBackButtonService } from './search/search-back-button.service';
 import { UserService } from './user/user.service';
 
 @NgModule({
@@ -13,20 +15,22 @@ import { UserService } from './user/user.service';
     SharedModule,
     LocalDbModule,
     AlertModule,
-    IconModule
+    IconModule,
+    NavBarModule
   ],
   declarations: [
-    NavBarComponent,
     FooterComponent
   ],
   exports: [
-    NavBarComponent,
     FooterComponent,
     AlertModule,
-    IconModule
+    IconModule,
+    NavBarModule
   ],
   providers: [
-    UserService
+    UserService,
+    MarketService,
+    SearchBackButtonService
   ]
 })
 export class CoreModule {
