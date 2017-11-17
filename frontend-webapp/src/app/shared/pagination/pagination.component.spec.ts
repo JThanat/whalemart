@@ -2,17 +2,16 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PaginationComponent } from './pagination.component';
 
-describe('PaginationComponent', () => {
+fdescribe('PaginationComponent', () => {
   let component: PaginationComponent;
   let fixture: ComponentFixture<PaginationComponent>;
 
   function mergePageNums(comp: PaginationComponent): number[] {
     const { left, center, right } = comp;
-    let arr: number[] = [];
+    const arr = [...center];
     if (left) {
-      arr.push(left);
+      arr.unshift(left);
     }
-    arr = [...arr, ...center];
     if (right) {
       arr.push(right);
     }
