@@ -247,7 +247,7 @@ fdescribe('PaginationComponent', () => {
     expectPaginationProps(component, false, [10, 11, 12, 13, 14], false);
   });
 
-  it('should output when trigger button', () => {
+  it('should emit navigate when trigger button', () => {
     component.min = 5;
     component.current = 6;
     component.max = 7;
@@ -263,5 +263,22 @@ fdescribe('PaginationComponent', () => {
 
     expect(navigateSpy).toHaveBeenCalledTimes(1);
     expect(navigateSpy.calls.mostRecent().args).toEqual([5]);
+  });
+
+  it('should not emit navigate when click on active button', () => {
+    component.min = 5;
+    component.current = 6;
+    component.max = 7;
+
+    const navigateSpy = jasmine.createSpy();
+    component.navigate.subscribe(navigateSpy);
+
+    component.ngOnChanges();
+    fixture.detectChanges();
+
+    const button = fixture.debugElement.queryAll(By.css('.btn'));
+    button[1].nativeElement.click();
+
+    expect(navigateSpy).toHaveBeenCalledTimes(0);
   });
 });
