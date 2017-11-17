@@ -10,11 +10,11 @@ describe('PaginationComponent', () => {
     const { left, center, right } = comp;
     let arr: number[] = [];
     if (left) {
-      arr = arr.concat([left]);
+      arr.push(left);
     }
-    arr = arr.concat(center);
+    arr = [...arr, ...center];
     if (right) {
-      arr = arr.concat([right]);
+      arr.push(right);
     }
     return arr;
   }
@@ -32,9 +32,8 @@ describe('PaginationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PaginationComponent ]
-    })
-    .compileComponents();
+      declarations: [PaginationComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -84,7 +83,7 @@ describe('PaginationComponent', () => {
   });
 
   describe('pagination with 5 elements', () => {
-    it('should display 5 element when current position is 1', () => {
+    it('should display 5 elements when current position is 1', () => {
       component.min = 1;
       component.current = 1;
       component.max = 5;
@@ -94,7 +93,7 @@ describe('PaginationComponent', () => {
       expectPaginationProps(component, false, [1, 2, 3, 4, 5], false);
     });
 
-    it('should display 5 element when current position is 2', () => {
+    it('should display 5 elements when current position is 2', () => {
       component.min = 1;
       component.current = 2;
       component.max = 5;
@@ -104,7 +103,7 @@ describe('PaginationComponent', () => {
       expectPaginationProps(component, false, [1, 2, 3, 4, 5], false);
     });
 
-    it('should display 5 element when current position is 3', () => {
+    it('should display 5 elements when current position is 3', () => {
       component.min = 1;
       component.current = 3;
       component.max = 5;
@@ -114,7 +113,7 @@ describe('PaginationComponent', () => {
       expectPaginationProps(component, false, [1, 2, 3, 4, 5], false);
     });
 
-    it('should display 5 element when current position is 4', () => {
+    it('should display 5 elements when current position is 4', () => {
       component.min = 1;
       component.current = 4;
       component.max = 5;
@@ -124,7 +123,7 @@ describe('PaginationComponent', () => {
       expectPaginationProps(component, false, [1, 2, 3, 4, 5], false);
     });
 
-    it('should display 5 element when current position is 5', () => {
+    it('should display 5 elements when current position is 5', () => {
       component.min = 1;
       component.current = 5;
       component.max = 5;

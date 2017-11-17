@@ -21,14 +21,14 @@ export class PaginationComponent implements OnChanges {
   public showDotRight: boolean;
 
   @Input() min = 1;
-  @Input() max: number;
-  @Input() current: number;
+  @Input() max = 1;
+  @Input() current = 1;
   @Input() padding = 1;
   @Output() onNavigate = new EventEmitter<number>();
 
   navigate(page: number) {
     if (page === this.current) {
-      return ;
+      return;
     }
     this.onNavigate.emit(page);
   }
