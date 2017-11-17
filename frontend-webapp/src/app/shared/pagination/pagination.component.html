@@ -1,4 +1,4 @@
-<button *ngIf="showLeft" class="btn" [class.active]="left === current">
+<button *ngIf="left" class="btn" [class.active]="left === current">
   {{ left }}
 </button>
 <div *ngIf="showDotLeft" class="dot">...</div>
@@ -6,6 +6,6 @@
   {{ num }}
 </button>
 <div *ngIf="showDotRight" class="dot">...</div>
-<button *ngIf="showRight" class="btn" [class.active]="right === current">
+<button *ngIf="right" class="btn" [class.active]="right === current">
   {{ right }}
 </button>
