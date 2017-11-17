@@ -87,7 +87,6 @@ class MarketFeedViewSet(viewsets.GenericViewSet):
         if max_date:
             queryset = queryset.exclude(opening_date__gt=max_date)
         filtered_queryset = queryset
-        print(filtered_queryset)
         filtered_queryset = self.filter_part_of_the_day(
             filtered_queryset, morning, afternoon, evening, night)
         if sort_by:
