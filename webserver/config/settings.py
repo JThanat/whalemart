@@ -46,9 +46,11 @@ INSTALLED_APPS = [
     'apps.ping',
     'apps.lessors',
     'apps.bank_accounts',
+    'apps.products',
     'apps.markets',
     'apps.tags',
     'apps.commons',
+    'apps.booths',
 ]
 
 AUTH_USER_MODEL = 'users.User'

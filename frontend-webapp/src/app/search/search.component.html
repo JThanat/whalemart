@@ -1,0 +1,57 @@
+<ng-container *appSubNavBar>
+  <div class="filter-bar">
+    <div class="filter-item">
+      <span>ช่วงราคา</span>
+      <app-svg-icon key="arrow-head-down" width="12"></app-svg-icon>
+    </div>
+    <div class="filter-item">
+      <span>วันจัดตลาด</span>
+      <app-svg-icon key="arrow-head-down" width="12"></app-svg-icon>
+    </div>
+    <div class="filter-item">
+      <span>ช่วงเวลาที่ตลาดเปิด</span>
+      <app-svg-icon key="arrow-head-down" width="12"></app-svg-icon>
+    </div>
+    <button *ngIf="canGoBack()" type="button" class="ml-auto btn btn-link" (click)="goBack()">
+      ปิดการค้นหา
+    </button>
+  </div>
+</ng-container>
+
+<div class="container mt-5 mb-5">
+  <ng-container *ngIf="(searchResult | async) as result; else noSearchQuery">
+    <div class="row" *ngIf="result.length > 0; else emptySearchResult">
+      <div class="col-12 col-sm-6 col-lg-3 mb-5" *ngFor="let market of result; trackBy: marketTrackByFn" @marketInOut>
+        <app-market-item [market]="market"></app-market-item>
+      </div>
+    </div>
+    <ng-template #emptySearchResult>
+      <div class="empty-search-result">
+        <h3>ไม่พบตลาดที่ตรงตามคำค้น</h3>
+        <div class="no-result-suggestion">
+          ลองเปลี่ยนการค้นหา หรือทำตามคำแนะด้านล่าง
+          <ul>
+            <li>ตรวจสอบชื่อตลาด หรือสถานที่ที่ต้องการค้นหา</li>
+            <li>เปลี่ยนช่วงวันจัดตลาด</li>
+            <li>เปลี่ยนตัวกรองผลการค้นหา หรือเอาตัวกรองผลการค้นหาบางอันออก</li>
+          </ul>
+          <button type="button" class="btn btn-primary my-2 my-sm-0" routerLink="#">เอาตัวกรองทั้งหมดออก</button>
+        </div>
+      </div>
+    </ng-template>
+  </ng-container>
+
+  <ng-template #noSearchQuery>
+    <div class="no-search-query">
+      <h3>กรุณากรอกคำค้นหา</h3>
+      <div class="no-result-suggestion">
+        คุณสามารถค้นหาตลาดได้ง่ายๆ จากการ
+        <ul>
+          <li>ระบุชื่อตลาด หรือสถานที่</li>
+          <li>เลือกช่วงวันจัดตลาด</li>
+          <li>เพิ่มตัวกรองต่างๆ เพื่อตัดตลาดที่ไม่ต้องการออกจากผลการค้นหา</li>
+        </ul>
+      </div>
+    </div>
+  </ng-template>
+</div>

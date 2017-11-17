@@ -11,6 +11,7 @@
 7. [Deployment Diagram and Component Diagrams](./sections/7-deployment-diagram-and-component-diagrams.md)
 8. [Class Diagram](./sections/8-class-diagram.md)
 9. [Updated ER Diagram](./sections/9-updated-er-diagram.md)
+10. [Component Diagram](./sections/10-compoent-diagram.md)
 
 ## Team Contribution
 
