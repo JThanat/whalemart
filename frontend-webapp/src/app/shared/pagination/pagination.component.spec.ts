@@ -8,26 +8,26 @@ describe('PaginationComponent', () => {
   let fixture: ComponentFixture<PaginationComponent>;
 
   function mergePageNums(comp: PaginationComponent): number[] {
-    const { left, center, right } = comp;
-    const arr = [...center];
-    if (left) {
-      arr.unshift(left);
+    const { showLeft, centers, showRight } = comp;
+    const arr = [...centers];
+    if (showLeft) {
+      arr.unshift(comp.min);
     }
-    if (right) {
-      arr.push(right);
+    if (showRight) {
+      arr.push(comp.max);
     }
     return arr;
   }
 
   function expectPaginationProps(
     comp: PaginationComponent,
-    showDotLeft: boolean,
+    showLeft: boolean,
     centerElm: number[],
-    showDotRight: boolean
+    showRight: boolean
   ) {
-    expect(comp.showDotLeft).toBe(showDotLeft);
+    expect(comp.showLeft).toBe(showLeft);
     expect(mergePageNums(comp)).toEqual(centerElm);
-    expect(comp.showDotRight).toBe(showDotRight);
+    expect(comp.showRight).toBe(showRight);
   }
 
   beforeEach(async(() => {
@@ -51,7 +51,7 @@ describe('PaginationComponent', () => {
       expectPaginationProps(component, false, [1], false);
     });
 
-    it('should display 2 elements when given 2 elemetns', () => {
+    it('should display 2 elements when given 2 elements', () => {
       component.min = 1;
       component.current = 1;
       component.max = 2;
