@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'apps.markets',
     'apps.tags',
     'apps.commons',
+    'apps.booths',
 ]
 
 AUTH_USER_MODEL = 'users.User'
