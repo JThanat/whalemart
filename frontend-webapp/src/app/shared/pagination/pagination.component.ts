@@ -24,13 +24,13 @@ export class PaginationComponent implements OnChanges {
   @Input() max = 1;
   @Input() current = 1;
   @Input() padding = 1;
-  @Output() onNavigate = new EventEmitter<number>();
+  @Output() navigate = new EventEmitter<number>();
 
-  navigate(page: number) {
+  go(page: number) {
     if (page === this.current) {
       return;
     }
-    this.onNavigate.emit(page);
+    this.navigate.emit(page);
   }
 
   ngOnChanges() {

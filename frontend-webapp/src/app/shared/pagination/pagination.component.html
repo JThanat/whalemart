@@ -1,11 +1,11 @@
-<button *ngIf="left" class="btn" (click)="navigate(left)" [class.active]="left === current">
+<button *ngIf="left" class="btn" (click)="go(left)" [class.active]="left === current">
   {{ left }}
 </button>
 <div *ngIf="showDotLeft" class="dot">...</div>
-<button *ngFor="let num of center" class="btn" (click)="navigate(num)" [class.active]="num === current">
+<button *ngFor="let num of center" class="btn" (click)="go(num)" [class.active]="num === current">
   {{ num }}
 </button>
 <div *ngIf="showDotRight" class="dot">...</div>
-<button *ngIf="right" class="btn" (click)="navigate(right)" [class.active]="right === current">
+<button *ngIf="right" class="btn" (click)="go(right)" [class.active]="right === current">
   {{ right }}
 </button>

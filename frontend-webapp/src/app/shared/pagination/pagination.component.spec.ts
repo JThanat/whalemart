@@ -83,55 +83,24 @@ describe('PaginationComponent', () => {
   });
 
   describe('pagination with 5 elements', () => {
-    it('should display 5 elements when current position is 1', () => {
-      component.min = 1;
-      component.current = 1;
-      component.max = 5;
-      component.ngOnChanges();
-      fixture.detectChanges();
+    const numElement = 5;
+    const expectedPageNums: number[] = [];
 
-      expectPaginationProps(component, false, [1, 2, 3, 4, 5], false);
-    });
+    for (let i = 1; i <= numElement; i++) {
+      expectedPageNums.push(i);
+    }
 
-    it('should display 5 elements when current position is 2', () => {
-      component.min = 1;
-      component.current = 2;
-      component.max = 5;
-      component.ngOnChanges();
-      fixture.detectChanges();
+    for (let i = 1; i <= numElement; i++) {
+      it(`should display ${numElement} elements when current position is ${i}`, () => {
+        component.min = 1;
+        component.current = i;
+        component.max = numElement;
+        component.ngOnChanges();
+        fixture.detectChanges();
 
-      expectPaginationProps(component, false, [1, 2, 3, 4, 5], false);
-    });
-
-    it('should display 5 elements when current position is 3', () => {
-      component.min = 1;
-      component.current = 3;
-      component.max = 5;
-      component.ngOnChanges();
-      fixture.detectChanges();
-
-      expectPaginationProps(component, false, [1, 2, 3, 4, 5], false);
-    });
-
-    it('should display 5 elements when current position is 4', () => {
-      component.min = 1;
-      component.current = 4;
-      component.max = 5;
-      component.ngOnChanges();
-      fixture.detectChanges();
-
-      expectPaginationProps(component, false, [1, 2, 3, 4, 5], false);
-    });
-
-    it('should display 5 elements when current position is 5', () => {
-      component.min = 1;
-      component.current = 5;
-      component.max = 5;
-      component.ngOnChanges();
-      fixture.detectChanges();
-
-      expectPaginationProps(component, false, [1, 2, 3, 4, 5], false);
-    });
+        expectPaginationProps(component, false, expectedPageNums, false);
+      });
+    }
   });
 
   describe('pagination with custom min/max', () => {
