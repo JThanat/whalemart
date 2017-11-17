@@ -13,7 +13,7 @@ import { SearchBackButtonService } from './search-back-button.service';
 })
 class MockComponent { }
 
-fdescribe('SearchBackButtonService', () => {
+describe('SearchBackButtonService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
