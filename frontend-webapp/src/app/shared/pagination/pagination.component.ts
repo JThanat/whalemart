@@ -1,9 +1,11 @@
 import { Component, Input, OnChanges } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
-  styleUrls: ['./pagination.component.scss']
+  styleUrls: ['./pagination.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaginationComponent implements OnChanges {
   public left: number;
