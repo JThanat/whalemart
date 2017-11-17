@@ -46,14 +46,14 @@ export class PaginationComponent implements OnChanges {
 
     const pageNums: number[] = [];
 
-    const center = this.current;
-    if (center > this.min && center < this.max) {
-      pageNums.push(center);
+    const current = this.current;
+    if (current > this.min && current < this.max) {
+      pageNums.push(current);
     }
 
     for (let i = 1, j = 1; i <= this.padding; i++) {
-      const leftPad = center - j;
-      const rightPad = center + j;
+      const leftPad = current - j;
+      const rightPad = current + j;
 
       if (leftPad > this.min && rightPad < this.max) {
         pageNums.unshift(leftPad);
