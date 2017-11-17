@@ -125,6 +125,7 @@ class MarketFeedViewSet(viewsets.GenericViewSet):
         return morning_markets + afternoon_markets + evening_markets + night_markets
 
     def make_sql_query(self, start_time, end_time):
+        time_interval = str(self.get_time_interval(start_time, end_time))
         percent_overlap = '0.5'
         query_string = ""\
             "select * from ( "\
@@ -141,7 +142,15 @@ class MarketFeedViewSet(viewsets.GenericViewSet):
                     "(new_opening_time >= '" + start_time + "' and new_closing_time <= '" + end_time + "') or "\
                     "(new_opening_time <= '" + start_time + "' and new_closing_time >= '" + end_time + "') or "\
                     "(new_opening_time <= '" + start_time + "' and new_closing_time <= '" + end_time + "' and "\
-                        "new_closing_time - '" + start_time + "' >= " + percent_overlap + " * (interval '8 hour')) or "\
+                        "new_closing_time - '" + start_time + "' >= " + \
+                            percent_overlap + " * (interval '" + time_interval + " minute')) or "\
                     "(new_opening_time >= '" + start_time + "' and new_closing_time >= '" + end_time + "' and  "\
-                        "'2017-01-01 12:00:00' - new_opening_time >= " + percent_overlap + " * (interval '8 hour')))"
+                        "'2017-01-01 12:00:00' - new_opening_time >= " + \
+                            percent_overlap + " * (interval '" + time_interval + " minute')))"
         return query_string
+
+    def get_time_interval(self, start_time, end_time):
+        start = datetime.strptime(start_time, '%Y-%m-%d %H:%M:%S')
+        end = datetime.strptime(end_time, '%Y-%m-%d %H:%M:%S')
+        diff = end - start
+        return diff.seconds//60
