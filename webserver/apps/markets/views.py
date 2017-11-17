@@ -1,5 +1,6 @@
-from datetime import time
+from datetime import time, datetime, timedelta
 
+from django.db.models import F
 from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.response import Response
@@ -92,5 +93,55 @@ class MarketFeedViewSet(viewsets.GenericViewSet):
         return queryset
 
     def filter_part_of_the_day(self, queryset, morning, afternoon, evening, night):
-        # MORNING_START_TIME = time()
-        return queryset
+        MORNING_START_TIME = '2017-01-01 4:00:00'
+        MORNING_END_TIME = '2017-01-01 12:00:00'
+        AFTERNOON_START_TIME = '2017-01-01 12:00:00'
+        AFTERNOON_END_TIME = '2017-01-01 18:00:00'
+        EVENING_START_TIME = '2017-01-01 15.30:00:00'
+        EVENING_END_TIME = '2017-01-01 21:00:00'
+        NIGHT_START_TIME = '2017-01-01 18:00:00'
+        NIGHT_END_TIME = '2017-01-02 4:00:00'
+
+        morning_markets = []
+        afternoon_markets = []
+        evening_markets = []
+        night_markets = []
+
+        if not (morning or afternoon or evening or night):
+            return queryset
+
+        if morning:
+            morning_markets = queryset.raw(self.make_sql_query(MORNING_START_TIME, MORNING_END_TIME))
+            morning_markets = list(morning_markets)
+        if afternoon:
+            afternoon_markets = queryset.raw(self.make_sql_query(AFTERNOON_START_TIME, AFTERNOON_END_TIME))
+            afternoon_markets = list(afternoon_markets)
+        if evening:
+            evening_markets = queryset.raw(self.make_sql_query(EVENING_START_TIME, EVENING_END_TIME))
+            evening_markets = list(evening_markets)
+        if night:
+            night_markets = queryset.raw(self.make_sql_query(NIGHT_START_TIME, NIGHT_END_TIME))
+            night_markets = list(night_markets)
+        return morning_markets + afternoon_markets + evening_markets + night_markets
+
+    def make_sql_query(self, start_time, end_time):
+        percent_overlap = '0.5'
+        query_string = ""\
+            "select * from ( "\
+                "select *, "\
+                    "cast('2017-01-01' as timestamp) + opening_time as new_opening_time, "\
+                        "cast(case "\
+                            "when closing_time < opening_time "\
+                                "then cast('2017-01-01' as timestamp) + closing_time + INTERVAL '1 day' "\
+                                "else cast('2017-01-01' as timestamp) + closing_time "\
+                            "end AS timestamp) as new_closing_time "\
+                "from public.markets_market) as MarketTable "\
+            "where (not new_opening_time >= '" + end_time + "' and not new_closing_time <= '" + start_time + "') "\
+                "and ( "\
+                    "(new_opening_time >= '" + start_time + "' and new_closing_time <= '" + end_time + "') or "\
+                    "(new_opening_time <= '" + start_time + "' and new_closing_time >= '" + end_time + "') or "\
+                    "(new_opening_time <= '" + start_time + "' and new_closing_time <= '" + end_time + "' and "\
+                        "new_closing_time - '" + start_time + "' >= " + percent_overlap + " * (interval '8 hour')) or "\
+                    "(new_opening_time >= '" + start_time + "' and new_closing_time >= '" + end_time + "' and  "\
+                        "'2017-01-01 12:00:00' - new_opening_time >= " + percent_overlap + " * (interval '8 hour')))"
+        return query_string
