@@ -1,5 +1,11 @@
-import { Component, Input, OnChanges } from '@angular/core';
-import { ChangeDetectionStrategy } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output
+} from '@angular/core';
 
 @Component({
   selector: 'app-pagination',
@@ -18,6 +24,14 @@ export class PaginationComponent implements OnChanges {
   @Input() max: number;
   @Input() current: number;
   @Input() padding = 1;
+  @Output() onNavigate = new EventEmitter<number>();
+
+  navigate(page: number) {
+    if (page === this.current) {
+      return ;
+    }
+    this.onNavigate.emit(page);
+  }
 
   ngOnChanges() {
     if (this.max < this.min) {
