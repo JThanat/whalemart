@@ -53,6 +53,10 @@ export class NavBarComponent implements OnInit, OnDestroy {
     this.routerSubcription.unsubscribe();
   }
 
+  toggleMenu() {
+    this.isMenuOpened = !this.isMenuOpened;
+  }
+
   logout() {
     this.isMenuOpened = false;
     this.userService.logout().subscribe(() => {
