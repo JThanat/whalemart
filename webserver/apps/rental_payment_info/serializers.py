@@ -50,6 +50,3 @@ class FirstInstallmentSerializer(serializers.ModelSerializer):
         validated_data['round'] = 1
         validated_data['rental_payment_info'] = rental_payment_info
         return Installment.objects.create(**validated_data)
-
-    def update(self, instance, validated_data):
-        pass
