@@ -10,6 +10,7 @@ class Booth(models.Model):
         Market,
         on_delete=models.CASCADE,
         verbose_name='Market',
+        related_name='booths'
     )
 
     class Meta:
