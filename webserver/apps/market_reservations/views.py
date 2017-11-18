@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from rest_framework import viewsets
+from apps.markets.market_reservations import MarketReservationSerializer
 
-# Create your views here.
+
+class MarketReservationViewSet(viewsets.ModelViewSet):
+    queryset = Market.objects.all().order_by('-created_at')
+    serializer_class = MarketReservationSerializer
