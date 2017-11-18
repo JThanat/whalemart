@@ -2,9 +2,11 @@ from django.db import models
 
 
 class RentalPaymentInfo(models.Model):
+    DRAFTED = 0
     DEPOSITED = 1
     FULLY_PAID = 2
     STATUS_CHOICES = (
+        (DRAFTED, 'Drafted'),
         (DEPOSITED, 'Deposited'),
         (FULLY_PAID, 'Fully Paid')
     )
