@@ -28,12 +28,13 @@ class MarketReservation(models.Model):
         verbose_name='User',
     )
 
-    booth = models.ManyToManyField(
+    booth = models.ForeignKey(
         Booth,
+        on_delete=models.PROTECT,
         verbose_name='Booth',
     )
 
 
 
     def __str__(self):
-        return '%s-%s' % (self.user.first_name, self.shop_name)
+        return '%s-%s-%s' % (self.user.first_name, self.shop_name, self.booth)
