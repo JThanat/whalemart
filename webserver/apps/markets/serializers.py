@@ -26,8 +26,8 @@ class SceneSerializer(serializers.ModelSerializer):
         model = Scene
         fields = ('scene_image',)
 
-    def to_representation(self, instance):
-        return instance.scene_image
+    # def to_representation(self, instance):
+    #     return super(SceneSerializer, self).to_representation(instance)
 
 
 class BoothSerializer(serializers.ModelSerializer):
@@ -54,7 +54,7 @@ class MarketSerializer(serializers.ModelSerializer):
                                     use_url=False),
         write_only=True
     )
-    booths = BoothSerializer(many=True)
+    # booths = BoothSerializer(many=True)
 
     class Meta:
         model = Market
@@ -65,9 +65,10 @@ class MarketSerializer(serializers.ModelSerializer):
                   'layout_photo', 'provided_accessories', 'cover_photo', 'scene_photo_list', 'tag_list')
 
     def create(self, validated_data):
+        print('validated data%s' % validated_data)
         tags_data = validated_data.pop('tag_list')
         cover_photo = validated_data.pop('cover_photo')
-        scene_photos = validated_data.pop('scene_list')
+        scene_images = validated_data.pop('scene_photo_list')
         # booths = validated_data.pop('booths')
 
         validated_data['created_user'] = self.context.get('request').user
@@ -82,8 +83,8 @@ class MarketSerializer(serializers.ModelSerializer):
             tag_obj.save()
             tag_obj.market.add(market)
 
-        for scene_photo in scene_photos:
-            Scene.objects.create(market=market, **scene_photo)
+        for scene_image in scene_images:
+            Scene.objects.create(market=market, scene_image=scene_image)
 
         # for booth in booths:
         #     Booth.objects.create(market=market, **booth)
@@ -102,8 +103,7 @@ class MarketSerializer(serializers.ModelSerializer):
             a.append(serialized_scene)
 
         scene_dict = {}
-        scene_dict["scene_photos"] = a
-        print(scene_dict)
+        scene_dict['scene_photos'] = a
 
         b = []
         for tag in tag_list:
@@ -111,11 +111,10 @@ class MarketSerializer(serializers.ModelSerializer):
             b.append(serialized_tag)
 
         tag_dict = {}
-        tag_dict["tag_list"] = b
+        tag_dict['tag_list'] = b
 
         repr['scene_list'] = scene_dict
         repr['tag_list'] = tag_dict
-
         return repr
 
 
