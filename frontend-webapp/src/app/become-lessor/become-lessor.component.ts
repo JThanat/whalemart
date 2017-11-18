@@ -43,11 +43,11 @@ export class BecomeLessorComponent implements OnInit {
       'organizationPhone'
     ];
 
-    for (const field in fields) {
+    for (let i = 0; i < fields.length; i++) {
       if (isEnable) {
-        this.becomeLessorForm.controls[field].enable();
+        this.becomeLessorForm.controls[fields[i]].enable();
       } else {
-        this.becomeLessorForm.controls[field].disable();
+        this.becomeLessorForm.controls[fields[i]].disable();
       }
     }
   }
@@ -57,13 +57,8 @@ export class BecomeLessorComponent implements OnInit {
 
     if (!this.becomeLessorForm.valid) {
       return ;
+    } else {
+      alert('pass');
     }
-
-    // const { 
-    //   lessorName, isOrganization, organizationName, organizationContactName,
-    //   organizationEmail, organizationPhone      
-    // } = this.becomeLessorForm.value;
-
-    
   }
 }
