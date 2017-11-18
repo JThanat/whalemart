@@ -50,7 +50,7 @@ class MarketSerializer(serializers.ModelSerializer):
                   'contact_person_fullname', 'contact_person_phone_number', 'contact_person_email', 'location',
                   'location_latitude', 'location_longitude', 'term_and_condition', 'deposit_payment_due',
                   'full_payment_due', 'reservation_due_date', 'estimate_visitor', 'min_price', 'max_price',
-                  'layout_photo', 'provided_accessories', 'cover_photo', 'scene_photos', 'tags')
+                  'layout_photo', 'provided_accessories', 'cover_photo', 'scene_photos', 'tags', 'booths')
 
     def create(self, validated_data):
         tags_data = validated_data.pop('tags')
