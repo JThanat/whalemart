@@ -1,27 +1,39 @@
 from django.db import models
-from apps.vendors.models import Vendor
+from apps.users.models import User
+from apps.booths.models import Booth
 
 
 class MarketReservation(models.Model):
+    PENDING = 0
+    APPROVED = 1
+    REJECTED = 2
+    CANCELED = 3
+    STATUS_CHOICE = (
+        (PENDING, 'Pending'),
+        (APPROVED, 'Approved'),
+        (REJECTED, 'Rejected'),
+        (CANCELED, 'Canceled')
+    )
 
     shop_name = models.CharField(verbose_name='Shop Name', max_length=100)
     reservation_time = models.DateTimeField(verbose_name='Reservation Time', auto_now=False, auto_now_add=True)
-    status = models.CharField(verbose_name='Status', max_length=100)
+    status = models.IntegerField(verbose_name='Status',
+                                 choices=STATUS_CHOICE,
+                                 default=PENDING)
 
 
-    vendor = models.ForeignKey(
-        Vendor,
+    user = models.ForeignKey(
+        User,
         on_delete=models.CASCADE,
-        verbose_name='Vendor',
+        verbose_name='User',
     )
 
-    booth = models.ForeignKey(
-        Vendor,
-        on_delete=models.CASCADE,
-        verbose_name='Vendor',
+    booth = models.ManyToManyField(
+        Booth,
+        verbose_name='Booth',
     )
 
 
 
     def __str__(self):
-        return self.account_name
+        return '%s-%s' % (self.user.first_name, self.shop_name)

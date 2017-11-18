@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from apps.markets.market_reservations import MarketReservationSerializer
+from apps.market_reservations import MarketReservationSerializer
 
 
 class MarketReservationViewSet(viewsets.ModelViewSet):
