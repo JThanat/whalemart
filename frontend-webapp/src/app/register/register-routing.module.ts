@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { FacebookRegisterCanActivateGuard } from './facebook-register-guards.service';
+import { FacebookRegisterCanActivateGuard } from './facebook-register-can-activate-guard.service';
 import { FacebookRegisterComponent } from './facebook-register.component';
 import { RegisterComponent } from './register.component';
 
