@@ -66,18 +66,18 @@ describe('NavBarComponent', () => {
   it('should open and close navbar on clicking toggle button', () => {
     fixture.autoDetectChanges(true);
 
-    const toggleBtnElem = fixture.debugElement.query(By.css('.navbar-toggler'));
+    const toggleBtnElem = fixture.debugElement.query(By.css('.hamburger'));
     const toggleBtn = toggleBtnElem.nativeElement as HTMLButtonElement;
 
-    expect(fixture.debugElement.query(By.css('.navbar-collapse')).classes.show).toBe(false);
+    expect(fixture.debugElement.query(By.css('.menu-list')).classes['d-none']).toBe(true);
     expect(component.isMenuOpened).toBe(false);
 
     toggleBtn.click();
-    expect(fixture.debugElement.query(By.css('.navbar-collapse')).classes.show).toBe(true);
+    expect(fixture.debugElement.query(By.css('.menu-list')).classes['d-none']).toBe(false);
     expect(component.isMenuOpened).toBe(true);
 
     toggleBtn.click();
-    expect(fixture.debugElement.query(By.css('.navbar-collapse')).classes.show).toBe(false);
+    expect(fixture.debugElement.query(By.css('.menu-list')).classes['d-none']).toBe(true);
     expect(component.isMenuOpened).toBe(false);
   });
 });
