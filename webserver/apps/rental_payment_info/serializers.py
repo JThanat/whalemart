@@ -28,6 +28,19 @@ class FirstInstallmentSerializer(serializers.ModelSerializer):
             'is_verified': {'read_only': True}
         }
 
+    def validate_new_credit_card(self, card_info):
+        success, message = self.pay_with_credit_card(**card_info)
+        if not success:
+            raise ValueError(message)
+        return card_info
+
+    def validate_credit_card(self, pk):
+        card_info = CreditCard.object.get(id=pk)
+        success, message = self.pay_with_credit_card(**card_info)
+        if not success:
+            raise ValueError(message)
+        return card_info
+
     def create(self, validated_data):
         # Create new Rental Payment Info
         payment_type = validated_data.pop('payment_type')
@@ -50,3 +63,9 @@ class FirstInstallmentSerializer(serializers.ModelSerializer):
         validated_data['round'] = 1
         validated_data['rental_payment_info'] = rental_payment_info
         return Installment.objects.create(**validated_data)
+
+    def pay_with_credit_card(self, **data):
+        # TODO: Call service -- Boat-sama
+        status = True
+        message = 'Payment success'
+        return status, message
