@@ -2,6 +2,7 @@ import re
 
 from rest_framework import serializers
 
+from apps.commons.custom_field import MyListField
 from apps.markets.models import Market, CoverPhoto, Scene
 from apps.tags.models import Tag
 from apps.booths.models import Booth
@@ -42,7 +43,10 @@ class BoothSerializer(serializers.ModelSerializer):
 
 
 class MarketSerializer(serializers.ModelSerializer):
-    tags = TagSerializer(many=True)
+    tag_list = MyListField(
+        child=serializers.CharField(max_length=255),
+        write_only=True
+    )
     cover_photo = CoverPhotoSerializer()
     scene_photos = SceneSerializer(many=True)
     booths = BoothSerializer(many=True)
