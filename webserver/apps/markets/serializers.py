@@ -48,7 +48,12 @@ class MarketSerializer(serializers.ModelSerializer):
         write_only=True
     )
     cover_photo = CoverPhotoSerializer()
-    scene_photos = SceneSerializer(many=True)
+    scene_photo_list = serializers.ListField(
+        child=serializers.FileField(max_length=100000,
+                                    allow_empty_file=False,
+                                    use_url=False),
+        write_only=True
+    )
     booths = BoothSerializer(many=True)
 
     class Meta:
