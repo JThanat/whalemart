@@ -32,4 +32,4 @@ class CreditCard(models.Model):
     verification_no = models.CharField(verbose_name='Verification Number', max_length=10)
 
     def __str__(self):
-        return self.card_number
+        return 'XXXX-XXXX-XXXX-' + self.card_number[-4:]
