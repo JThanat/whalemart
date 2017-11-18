@@ -41,10 +41,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_filters',
 
     'apps.ping',
     'apps.lessors',
     'apps.bank_accounts',
+    'apps.products',
+    'apps.markets',
+    'apps.tags',
+    'apps.commons',
+    'apps.booths',
 ]
 
 AUTH_USER_MODEL = 'users.User'
@@ -104,7 +110,8 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
     ),
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
 }
 
 # Password validation

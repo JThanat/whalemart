@@ -1,11 +1,11 @@
-<section class="search-section mt-3 mb-5 py-4" @searchSectionIn>
+<section class="search-section mb-5 py-4" @searchSectionIn>
   <div class="container">
     <p class="lead-1">ตลาดสุดฮิตมากมาย<wbr> รอให้คุณมาจับจอง</p>
     <p class="lead-2">ค้นหาตลาดง่ายๆ แค่ปลายนิ้ว</p>
-    <form [formGroup]="searchForm" class="row align-items-end">
+    <form [formGroup]="searchForm" class="row align-items-end" (submit)="search()">
       <div class="col-12 col-lg-5">
         <app-input-group label="ชื่อตลาดหรือสถานที่">
-          <input appInput type="text" class="form-control form-control-lg" placeholder="ชื่อตลาดหรือสถานที่">
+          <input appInput [hideValidation]="true" type="text" formControlName="searchQuery" class="form-control form-control-lg" placeholder="ชื่อตลาดหรือสถานที่">
         </app-input-group>
       </div>
       <div class="col-12 col-lg-4">
@@ -36,15 +36,22 @@
           <div class="card">
             <div class="card-body">
               <h4 class="name">ตลาดนัดถนนรัชดาภิเษก</h4>
-              <p class="location">ถนนรัชดาภิเษก กทม.</p>
-              <p class="date">วันที่ 18&ndash;24 ธันวาคม 2560</p>
+              <p class="location">
+                <app-svg-icon key="location-pin" width="15"></app-svg-icon>
+                <span>ถนนรัชดาภิเษก กทม.</span>
+              </p>
+              <p class="date">
+                <app-svg-icon key="date" width="18"></app-svg-icon>
+                <span>18&ndash;24 ธันวาคม 2560</span>
+              </p>
               <div class="d-flex justify-content-between align-items-center mt-3">
                 <p class="price">เริ่มต้น 1,200฿</p>
                 <a routerLink="/" class="btn btn-primary">ดูเพิ่มเติม</a>
               </div>
             </div>
             <div class="card-footer">
-              มีคนจองตลาดนี้แล้ว 84 คน
+                <app-svg-icon key="person-circle"></app-svg-icon>
+                <span>มีคนจองตลาดนี้แล้ว 84 คน</span>
             </div>
           </div>
         </div>
@@ -56,22 +63,19 @@
     <div class="container mb-3">
       <div class="section-title">
         <h2>ตลาดนัดชิวยามค่ำคืน</h2>
-        <a routerLink="/">ดูทั้งหมด ></a>
+        <a class="link-with-icon" routerLink="/">
+          <div class="link-text">ดูทั้งหมด</div>
+          <div class="link-icon">
+            <app-svg-icon key="arrow-head-right" width="8"></app-svg-icon>
+          </div>
+        </a>
       </div>
     </div>
 
     <div class="container">
       <div class="row">
         <div class="col-12 col-sm-6 col-lg-3 mb-5" *ngFor="let i of carouselLooper">
-          <div class="carousel-item">
-            <div class="img-container">
-              <div class="expire-note">หมดเขตจองในอีก 3 วัน</div>
-            </div>
-            <p class="location">ถนนรัชดาภิเศก กทม.</p>
-            <p class="name">ตลาดนัดถนนรัชดาภิเษก</p>
-            <p class="date">วันที่ 18&ndash;24 ธันวาคม 2560</p>
-            <p class="price">เริ่มต้น 1,200฿</p>
-          </div>
+          <app-market-item></app-market-item>
         </div>
       </div>
     </div>
@@ -81,20 +85,19 @@
     <div class="container mb-3">
       <div class="section-title">
         <h2>ตลาดนัดใต้แสงแดดประเทศไทย</h2>
-        <a routerLink="/">ดูทั้งหมด ></a>
+        <a class="link-with-icon" routerLink="/">
+          <div class="link-text">ดูทั้งหมด</div>
+          <div class="link-icon">
+            <app-svg-icon key="arrow-head-right" width="8"></app-svg-icon>
+          </div>
+        </a>
       </div>
     </div>
 
     <div class="container">
       <div class="row">
         <div class="col-12 col-sm-6 col-lg-3 mb-5" *ngFor="let i of carouselLooper">
-          <div class="carousel-item">
-            <div class="img-container"></div>
-            <p class="location">ถนนรัชดาภิเษก กทม.</p>
-            <p class="name">ตลาดนัดถนนรัชดาภิเษก</p>
-            <p class="date">วันที่ 18&ndash;24 ธันวาคม 2560</p>
-            <p class="price">เริ่มต้น 1,200฿</p>
-          </div>
+          <app-market-item></app-market-item>
         </div>
       </div>
     </div>

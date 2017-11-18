@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { AlertService } from '../alert/alert.service';
 import { UserService } from '../user/user.service';
+import { SubNavBarService } from './sub-nav-bar.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -26,12 +27,13 @@ export class NavBarComponent implements OnInit, OnDestroy {
   constructor(
     private userService: UserService,
     private alert: AlertService,
-    private router: Router
+    private router: Router,
+    private subNavBarService: SubNavBarService
   ) { }
 
   ngOnInit() {
     this.userName = this.userService.userInfo.pipe(
-      map(userInfo => userInfo ? userInfo.email : undefined)
+      map(userInfo => userInfo ? userInfo.firstName : undefined)
     );
 
     this.routerSubcription = this.router.events.subscribe(event => {
@@ -43,13 +45,29 @@ export class NavBarComponent implements OnInit, OnDestroy {
     });
   }
 
+  getSubNavBarPortal() {
+    return this.subNavBarService.getAttachingSubNavBarPortal();
+  }
+
   ngOnDestroy() {
     this.routerSubcription.unsubscribe();
   }
 
+  toggleMenu() {
+    this.isMenuOpened = !this.isMenuOpened;
+  }
+
   logout() {
     this.isMenuOpened = false;
-    this.userService.userInfo.next(undefined);
-    this.alert.show({ message: `ออกจากระบบสำเร็จ`, type: 'success' });
+    this.userService.logout().subscribe(() => {
+      this.alert.show({ message: `ออกจากระบบสำเร็จ`, type: 'success' });
+    }, err => {
+      // TODO: Handle error
+      console.error(err);
+    });
+  }
+
+  isShowNavBarSearchBox() {
+    return this.router.url !== '/';
   }
 }

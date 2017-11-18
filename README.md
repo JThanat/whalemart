@@ -53,8 +53,16 @@ You can then access the followings:
 - [pgAdmin](https://www.pgadmin.org/) via [localhost:5050](http://localhost:5050) for Postgres database GUI access
   - Username: `pgadmin4@pgadmin.org`
   - Password: `admin`
+  - Host Name: `db`
+  - Port: `5432`
   - Database username: `postgres`
   - Database password: `postgres`
+
+### Import Data
+- Copy `dump_images` to `/webserver` folder and name it as `media`.
+- Start your docker-compose or webserver and db service. 
+- Exec into webserver docker by calling `docker exec -it <container> /bin/bash`
+- run `python3 manage.py loaddata dump.json` 
 
 ### Git Convention
 

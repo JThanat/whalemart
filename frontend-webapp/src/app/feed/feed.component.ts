@@ -9,7 +9,8 @@ import {
   trigger
 } from '@angular/animations';
 import { Component, HostBinding, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './feed.component.html',
@@ -53,7 +54,19 @@ export class FeedComponent implements OnInit {
   coolCarouselLooper = [0, 1];
   searchForm: FormGroup;
 
+  constructor(private router: Router) {}
+
   ngOnInit() {
-    this.searchForm = new FormGroup({});
+    this.searchForm = new FormGroup({
+      searchQuery: new FormControl('')
+    });
+  }
+
+  search() {
+    this.router.navigate(['/search'], {
+      queryParams: {
+        q: this.searchForm.value.searchQuery
+      }
+    });
   }
 }

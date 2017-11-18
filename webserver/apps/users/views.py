@@ -6,24 +6,24 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 
-from .serializers import RegistrationSerializer, UserSerializer
+from .serializers import RegistrationSerializer, UserSerializer, get_facebook_id
 
 User = get_user_model()
 
 
 class UserViewSet(viewsets.ModelViewSet):
     """
-    credit_cards data example:
-    "credit_cards": [
-        {
-            "id": 10,
-            "card_number": "1",
-            "card_holder_name": "2",
-            "type": 1,
-            "expiry_date": "2017-05-16",
-            "verification_no": "1"
-        }
-    ]
+    credit_cards data example:\n
+    "credit_cards": [\n
+        {\n
+            "id": 10,\n
+            "card_number": "1",\n
+            "card_holder_name": "2",\n
+            "type": 1,\n
+            "expiry_date": "2017-05-16",\n
+            "verification_no": "1"\n
+        }\n
+    ]\n
     """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
@@ -52,7 +52,7 @@ class ValidateUserEmailView(APIView):
     """
     def get(self, request, *args, **kwargs):
         username = request.query_params.get('email', None)
-        
+
         if not username:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -61,10 +61,6 @@ class ValidateUserEmailView(APIView):
             return Response({'is_ok': True})
         else:
             return Response({'is_ok': False})
-
-
-# @api_view(['POST'],)
-# def register(request, *args, **kwargs):
 
 
 @api_view(['POST',])
@@ -92,14 +88,18 @@ def login_facebook(request, *args, **kwargs):
     ### Required
     `facebook_token`
     """
-    facebook_token = request.data.get('facebook_token', None)
-    try:
-        user = User.objects.get(facebook_token=facebook_token)
-        auth.login(request, user)
-        return Response({'first_name': user.first_name, 'last_name': user.last_name, 'email': user.email},
-                        status=status.HTTP_200_OK)
-    except User.DoesNotExist:
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+    facebook_token = request.data.get('facebook_token', '')
+    is_success, response = get_facebook_id(facebook_token)
+    if is_success:
+        try:
+            user = User.objects.get(facebook_id=response)
+            auth.login(request, user)
+            return Response({'first_name': user.first_name, 'last_name': user.last_name, 'email': user.email},
+                            status=status.HTTP_200_OK)
+        except User.DoesNotExist:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response(response, status=response.status_code)
 
 
 @api_view(['POST',])

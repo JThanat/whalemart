@@ -4,7 +4,14 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { SharedModule } from '../../shared/shared.module';
 import { SVG_ICON_DEFINITIONS, SvgIconRegistry } from './svg-icon-registry.service';
 
-const svgIconNames: string[] = [];
+const svgIconNames = [
+  'whalemart-logo-with-name',
+  'arrow-head-right',
+  'location-pin',
+  'date',
+  'person-circle',
+  'arrow-head-down'
+];
 
 @NgModule({
   imports: [
@@ -16,8 +23,9 @@ const svgIconNames: string[] = [];
       provide: SVG_ICON_DEFINITIONS,
       useFactory: (domSanitizer: DomSanitizer) => svgIconNames.map(svgIconName => ({
         key: svgIconName,
-        fileUrl: domSanitizer.bypassSecurityTrustResourceUrl(`/assets/icon/${svgIconName}.svg`)
-      }))
+        fileUrl: domSanitizer.bypassSecurityTrustResourceUrl(`/assets/icons/${svgIconName}.svg`)
+      })),
+      deps: [DomSanitizer]
     }
   ]
 })
