@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { AlertService } from '../alert/alert.service';
 import { UserService } from '../user/user.service';
+import { SubNavBarService } from './sub-nav-bar.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -26,7 +27,8 @@ export class NavBarComponent implements OnInit, OnDestroy {
   constructor(
     private userService: UserService,
     private alert: AlertService,
-    private router: Router
+    private router: Router,
+    private subNavBarService: SubNavBarService
   ) { }
 
   ngOnInit() {
@@ -43,8 +45,16 @@ export class NavBarComponent implements OnInit, OnDestroy {
     });
   }
 
+  getSubNavBarPortal() {
+    return this.subNavBarService.getAttachingSubNavBarPortal();
+  }
+
   ngOnDestroy() {
     this.routerSubcription.unsubscribe();
+  }
+
+  toggleMenu() {
+    this.isMenuOpened = !this.isMenuOpened;
   }
 
   logout() {
@@ -55,5 +65,9 @@ export class NavBarComponent implements OnInit, OnDestroy {
       // TODO: Handle error
       console.error(err);
     });
+  }
+
+  isShowNavBarSearchBox() {
+    return this.router.url !== '/';
   }
 }

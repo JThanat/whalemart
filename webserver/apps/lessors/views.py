@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.decorators import list_route
 
-from apps.lessors.serializers import LessorSerializer, LessorEditSerializer
+from apps.lessors.serializers import LessorInputSerializer, LessorEditSerializer, LessorSerializer
 from .models import Lessor
 
 User = get_user_model()
@@ -17,7 +17,7 @@ class BecomeALessorViewSet(viewsets.GenericViewSet):
     """
     Become a lessor api
     """
-    serializer_class = LessorSerializer
+    serializer_class = LessorInputSerializer
 
     def create(self, request):
         data = request.data.copy()
