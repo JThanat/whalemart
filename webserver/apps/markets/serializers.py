@@ -25,6 +25,9 @@ class SceneSerializer(serializers.ModelSerializer):
         model = Scene
         fields = ('scene_image',)
 
+    def to_representation(self, instance):
+        return instance.scene_image
+
 
 class BoothSerializer(serializers.ModelSerializer):
     class Meta:
