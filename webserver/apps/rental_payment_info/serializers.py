@@ -2,6 +2,7 @@ from datetime import datetime
 
 from rest_framework import serializers
 
+from apps.market_reservations.models import MarketReservation
 from apps.rental_payment_info.models import RentalPaymentInfo, Installment
 from apps.users.models import CreditCard
 from apps.users.serializers import CreditCardSerializer
@@ -43,6 +44,7 @@ class FirstInstallmentSerializer(serializers.ModelSerializer):
                                                                reservation_info=reservation_info)
         # Create new credit card if user pay with new credit card
         new_credit_card = validated_data.pop('new_credit_card')
+        new_credit_card['user'] = user
         validated_data['credit_card'] = CreditCard.object.create(**new_credit_card)
         # Create First Installment
         validated_data['round'] = 1
