@@ -90,6 +90,34 @@ class MarketSerializer(serializers.ModelSerializer):
 
         return market
 
+    def to_representation(self, instance):
+        repr = super(MarketSerializer, self).to_representation(instance)
+
+        scene_list = Scene.objects.filter(market=instance.id)
+        tag_list = Tag.objects.filter(market=instance.id)
+
+        a = []
+        for scene in scene_list:
+            serialized_scene = SceneSerializer().to_representation(scene)
+            a.append(serialized_scene)
+
+        scene_dict = {}
+        scene_dict["scene_photos"] = a
+        print(scene_dict)
+
+        b = []
+        for tag in tag_list:
+            serialized_tag = TagSerializer().to_representation(tag)
+            b.append(serialized_tag)
+
+        tag_dict = {}
+        tag_dict["tag_list"] = b
+
+        repr['scene_list'] = scene_dict
+        repr['tag_list'] = tag_dict
+
+        return repr
+
 
 class MarketFeedSerializer(serializers.ModelSerializer):
     tags = TagSerializer(many=True)
