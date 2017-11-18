@@ -11,5 +11,5 @@ export interface Env {
      * An app ID.
      */
     appId: string;
-  }
+  };
 }
