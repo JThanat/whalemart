@@ -13,15 +13,15 @@ User = get_user_model()
 
 class UserViewSet(viewsets.ModelViewSet):
     """
-    credit_cards data example:
+    credit_cards data example:\n
     "credit_cards": [\n
-        \t{\n
-            \t"id": 10,\n
-            \t"card_number": "1",\n
-            \t"card_holder_name": "2",\n
-            \t"type": 1,\n
-            \t"expiry_date": "2017-05-16",\n
-            \t"verification_no": "1"\n
+        {\n
+            "id": 10,\n
+            "card_number": "1",\n
+            "card_holder_name": "2",\n
+            "type": 1,\n
+            "expiry_date": "2017-05-16",\n
+            "verification_no": "1"\n
         }\n
     ]\n
     """
