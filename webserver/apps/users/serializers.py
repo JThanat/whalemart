@@ -101,5 +101,4 @@ def get_facebook_id(facebook_token):
     if response.status_code == 200:
         response_dict = ast.literal_eval(response.content.decode("utf-8"))
         return True, response_dict['id']
-    print(response)
     return False, response
