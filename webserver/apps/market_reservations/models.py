@@ -26,12 +26,14 @@ class MarketReservation(models.Model):
         User,
         on_delete=models.CASCADE,
         verbose_name='User',
+        related_name='market_reservations'
     )
 
     booth = models.ForeignKey(
         Booth,
         on_delete=models.PROTECT,
         verbose_name='Booth',
+        related_name='market_reservations'
     )
 
 
