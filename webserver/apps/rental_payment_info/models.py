@@ -28,5 +28,9 @@ class Installment(models.Model):
     round = models.IntegerField(verbose_name='Round')
     payment_date = models.DateField(verbose_name='Payment Date', auto_now_add=True)
     amount = models.DecimalField(verbose_name='Amount', max_digits=15, decimal_places=2)
+    credit_card = models.ForeignKey('users.CreditCard', verbose_name='Credit Card')
     receipt_image = models.ImageField(verbose_name='Receipt Image', null=True, upload_to='receipt_images/%Y/%m/%d')
     is_verified = models.BooleanField(verbose_name='Is Verified', default=False)
+    rental_payment_info = models.ForeignKey('rental_payment_info.RentalPaymentInfo',
+                                            verbose_name='Rental Payment Info',
+                                            related_name='installments')
