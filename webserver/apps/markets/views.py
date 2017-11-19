@@ -37,6 +37,10 @@ class MarketViewSet(viewsets.ModelViewSet):
     serializer_class = MarketSerializer
     parser_classes = (JSONParser, FormParser, MultipartFormencodeParser)
 
+    def update(self, request, *args, **kwargs):
+        kwargs['partial'] = True
+        return super(MarketViewSet, self).update(request, *args, **kwargs)
+
 
 class MarketFeedViewSet(viewsets.GenericViewSet):
     """
