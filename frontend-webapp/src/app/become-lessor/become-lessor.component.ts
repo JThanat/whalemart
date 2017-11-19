@@ -20,7 +20,7 @@ export class BecomeLessorComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.becomeLessorService.checkLessorStatus().subscribe((status: string) => {
+    this.becomeLessorService.checkLessorStatus().subscribe(status => {
       this.loadingStatus = status;
     }, (err: any) => {
       this.alert.show({ message: 'ไม่สามารถโหลดข้อมูลได้', type: 'danger' });
