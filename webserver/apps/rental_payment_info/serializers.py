@@ -28,17 +28,17 @@ class FirstInstallmentSerializer(serializers.ModelSerializer):
             'is_verified': {'read_only': True}
         }
 
-    def validate_new_credit_card(self, card_info):
+    def _validate_new_credit_card(self, card_info):
         success, message = self.pay_with_credit_card(**card_info)
         if not success:
-            raise ValueError(message)
+            raise serializers.ValidationError(message)
         return card_info
 
-    def validate_credit_card(self, pk):
+    def _validate_credit_card(self, pk):
         card_info = CreditCard.object.get(id=pk)
         success, message = self.pay_with_credit_card(**card_info)
         if not success:
-            raise ValueError(message)
+            raise serializers.ValidationError(message)
         return card_info
 
     def create(self, validated_data):
