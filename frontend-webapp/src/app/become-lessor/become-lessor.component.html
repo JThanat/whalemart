@@ -48,14 +48,14 @@
             </app-input-error>
           </app-input-group>
 
-          <app-input-group label="อีเมล์องค์กร">
+          <app-input-group label="อีเมลองค์กร">
             <input appInput type="email" class="form-control" [attr.disabled]="isOrganization ? null : ''" formControlName="organizationEmail"
-              placeholder="อีเมล์องค์กร">
+              placeholder="อีเมลองค์กร">
             <app-input-error *ngIf="becomeLessorForm.controls['organizationEmail'].hasError('required')">
-              กรุณากรอกอีเมล์ในองค์กร
+              กรุณากรอกอีเมลในองค์กร
             </app-input-error>
             <app-input-error *ngIf="becomeLessorForm.controls['organizationEmail'].hasError('email')">
-              อีเมล์ของคุณอยู่ในรูปแบบที่ไม่ถูกต้อง
+              อีเมลของคุณอยู่ในรูปแบบที่ไม่ถูกต้อง
             </app-input-error>
           </app-input-group>
 
