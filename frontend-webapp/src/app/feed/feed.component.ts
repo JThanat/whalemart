@@ -10,7 +10,11 @@ import {
 } from '@angular/animations';
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import { map } from 'rxjs/operators';
+
+import { MarketFeed } from '../core/market/market.service';
 
 @Component({
   templateUrl: './feed.component.html',
@@ -50,16 +54,18 @@ import { Router } from '@angular/router';
 })
 export class FeedComponent implements OnInit {
   @HostBinding('@pageIn') pageIn = true;
-  carouselLooper = [0, 1, 2, 3];
   coolCarouselLooper = [0, 1];
+  marketFeed: Observable<MarketFeed>;
   searchForm: FormGroup;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.searchForm = new FormGroup({
       searchQuery: new FormControl('')
     });
+
+    this.marketFeed = this.route.data.pipe(map(data => data.marketFeed));
   }
 
   search() {
