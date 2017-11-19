@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 import { AlertService } from '../core/alert/alert.service';
 import { BecomeLessorService } from './become-lessor.service';
@@ -27,7 +28,10 @@ export class BecomeLessorComponent implements OnInit {
 
     this.becomeLessorForm = new FormGroup({
       lessorName: new FormControl('', [Validators.required]),
-      isOrganization: new FormControl('', [Validators.required]),
+      isOrganization: new FormControl(
+        false,
+        { updateOn: 'change', validators: [Validators.required] }
+      ),
       organizationName: new FormControl('', [Validators.required]),
       organizationContactName: new FormControl('', [Validators.required]),
       organizationEmail: new FormControl('', [Validators.required, Validators.email]),
@@ -37,17 +41,22 @@ export class BecomeLessorComponent implements OnInit {
       )
     }, { updateOn: 'blur' });
 
-    this.becomeLessorForm.controls['isOrganization'].setValue(false);
+    this.becomeLessorForm.controls['isOrganization'].valueChanges.pipe(
+      distinctUntilChanged()
+    ).subscribe(isOrganization => {
+      this.setValidateOnOrganization(isOrganization);
+    });
+
     this.setValidateOnOrganization(false);
   }
 
-  toggleIsOrganization() {
-    const isOrganization = this.becomeLessorForm.value.isOrganization;
-    this.becomeLessorForm.controls['isOrganization'].setValue(
-      !isOrganization
-    );
-    this.setValidateOnOrganization(!isOrganization);
-  }
+  // toggleIsOrganization() {
+  //   const isOrganization = this.becomeLessorForm.value.isOrganization;
+  //   this.becomeLessorForm.controls['isOrganization'].setValue(
+  //     !isOrganization
+  //   );
+  //   this.setValidateOnOrganization(!isOrganization);
+  // }
 
   setValidateOnOrganization(isOrganization: Boolean) {
     const fields: string[] = [
@@ -57,7 +66,7 @@ export class BecomeLessorComponent implements OnInit {
       'organizationPhone'
     ];
 
-    this.becomeLessorForm.controls['isOrganization'].setValue(isOrganization);
+    // this.becomeLessorForm.controls['isOrganization'].setValue(isOrganization);
 
     for (let i = 0; i < fields.length; i++) {
       if (isOrganization) {
