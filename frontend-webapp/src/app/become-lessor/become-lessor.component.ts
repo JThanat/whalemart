@@ -93,6 +93,7 @@ export class BecomeLessorComponent implements OnInit {
       organization_email: organizationEmail,
       organization_phone_number: organizationPhone
     }).subscribe(() => {
+      // TODO: Redirect to lessor profile
       this.alert.show({ message: 'สมัครผู้ให้เช่าตลาดสมบูรณ์', type: 'success' });
     }, err => {
       this.becomeLessorForm.enable();
