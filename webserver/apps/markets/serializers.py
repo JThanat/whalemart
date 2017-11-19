@@ -2,10 +2,10 @@ import re
 
 from rest_framework import serializers
 
+from apps.booths.models import Booth
 from apps.commons.custom_field import MyListField
 from apps.markets.models import Market, CoverPhoto, Scene
 from apps.tags.models import Tag
-from apps.booths.models import Booth
 from apps.tags.serializers import TagSerializer
 
 
@@ -26,8 +26,8 @@ class SceneSerializer(serializers.ModelSerializer):
         model = Scene
         fields = ('scene_image',)
 
-    # def to_representation(self, instance):
-    #     return super(SceneSerializer, self).to_representation(instance)
+        # def to_representation(self, instance):
+        #     return super(SceneSerializer, self).to_representation(instance)
 
 
 class BoothSerializer(serializers.ModelSerializer):
@@ -54,6 +54,7 @@ class MarketSerializer(serializers.ModelSerializer):
                                     use_url=False),
         write_only=True
     )
+
     # booths = BoothSerializer(many=True)
 
     class Meta:
@@ -113,7 +114,7 @@ class MarketSerializer(serializers.ModelSerializer):
         tag_dict = {}
         tag_dict['tag_list'] = b
 
-        repr['scene_list'] = scene_dict
+        repr['scene_photo_list'] = scene_dict
         repr['tag_list'] = tag_dict
         return repr
 
