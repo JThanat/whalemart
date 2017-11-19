@@ -2,58 +2,67 @@
   <div class="row justify-content-center">
     <div class="col-12 col-sm-9 col-md-6 col-lg-5 col-xl-5">
       <h1 class="display-4 mt-5">ลงตลาดให้เช่า</h1>
-      
-      <form [formGroup]="becomeLessorForm" (submit)="becomeLessor()">
-        <app-input-group label="ชื่อผู้ให้เช่า">
-          <input appInput type="text" class="form-control" formControlName="lessorName" placeholder="ชื่อผู้ให้เช่า">
-          <app-input-error *ngIf="becomeLessorForm.controls['lessorName'].hasError('required')">
-            กรุณากรอกชื่อผู้ให้เช่า
-          </app-input-error>
-        </app-input-group>
 
-        <app-input-group label="เป็นองค์กรหรือไม่">
-          <div appInput class="form-check">
-            <label class="form-check-label">
-              <input appInput 
-                type="checkbox" 
-                [checked]="isOrganization" 
-                (change)="toggleIsOrganization()" 
-                class="form-check-input"
-                fornControlName="isOrganization"> เป็นองค์กร
-            </label>
-          </div>
-        </app-input-group>
+      <div *ngIf="!loadingStatus">
+        กำลังตรวจสอบข้อมูล...
+      </div>
 
-        <app-input-group label="ชื่อองค์กร">
-          <input appInput type="text" class="form-control" [attr.disabled]="isOrganization ? null : ''" formControlName="organizationName" placeholder="ชื่อองค์กร">
-          <app-input-error *ngIf="becomeLessorForm.controls['organizationName'].hasError('required')">
-            กรุณากรอกชื่อองค์กร
-          </app-input-error>
-        </app-input-group>
+      <div *ngIf="loadingStatus == 'is_lessor'">
+        คุณได้สมัครเป็นผู้ให้เช่าตลาดเรียบร้อยแล้ว
+      </div>
 
-        <app-input-group label="ชื่อติดต่อในองค์กร">
-          <input appInput type="text" class="form-control" [attr.disabled]="isOrganization ? null : ''" formControlName="organizationContactName" placeholder="ชื่อติดต่อในองค์กร">
-          <app-input-error *ngIf="becomeLessorForm.controls['organizationContactName'].hasError('required')">
-            กรุณากรอกชื่อติดต่อในองต์กร
-          </app-input-error>
-        </app-input-group>
+      <div *ngIf="loadingStatus == 'is_not_lessor'">
+        <form [formGroup]="becomeLessorForm" (submit)="becomeLessor()">
+          <app-input-group label="ชื่อผู้ให้เช่า">
+            <input appInput type="text" class="form-control" formControlName="lessorName" placeholder="ชื่อผู้ให้เช่า">
+            <app-input-error *ngIf="becomeLessorForm.controls['lessorName'].hasError('required')">
+              กรุณากรอกชื่อผู้ให้เช่า
+            </app-input-error>
+          </app-input-group>
 
-        <app-input-group label="อีเมล์องค์กร">
-          <input appInput type="email" class="form-control" [attr.disabled]="isOrganization ? null : ''" formControlName="organizationEmail" placeholder="อีเมล์องค์กร">
-          <app-input-error *ngIf="becomeLessorForm.controls['organizationEmail'].hasError('required')">
-            กรุณากรอกอีเมล์ในองค์กร
-          </app-input-error>
-        </app-input-group>          
+          <app-input-group label="เป็นองค์กรหรือไม่">
+            <div appInput class="form-check">
+              <label class="form-check-label">
+                <input appInput type="checkbox" [checked]="isOrganization" (change)="toggleIsOrganization()" class="form-check-input" fornControlName="isOrganization"> เป็นองค์กร
+              </label>
+            </div>
+          </app-input-group>
 
-        <app-input-group label="เบอร์โทรศัพท์องค์กร">
-          <input appInput type="text" class="form-control" [attr.disabled]="isOrganization ? null : ''" formControlName="organizationPhone" placeholder="เบอร์โทรศัพท์องค์กร">
-          <app-input-error *ngIf="becomeLessorForm.controls['organizationPhone'].hasError('required')">
-            กรุณากรอกเบอร์โทรศัพท์องค์กร
-          </app-input-error>
-        </app-input-group>
+          <app-input-group label="ชื่อองค์กร">
+            <input appInput type="text" class="form-control" [attr.disabled]="isOrganization ? null : ''" formControlName="organizationName"
+              placeholder="ชื่อองค์กร">
+            <app-input-error *ngIf="becomeLessorForm.controls['organizationName'].hasError('required')">
+              กรุณากรอกชื่อองค์กร
+            </app-input-error>
+          </app-input-group>
 
-        <button type="submit" class="btn btn-primary btn-lg" [disabled]="becomeLessorForm.disabled">ลงตลาด</button>
-      </form>
+          <app-input-group label="ชื่อติดต่อในองค์กร">
+            <input appInput type="text" class="form-control" [attr.disabled]="isOrganization ? null : ''" formControlName="organizationContactName"
+              placeholder="ชื่อติดต่อในองค์กร">
+            <app-input-error *ngIf="becomeLessorForm.controls['organizationContactName'].hasError('required')">
+              กรุณากรอกชื่อติดต่อในองต์กร
+            </app-input-error>
+          </app-input-group>
+
+          <app-input-group label="อีเมล์องค์กร">
+            <input appInput type="email" class="form-control" [attr.disabled]="isOrganization ? null : ''" formControlName="organizationEmail"
+              placeholder="อีเมล์องค์กร">
+            <app-input-error *ngIf="becomeLessorForm.controls['organizationEmail'].hasError('required')">
+              กรุณากรอกอีเมล์ในองค์กร
+            </app-input-error>
+          </app-input-group>
+
+          <app-input-group label="เบอร์โทรศัพท์องค์กร">
+            <input appInput type="text" class="form-control" [attr.disabled]="isOrganization ? null : ''" formControlName="organizationPhone"
+              placeholder="เบอร์โทรศัพท์องค์กร">
+            <app-input-error *ngIf="becomeLessorForm.controls['organizationPhone'].hasError('required')">
+              กรุณากรอกเบอร์โทรศัพท์องค์กร
+            </app-input-error>
+          </app-input-group>
+
+          <button type="submit" class="btn btn-primary btn-lg" [disabled]="becomeLessorForm.disabled">ลงตลาด</button>
+        </form>
+      </div>
     </div>
   </div>
 </div>

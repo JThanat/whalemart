@@ -1,29 +1,38 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-// import { BecomeLessorService } from './become-lessor.service'
-// import { Router } from '@angular/router';
+import { AlertService } from '../core/alert/alert.service';
+import { BecomeLessorService } from './become-lessor.service';
 
 @Component({
   selector: 'app-become-lessor',
   templateUrl: './become-lessor.component.html',
-  styleUrls: ['./become-lessor.component.scss'],
+  styleUrls: ['./become-lessor.component.scss']
 })
 export class BecomeLessorComponent implements OnInit {
   becomeLessorForm: FormGroup;
   isOrganization: Boolean;
+  loadingStatus: string;
 
   constructor(
-    // private router: Router
+    private becomeLessorService: BecomeLessorService,
+    private alert: AlertService
   ) { }
 
   ngOnInit() {
+    this.becomeLessorService.checkLessorStatus().subscribe((status: string) => {
+      console.log(status);
+      this.loadingStatus = status;
+    }, (err: any) => {
+      this.alert.show({ message: 'ไม่สามารถโหลดข้อมูลได้', type: 'danger' });
+    });
+
     this.becomeLessorForm = new FormGroup({
       lessorName: new FormControl('', [Validators.required]),
       isOrganization: new FormControl('', [Validators.required]),
       organizationName: new FormControl('', [Validators.required]),
       organizationContactName: new FormControl('', [Validators.required]),
       organizationEmail: new FormControl('', [Validators.required]),
-      organizationPhone: new FormControl('', [Validators.required]),
+      organizationPhone: new FormControl('', [Validators.required])
     }, { updateOn: 'blur' });
 
     this.isOrganization = false;
