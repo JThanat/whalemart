@@ -20,7 +20,6 @@ export class BecomeLessorComponent implements OnInit {
 
   ngOnInit() {
     this.becomeLessorService.checkLessorStatus().subscribe((status: string) => {
-      console.log(status);
       this.loadingStatus = status;
     }, (err: any) => {
       this.alert.show({ message: 'ไม่สามารถโหลดข้อมูลได้', type: 'danger' });
@@ -31,8 +30,11 @@ export class BecomeLessorComponent implements OnInit {
       isOrganization: new FormControl('', [Validators.required]),
       organizationName: new FormControl('', [Validators.required]),
       organizationContactName: new FormControl('', [Validators.required]),
-      organizationEmail: new FormControl('', [Validators.required]),
-      organizationPhone: new FormControl('', [Validators.required])
+      organizationEmail: new FormControl('', [Validators.required, Validators.email]),
+      organizationPhone: new FormControl(
+        '',
+        [Validators.required, Validators.pattern(/\+?\d{9,15}$/)]
+      )
     }, { updateOn: 'blur' });
 
     this.isOrganization = false;
@@ -44,7 +46,7 @@ export class BecomeLessorComponent implements OnInit {
     this.setValidateOnOrganization(this.isOrganization);
   }
 
-  setValidateOnOrganization(isEnable: Boolean) {
+  setValidateOnOrganization(isOrganization: Boolean) {
     const fields: string[] = [
       'organizationName',
       'organizationContactName',
@@ -52,8 +54,10 @@ export class BecomeLessorComponent implements OnInit {
       'organizationPhone'
     ];
 
+    this.becomeLessorForm.controls['isOrganization'].setValue(isOrganization);
+
     for (let i = 0; i < fields.length; i++) {
-      if (isEnable) {
+      if (isOrganization) {
         this.becomeLessorForm.controls[fields[i]].enable();
       } else {
         this.becomeLessorForm.controls[fields[i]].disable();
@@ -64,10 +68,35 @@ export class BecomeLessorComponent implements OnInit {
   becomeLessor() {
     this.becomeLessorForm.updateValueAndValidity();
 
+    console.log(this.becomeLessorForm);
+
     if (!this.becomeLessorForm.valid) {
       return ;
-    } else {
-      alert('pass');
     }
+
+    this.becomeLessorForm.disable();
+
+    const {
+      lessorName,
+      isOrganization,
+      organizationName,
+      organizationContactName,
+      organizationEmail,
+      organizationPhone
+    } = this.becomeLessorForm.value;
+
+    this.becomeLessorService.becomeLessor({
+      lessor_name: lessorName,
+      is_organization: isOrganization,
+      organization_name: organizationName,
+      organization_contact_name: organizationContactName,
+      organization_email: organizationEmail,
+      organization_phone_number: organizationPhone
+    }).subscribe(() => {
+      this.alert.show({ message: 'สมัครผู้ให้เช่าตลาดสมบูรณ์', type: 'success' });
+    }, err => {
+      this.becomeLessorForm.enable();
+      this.alert.show({ message: 'เกิดข้อผิดพลาด', type: 'danger' });
+    });
   }
 }

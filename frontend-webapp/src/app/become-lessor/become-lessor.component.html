@@ -6,12 +6,16 @@
       <div *ngIf="!loadingStatus">
         กำลังตรวจสอบข้อมูล...
       </div>
+      
+      <div *ngIf="loadingStatus === 'require_login'">
+        กรุณาเข้าระบบก่อนทำรายการ
+      </div>
 
-      <div *ngIf="loadingStatus == 'is_lessor'">
+      <div *ngIf="loadingStatus === 'is_lessor'">
         คุณได้สมัครเป็นผู้ให้เช่าตลาดเรียบร้อยแล้ว
       </div>
 
-      <div *ngIf="loadingStatus == 'is_not_lessor'">
+      <div *ngIf="loadingStatus === 'is_not_lessor'">
         <form [formGroup]="becomeLessorForm" (submit)="becomeLessor()">
           <app-input-group label="ชื่อผู้ให้เช่า">
             <input appInput type="text" class="form-control" formControlName="lessorName" placeholder="ชื่อผู้ให้เช่า">
@@ -50,6 +54,9 @@
             <app-input-error *ngIf="becomeLessorForm.controls['organizationEmail'].hasError('required')">
               กรุณากรอกอีเมล์ในองค์กร
             </app-input-error>
+            <app-input-error *ngIf="becomeLessorForm.controls['organizationEmail'].hasError('email')">
+              อีเมล์ของคุณอยู่ในรูปแบบที่ไม่ถูกต้อง
+            </app-input-error>
           </app-input-group>
 
           <app-input-group label="เบอร์โทรศัพท์องค์กร">
@@ -57,6 +64,9 @@
               placeholder="เบอร์โทรศัพท์องค์กร">
             <app-input-error *ngIf="becomeLessorForm.controls['organizationPhone'].hasError('required')">
               กรุณากรอกเบอร์โทรศัพท์องค์กร
+            </app-input-error>
+            <app-input-error *ngIf="becomeLessorForm.controls['organizationPhone'].hasError('pattern')">
+              หมายเลขโทรศัพท์ของคุณควรอยู่ในรูปแบบ 0812345678
             </app-input-error>
           </app-input-group>
 
