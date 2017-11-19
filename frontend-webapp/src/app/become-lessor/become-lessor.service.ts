@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { of as observableOf } from 'rxjs/observable/of';
-import { catchError, map, mapTo } from 'rxjs/operators';
+import { _throw as observableThrow } from 'rxjs/observable/throw';
+import { catchError, mapTo } from 'rxjs/operators';
 
 import { UserService } from '../core/user/user.service';
 
@@ -37,7 +38,7 @@ export class BecomeLessorService {
             return observableOf('is_not_lessor');
           }
         }
-        return Observable.throw(err);
+        return observableThrow(err);
       })
     );
   }
