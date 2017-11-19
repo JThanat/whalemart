@@ -12,7 +12,7 @@ import { BecomeLessorService } from './become-lessor.service';
 export class BecomeLessorComponent implements OnInit {
   becomeLessorForm: FormGroup;
   isOrganization: Boolean;
-  loadingStatus: string;
+  loadingStatus: string | undefined = undefined;
 
   constructor(
     private becomeLessorService: BecomeLessorService,
