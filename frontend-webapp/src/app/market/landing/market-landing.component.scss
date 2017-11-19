@@ -2,7 +2,6 @@
 
 .header {
   h1 {
-    @include font-weight(bold);
     font-size: 1.6rem;
     margin: 0;
   }
@@ -11,6 +10,7 @@
     margin-bottom: 0;
   }
   .location, .date {
+    color: $dark-gray;
     margin-bottom: 0;
     font-size: 0.9rem;
   }
@@ -136,6 +136,7 @@ nav {
   .cta-container {
     border: 1px solid $light-gray;
     padding: map-get($spacers, 3) map-get($spacers, 4);
+    box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.05);
     .price {
       p {
         margin-bottom: 0;
