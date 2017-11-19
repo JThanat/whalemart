@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
 
+import { MarketDetailResolver } from './market-detail-resolver.service';
 import { MarketLandingRoutingModule } from './market-landing-routing.module';
 import { MarketLandingComponent } from './market-landing.component';
 
@@ -9,6 +10,7 @@ import { MarketLandingComponent } from './market-landing.component';
     SharedModule,
     MarketLandingRoutingModule
   ],
-  declarations: [MarketLandingComponent]
+  declarations: [MarketLandingComponent],
+  providers: [MarketDetailResolver]
 })
 export class MarketLandingModule { }

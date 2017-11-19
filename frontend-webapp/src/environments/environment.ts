@@ -9,5 +9,8 @@ export const environment: Env = {
   production: false,
   facebook: {
     appId: '132853970755931'
+  },
+  google: {
+    apiKey: 'AIzaSyAaQHydaUz5xiK4904ToFannKud3kl07jg'
   }
 };

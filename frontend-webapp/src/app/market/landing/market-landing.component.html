@@ -1,130 +1,117 @@
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-12 col-md-10">
-      <div class="header mt-5 mb-3 d-md-flex flex-md-row justify-content-md-between align-items-md-end">
-        <div class="mb-1">
-          <h1>อาร์ต บอกซ์ สวนหลวง</h1>
-          <p class="lead">Teenage &amp; Creative Market in Bangkok</p>
-        </div>
-        <div class="mb-1 text-left text-md-right">
-          <p class="location">ซอยจุฬาลงกรณ์ 5 กทม.</p>
-          <p class="date">วันที่ 12&ndash;14 ธันวาคม 2560</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="cover-image-container"></div>
-
-<div class="nav-wrapper">
+<ng-container *ngIf="(marketDetailObs | async) as marketDetail">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-12 col-md-10">
-        <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link active" routerLink="./" fragment="general">ข้อมูลทั่วไป</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="./" fragment="lease-info">ข้อมูลการเช่า</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="./" fragment="market-map">แผนผังตลาด</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="./" fragment="lessor-contact">ติดต่อผู้ดูแลตลาด</a>
-          </li>
-        </ul>
+        <div class="header mt-5 mb-3 d-md-flex flex-md-row justify-content-md-between align-items-md-end">
+          <div class="mb-1">
+            <h1>{{ marketDetail.name }}</h1>
+            <p class="lead">{{ marketDetail.caption }}</p>
+          </div>
+          <div class="mb-1 text-left text-md-right">
+            <p class="location">{{ marketDetail.location.name }}</p>
+            <p class="date">วันที่ {{ [marketDetail.openingDate, marketDetail.closingDate] | dateRange }}</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="container my-5">
-  <section class="main-content row justify-content-center align-items-start mb-5">
-    <div class="col-12 col-md-10 col-lg-6">
-      <h2>ข้อมูลทั่วไป</h2>
+  <div class="cover-image-container" [style.backgroundImage]="'url(' + marketDetail.coverImageUrl + ')'"></div>
 
-      <p>
-        ไลฟ์สไตล์การใช้ชีวิตอันหลากหลายของคนเมือง นำพาเอา &ldquo;ค้าปลีก&rdquo; รูปแบบใหม่ๆ สไตล์เท่ๆ ตั้งแต่ Truck food จนมาถึง Art Box ตลาดนัดตู้คอนเทนเนอร์ กำลังกลายเป็นกระแสใหม่ของการช้อปปิ้ง และสถานที่แฮงเอาท์ของคนเมือง ว่ากันว่าตลาดนัดแนวนี้ ดึงทราฟฟิกช่วงวันหยุดจากห้างสรรพสินค้าติดแอร์ไปได้ไม่น้อยทีเดียว
-      </p>
-
-      <h3>วัน-เวลา</h3>
-      <p class="date">12&ndash;14 ธันวาคม 2560</p>
-      <p class="time">19.00&ndash;23.00น.</p>
-
-      <h3>สถานที่</h3>
-      <div class="location-map-container"></div>
-
-      <hr>
-
-      <h2>ข้อมูลการเช่า</h2>
-
-      <dl class="row lease-info">
-        <dt class="col-12 col-md-4 col-xl-3">สิ่งที่จัดเตรียมให้</dt>
-        <dd class="col-12 col-md-8 col-xl-9">
-          <div class="row">
-            <div class="col-12 col-md-6">โต๊ะ x2</div>
-            <div class="col-12 col-md-6">ไฟฟลูออเรสเซนต์ x2</div>
-            <div class="col-12 col-md-6">เก้าอี้ x4</div>
-            <div class="col-12 col-md-6">ราวแขวนเสื้อ x2</div>
-          </div>
-        </dd>
-        <dt class="col-12 col-md-4 col-xl-3">ช่วงราคา</dt>
-        <dd class="col-12 col-md-8 col-xl-9">1,200฿ &ndash; 10,500฿</dd>
-        <dt class="col-12 col-md-4 col-xl-3">จำนวนผู้เข้าชมโดยประมาณ</dt>
-        <dd class="col-12 col-md-8 col-xl-9">1,000 &ndash; 1,400 คนต่อวัน</dd>
-        <dt class="col-12 col-md-4 col-xl-3">วันหมดเขต</dt>
-        <dd class="col-12 col-md-8 col-xl-9">N/A</dd>
-      </dl>
-
-      <hr>
-
-      <h2>แผนผังตลาด</h2>
-      <div class="market-map-container"></div>
-
-      <hr>
-
-      <h2>ติดต่อผู้ดูแลตลาด</h2>
-      <div class="lessor-contact d-flex align-items-center">
-        <div class="market-lessor-image"></div>
-        <div class="ml-4">
-          <p class="name">คุณสุมิตา สุพรรณบุรี</p>
-          <p class="email">sumita.su@whalemart.com</p>
-          <p class="tel">089-2345251</p>
+  <nav>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-10">
+          <a class="nav-link active" routerLink="./" fragment="general">ข้อมูลทั่วไป</a>
+          <a class="nav-link" routerLink="./" fragment="lease-info">ข้อมูลการเช่า</a>
+          <a class="nav-link" routerLink="./" fragment="market-map">แผนผังตลาด</a>
+          <a class="nav-link" routerLink="./" fragment="lessor-contact">ติดต่อผู้ดูแลตลาด</a>
         </div>
-      </div>
-
-      <hr class="d-block d-lg-none">
-    </div>
-
-    <div class="col-12 col-md-10 col-lg-4 ml-lg-5 side-content">
-      <div class="scene-carousel mb-4">
-        <div class="image-container mb-3"></div>
-        <div class="d-flex justify-content-between">
-          <button type="button" class="btn prev disabled">ก่อนหน้า</button>
-          <div class="image-selector d-flex align-content-center">
-            <button type="button" class="btn selected">1</button>
-            <button type="button" class="btn">2</button>
-            <button type="button" class="btn">3</button>
-            <button type="button" class="btn">4</button>
-            <button type="button" class="btn">5</button>
-          </div>
-          <button type="button" class="btn next">ถัดไป</button>
-        </div>
-      </div>
-      <div class="cta-container d-flex justify-content-between align-items-center">
-        <div class="price">
-          <p class="min"><strong>เริ่มต้น</strong> 1,200฿</p>
-          <p class="max"><strong>ถึง</strong> 10,500฿</p>
-        </div>
-        <a class="btn btn-primary" role="button" routerLink="/">จองบูธ</a>
       </div>
     </div>
-  </section>
+  </nav>
 
-  <section class="related-markets">
-    <h2 class="pt-2 mb-4">คุณอาจสนใจตลาดเหล่านี้</h2>
-    <div class="market"></div>
-  </section>
-</div>
+  <div class="container my-5">
+    <section class="main-content row justify-content-center align-items-start mb-5">
+      <div class="col-12 col-md-10 col-lg-6">
+        <h2>ข้อมูลทั่วไป</h2>
+
+        <p>{{ marketDetail.description }}</p>
+
+        <h3>วัน-เวลา</h3>
+        <p class="date">วันที่ {{ [marketDetail.openingDate, marketDetail.closingDate] | dateRange }}</p>
+        <p class="time">19.00&ndash;23.00น.</p>
+
+        <h3>สถานที่</h3>
+        <iframe width="100%" height="300" frameborder="0" style="border:0" [src]="getMapIframeUrl(marketDetail.location)" allowfullscreen></iframe>
+
+        <hr>
+
+        <h2>ข้อมูลการเช่า</h2>
+
+        <dl class="row lease-info">
+          <dt class="col-12 col-md-4 col-xl-3">สิ่งที่จัดเตรียมให้</dt>
+          <dd class="col-12 col-md-8 col-xl-9">
+            <div class="row">
+              <div class="col-12 col-md-6">โต๊ะ x2</div>
+              <div class="col-12 col-md-6">ไฟฟลูออเรสเซนต์ x2</div>
+              <div class="col-12 col-md-6">เก้าอี้ x4</div>
+              <div class="col-12 col-md-6">ราวแขวนเสื้อ x2</div>
+            </div>
+          </dd>
+          <dt class="col-12 col-md-4 col-xl-3">ช่วงราคา</dt>
+          <dd class="col-12 col-md-8 col-xl-9">1,200฿ &ndash; 10,500฿</dd>
+          <dt class="col-12 col-md-4 col-xl-3">จำนวนผู้เข้าชมโดยประมาณ</dt>
+          <dd class="col-12 col-md-8 col-xl-9">1,000 &ndash; 1,400 คนต่อวัน</dd>
+          <dt class="col-12 col-md-4 col-xl-3">วันหมดเขต</dt>
+          <dd class="col-12 col-md-8 col-xl-9">N/A</dd>
+        </dl>
+
+        <hr>
+
+        <h2>แผนผังตลาด</h2>
+        <img [src]="marketDetail.layoutImageUrl" alt="รูปแผนผังตลาด" class="market-map">
+
+        <hr>
+
+        <h2>ติดต่อผู้ดูแลตลาด</h2>
+        <div class="lessor-contact">
+          <p class="name">{{ marketDetail.contact.fullname }}</p>
+          <p class="email">{{ marketDetail.contact.email }}</p>
+          <p class="tel">{{ marketDetail.contact.phoneNumber }}</p>
+        </div>
+
+        <hr class="d-block d-lg-none">
+      </div>
+
+      <div class="col-12 col-md-10 col-lg-4 pl-lg-5 side-content">
+        <div class="scene-carousel mb-4">
+          <div class="image-container mb-3"></div>
+          <div class="d-flex justify-content-between">
+            <button type="button" class="btn prev disabled">ก่อนหน้า</button>
+            <div class="image-selector d-flex align-content-center">
+              <button type="button" class="btn selected">1</button>
+              <button type="button" class="btn">2</button>
+              <button type="button" class="btn">3</button>
+              <button type="button" class="btn">4</button>
+              <button type="button" class="btn">5</button>
+            </div>
+            <button type="button" class="btn next">ถัดไป</button>
+          </div>
+        </div>
+        <div class="cta-container d-flex justify-content-between align-items-center">
+          <div class="price">
+            <p class="min"><strong>เริ่มต้น</strong> {{ marketDetail.minPrice | currency:'THB':'฿':'3.0' }}</p>
+            <p class="max"><strong>ถึง</strong> {{ marketDetail.maxPrice | currency:'THB':'฿':'3.0' }}</p>
+          </div>
+          <a class="btn btn-primary" role="button" routerLink="/">จองบูธ</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="related-markets">
+      <h2 class="pt-2 mb-4">คุณอาจสนใจตลาดเหล่านี้</h2>
+      <div class="market"></div>
+    </section>
+  </div>
+</ng-container>
