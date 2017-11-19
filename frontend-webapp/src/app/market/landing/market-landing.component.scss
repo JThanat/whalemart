@@ -29,12 +29,17 @@ nav {
   position: sticky;
   top: 0;
   .nav-link {
+    @include font-family(heading);
+    color: $dark-gray;
     display: inline-block;
     padding-top: map-get($spacers, 3);
     padding-bottom: map-get($spacers, 3);
     margin-left: map-get($spacers, 4);
     &:first-child {
       margin-left: 0;
+    }
+    &.active {
+      color: $primary;
     }
   }
 }

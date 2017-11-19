@@ -22,10 +22,10 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-12 col-md-10">
-          <a class="nav-link active" routerLink="./" fragment="general">ข้อมูลทั่วไป</a>
-          <a class="nav-link" routerLink="./" fragment="lease-info">ข้อมูลการเช่า</a>
-          <a class="nav-link" routerLink="./" fragment="market-map">แผนผังตลาด</a>
-          <a class="nav-link" routerLink="./" fragment="lessor-contact">ติดต่อผู้ดูแลตลาด</a>
+          <a class="nav-link" [class.active]="currentSectionId === 0" routerLink="./" fragment="general">ข้อมูลทั่วไป</a>
+          <a class="nav-link" [class.active]="currentSectionId === 1" routerLink="./" fragment="lease-info">ข้อมูลการเช่า</a>
+          <a class="nav-link" [class.active]="currentSectionId === 2" routerLink="./" fragment="market-map">แผนผังตลาด</a>
+          <a class="nav-link" [class.active]="currentSectionId === 3" routerLink="./" fragment="lessor-contact">ติดต่อผู้ดูแลตลาด</a>
         </div>
       </div>
     </div>
@@ -34,7 +34,7 @@
   <div class="container my-5">
     <section class="main-content row justify-content-center align-items-start mb-5">
       <div class="col-12 col-md-10 col-lg-6">
-        <h2>ข้อมูลทั่วไป</h2>
+        <h2 #sectionHeading id="general">ข้อมูลทั่วไป</h2>
 
         <p>{{ marketDetail.description }}</p>
 
@@ -43,11 +43,11 @@
         <p class="time">19.00&ndash;23.00น.</p>
 
         <h3>สถานที่</h3>
-        <iframe width="100%" height="300" frameborder="0" style="border:0" [src]="getMapIframeUrl(marketDetail.location)" allowfullscreen></iframe>
+        <iframe width="100%" height="300" frameborder="0" style="border:0" [src]="marketMapIframeUrl | async" allowfullscreen></iframe>
 
         <hr>
 
-        <h2>ข้อมูลการเช่า</h2>
+        <h2 #sectionHeading id="lease-info">ข้อมูลการเช่า</h2>
 
         <dl class="row lease-info">
           <dt class="col-12 col-md-4 col-xl-3">สิ่งที่จัดเตรียมให้</dt>
@@ -69,12 +69,12 @@
 
         <hr>
 
-        <h2>แผนผังตลาด</h2>
+        <h2 #sectionHeading id="market-map">แผนผังตลาด</h2>
         <img [src]="marketDetail.layoutImageUrl" alt="รูปแผนผังตลาด" class="market-map">
 
         <hr>
 
-        <h2>ติดต่อผู้ดูแลตลาด</h2>
+        <h2 #sectionHeading id="lessor-contact">ติดต่อผู้ดูแลตลาด</h2>
         <div class="lessor-contact">
           <p class="name">{{ marketDetail.contact.fullname }}</p>
           <p class="email">{{ marketDetail.contact.email }}</p>
