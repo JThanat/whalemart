@@ -4,4 +4,4 @@
 <p class="location"><app-svg-icon key="location-pin"></app-svg-icon>  {{ market.location }}</p>
 <p class="name">{{ market.name }}</p>
 <p class="date">วันที่ {{ [market.startDate, market.endDate] | dateRange }}</p>
-<p class="price">เริ่มต้น {{ market.minPrice | currency:'THB':'฿':'3.0' }}</p>
+<p class="price">เริ่มต้น {{ market.minPrice | currency:'THB':'symbol-narrow' }}</p>

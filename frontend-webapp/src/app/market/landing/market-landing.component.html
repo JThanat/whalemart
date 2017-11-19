@@ -101,8 +101,8 @@
         </div>
         <div class="cta-container d-flex justify-content-between align-items-center">
           <div class="price">
-            <p class="min"><strong>เริ่มต้น</strong> {{ marketDetail.minPrice | currency:'THB':'฿':'3.0' }}</p>
-            <p class="max"><strong>ถึง</strong> {{ marketDetail.maxPrice | currency:'THB':'฿':'3.0' }}</p>
+            <p class="min"><strong>เริ่มต้น</strong> {{ marketDetail.minPrice | currency:'THB':'symbol-narrow' }}</p>
+            <p class="max"><strong>ถึง</strong> {{ marketDetail.maxPrice | currency:'THB':'symbol-narrow' }}</p>
           </div>
           <a class="btn btn-primary" role="button" routerLink="/">จองบูธ</a>
         </div>
