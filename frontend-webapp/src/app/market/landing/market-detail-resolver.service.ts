@@ -48,6 +48,20 @@ export class MarketDetailResolver implements Resolve<MarketDetail> {
   }
 
   private normalizeMarketDetail(sr: MarketDetailServerResponse): MarketDetail {
+    // TODO: Remove this when server returns correct provided accessories detail.
+    sr.provided_accessories = JSON.stringify({
+      'โต๊ะ': 2,
+      'ไฟฟลูออเรสเซนต์': 2,
+      'เก้าอี้': 4,
+      'ราวแขวนเสื้อ': 2
+    });
+
+    const accessoriesObj = JSON.parse(sr.provided_accessories) as { [name: string]: number };
+    const providedAccessories = Object.entries(accessoriesObj).map(accessory => {
+      const [name, amount] = accessory;
+      return { name, amount };
+    });
+
     return {
       name: sr.name,
       caption: sr.caption,
@@ -74,7 +88,7 @@ export class MarketDetailResolver implements Resolve<MarketDetail> {
       minPrice: Number(sr.min_price),
       maxPrice: Number(sr.max_price),
       layoutImageUrl: sr.layout_photo.replace('4200', '8000'),
-      providedAccessories: sr.provided_accessories,
+      providedAccessories: providedAccessories,
       coverImageUrl: sr.cover_photo.image.replace('4200', '8000'),
       scenePhotos: sr.scene_photos,
       tags: sr.tags,

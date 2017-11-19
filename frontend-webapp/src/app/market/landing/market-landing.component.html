@@ -38,7 +38,7 @@
 
         <p>{{ marketDetail.description }}</p>
 
-        <h3>วัน-เวลา</h3>
+        <h3>วัน&ndash;เวลา</h3>
         <p class="date">วันที่ {{ [marketDetail.openingDate, marketDetail.closingDate] | dateRange }}</p>
         <p class="time">19.00&ndash;23.00น.</p>
 
@@ -53,18 +53,17 @@
           <dt class="col-12 col-md-4 col-xl-3">สิ่งที่จัดเตรียมให้</dt>
           <dd class="col-12 col-md-8 col-xl-9">
             <div class="row">
-              <div class="col-12 col-md-6">โต๊ะ x2</div>
-              <div class="col-12 col-md-6">ไฟฟลูออเรสเซนต์ x2</div>
-              <div class="col-12 col-md-6">เก้าอี้ x4</div>
-              <div class="col-12 col-md-6">ราวแขวนเสื้อ x2</div>
+              <div class="col-12 col-md-6" *ngFor="let accessory of marketDetail.providedAccessories">
+                {{ accessory.name }} x{{ accessory.amount }}
+              </div>
             </div>
           </dd>
           <dt class="col-12 col-md-4 col-xl-3">ช่วงราคา</dt>
-          <dd class="col-12 col-md-8 col-xl-9">1,200฿ &ndash; 10,500฿</dd>
+          <dd class="col-12 col-md-8 col-xl-9">{{ marketDetail.minPrice | currency:'THB':'symbol-narrow' }} &ndash; {{ marketDetail.maxPrice | currency:'THB':'symbol-narrow' }}</dd>
           <dt class="col-12 col-md-4 col-xl-3">จำนวนผู้เข้าชมโดยประมาณ</dt>
-          <dd class="col-12 col-md-8 col-xl-9">1,000 &ndash; 1,400 คนต่อวัน</dd>
+          <dd class="col-12 col-md-8 col-xl-9">ประมาณ {{ marketDetail.estimateVisitor | number }} คนต่อวัน</dd>
           <dt class="col-12 col-md-4 col-xl-3">วันหมดเขต</dt>
-          <dd class="col-12 col-md-8 col-xl-9">N/A</dd>
+          <dd class="col-12 col-md-8 col-xl-9">{{ marketDetail.reservationDueDate | date:'d LLLL y' }}</dd>
         </dl>
 
         <hr>

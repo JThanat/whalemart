@@ -45,7 +45,10 @@ export interface MarketDetail {
   minPrice: number;
   maxPrice: number;
   layoutImageUrl: string;
-  providedAccessories: string;
+  providedAccessories: {
+    name: string;
+    amount: number;
+  }[];
   coverImageUrl: string;
   scenePhotos: any[];
   tags: any[];
