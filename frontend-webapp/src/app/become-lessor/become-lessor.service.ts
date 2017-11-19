@@ -16,6 +16,8 @@ interface BecomeLessorRequest {
   organization_phone_number: string;
 }
 
+type LessorStatus = 'require_login' | 'is_lessor' | 'is_not_lessor';
+
 @Injectable()
 export class BecomeLessorService {
   constructor(
@@ -23,12 +25,12 @@ export class BecomeLessorService {
     private userService: UserService
   ) { }
 
-  checkLessorStatus(): Observable<string> {
+  checkLessorStatus(): Observable<LessorStatus> {
     if (!this.userService.getCurrentUserInfo()) {
-      return observableOf('require_login');
+      return observableOf('require_login' as LessorStatus);
     }
     return this.http.get('/api/lessor.json').pipe(
-      map(() => 'is_lessor'),
+      mapTo('is_lessor'),
       catchError((err: any): Observable<string> | ErrorObservable => {
         if (err instanceof HttpErrorResponse) {
           if (err.status === 404) {
