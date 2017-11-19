@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { of as observableOf } from 'rxjs/observable/of';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, mapTo } from 'rxjs/operators';
 
 import { UserService } from '../core/user/user.service';
 
@@ -41,11 +41,6 @@ export class BecomeLessorService {
   }
 
   becomeLessor(lessorParams: BecomeLessorRequest): Observable<boolean> {
-    return this
-      .http
-      .post('/api/become-lessor.json', lessorParams)
-      .pipe(
-      map(() => true)
-      );
+    return this.http.post('/api/become-lessor.json', lessorParams).pipe(mapTo(true));
   }
 }

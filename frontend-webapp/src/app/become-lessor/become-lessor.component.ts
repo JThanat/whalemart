@@ -33,7 +33,7 @@ export class BecomeLessorComponent implements OnInit {
       organizationEmail: new FormControl('', [Validators.required, Validators.email]),
       organizationPhone: new FormControl(
         '',
-        [Validators.required, Validators.pattern(/\+?\d{9,15}$/)]
+        [Validators.required, Validators.pattern(/^\+?\d{9,15}$/)]
       )
     }, { updateOn: 'blur' });
 
