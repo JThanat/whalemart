@@ -1,12 +1,11 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
-import { UserService } from '../core/user/user.service';
-
 import { Observable } from 'rxjs/Observable';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { of as observableOf } from 'rxjs/observable/of';
 import { catchError, map } from 'rxjs/operators';
+
+import { UserService } from '../core/user/user.service';
 
 interface BecomeLessorRequest {
   lessor_name: string;
