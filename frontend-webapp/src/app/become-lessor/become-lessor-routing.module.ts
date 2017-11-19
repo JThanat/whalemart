@@ -6,6 +6,7 @@ import { BecomeLessorComponent } from './become-lessor.component';
 const routes: Routes = [
   {
     path: '',
+    pathMatch: 'full',
     component: BecomeLessorComponent
   }
 ];
