@@ -16,9 +16,6 @@ interface BecomeLessorRequest {
   organization_phone_number: string;
 }
 
-export class BecomeLessorError { }
-export class CheckLessorError { }
-
 @Injectable()
 export class BecomeLessorService {
   constructor(
