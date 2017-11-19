@@ -11,7 +11,6 @@ import { BecomeLessorService } from './become-lessor.service';
 })
 export class BecomeLessorComponent implements OnInit {
   becomeLessorForm: FormGroup;
-  isOrganization: Boolean;
   loadingStatus: string | undefined = undefined;
 
   constructor(
@@ -38,13 +37,16 @@ export class BecomeLessorComponent implements OnInit {
       )
     }, { updateOn: 'blur' });
 
-    this.isOrganization = false;
-    this.setValidateOnOrganization(this.isOrganization);
+    this.becomeLessorForm.controls['isOrganization'].setValue(false);
+    this.setValidateOnOrganization(false);
   }
 
   toggleIsOrganization() {
-    this.isOrganization = !this.isOrganization;
-    this.setValidateOnOrganization(this.isOrganization);
+    const isOrganization = this.becomeLessorForm.value.isOrganization;
+    this.becomeLessorForm.controls['isOrganization'].setValue(
+      !isOrganization
+    );
+    this.setValidateOnOrganization(!isOrganization);
   }
 
   setValidateOnOrganization(isOrganization: Boolean) {
