@@ -26,9 +26,6 @@ class SceneSerializer(serializers.ModelSerializer):
         model = Scene
         fields = ('scene_image',)
 
-        # def to_representation(self, instance):
-        #     return super(SceneSerializer, self).to_representation(instance)
-
 
 class BoothSerializer(serializers.ModelSerializer):
     class Meta:
@@ -95,19 +92,22 @@ class MarketSerializer(serializers.ModelSerializer):
 
         scene_list = Scene.objects.filter(market=instance.id)
         tag_list = Tag.objects.filter(market=instance.id)
+        cover_photo_id = CoverPhoto.objects.filter(market=instance.id).first().pk
 
-        a = []
+        scenes = []
         for scene in scene_list:
             serialized_scene = SceneSerializer().to_representation(scene)
-            a.append(serialized_scene)
+            serialized_scene['id'] = scene.id
+            scenes.append(serialized_scene)
 
-        b = []
+        tags = []
         for tag in tag_list:
             serialized_tag = TagSerializer().to_representation(tag)
-            b.append(serialized_tag)
+            tags.append(serialized_tag)
 
-        repr['scene_photo_list'] = a
-        repr['tag_list'] = b
+        repr['scene_photo_list'] = scenes
+        repr['tag_list'] = tags
+        repr['cover_photo']['id'] = cover_photo_id
         return repr
 
     def update(self, instance, validated_data):
