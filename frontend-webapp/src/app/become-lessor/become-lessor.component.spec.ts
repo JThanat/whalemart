@@ -1,7 +1,20 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Observable } from 'rxjs/Observable';
+import { of as observableOf } from 'rxjs/observable/of';
 
+import { AlertService } from '../core/alert/alert.service';
+import { UserService } from '../core/user/user.service';
 import { BecomeLessorComponent } from './become-lessor.component';
+import { BecomeLessorService, LessorStatus } from './become-lessor.service';
+
+export class MockBecomeLessorService {
+  checkLessorStatus(): Observable<LessorStatus> {
+    return observableOf('is_lessor' as LessorStatus);
+  }
+  becomeLessor(lessorParams: any): Observable<boolean> { return observableOf(true); }
+}
 
 describe('BecomeLessorComponent', () => {
   let component: BecomeLessorComponent;
@@ -9,8 +22,14 @@ describe('BecomeLessorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
       declarations: [BecomeLessorComponent],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
+      providers: [
+        { provide: BecomeLessorService, useClass: MockBecomeLessorService },
+        { provide: AlertService, useValue: {} },
+        { provide: UserService, useValue: {} }
+      ]
     })
       .compileComponents();
   }));

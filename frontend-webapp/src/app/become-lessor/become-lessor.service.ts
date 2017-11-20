@@ -17,7 +17,7 @@ interface BecomeLessorRequest {
   organization_phone_number: string;
 }
 
-type LessorStatus = 'require_login' | 'is_lessor' | 'is_not_lessor';
+export type LessorStatus = 'require_login' | 'is_lessor' | 'is_not_lessor';
 
 @Injectable()
 export class BecomeLessorService {
