@@ -93,7 +93,7 @@ export class MarketService {
       minPrice: Number(serverMarket.min_price),
       expireDay: (0 < expireDay && expireDay <= minShowExpireTimespanInDays)
         ? expireDay : undefined,
-      imageURL: serverMarket.cover_photo.thumbnail.replace('4200', '8000')
+      imageURL: serverMarket.cover_photo.thumbnail
     };
   }
 
