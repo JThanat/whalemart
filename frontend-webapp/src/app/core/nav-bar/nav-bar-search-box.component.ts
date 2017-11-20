@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, first, map } from 'rxjs/operators';
 import { Subscription } from 'rxjs/Subscription';
-import { DateRangeService, DateRange } from '../utils/date-range.service';
+import { DateRange, DateRangeService } from '../utils/date-range.service';
 
 @Component({
   selector: 'app-nav-bar-search-box',
