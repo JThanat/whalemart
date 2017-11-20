@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { MarketDetailResolver } from './market-detail-resolver.service';
 import { MarketLandingComponent } from './market-landing.component';
+import { SimilarMarketsResolver } from './similar-markets-resolver.service';
 
 const routes: Routes = [
   {
@@ -10,7 +11,8 @@ const routes: Routes = [
     pathMatch: 'full',
     component: MarketLandingComponent,
     resolve: {
-      marketDetail: MarketDetailResolver
+      marketDetail: MarketDetailResolver,
+      similarMarkets: SimilarMarketsResolver
     }
   }
 ];

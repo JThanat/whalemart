@@ -18,6 +18,7 @@ import { map } from 'rxjs/operators/map';
 import { Subscription } from 'rxjs/Subscription';
 
 import { environment } from '../../../environments/environment';
+import { Market } from '../../core/market/market.service';
 
 export interface MarketDetail {
   name: string;
@@ -50,9 +51,8 @@ export interface MarketDetail {
     amount: number;
   }[];
   coverImageUrl: string;
-  scenePhotos: any[];
-  tags: any[];
-  booths: any[];
+  scenePhotoUrls: string[];
+  tags: string[];
 }
 
 /**
@@ -73,6 +73,7 @@ const navigateOffset = 100;
 })
 export class MarketLandingComponent implements OnInit, OnDestroy, AfterViewInit {
   marketDetailObs: Observable<MarketDetail>;
+  similarMarketsObs: Observable<Market[]>;
   marketMapIframeUrl: Observable<SafeResourceUrl>;
   currentSectionId = -1;
 
@@ -91,6 +92,7 @@ export class MarketLandingComponent implements OnInit, OnDestroy, AfterViewInit 
 
   ngOnInit() {
     this.marketDetailObs = this.route.data.pipe(map(data => data.marketDetail));
+    this.similarMarketsObs = this.route.data.pipe(map(data => data.similarMarkets));
     this.marketMapIframeUrl = this.marketDetailObs.pipe(map(marketDetail => {
       const url = `https://www.google.com/maps/embed/v1/place?key=${environment.google.apiKey}&q=` +
         encodeURIComponent(`${marketDetail.location.latitude},${marketDetail.location.longitude}`);

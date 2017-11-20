@@ -5,6 +5,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { MarketDetailResolver } from './market-detail-resolver.service';
 import { MarketLandingRoutingModule } from './market-landing-routing.module';
 import { MarketLandingComponent } from './market-landing.component';
+import { SimilarMarketsResolver } from './similar-markets-resolver.service';
 
 @NgModule({
   imports: [
@@ -13,6 +14,9 @@ import { MarketLandingComponent } from './market-landing.component';
     ScrollDispatchModule
   ],
   declarations: [MarketLandingComponent],
-  providers: [MarketDetailResolver]
+  providers: [
+    MarketDetailResolver,
+    SimilarMarketsResolver
+  ]
 })
 export class MarketLandingModule { }
