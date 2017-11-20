@@ -118,6 +118,19 @@ class MarketSerializer(serializers.ModelSerializer):
         repr['tag_list'] = tag_dict
         return repr
 
+    def update(self, instance, validated_data):
+        print(validated_data)
+        market = super(MarketSerializer, self).update(instance, validated_data)
+
+        # Update Tag
+        tags_data = validated_data.pop('tag_list', None)
+        for tag in tags_data:
+            tag_obj = Tag(tag=tag)
+            tag_obj.save()
+            tag_obj.market.add(market)
+
+        return market
+
 
 class MarketFeedSerializer(serializers.ModelSerializer):
     tags = TagSerializer(many=True)
