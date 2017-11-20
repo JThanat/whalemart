@@ -4,6 +4,10 @@
       <h1 class="display-4 mt-5">เข้าสู่ระบบ</h1>
 
       <form (submit)="login()" [formGroup]="loginForm">
+        <div *ngIf="isFb">
+          <p>Access Token {{ fbAccessToken }}</p>
+        </div>
+
         <app-input-group label="อีเมล">
           <input appInput type="email" class="form-control" placeholder="อีเมล" formControlName="email" required>
           <app-input-error *ngIf="loginForm.controls['email'].hasError('email')">
@@ -19,6 +23,7 @@
         </app-input-group>
 
         <button class="btn btn-primary btn-lg" type="submit" [disabled]="loginForm.disabled">เข้าสู่ระบบ</button>
+        <button class="btn btn-facebook btn-lg ml-2" type="button" (click)="loginWithFacebook()">เข้าสู่ระบบด้วยเฟสบุ๊ค</button>
       </form>
     </div>
   </div>

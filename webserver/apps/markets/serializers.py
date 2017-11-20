@@ -2,9 +2,10 @@ import re
 
 from rest_framework import serializers
 
+from apps.booths.models import Booth
+from apps.commons.custom_field import MyListField
 from apps.markets.models import Market, CoverPhoto, Scene
 from apps.tags.models import Tag
-from apps.booths.models import Booth
 from apps.tags.serializers import TagSerializer
 
 
@@ -25,6 +26,9 @@ class SceneSerializer(serializers.ModelSerializer):
         model = Scene
         fields = ('scene_image',)
 
+        # def to_representation(self, instance):
+        #     return super(SceneSerializer, self).to_representation(instance)
+
 
 class BoothSerializer(serializers.ModelSerializer):
     class Meta:
@@ -39,10 +43,19 @@ class BoothSerializer(serializers.ModelSerializer):
 
 
 class MarketSerializer(serializers.ModelSerializer):
-    tags = TagSerializer(many=True)
+    tag_list = MyListField(
+        child=serializers.CharField(max_length=255),
+        write_only=True
+    )
     cover_photo = CoverPhotoSerializer()
-    scene_photos = SceneSerializer(many=True)
-    booths = BoothSerializer(many=True)
+    scene_photo_list = serializers.ListField(
+        child=serializers.FileField(max_length=100000,
+                                    allow_empty_file=False,
+                                    use_url=False),
+        write_only=True
+    )
+
+    # booths = BoothSerializer(many=True)
 
     class Meta:
         model = Market
@@ -50,13 +63,14 @@ class MarketSerializer(serializers.ModelSerializer):
                   'contact_person_fullname', 'contact_person_phone_number', 'contact_person_email', 'location',
                   'location_latitude', 'location_longitude', 'term_and_condition', 'deposit_payment_due',
                   'full_payment_due', 'reservation_due_date', 'estimate_visitor', 'min_price', 'max_price',
-                  'layout_photo', 'provided_accessories', 'cover_photo', 'scene_photos', 'tags', 'booths')
+                  'layout_photo', 'provided_accessories', 'cover_photo', 'scene_photo_list', 'tag_list')
 
     def create(self, validated_data):
-        tags_data = validated_data.pop('tags')
+        print('validated data%s' % validated_data)
+        tags_data = validated_data.pop('tag_list')
         cover_photo = validated_data.pop('cover_photo')
-        scene_photos = validated_data.pop('scene_photos')
-        booths = validated_data.pop('booths')
+        scene_images = validated_data.pop('scene_photo_list')
+        # booths = validated_data.pop('booths')
 
         validated_data['created_user'] = self.context.get('request').user
         validated_data['updated_user'] = self.context.get('request').user
@@ -66,15 +80,43 @@ class MarketSerializer(serializers.ModelSerializer):
         CoverPhoto.objects.create(market=market, **cover_photo)
 
         for tag in tags_data:
-            Tag.objects.create(market=market, **tag)
+            tag_obj = Tag(tag=tag)
+            tag_obj.save()
+            tag_obj.market.add(market)
 
-        for scene_photo in scene_photos:
-            Scene.objects.create(market=market, **scene_photo)
+        for scene_image in scene_images:
+            Scene.objects.create(market=market, scene_image=scene_image)
 
-        for booth in booths:
-            Booth.objects.create(market=market, **booth)
+        # for booth in booths:
+        #     Booth.objects.create(market=market, **booth)
 
         return market
+
+    def to_representation(self, instance):
+        repr = super(MarketSerializer, self).to_representation(instance)
+
+        scene_list = Scene.objects.filter(market=instance.id)
+        tag_list = Tag.objects.filter(market=instance.id)
+
+        a = []
+        for scene in scene_list:
+            serialized_scene = SceneSerializer().to_representation(scene)
+            a.append(serialized_scene)
+
+        scene_dict = {}
+        scene_dict['scene_photos'] = a
+
+        b = []
+        for tag in tag_list:
+            serialized_tag = TagSerializer().to_representation(tag)
+            b.append(serialized_tag)
+
+        tag_dict = {}
+        tag_dict['tag_list'] = b
+
+        repr['scene_photo_list'] = scene_dict
+        repr['tag_list'] = tag_dict
+        return repr
 
 
 class MarketFeedSerializer(serializers.ModelSerializer):

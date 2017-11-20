@@ -3,13 +3,19 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 
 export interface Market {
-  expireDay?: number;
-  imageURL: string;
-  name: string;
-  location: string;
-  startDate: Date;
-  endDate: Date;
-  minPrice: number;
+  readonly expireDay?: number;
+  readonly imageURL: string;
+  readonly name: string;
+  readonly location: string;
+  readonly startDate: Date;
+  readonly endDate: Date;
+  readonly minPrice: number;
+}
+
+export interface MarketFeed {
+  readonly recommendations: Market[];
+  readonly nights: Market[];
+  readonly days: Market[];
 }
 
 interface MarketSearchResult {
@@ -46,6 +52,14 @@ const minShowExpireTimespanInDays = 90;
 export class MarketService {
   constructor(private http: HttpClient) { }
 
+  public getFeed() {
+    // TODO: Use categorized markets feed data from server.
+    return this.http.get<MarketSearchResult>('/api/market-feed/').pipe(
+      map(result => result.results.map(serverMarket => this.transformResponse(serverMarket))),
+      map(markets => this.transformToMarketsFeed(markets))
+    );
+  }
+
   public search(params: SearchParams) {
     return this.http.get<MarketSearchResult>('/api/market-feed/', {
       params: {
@@ -71,6 +85,20 @@ export class MarketService {
       expireDay: (0 < expireDay && expireDay <= minShowExpireTimespanInDays)
         ? expireDay : undefined,
       imageURL: serverMarket.cover_photo.thumbnail.replace('4200', '8000')
+    };
+  }
+
+  private transformToMarketsFeed(markets: Market[]): MarketFeed {
+    if (markets.length === 0) {
+      throw new Error('No market. Please run loaddata first');
+    }
+
+    const m = (index: number) => markets[index % markets.length];
+
+    return {
+      recommendations: [m(0), m(1)],
+      days: [m(2), m(3), m(4), m(5)],
+      nights: [m(6), m(7), m(8), m(9)]
     };
   }
 }

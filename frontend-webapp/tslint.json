@@ -131,7 +131,8 @@
     "angular-whitespace": [
       true,
       "check-interpolation",
-      "check-pipe",
+      // TODO: Reenable this when https://github.com/mgechev/codelyzer/issues/452 is fixed.
+      // "check-pipe",
       "check-semicolon"
     ],
     "directive-selector": [
