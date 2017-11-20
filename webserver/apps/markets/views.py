@@ -35,7 +35,6 @@ class MarketFeedViewSet(viewsets.GenericViewSet):
     queryset = Market.objects.all().order_by('-created_at')
     filter_backends = (filters.SearchFilter,)
     search_fields = ('name', 'location')
-    paginate_by = 12
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
