@@ -4,6 +4,7 @@ import { SharedModule } from '../shared/shared.module';
 import { BecomeLessorRoutingModule } from './become-lessor-routing.module';
 import { BecomeLessorComponent } from './become-lessor.component';
 import { BecomeLessorService } from './become-lessor.service';
+import { UserGuard } from '../shared/guard/user-guard';
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import { BecomeLessorService } from './become-lessor.service';
   ],
   declarations: [BecomeLessorComponent],
   providers: [
-    BecomeLessorService
+    BecomeLessorService,
+    UserGuard
   ]
 })
 export class BecomeLessorModule { }

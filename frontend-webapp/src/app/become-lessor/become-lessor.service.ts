@@ -6,8 +6,6 @@ import { of as observableOf } from 'rxjs/observable/of';
 import { _throw as observableThrow } from 'rxjs/observable/throw';
 import { catchError, mapTo } from 'rxjs/operators';
 
-import { UserService } from '../core/user/user.service';
-
 interface BecomeLessorRequest {
   lessor_name: string;
   is_organization: boolean;
@@ -17,19 +15,15 @@ interface BecomeLessorRequest {
   organization_phone_number: string;
 }
 
-export type LessorStatus = 'require_login' | 'is_lessor' | 'is_not_lessor';
+export type LessorStatus = 'is_lessor' | 'is_not_lessor';
 
 @Injectable()
 export class BecomeLessorService {
   constructor(
-    private http: HttpClient,
-    private userService: UserService
+    private http: HttpClient
   ) { }
 
   checkLessorStatus(): Observable<LessorStatus> {
-    if (!this.userService.getCurrentUserInfo()) {
-      return observableOf('require_login' as LessorStatus);
-    }
     return this.http.get('/api/lessor/').pipe(
       mapTo('is_lessor'),
       catchError((err: any): Observable<string> | ErrorObservable => {
