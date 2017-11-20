@@ -6,30 +6,8 @@ from rest_framework.parsers import JSONParser, FormParser
 from rest_framework.response import Response
 
 from apps.commons.parser import MultipartFormencodeParser
-from apps.markets.models import Market
-from apps.markets.serializers import MarketSerializer, MarketFeedSerializer
-
-
-#
-# class MarketViewSet(viewsets.ViewSet):
-#     """
-#     A ViewSet for listing market
-#     """
-#     # queryset = Market.objects.all().order_by('-created_at')
-#     # serializer_class = MarketFeedSerializer
-#     def list(self, request):
-#         queryset = Market.objects.all()
-#         serializer = MarketFeedSerializer(queryset, many=True)
-#         return Response(serializer.data)
-#
-#     def retrieve(self, request, pk=None):
-#         queryset = Market.objects.all()
-#         market = get_object_or_404(queryset, pk=pk)
-#         serializer = MarketSerializer(market)
-#         return Response(serializer.data)
-#
-#     def create(self, request):
-#         serializers = MarketSerializer
+from apps.markets.models import Market, Scene
+from apps.markets.serializers import MarketSerializer, MarketFeedSerializer, SceneSerializer
 
 
 class MarketViewSet(viewsets.ModelViewSet):
@@ -157,3 +135,8 @@ class MarketFeedViewSet(viewsets.GenericViewSet):
         end = datetime.strptime(end_time, '%Y-%m-%d %H:%M:%S')
         diff = end - start
         return diff.seconds // 60
+
+
+class SceneViewSet(viewsets.ModelViewSet):
+    queryset = Scene.objects.all().order_by('-id')
+    serializer_class = SceneSerializer

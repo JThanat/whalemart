@@ -22,9 +22,11 @@ class CoverPhotoThumbnailSerializer(serializers.ModelSerializer):
 
 
 class SceneSerializer(serializers.ModelSerializer):
+    market = serializers.PrimaryKeyRelatedField(queryset=Market.objects.all())
+
     class Meta:
         model = Scene
-        fields = ('scene_image',)
+        fields = ('id', 'scene_image', 'market')
 
 
 class BoothSerializer(serializers.ModelSerializer):
