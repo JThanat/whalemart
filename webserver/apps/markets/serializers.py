@@ -66,7 +66,6 @@ class MarketSerializer(serializers.ModelSerializer):
                   'layout_photo', 'provided_accessories', 'cover_photo', 'scene_photo_list', 'tag_list')
 
     def create(self, validated_data):
-        print('validated data%s' % validated_data)
         tags_data = validated_data.pop('tag_list')
         cover_photo = validated_data.pop('cover_photo')
         scene_images = validated_data.pop('scene_photo_list')
@@ -80,8 +79,7 @@ class MarketSerializer(serializers.ModelSerializer):
         CoverPhoto.objects.create(market=market, **cover_photo)
 
         for tag in tags_data:
-            tag_obj = Tag(tag=tag)
-            tag_obj.save()
+            tag_obj, is_created = Tag.objects.get_or_create(tag=tag)
             tag_obj.market.add(market)
 
         for scene_image in scene_images:
