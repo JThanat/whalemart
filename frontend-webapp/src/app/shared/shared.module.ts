@@ -7,6 +7,8 @@ import { LOCALE_ID } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+import { BreadcrumbItemDirective } from './breadcrumb/breadcrumb-item.directive';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { DateRangeInputDirective } from './date-range/date-range-input.directive';
 import { DateRangePipe } from './date-range/date-range.pipe';
 import { InputErrorComponent } from './input/input-error.component';
@@ -38,7 +40,9 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
     SubNavBarDirective,
     MarketComponent,
     DateRangePipe,
-    DateRangeInputDirective
+    DateRangeInputDirective,
+    BreadcrumbComponent,
+    BreadcrumbItemDirective
   ],
   exports: [
     CommonModule,
@@ -54,7 +58,9 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
     SubNavBarDirective,
     MarketComponent,
     DateRangePipe,
-    DateRangeInputDirective
+    DateRangeInputDirective,
+    BreadcrumbComponent,
+    BreadcrumbItemDirective
   ],
   providers: [
     DatePipe,
