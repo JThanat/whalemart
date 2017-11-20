@@ -25,8 +25,8 @@ export interface MarketDetail {
   description: string;
   openingDate: Date;
   closingDate: Date;
-  openingTime: string;
-  closingTime: string;
+  openingTime: Date;
+  closingTime: Date;
   contact: {
     fullname: string;
     phoneNumber: string;

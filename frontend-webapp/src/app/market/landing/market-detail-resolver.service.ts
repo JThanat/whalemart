@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
+import { map } from 'rxjs/operators';
 
-import { map } from 'rxjs/operators/map';
+import { TimeService } from '../../core/utils/time.service';
 import { MarketDetail } from './market-landing.component';
 
 interface MarketDetailServerResponse {
@@ -38,7 +39,7 @@ interface MarketDetailServerResponse {
 
 @Injectable()
 export class MarketDetailResolver implements Resolve<MarketDetail> {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private timeService: TimeService) { }
 
   resolve(route: ActivatedRouteSnapshot) {
     const marketId = Number(route.params.id);
@@ -68,8 +69,8 @@ export class MarketDetailResolver implements Resolve<MarketDetail> {
       description: sr.description,
       openingDate: new Date(sr.opening_date),
       closingDate: new Date(sr.closing_date),
-      openingTime: sr.opening_time,
-      closingTime: sr.closing_time,
+      openingTime: this.timeService.convertToDate(sr.opening_time),
+      closingTime: this.timeService.convertToDate(sr.closing_time),
       contact: {
         fullname: sr.contact_person_fullname,
         phoneNumber: sr.contact_person_phone_number,

@@ -4,7 +4,7 @@
       <div class="col-12 col-md-10">
         <div class="header mt-5 mb-3 d-md-flex flex-md-row justify-content-md-between align-items-md-end">
           <div class="mb-1">
-            <h1>{{ marketDetail.name }} ทดสอบ</h1>
+            <h1>{{ marketDetail.name }}</h1>
             <p class="lead">{{ marketDetail.caption }}</p>
           </div>
           <div class="mb-1 text-left text-md-right">
@@ -40,7 +40,7 @@
 
         <h3>วัน&ndash;เวลา</h3>
         <p class="date">วันที่ {{ [marketDetail.openingDate, marketDetail.closingDate] | dateRange }}</p>
-        <p class="time">19.00&ndash;23.00น.</p>
+        <p class="time">{{ marketDetail.openingTime | date:'shortTime' }} &ndash; {{ marketDetail.closingTime | date:'shortTime' }}น.</p>
 
         <h3>สถานที่</h3>
         <iframe width="100%" height="300" frameborder="0" style="border:0" [src]="marketMapIframeUrl | async" allowfullscreen></iframe>
