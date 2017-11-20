@@ -75,7 +75,7 @@ export class SearchComponent implements OnInit {
 
     this.searchResult = searchParams.pipe(
       switchMap(([query, dateRange]) => {
-        if (query === '') {
+        if (query === '' && dateRange === undefined) {
           return observableOf({ status: SearchResultStatus.EmptyQuery });
         } else {
           return this.marketService.search({
