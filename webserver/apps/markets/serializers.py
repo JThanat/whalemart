@@ -58,11 +58,13 @@ class MarketSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Market
-        fields = ('id', 'name', 'caption', 'description', 'opening_date', 'closing_date', 'opening_time', 'closing_time',
-                  'contact_person_fullname', 'contact_person_phone_number', 'contact_person_email', 'location',
-                  'location_latitude', 'location_longitude', 'term_and_condition', 'deposit_payment_due',
-                  'full_payment_due', 'reservation_due_date', 'estimate_visitor', 'min_price', 'max_price',
-                  'layout_photo', 'provided_accessories', 'cover_photo', 'scene_photo_list', 'tag_list')
+        fields = (
+            'id', 'name', 'caption', 'description', 'opening_date', 'closing_date', 'opening_time', 'closing_time',
+            'contact_person_fullname', 'contact_person_phone_number', 'contact_person_email', 'location',
+            'location_latitude', 'location_longitude', 'term_and_condition', 'deposit_payment_due',
+            'full_payment_due', 'reservation_due_date', 'estimate_visitor', 'min_price', 'max_price',
+            'layout_photo', 'provided_accessories', 'cover_photo', 'scene_photo_list', 'tag_list'
+        )
 
     def create(self, validated_data):
         tags_data = validated_data.pop('tag_list', None)
@@ -138,6 +140,7 @@ class MarketFeedSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Market
-        fields = ('id', 'name', 'caption', 'description', 'opening_date', 'closing_date', 'opening_time', 'closing_time',
-                  'contact_person_fullname', 'location', 'reservation_due_date', 'min_price', 'max_price',
-                  'cover_photo', 'tags', 'id')
+        fields = (
+            'id', 'name', 'caption', 'description', 'opening_date', 'closing_date', 'opening_time', 'closing_time',
+            'contact_person_fullname', 'location', 'reservation_due_date', 'min_price', 'max_price',
+            'cover_photo', 'tags', 'id')

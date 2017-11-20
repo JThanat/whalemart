@@ -1,4 +1,4 @@
-from django.db import connection, models
+from django.db import connection
 
 from apps.commons.control_model import SoftDeletionManager
 

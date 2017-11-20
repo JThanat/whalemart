@@ -1,7 +1,7 @@
 from django.contrib.postgres import fields
 from django.db import models
 
-from apps.commons.control_model import ControlModel, SoftDeletionManager
+from apps.commons.control_model import ControlModel
 from apps.commons.file_upload import UploadedImage
 from apps.markets.managers import MarketManager
 from apps.tags.models import Tag
