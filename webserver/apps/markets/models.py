@@ -67,6 +67,9 @@ class Market(ControlModel):
     # Provided Accessories
     provided_accessories = fields.JSONField(verbose_name='Provided Accessories')
 
+    def __str__(self):
+        return '{} - {}'.format(self.name, self.id)
+
     def tag_set(self):
         tags = Tag.objects.filter(market=self.pk)
         tags = [x.tag for x in tags]
