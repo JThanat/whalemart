@@ -66,9 +66,9 @@ class MarketSerializer(serializers.ModelSerializer):
                   'layout_photo', 'provided_accessories', 'cover_photo', 'scene_photo_list', 'tag_list')
 
     def create(self, validated_data):
-        tags_data = validated_data.pop('tag_list')
-        cover_photo = validated_data.pop('cover_photo')
-        scene_images = validated_data.pop('scene_photo_list')
+        tags_data = validated_data.pop('tag_list', None)
+        cover_photo = validated_data.pop('cover_photo', None)
+        scene_images = validated_data.pop('scene_photo_list', None)
         # booths = validated_data.pop('booths')
 
         validated_data['created_user'] = self.context.get('request').user
@@ -122,10 +122,16 @@ class MarketSerializer(serializers.ModelSerializer):
 
         # Update Tag
         tags_data = validated_data.pop('tag_list', None)
+        existing_tag = market.tag_set()
         for tag in tags_data:
-            tag_obj = Tag(tag=tag)
-            tag_obj.save()
+            tag_obj, is_created = Tag.objects.get_or_create(tag=tag)
+            # Get all tag already in the market
             tag_obj.market.add(market)
+
+        # Remove deleted tag
+        for tag in existing_tag:
+            if not tag in tags_data:
+                Tag.objects.get(tag=tag).market.remove(market)
 
         return market
 
