@@ -7,6 +7,7 @@ import { LOCALE_ID } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+import { DateRangeInputDirective } from './date-range/date-range-input.directive';
 import { DateRangePipe } from './date-range/date-range.pipe';
 import { InputErrorComponent } from './input/input-error.component';
 import { InputGroupComponent } from './input/input-group.component';
@@ -36,7 +37,8 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
     PaginationComponent,
     SubNavBarDirective,
     MarketComponent,
-    DateRangePipe
+    DateRangePipe,
+    DateRangeInputDirective
   ],
   exports: [
     CommonModule,
@@ -51,7 +53,8 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
     PortalModule,
     SubNavBarDirective,
     MarketComponent,
-    DateRangePipe
+    DateRangePipe,
+    DateRangeInputDirective
   ],
   providers: [
     DatePipe,
