@@ -20,11 +20,15 @@
 
 <div class="container mt-5 mb-5" *ngIf="(searchResult | async) as result">
   <ng-container *ngIf="result.status === 'ok'; else noSearchQuery">
-    <div class="row" *ngIf="result?.markets.length > 0; else emptySearchResult">
-      <div class="col-12 col-sm-6 col-lg-3 mb-5" *ngFor="let market of result?.markets; trackBy: marketTrackByFn" @marketInOut>
-        <app-market-item [market]="market"></app-market-item>
+    <ng-container *ngIf="result?.markets.length > 0; else emptySearchResult">
+      <div class="row" [@pageChangeAnim]="result.currentPage">
+        <div class="col-12 col-sm-6 col-lg-3 mb-5" *ngFor="let market of result?.markets; trackBy: marketTrackByFn" @marketInOut>
+          <app-market-item [market]="market"></app-market-item>
+        </div>
       </div>
-    </div>
+
+      <app-pagination class="mt-2" [current]="currentPage | async" [max]="result.totalPage" [padding]="3" (navigate)="goToSearchPage($event)"></app-pagination>
+    </ng-container>
 
     <ng-template #emptySearchResult>
       <div class="empty-search-result">
@@ -43,7 +47,7 @@
   </ng-container>
 
   <ng-template #noSearchQuery>
-    <div class="no-search-query" *ngIf="result.status === 'emptyQuery'">
+    <div class="no-search-query" *ngIf="result.status === 'emptySearchParams'">
       <h3>กรุณากรอกคำค้นหา</h3>
       <div class="no-result-suggestion">
         คุณสามารถค้นหาตลาดได้ง่ายๆ จากการ

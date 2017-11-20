@@ -1,6 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { of as observableOf } from 'rxjs/observable/of';
 import { map } from 'rxjs/operators';
+
 import { DateRange } from '../utils/date-range.service';
 
 export interface Market {
@@ -20,7 +23,7 @@ export interface MarketFeed {
   readonly days: Market[];
 }
 
-interface MarketSearchResult {
+interface MarketFeedServerResponse {
   count: number;
   results: MarketServerResponse[];
 }
@@ -46,11 +49,21 @@ interface MarketServerResponse {
 }
 
 interface SearchParams {
-  query: string;
+  query?: string;
   dateRange?: DateRange;
+  page: number;
 }
 
 const minShowExpireTimespanInDays = 90;
+
+// TODO: Change this to 12.
+const searchResultItemsPerPage = 10;
+
+export interface MarketSearchResult {
+  currentPage: number;
+  totalPage: number;
+  markets: Market[];
+}
 
 @Injectable()
 export class MarketService {
@@ -58,24 +71,43 @@ export class MarketService {
 
   public getFeed() {
     // TODO: Use categorized markets feed data from server.
-    return this.http.get<MarketSearchResult>('/api/market-feed/').pipe(
+    return this.http.get<MarketFeedServerResponse>('/api/market-feed/').pipe(
       map(result => result.results.map(serverMarket => this.transformResponse(serverMarket))),
       map(markets => this.transformToMarketsFeed(markets))
     );
   }
 
-  public search(searchParams: SearchParams) {
-    let params = new HttpParams().append('search', searchParams.query);
-    if (searchParams.dateRange) {
+  public search(searchParams: SearchParams): Observable<MarketSearchResult | undefined> {
+    let hasSearchParams = false;
+    let params = new HttpParams();
+
+    if (searchParams.query !== undefined) {
+      hasSearchParams = true;
+      params = params.append('search', searchParams.query);
+    }
+
+    if (searchParams.dateRange !== undefined) {
+      hasSearchParams = true;
       params = params
         .append('min_date', searchParams.dateRange.start.toISOString())
         .append('max_date', searchParams.dateRange.end.toISOString());
     }
 
-    return this.http.get<MarketSearchResult>('/api/market-feed/', { params })
-      .pipe(map(result => result.results.map(
-        serverMarket => this.transformResponse(serverMarket)
-      )));
+    if (!hasSearchParams) {
+      return observableOf(undefined);
+    }
+
+    return this.http.get<MarketFeedServerResponse>('/api/market-feed/', {
+      params: params.append('page', String(searchParams.page))
+    }).pipe(map(result => {
+      return {
+        currentPage: searchParams.page,
+        totalPage: Math.ceil(result.count / searchResultItemsPerPage),
+        markets: result.results.map(
+          serverMarket => this.transformResponse(serverMarket)
+        )
+      };
+    }));
   }
 
   private transformResponse(serverMarket: MarketServerResponse): Market {

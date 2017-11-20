@@ -39,8 +39,7 @@ export class NavBarSearchBoxComponent implements OnInit, OnDestroy {
         queryParams: {
           q: value.query,
           daterange: value.dateRange ? this.dateRangeService.serialize(value.dateRange) : undefined
-        },
-        queryParamsHandling: 'merge'
+        }
       });
     });
   }
