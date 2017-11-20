@@ -1,5 +1,13 @@
 input {
   font-size: 0.9rem;
-  background: #F8F8F8;
+  background: #F8F8F8 !important;
   border-color: #DDDDDD;
+}
+
+.query-input {
+  width: 20rem;
+}
+
+.date-range-input {
+  width: 15rem;
 }

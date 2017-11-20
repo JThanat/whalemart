@@ -40,6 +40,17 @@
 // @import '~bootstrap/scss/carousel';
 @import '~bootstrap/scss/utilities';
 
+// Datepicker stylings
+
+@import '~flatpickr/dist/flatpickr.min.css';
+@import '~flatpickr/dist/themes/airbnb.css';
+
+input.date-range[readonly] {
+  background: $white;
+}
+
+// Other stylings
+
 .form-control-lg {
   padding: 0.8rem 1.4rem;
   font-size: 1rem;

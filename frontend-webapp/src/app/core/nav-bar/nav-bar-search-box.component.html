@@ -1,3 +1,4 @@
-<form [formGroup]="searchForm">
-  <input type="text" class="form-control" formControlName="query" placeholder="ชื่อตลาดหรือสถานที่">
+<form [formGroup]="searchForm" class="d-inline-flex">
+  <input type="text" class="form-control query-input" formControlName="query" placeholder="ชื่อตลาดหรือสถานที่">
+  <input appDateRangeInput type="text" class="form-control date-range-input ml-2" formControlName="dateRange" placeholder="ตั้งแต่วันที่ &ndash; ถึงวันที่">
 </form>
