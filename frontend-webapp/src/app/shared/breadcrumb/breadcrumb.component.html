@@ -1,0 +1,10 @@
+<nav *appSubNavBar aria-label="breadcrumb" role="navigation" class="breadcrumb d-flex align-items-center">
+  <ng-container *ngFor="let item of (displayBreadcrumbItems | async); last as isLast">
+    <ng-container *ngTemplateOutlet="item"></ng-container>
+    <app-svg-icon *ngIf="!isLast" key="arrow-head-right"></app-svg-icon>
+  </ng-container>
+</nav>
+
+<ng-template>
+  <ng-content select="appBreadcrumbItem"></ng-content>
+</ng-template>

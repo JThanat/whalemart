@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../shared/shared.module';
+import { FeedResolver } from './feed-resolver.service';
 import { FeedRoutingModule } from './feed-routing.module';
 import { FeedComponent } from './feed.component';
 
@@ -9,6 +10,7 @@ import { FeedComponent } from './feed.component';
     SharedModule,
     FeedRoutingModule
   ],
-  declarations: [FeedComponent]
+  declarations: [FeedComponent],
+  providers: [FeedResolver]
 })
 export class FeedModule { }
