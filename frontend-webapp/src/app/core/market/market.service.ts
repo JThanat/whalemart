@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
+import { DateRange } from '../utils/date-range.service';
 
 export interface Market {
   readonly expireDay?: number;
@@ -44,6 +45,7 @@ interface MarketServerResponse {
 
 interface SearchParams {
   query: string;
+  dateRange?: DateRange;
 }
 
 const minShowExpireTimespanInDays = 90;
@@ -60,14 +62,18 @@ export class MarketService {
     );
   }
 
-  public search(params: SearchParams) {
-    return this.http.get<MarketSearchResult>('/api/market-feed/', {
-      params: {
-        search: params.query
-      }
-    }).pipe(map(result => result.results.map(
-      serverMarket => this.transformResponse(serverMarket)
-    )));
+  public search(searchParams: SearchParams) {
+    let params = new HttpParams().append('search', searchParams.query);
+    if (searchParams.dateRange) {
+      params = params
+        .append('min_date', searchParams.dateRange.start.toISOString())
+        .append('max_date', searchParams.dateRange.end.toISOString());
+    }
+
+    return this.http.get<MarketSearchResult>('/api/market-feed/', { params })
+      .pipe(map(result => result.results.map(
+        serverMarket => this.transformResponse(serverMarket)
+      )));
   }
 
   private transformResponse(serverMarket: MarketServerResponse): Market {

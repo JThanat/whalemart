@@ -10,7 +10,7 @@
       </div>
       <div class="col-12 col-lg-4">
         <app-input-group label="ช่วงวันจัดตลาด">
-          <input appInput type="text" class="form-control form-control-lg" placeholder="ตั้งแต่วันที่ &ndash; ถึงวันที่">
+          <input appInput [hideValidation]="true" appDateRangeInput type="text" class="form-control form-control-lg" formControlName="dateRange" placeholder="ตั้งแต่วันที่ &ndash; ถึงวันที่">
         </app-input-group>
       </div>
       <div class="col-12 col-lg-3 mb-3 mt-2">
