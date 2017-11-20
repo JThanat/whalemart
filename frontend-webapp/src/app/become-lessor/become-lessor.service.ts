@@ -30,7 +30,7 @@ export class BecomeLessorService {
     if (!this.userService.getCurrentUserInfo()) {
       return observableOf('require_login' as LessorStatus);
     }
-    return this.http.get('/api/lessor.json').pipe(
+    return this.http.get('/api/lessor/').pipe(
       mapTo('is_lessor'),
       catchError((err: any): Observable<string> | ErrorObservable => {
         if (err instanceof HttpErrorResponse) {
@@ -44,6 +44,6 @@ export class BecomeLessorService {
   }
 
   becomeLessor(lessorParams: BecomeLessorRequest): Observable<boolean> {
-    return this.http.post('/api/become-lessor.json', lessorParams).pipe(mapTo(true));
+    return this.http.post('/api/become-lessor/', lessorParams).pipe(mapTo(true));
   }
 }

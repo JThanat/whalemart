@@ -50,14 +50,6 @@ export class BecomeLessorComponent implements OnInit {
     this.setValidateOnOrganization(false);
   }
 
-  // toggleIsOrganization() {
-  //   const isOrganization = this.becomeLessorForm.value.isOrganization;
-  //   this.becomeLessorForm.controls['isOrganization'].setValue(
-  //     !isOrganization
-  //   );
-  //   this.setValidateOnOrganization(!isOrganization);
-  // }
-
   setValidateOnOrganization(isOrganization: Boolean) {
     const fields: string[] = [
       'organizationName',
@@ -65,8 +57,6 @@ export class BecomeLessorComponent implements OnInit {
       'organizationEmail',
       'organizationPhone'
     ];
-
-    // this.becomeLessorForm.controls['isOrganization'].setValue(isOrganization);
 
     for (let i = 0; i < fields.length; i++) {
       if (isOrganization) {
