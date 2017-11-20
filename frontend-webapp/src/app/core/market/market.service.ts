@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { DateRange } from '../utils/date-range.service';
 
 export interface Market {
+  readonly id: number;
   readonly expireDay?: number;
   readonly imageURL: string;
   readonly name: string;
@@ -41,6 +42,7 @@ interface MarketServerResponse {
     thumbnail: string;
   };
   tags: any[];
+  id: number;
 }
 
 interface SearchParams {
@@ -83,6 +85,7 @@ export class MarketService {
     const expireDay = Math.ceil((dueDate - Date.now()) / millisecondsInDay);
 
     return {
+      id: serverMarket.id,
       name: serverMarket.name,
       location: serverMarket.location,
       startDate: new Date(serverMarket.opening_date),
