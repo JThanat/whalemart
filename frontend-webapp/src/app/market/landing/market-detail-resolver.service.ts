@@ -28,13 +28,16 @@ interface MarketDetailServerResponse {
   min_price: string;
   max_price: string;
   layout_photo: string;
-  provided_accessories: string;
+  provided_accessories: {
+    [name: string]: number;
+  };
   cover_photo: {
     image: string;
   };
-  scene_photos: any[];
-  tags: any[];
-  booths: any[];
+  scene_photo_list: {
+    scene_image: string;
+  }[];
+  tag_list: string[];
 }
 
 @Injectable()
@@ -49,16 +52,7 @@ export class MarketDetailResolver implements Resolve<MarketDetail> {
   }
 
   private normalizeMarketDetail(sr: MarketDetailServerResponse): MarketDetail {
-    // TODO: Remove this when server returns correct provided accessories detail.
-    sr.provided_accessories = JSON.stringify({
-      'โต๊ะ': 2,
-      'ไฟฟลูออเรสเซนต์': 2,
-      'เก้าอี้': 4,
-      'ราวแขวนเสื้อ': 2
-    });
-
-    const accessoriesObj = JSON.parse(sr.provided_accessories) as { [name: string]: number };
-    const providedAccessories = Object.entries(accessoriesObj).map(accessory => {
+    const providedAccessories = Object.entries(sr.provided_accessories).map(accessory => {
       const [name, amount] = accessory;
       return { name, amount };
     });
@@ -88,12 +82,11 @@ export class MarketDetailResolver implements Resolve<MarketDetail> {
       estimateVisitor: sr.estimate_visitor,
       minPrice: Number(sr.min_price),
       maxPrice: Number(sr.max_price),
-      layoutImageUrl: sr.layout_photo.replace('4200', '8000'),
+      layoutImageUrl: sr.layout_photo,
       providedAccessories: providedAccessories,
-      coverImageUrl: sr.cover_photo.image.replace('4200', '8000'),
-      scenePhotos: sr.scene_photos,
-      tags: sr.tags,
-      booths: sr.booths
+      coverImageUrl: sr.cover_photo.image,
+      scenePhotoUrls: sr.scene_photo_list.map(photo => photo.scene_image),
+      tags: sr.tag_list
     };
   }
 }

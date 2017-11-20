@@ -89,20 +89,8 @@
       </div>
 
       <div class="col-12 col-md-10 col-lg-4 pl-lg-5 side-content">
-        <div class="scene-carousel mb-4">
-          <div class="image-container mb-3"></div>
-          <div class="d-flex justify-content-between">
-            <button type="button" class="btn prev disabled">ก่อนหน้า</button>
-            <div class="image-selector d-flex align-content-center">
-              <button type="button" class="btn selected">1</button>
-              <button type="button" class="btn">2</button>
-              <button type="button" class="btn">3</button>
-              <button type="button" class="btn">4</button>
-              <button type="button" class="btn">5</button>
-            </div>
-            <button type="button" class="btn next">ถัดไป</button>
-          </div>
-        </div>
+        <app-scene-carousel class="mb-4" [imgUrls]="marketDetail.scenePhotoUrls"></app-scene-carousel>
+
         <div class="cta-container d-flex justify-content-between align-items-center">
           <div class="price">
             <p class="min"><strong>เริ่มต้น</strong> {{ marketDetail.minPrice | currency:'THB':'symbol-narrow' }}</p>

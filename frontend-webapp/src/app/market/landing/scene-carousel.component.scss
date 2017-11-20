@@ -1,0 +1,15 @@
+@import '~styles/common';
+
+:host {
+  display: block;
+}
+
+.scene-image {
+  min-height: 5rem;
+  max-height: 20rem;
+  display: block;
+  background: $light-gray;
+  border-radius: $border-radius;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}

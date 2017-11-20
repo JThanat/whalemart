@@ -14,13 +14,13 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaginationComponent implements OnChanges {
-  public showLeft: boolean;
-  public showRight: boolean;
-  public centers: number[];
+  showLeft: boolean;
+  showRight: boolean;
+  centers: number[];
+  current = 1;
 
   @Input() min = 1;
   @Input() max = 1;
-  @Input() current = 1;
   @Input() padding = 1;
   @Output() navigate = new EventEmitter<number>();
 
@@ -28,6 +28,7 @@ export class PaginationComponent implements OnChanges {
     if (page === this.current) {
       return;
     }
+    this.current = page;
     this.navigate.emit(page);
   }
 
@@ -36,11 +37,7 @@ export class PaginationComponent implements OnChanges {
       this.max = this.min;
     }
 
-    if (this.current < this.min) {
-      this.current = this.min;
-    } else if (this.current > this.max) {
-      this.current = this.max;
-    }
+    this.current = this.min;
 
     let left = Math.min(
       this.current - this.padding,
