@@ -101,19 +101,13 @@ class MarketSerializer(serializers.ModelSerializer):
             serialized_scene = SceneSerializer().to_representation(scene)
             a.append(serialized_scene)
 
-        scene_dict = {}
-        scene_dict['scene_photos'] = a
-
         b = []
         for tag in tag_list:
             serialized_tag = TagSerializer().to_representation(tag)
             b.append(serialized_tag)
 
-        tag_dict = {}
-        tag_dict['tag_list'] = b
-
-        repr['scene_photo_list'] = scene_dict
-        repr['tag_list'] = tag_dict
+        repr['scene_photo_list'] = a
+        repr['tag_list'] = b
         return repr
 
     def update(self, instance, validated_data):

@@ -15,6 +15,7 @@ import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 
 import { MarketFeed } from '../core/market/market.service';
+import { DateRangeService } from '../core/utils/date-range.service';
 
 @Component({
   templateUrl: './feed.component.html',
@@ -58,20 +59,27 @@ export class FeedComponent implements OnInit {
   marketFeed: Observable<MarketFeed>;
   searchForm: FormGroup;
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private dateRangeService: DateRangeService
+  ) { }
 
   ngOnInit() {
     this.searchForm = new FormGroup({
-      searchQuery: new FormControl('')
+      searchQuery: new FormControl(''),
+      dateRange: new FormControl(null)
     });
 
     this.marketFeed = this.route.data.pipe(map(data => data.marketFeed));
   }
 
   search() {
+    const { searchQuery, dateRange } = this.searchForm.value;
     this.router.navigate(['/search'], {
       queryParams: {
-        q: this.searchForm.value.searchQuery
+        q: searchQuery,
+        daterange: dateRange ? this.dateRangeService.serialize(dateRange) : undefined
       }
     });
   }

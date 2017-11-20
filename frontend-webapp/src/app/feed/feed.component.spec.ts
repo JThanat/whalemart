@@ -7,9 +7,11 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { of as observableOf } from 'rxjs/observable/of';
 
 import { Market, MarketFeed } from '../core/market/market.service';
+import { DateRangeService } from '../core/utils/date-range.service';
 import { FeedComponent } from './feed.component';
 
 const testMarket: Market = {
+  id: 1,
   imageURL: 'https://url',
   expireDay: 3,
   name: 'foo',
@@ -38,7 +40,8 @@ describe('FeedComponent', () => {
           provide: ActivatedRoute, useValue: {
             data: observableOf({ marketFeed: testMarketFeed })
           }
-        }
+        },
+        DateRangeService
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
