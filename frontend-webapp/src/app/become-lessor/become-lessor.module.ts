@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 
+import { UserGuard } from '../shared/guard/user-guard';
 import { SharedModule } from '../shared/shared.module';
 import { BecomeLessorRoutingModule } from './become-lessor-routing.module';
 import { BecomeLessorComponent } from './become-lessor.component';
 import { BecomeLessorService } from './become-lessor.service';
-import { UserGuard } from '../shared/guard/user-guard';
 
 @NgModule({
   imports: [
