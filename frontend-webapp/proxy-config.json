@@ -5,5 +5,9 @@
     "pathRewrite": {
       "^/api": ""
     }
+  },
+  "/media": {
+    "target": "http://api:8000",
+    "changeOrigin": false
   }
 }
