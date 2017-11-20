@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { FacebookRegisterCanActivateGuard } from './facebook-register-can-activate-guard.service';
+import { FacebookRegisterComponent } from './facebook-register.component';
 import { RegisterComponent } from './register.component';
 
 const routes: Routes = [
@@ -8,6 +10,11 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     component: RegisterComponent
+  },
+  {
+    path: 'facebook',
+    component: FacebookRegisterComponent,
+    canActivate: [FacebookRegisterCanActivateGuard]
   }
 ];
 

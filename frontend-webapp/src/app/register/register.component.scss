@@ -1,3 +1,22 @@
-.form-error {
-  color: red;
+@import '~styles/common';
+
+.fb-card {
+  border: 1px solid $light-gray;
+  padding: map-get($spacers, 3) map-get($spacers, 4);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  .fb-profile-image {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+  }
+
+  .fb-profile-info {
+    p {
+      margin-bottom: 0;
+      font-size: 1.1rem;
+      strong {
+        font-size: 1.3rem;
+      }
+    }
+  }
 }

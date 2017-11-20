@@ -25,8 +25,8 @@
 // @import '~bootstrap/scss/nav';
 // @import '~bootstrap/scss/navbar';
 @import '~bootstrap/scss/card';
-@import '~bootstrap/scss/breadcrumb';
-@import '~bootstrap/scss/pagination';
+// @import '~bootstrap/scss/breadcrumb';
+// @import '~bootstrap/scss/pagination';
 @import '~bootstrap/scss/badge';
 @import '~bootstrap/scss/jumbotron';
 // @import '~bootstrap/scss/alert';
@@ -39,6 +39,17 @@
 @import '~bootstrap/scss/popover';
 // @import '~bootstrap/scss/carousel';
 @import '~bootstrap/scss/utilities';
+
+// Datepicker stylings
+
+@import '~flatpickr/dist/flatpickr.min.css';
+@import '~flatpickr/dist/themes/airbnb.css';
+
+input.date-range[readonly] {
+  background: $white;
+}
+
+// Other stylings
 
 .form-control-lg {
   padding: 0.8rem 1.4rem;

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../shared/shared.module';
+import { FacebookRegisterCanActivateGuard } from './facebook-register-can-activate-guard.service';
+import { FacebookRegisterComponent } from './facebook-register.component';
 import { RegisterRoutingModule } from './register-routing.module';
 import { RegisterComponent } from './register.component';
 import { RegisterService } from './register.service';
@@ -10,9 +12,13 @@ import { RegisterService } from './register.service';
     SharedModule,
     RegisterRoutingModule
   ],
-  declarations: [RegisterComponent],
+  declarations: [
+    RegisterComponent,
+    FacebookRegisterComponent
+  ],
   providers: [
-    RegisterService
+    RegisterService,
+    FacebookRegisterCanActivateGuard
   ]
 })
 export class RegisterModule { }

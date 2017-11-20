@@ -1,5 +1,8 @@
 import { Env } from './env';
 
 export const environment: Env = {
-  production: true
+  production: true,
+  facebook: {
+    appId: '368578503589249'
+  }
 };
