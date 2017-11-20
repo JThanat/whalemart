@@ -1,4 +1,9 @@
 <ng-container *ngIf="(marketDetailObs | async) as marketDetail">
+  <app-breadcrumb>
+    <a *appBreadcrumbItem routerLink="/">ฟีดตลาด</a>
+    <span *appBreadcrumbItem>{{ marketDetail.name }}</span>
+  </app-breadcrumb>
+
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-12 col-md-10">

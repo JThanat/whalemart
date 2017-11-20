@@ -1,12 +1,11 @@
-from datetime import time, datetime, timedelta
+from datetime import datetime
 
-from django.db.models import F
-from rest_framework import status
-from rest_framework import viewsets
-from rest_framework.response import Response
-from rest_framework.settings import api_settings
 from rest_framework import filters
+from rest_framework import viewsets
+from rest_framework.parsers import JSONParser, FormParser
+from rest_framework.response import Response
 
+from apps.commons.parser import MultipartFormencodeParser
 from apps.markets.models import Market
 from apps.markets.serializers import MarketSerializer, MarketFeedSerializer
 
@@ -36,6 +35,7 @@ from apps.markets.serializers import MarketSerializer, MarketFeedSerializer
 class MarketViewSet(viewsets.ModelViewSet):
     queryset = Market.objects.all().order_by('-created_at')
     serializer_class = MarketSerializer
+    parser_classes = (JSONParser, FormParser, MultipartFormencodeParser)
 
 
 class MarketFeedViewSet(viewsets.GenericViewSet):
@@ -152,4 +152,4 @@ class MarketFeedViewSet(viewsets.GenericViewSet):
         start = datetime.strptime(start_time, '%Y-%m-%d %H:%M:%S')
         end = datetime.strptime(end_time, '%Y-%m-%d %H:%M:%S')
         diff = end - start
-        return diff.seconds//60
+        return diff.seconds // 60

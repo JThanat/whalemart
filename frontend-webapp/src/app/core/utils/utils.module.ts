@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 
+import { DateRangeService } from './date-range.service';
 import { IntercomponentDataService } from './intercomponent-data.service';
 import { TimeService } from './time.service';
 
@@ -7,8 +8,9 @@ import { TimeService } from './time.service';
   imports: [],
   declarations: [],
   providers: [
-    IntercomponentDataService,
-    TimeService
+    TimeService,
+    DateRangeService,
+    IntercomponentDataService
   ]
 })
 export class UtilsModule { }

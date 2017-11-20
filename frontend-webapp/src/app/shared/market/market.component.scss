@@ -1,6 +1,16 @@
 @import '~styles/common';
 
-:host {
+a.market {
+  display: block;
+  text-decoration: none;
+  margin: -0.75rem;
+  padding: 0.75rem;
+  transition: box-shadow 0.25s;
+  &:hover {
+    box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.2);
+    background: $white;
+  }
+
   .img-container {
     height: 10rem;
     background-color: $light-gray;
@@ -24,7 +34,7 @@
       z-index: 1;
     }
   }
-  
+
   p {
     margin-bottom: 0;
     &.location {
@@ -39,6 +49,7 @@
     }
     &.date {
       font-size: 0.9rem;
+      color: $dark-gray;
     }
     &.price {
       margin-top: map-get($spacers, 1);
