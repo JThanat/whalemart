@@ -6,7 +6,6 @@ import { VendorProfileComponent } from './profile/vendor-profile.component';
 const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
     component: VendorProfileComponent
   }
 ];
