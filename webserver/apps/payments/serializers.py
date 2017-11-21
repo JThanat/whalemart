@@ -29,14 +29,14 @@ class FirstInstallmentSerializer(serializers.ModelSerializer):
         }
 
     def _validate_new_credit_card(self, card_info):
-        success, message = self.pay_with_credit_card(**card_info)
+        success, message = pay_with_credit_card(**card_info)
         if not success:
             raise serializers.ValidationError(message)
         return card_info
 
     def _validate_credit_card(self, pk):
         card_info = CreditCard.object.get(id=pk)
-        success, message = self.pay_with_credit_card(**card_info)
+        success, message = pay_with_credit_card(**card_info)
         if not success:
             raise serializers.ValidationError(message)
         return card_info
@@ -64,8 +64,9 @@ class FirstInstallmentSerializer(serializers.ModelSerializer):
         validated_data['rental_payment_info'] = rental_payment_info
         return Installment.objects.create(**validated_data)
 
-    def pay_with_credit_card(self, **data):
-        # TODO: Call service -- Boat-sama
-        status = True
-        message = 'Payment success'
-        return status, message
+
+def pay_with_credit_card(self, **data):
+    # TODO: Call service -- Boat-sama
+    status = True
+    message = 'Payment success'
+    return status, message
