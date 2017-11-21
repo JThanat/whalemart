@@ -16,7 +16,7 @@
         </li>
         <ng-container *ngIf="(userName | async) as name; else loggedIn">
           <li class="nav-item">
-            <div class="navbar-text">{{ name }}</div>
+            <a href="#" class="navbar-text">{{ name }}</a>
           </li>
           <button class="btn btn-link my-2 my-sm-0" (click)="logout()">ออกจากระบบ</button>
         </ng-container>
