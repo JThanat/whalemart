@@ -1,18 +1,14 @@
 from datetime import datetime
 
-from rest_framework import filters, serializers
+from rest_framework import filters
 from rest_framework import viewsets
 from rest_framework.generics import ListAPIView
 from rest_framework.parsers import JSONParser, FormParser
 from rest_framework.response import Response
-from rest_framework.views import APIView
 
 from apps.commons.parser import MultipartFormencodeParser
 from apps.markets.models import Market, Scene
 from apps.markets.serializers import MarketSerializer, MarketFeedSerializer, SceneSerializer
-
-import json
-from itertools import chain
 
 
 class MarketViewSet(viewsets.ModelViewSet):
