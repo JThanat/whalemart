@@ -10,22 +10,24 @@
     <button type="button" class="hamburger d-md-none btn btn-outline-primary my-2 my-sm-0" (click)="toggleMenu()">เมนู</button>
 
     <div class="menu-list d-md-block" [class.d-none]="!isMenuOpened">
-      <ul class="">
+      <ul *ngIf="(userStatus | async) as status">
         <li class="nav-item active">
           <a class="nav-link" href="#">ลงตลาดให้เช่า</a>
         </li>
-        <ng-container *ngIf="(userName | async) as name; else loggedIn">
+
+        <ng-container *ngIf="status.type === 'loggedIn'">
           <li class="nav-item">
-            <a href="#" class="navbar-text">{{ name }}</a>
+            <a href="#" class="navbar-text">{{ status.user.firstName }}</a>
           </li>
           <button class="btn btn-link my-2 my-sm-0" (click)="logout()">ออกจากระบบ</button>
         </ng-container>
-        <ng-template #loggedIn>
+
+        <ng-container *ngIf="status.type === 'loggedOut'">
           <li class="nav-item">
             <a class="nav-link" routerLink="login">เข้าสู่ระบบ</a>
           </li>
           <a class="btn btn-outline-primary my-2 my-sm-0" routerLink="register">สมัครสมาชิก</a>
-        </ng-template>
+        </ng-container>
       </ul>
     </div>
   </div>

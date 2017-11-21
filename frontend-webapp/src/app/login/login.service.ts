@@ -27,7 +27,7 @@ export class LoginService {
             lastName: result.last_name,
             email: result.email
           };
-          this.userService.userInfo.next(userInfo);
+          this.userService.setLoginData(userInfo);
           return userInfo;
         }),
         catchError(err => {
