@@ -3,10 +3,6 @@
     <div class="col-12 col-sm-9 col-md-6 col-lg-5 col-xl-5">
       <h1 class="display-4 mt-5">ลงตลาดให้เช่า</h1>
 
-      <div *ngIf="!(lessorStatus$ | async)">
-        กำลังตรวจสอบข้อมูล...
-      </div>
-
       <div *ngIf="(lessorStatus$ | async) === 'is_lessor'">
         คุณได้สมัครเป็นผู้ให้เช่าตลาดเรียบร้อยแล้ว
       </div>
