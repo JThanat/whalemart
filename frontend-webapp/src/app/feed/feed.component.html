@@ -59,46 +59,56 @@
     </div>
   </div>
 
-  <section>
-    <div class="container mb-3">
-      <div class="section-title">
-        <h2>ตลาดนัดชิวยามค่ำคืน</h2>
-        <a class="link-with-icon" routerLink="/">
-          <div class="link-text">ดูทั้งหมด</div>
-          <div class="link-icon">
-            <app-svg-icon key="arrow-head-right" width="8"></app-svg-icon>
-          </div>
-        </a>
-      </div>
+  <section class="container mb-3">
+    <div class="section-title">
+      <h2>ตลาดมาใหม่ไฟแรง</h2>
+      <a class="link-with-icon" routerLink="/">
+        <div class="link-text">ดูทั้งหมด</div>
+        <div class="link-icon">
+          <app-svg-icon key="arrow-head-right" width="8"></app-svg-icon>
+        </div>
+      </a>
     </div>
 
-    <div class="container">
-      <div class="row">
-        <div class="col-12 col-sm-6 col-lg-3 mb-5" *ngFor="let market of (marketFeed | async).nights">
-          <app-market-item [market]="market"></app-market-item>
-        </div>
+    <div class="row">
+      <div class="col-12 col-sm-6 col-lg-3 mb-5" *ngFor="let market of (marketFeed | async).recentlyAdded">
+        <app-market-item [market]="market"></app-market-item>
       </div>
     </div>
   </section>
 
-  <section>
-    <div class="container mb-3">
-      <div class="section-title">
-        <h2>ตลาดนัดใต้แสงแดดประเทศไทย</h2>
-        <a class="link-with-icon" routerLink="/">
-          <div class="link-text">ดูทั้งหมด</div>
-          <div class="link-icon">
-            <app-svg-icon key="arrow-head-right" width="8"></app-svg-icon>
-          </div>
-        </a>
-      </div>
+  <section class="container mb-3">
+    <div class="section-title">
+      <h2>ตลาดนัดชิวยามค่ำคืน</h2>
+      <a class="link-with-icon" routerLink="/">
+        <div class="link-text">ดูทั้งหมด</div>
+        <div class="link-icon">
+          <app-svg-icon key="arrow-head-right" width="8"></app-svg-icon>
+        </div>
+      </a>
     </div>
 
-    <div class="container">
-      <div class="row">
-        <div class="col-12 col-sm-6 col-lg-3 mb-5" *ngFor="let market of (marketFeed | async).days">
-          <app-market-item [market]="market"></app-market-item>
+    <div class="row">
+      <div class="col-12 col-sm-6 col-lg-3 mb-5" *ngFor="let market of (marketFeed | async).night">
+        <app-market-item [market]="market"></app-market-item>
+      </div>
+    </div>
+  </section>
+
+  <section class="container mb-3">
+    <div class="section-title">
+      <h2>ตลาดฤดูหนาว</h2>
+      <a class="link-with-icon" routerLink="/">
+        <div class="link-text">ดูทั้งหมด</div>
+        <div class="link-icon">
+          <app-svg-icon key="arrow-head-right" width="8"></app-svg-icon>
         </div>
+      </a>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-sm-6 col-lg-3 mb-5" *ngFor="let market of (marketFeed | async).winter">
+        <app-market-item [market]="market"></app-market-item>
       </div>
     </div>
   </section>
