@@ -12,7 +12,6 @@
     @include font-weight(bold);
     margin: 3rem 0 0.5rem 0;
     font-size: 2rem;
-    white-space: nowrap;
     line-height: 2.5rem;
     @include media-breakpoint-up(lg) {
       margin: 6rem 0 0.5rem 0;
@@ -27,24 +26,37 @@
   }
 }
 
-.cool-carousel-item {
+.emphasized-market-item {
   position: relative;
-  height: 18rem;
+  height: 25rem;
+  margin-bottom: 2rem;
+  @include media-breakpoint-up(md) {
+    height: 18rem;
+  }
   .img-container {
     background: $light-gray;
+    background-size: cover;
     position: absolute;
-    border-radius: $border-radius-sm;
+    border-radius: $border-radius;
     top: 0;
-    bottom: 0;
+    bottom: 1rem;
     left: 0;
-    right: 55%;
+    right: 2rem;
+    @include media-breakpoint-up(md) {
+      bottom: 0;
+      right: 55%;
+    }
   }
   .card {
     box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.1);
     position: absolute;
     right: 0;
-    left: 35%;
-    bottom: 1rem;
+    bottom: 0;
+    left: 2rem;
+    @include media-breakpoint-up(md) {
+      bottom: 1rem;
+      left: 35%;
+    }
     .name {
       @include font-family(heading);
       @include font-weight(bold);

@@ -1,6 +1,6 @@
 <section class="search-section mb-5 py-4" @searchSectionIn>
   <div class="container">
-    <p class="lead-1">ตลาดสุดฮิตมากมาย<wbr> รอให้คุณมาจับจอง</p>
+    <p class="lead-1">ตลาดสุดฮิตมากมาย รอให้คุณมาจับจอง</p>
     <p class="lead-2">ค้นหาตลาดง่ายๆ แค่ปลายนิ้ว</p>
     <form [formGroup]="searchForm" class="row align-items-end" (submit)="search()">
       <div class="col-12 col-lg-5">
@@ -27,31 +27,30 @@
     </div>
   </div>
 
-  <!-- TODO: Properly implement carousel -->
   <div class="container mb-5">
     <div class="row">
-      <div class="col-12 col-lg-6" *ngFor="let i of coolCarouselLooper">
-        <div class="cool-carousel-item mb-4">
-          <div class="img-container"></div>
+      <div class="col-12 col-lg-6" *ngFor="let market of (marketFeed | async).recommended">
+        <div class="emphasized-market-item">
+          <div class="img-container" [style.backgroundImage]="'url(' + market.imageURL + ')'"></div>
           <div class="card">
             <div class="card-body">
-              <h4 class="name">ตลาดนัดถนนรัชดาภิเษก</h4>
+              <h4 class="name">{{ market.name }}</h4>
               <p class="location">
                 <app-svg-icon key="location-pin" width="15"></app-svg-icon>
-                <span>ถนนรัชดาภิเษก กทม.</span>
+                <span>{{ market.location }}</span>
               </p>
               <p class="date">
                 <app-svg-icon key="date" width="18"></app-svg-icon>
-                <span>18&ndash;24 ธันวาคม 2560</span>
+                <span>{{ [market.startDate, market.endDate] | dateRange }}</span>
               </p>
               <div class="d-flex justify-content-between align-items-center mt-3">
-                <p class="price">เริ่มต้น 1,200฿</p>
-                <a routerLink="/" class="btn btn-primary">ดูเพิ่มเติม</a>
+                <p class="price">เริ่มต้น {{ market.minPrice | currency:'THB':'฿':'3.0' }}</p>
+                <a [routerLink]="['/market', market.id]" class="btn btn-primary">ดูเพิ่มเติม</a>
               </div>
             </div>
             <div class="card-footer">
-                <app-svg-icon key="person-circle"></app-svg-icon>
-                <span>มีคนจองตลาดนี้แล้ว 84 คน</span>
+              <app-svg-icon key="person-circle"></app-svg-icon>
+            <span>มีคนจองตลาดนี้แล้ว 84 คน</span>
             </div>
           </div>
         </div>
