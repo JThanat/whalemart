@@ -19,7 +19,7 @@ class BecomeALessorViewSet(viewsets.GenericViewSet):
     """
     serializer_class = LessorInputSerializer
 
-    def create(self, request):
+    def create(self, request, format=None):
         data = request.data.copy()
         data['user'] = request.user.id
         serializer = LessorSerializer(data=data, context=self.get_serializer_context())
@@ -38,13 +38,13 @@ class LessorViewSet(viewsets.ViewSet):
     """
     serializer_class = LessorEditSerializer
 
-    def list(self, request):
+    def list(self, request, format=None):
         user = get_object_or_404(User, id=request.user.id)
         lessor = get_object_or_404(Lessor, user=user)
         return Response(LessorSerializer(lessor).data)
 
     @list_route(methods=['post'])
-    def change(self, request):
+    def change(self, request, format=None):
         user = get_object_or_404(User, id=request.user.id)
         lessor = get_object_or_404(Lessor, user=user)
         serializer = LessorEditSerializer(lessor, data=request.data, partial=True)

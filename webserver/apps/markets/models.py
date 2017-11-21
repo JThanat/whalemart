@@ -4,6 +4,7 @@ from django.db import models
 from apps.commons.control_model import ControlModel
 from apps.commons.file_upload import UploadedImage
 from apps.markets.managers import MarketManager
+from apps.tags.models import Tag
 
 
 class Market(ControlModel):
@@ -65,6 +66,14 @@ class Market(ControlModel):
 
     # Provided Accessories
     provided_accessories = fields.JSONField(verbose_name='Provided Accessories')
+
+    def __str__(self):
+        return '{} - {}'.format(self.name, self.id)
+
+    def tag_set(self):
+        tags = Tag.objects.filter(market=self.pk)
+        tags = [x.tag for x in tags]
+        return tags
 
 
 class CoverPhoto(UploadedImage):
