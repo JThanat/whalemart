@@ -126,7 +126,7 @@ export class MarketService {
       return observableOf(undefined);
     }
 
-    return this.http.get<MarketFeedServerResponse>('/api/market-feed/', {
+    return this.http.get<MarketFeedServerResponse>('/api/market-search/', {
       params: params.append('page', String(searchParams.page))
     }).pipe(map(result => {
       return {
