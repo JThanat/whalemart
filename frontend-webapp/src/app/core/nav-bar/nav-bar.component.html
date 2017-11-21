@@ -12,7 +12,7 @@
     <div class="menu-list d-md-block" [class.d-none]="!isMenuOpened">
       <ul class="">
         <li class="nav-item active">
-          <a class="nav-link" href="#">ลงตลาดให้เช่า</a>
+          <a class="nav-link" routerLink="become-lessor">ลงตลาดให้เช่า</a>
         </li>
         <ng-container *ngIf="(userName | async) as name; else loggedIn">
           <li class="nav-item">
