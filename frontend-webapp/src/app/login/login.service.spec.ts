@@ -3,19 +3,10 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { inject, TestBed } from '@angular/core/testing';
 
 import { UserInfo, UserService } from '../core/user/user.service';
-import {
-  InvalidLoginCredentialError,
-  LoginServerResponse,
-  LoginService
-} from './login.service';
+import { InvalidLoginCredentialError, LoginServerResponse, LoginService } from './login.service';
 
 class MockUserService {
-  private currentUserInfo: UserInfo | undefined = undefined;
-  userInfo = { next: (newUserInfo: UserInfo) => { this.currentUserInfo = newUserInfo; } };
-
-  getCurrentUserInfo() {
-    return this.currentUserInfo;
-  }
+  setLoginData = jasmine.createSpy();
 }
 
 describe('LoginService', () => {
@@ -34,7 +25,7 @@ describe('LoginService', () => {
   const inj = (fn: (
     loginService: LoginService,
     httpMock: HttpTestingController,
-    userService: UserService
+    userService: MockUserService
   ) => void) => inject([LoginService, HttpTestingController, UserService], fn);
 
   afterEach(inject(
@@ -43,7 +34,7 @@ describe('LoginService', () => {
 
   it('should return UserInfo correctly when the login credential is correct', inj(
     (loginService, httpMock, userService) => {
-      expect(userService.getCurrentUserInfo()).toBe(undefined);
+      expect(userService.setLoginData.calls.count()).toBe(0);
 
       let isSuccess = false;
       loginService.login('test@abc.com', 'testpassword').subscribe(result => {
@@ -60,7 +51,8 @@ describe('LoginService', () => {
       } as LoginServerResponse);
 
       expect(isSuccess).toBe(true);
-      expect(userService.getCurrentUserInfo()).toEqual({
+      expect(userService.setLoginData).toHaveBeenCalledTimes(1);
+      expect(userService.setLoginData.calls.first().args[0]).toEqual({
         email: 'test@abc.com',
         firstName: 'Foo',
         lastName: 'Bar'
@@ -70,7 +62,7 @@ describe('LoginService', () => {
 
   it('should throw LoginError when the login credential is not correct', inj(
     (loginService, httpMock, userService) => {
-      expect(userService.getCurrentUserInfo()).toBe(undefined);
+      expect(userService.setLoginData.calls.count()).toBe(0);
 
       let isError = false;
       loginService.login('test@abc.com', 'testpassword').subscribe(() => fail(), err => {
@@ -83,13 +75,13 @@ describe('LoginService', () => {
       req.flush(null, { status: 400, statusText: 'Bad Request' });
 
       expect(isError).toBe(true);
-      expect(userService.getCurrentUserInfo()).toBeUndefined();
+      expect(userService.setLoginData.calls.count()).toBe(0);
     }
   ));
 
   it('should throw LoginError when there is an HTTP error', inj(
     (loginService, httpMock, userService) => {
-      expect(userService.getCurrentUserInfo()).toBe(undefined);
+      expect(userService.setLoginData.calls.count()).toBe(0);
 
       let isError = false;
       loginService.login('test@abc.com', 'testpassword').subscribe(() => fail(), err => {
@@ -102,7 +94,7 @@ describe('LoginService', () => {
       req.error(new ErrorEvent('some error'));
 
       expect(isError).toBe(true);
-      expect(userService.getCurrentUserInfo()).toBeUndefined();
+      expect(userService.setLoginData.calls.count()).toBe(0);
     }
   ));
 });
