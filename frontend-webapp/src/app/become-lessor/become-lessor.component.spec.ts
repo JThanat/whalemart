@@ -30,7 +30,13 @@ describe('BecomeLessorComponent', () => {
         { provide: BecomeLessorService, useClass: MockBecomeLessorService },
         { provide: AlertService, useValue: {} },
         { provide: UserService, useValue: {} },
-        { provide: ActivatedRoute, useValue: {} }
+        {
+          provide: ActivatedRoute, useValue: {
+            data: observableOf({
+              lessorStatus: 'is_lessor'
+            })
+          }
+        }
       ]
     })
       .compileComponents();
