@@ -140,3 +140,22 @@ class MarketFeedViewSet(viewsets.GenericViewSet):
 class SceneViewSet(viewsets.ModelViewSet):
     queryset = Scene.objects.all().order_by('-id')
     serializer_class = SceneSerializer
+
+
+class SimilarMarketView(viewsets.GenericViewSet):
+
+    serializer_class = MarketFeedSerializer
+    queryset = Market.objects.all().order_by('-created_at')[:4]
+
+    def list(self, request, *args, **kwargs):
+        # This logic should be changed
+        queryset = self.filter_queryset(self.get_queryset())
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+
