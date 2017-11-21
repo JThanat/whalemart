@@ -20,6 +20,10 @@ const routes: Routes = [
     loadChildren: './register/register.module#RegisterModule'
   },
   {
+    path: 'become-lessor',
+    loadChildren: './become-lessor/become-lessor.module#BecomeLessorModule'
+  },
+  {
     path: 'market/:id',
     pathMatch: 'full',
     loadChildren: './market/landing/market-landing.module#MarketLandingModule'
