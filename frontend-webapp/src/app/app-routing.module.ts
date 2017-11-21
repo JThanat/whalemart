@@ -28,6 +28,11 @@ const routes: Routes = [
     path: 'search',
     pathMatch: 'full',
     loadChildren: './search/search.module#SearchModule'
+  },
+  {
+    path: 'vendor',
+    pathMatch: 'full',
+    loadChildren: './vendor-dashboard/vendor-dashboard.module#VendorDashboardModule'
   }
 ];
 
