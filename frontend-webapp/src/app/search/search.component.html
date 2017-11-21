@@ -1,17 +1,14 @@
 <ng-container *appSubNavBar>
   <div class="filter-bar">
-    <div class="filter-item">
-      <span>ช่วงราคา</span>
-      <app-svg-icon key="arrow-head-down" width="12"></app-svg-icon>
-    </div>
-    <div class="filter-item">
-      <span>วันจัดตลาด</span>
-      <app-svg-icon key="arrow-head-down" width="12"></app-svg-icon>
-    </div>
-    <div class="filter-item">
-      <span>ช่วงเวลาที่ตลาดเปิด</span>
-      <app-svg-icon key="arrow-head-down" width="12"></app-svg-icon>
-    </div>
+    <app-menu text="ช่วงราคา">
+      <div class="p-5">ช่วงราคา</div>
+    </app-menu>
+    <app-menu text="วันจัดตลาด">
+      <div class="p-5">วันจัดตลาด</div>
+    </app-menu>
+    <app-menu text="ช่วงเวลาที่ตลาดเปิด">
+      <div class="p-5">ช่วงเวลาที่ตลาดเปิด</div>
+    </app-menu>
     <button *ngIf="canGoBack()" type="button" class="ml-auto btn btn-link" (click)="goBack()">
       ปิดการค้นหา
     </button>

@@ -2,33 +2,15 @@
 
 .filter-bar {
   display: flex;
-  height: 40px;
+  height: 2.5rem;
   align-items: center;
-  padding-bottom: 6px;
-  overflow: hidden;
-}
+  padding-bottom: 0.2rem;
 
-.filter-item {
-  display: flex;
-  align-items: center;
-  color: $dark-gray;
-  margin-right: 1.1rem;
-  font-size: 0.9rem;
-  padding: 7px 12px;
-  border-radius: $border-radius;
-  margin-left: -12px;
-  cursor: pointer;
-  &:hover {
-    background: lighten($light-gray, 8%);
-  }
-  > span {
-    @include font-family(heading);
-    @include font-weight(regular);
-    white-space: nowrap;
-  }
-  > app-svg-icon {
-    margin-top: 2px;
-    margin-left: 0.3rem;
+  app-menu {
+    margin-left: 1rem;
+    &:first-child {
+      margin-left: 0;
+    }
   }
 }
 
