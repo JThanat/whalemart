@@ -1,3 +1,4 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   ActivationStart,
@@ -16,7 +17,27 @@ import { SubNavBarService } from './sub-nav-bar.service';
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.scss']
+  styleUrls: ['./nav-bar.component.scss'],
+  animations: [
+    trigger('searchBoxIn', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateX(-0.5rem)' }),
+        animate(
+          '250ms cubic-bezier(0.215, 0.61, 0.355, 1)',
+          style({ opacity: 1, transform: 'translateX(0)' })
+        )
+      ])
+    ]),
+    trigger('subNavIn', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(-0.5rem)' }),
+        animate(
+          '200ms 100ms cubic-bezier(0.215, 0.61, 0.355, 1)',
+          style({ opacity: 1, transform: 'translateY(0)' })
+        )
+      ])
+    ])
+  ]
 })
 export class NavBarComponent implements OnInit, OnDestroy {
   isMenuOpened = false;
