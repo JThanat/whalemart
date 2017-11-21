@@ -30,9 +30,9 @@ const routes: Routes = [
     loadChildren: './search/search.module#SearchModule'
   },
   {
-    path: 'vendor-profile',
+    path: 'vendor',
     pathMatch: 'full',
-    loadChildren: './vendor-profile/vendor-profile.module#VendorProfileModule'
+    loadChildren: './vendor-dashboard/vendor-dashboard.module#VendorDashboardModule'
   }
 ];
 
