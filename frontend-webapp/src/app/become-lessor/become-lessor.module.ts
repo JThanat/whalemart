@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { UserGuard } from '../shared/guard/user-guard';
+import { UserLoginGuard } from '../core/user/user-login-guard';
 import { SharedModule } from '../shared/shared.module';
 import { BecomeLessorResolver } from './become-lessor-resolver.service';
 import { BecomeLessorRoutingModule } from './become-lessor-routing.module';
@@ -15,7 +15,7 @@ import { BecomeLessorService } from './become-lessor.service';
   declarations: [BecomeLessorComponent],
   providers: [
     BecomeLessorService,
-    UserGuard,
+    UserLoginGuard,
     BecomeLessorResolver
   ]
 })
