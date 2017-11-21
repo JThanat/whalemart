@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 import { distinctUntilChanged } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { AlertService } from '../core/alert/alert.service';
-import { BecomeLessorService } from './become-lessor.service';
+import { BecomeLessorService, LessorStatus } from './become-lessor.service';
 
 @Component({
   selector: 'app-become-lessor',
@@ -12,19 +15,16 @@ import { BecomeLessorService } from './become-lessor.service';
 })
 export class BecomeLessorComponent implements OnInit {
   becomeLessorForm: FormGroup;
-  loadingStatus: string | undefined = undefined;
+  lessorStatus$: Observable<LessorStatus>;
 
   constructor(
     private becomeLessorService: BecomeLessorService,
-    private alert: AlertService
+    private alert: AlertService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.becomeLessorService.checkLessorStatus().subscribe(status => {
-      this.loadingStatus = status;
-    }, (err: any) => {
-      this.alert.show({ message: 'ไม่สามารถโหลดข้อมูลได้', type: 'danger' });
-    });
+    this.lessorStatus$ = this.route.data.pipe(map(data => data.lessorStatus));
 
     this.becomeLessorForm = new FormGroup({
       lessorName: new FormControl('', [Validators.required]),
