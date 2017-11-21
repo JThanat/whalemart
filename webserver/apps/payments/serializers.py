@@ -46,9 +46,9 @@ class FirstInstallmentSerializer(serializers.ModelSerializer):
         payment_type = validated_data.pop('payment_type')
         reservation_info = validated_data.pop('reservation_info')
         user = self.context['request'].user
-        is_verified = validated_data.pop('is_verified')
         status = RentalPaymentInfo.DRAFTED
-        if is_verified:
+        if validated_data['payment_method'] == Installment.CREDIT_CARD:
+            validated_data['is_verified'] = True
             if payment_type == self.PARTIAL:
                 status = RentalPaymentInfo.DEPOSITED
             elif payment_type == self.FULL:
