@@ -1,7 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit, TrackByFunction } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { combineLatest as observableCombineLatest } from 'rxjs/observable/combineLatest';
@@ -54,7 +54,7 @@ type SearchResult = SearchResultOK | SearchResultNotOK;
 })
 export class SearchComponent implements OnInit {
   searchResult: Observable<SearchResult>;
-  searchForm: FormGroup;
+  searchFilterForm: FormGroup;
   queryString: Observable<string>;
   dateRange: Observable<DateRange | undefined>;
   currentPage: Observable<number>;
@@ -71,6 +71,15 @@ export class SearchComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.searchFilterForm = new FormGroup({
+      time: new FormGroup({
+        morning: new FormControl(false),
+        afternoon: new FormControl(false),
+        evening: new FormControl(false),
+        night: new FormControl(false)
+      })
+    });
+
     this.queryString = this.route.queryParamMap.pipe(
       map(queryParam => queryParam.get('q') || ''),
       distinctUntilChanged()
@@ -102,15 +111,20 @@ export class SearchComponent implements OnInit {
     const searchParams = observableCombineLatest(
       this.currentPage,
       this.queryString,
-      this.dateRange
+      this.dateRange,
+      this.searchFilterForm.valueChanges.pipe(
+        startWith({}),
+        map(() => this.searchFilterForm.value)
+      )
     );
 
     this.searchResult = searchParams.pipe(
-      switchMap(([page, queryString, dateRange]) => {
+      switchMap(([page, queryString, dateRange, filter]) => {
         const query = queryString !== '' ? queryString : undefined;
+        const { time } = filter;
 
         return this.marketService.search({
-          page, query, dateRange
+          page, query, dateRange, time
         }).pipe(this.mapSearchResult());
       }),
       startWith({ status: SearchResultStatus.Searching } as SearchResult)

@@ -1,5 +1,5 @@
 <ng-container *appSubNavBar>
-  <div class="filter-bar">
+  <form class="filter-bar" [formGroup]="searchFilterForm">
     <app-menu text="ช่วงราคา">
       <div class="p-5">ช่วงราคา</div>
     </app-menu>
@@ -7,12 +7,37 @@
       <div class="p-5">วันจัดตลาด</div>
     </app-menu>
     <app-menu text="ช่วงเวลาที่ตลาดเปิด">
-      <div class="p-5">ช่วงเวลาที่ตลาดเปิด</div>
+      <div class="my-3 mx-4" formGroupName="time">
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" formControlName="morning" class="form-check-input">
+            เช้า
+          </label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" formControlName="afternoon" class="form-check-input">
+            บ่าย
+          </label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" formControlName="evening" class="form-check-input">
+            เย็น
+          </label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" formControlName="night" class="form-check-input">
+            กลางคืน
+          </label>
+        </div>
+      </div>
     </app-menu>
     <button *ngIf="canGoBack()" type="button" class="ml-auto btn btn-link" (click)="goBack()">
       ปิดการค้นหา
     </button>
-  </div>
+  </form>
 </ng-container>
 
 <div class="container mt-5 mb-5" *ngIf="(searchResult | async) as result">

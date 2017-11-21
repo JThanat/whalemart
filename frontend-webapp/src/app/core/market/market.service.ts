@@ -49,9 +49,15 @@ interface MarketServerResponse {
 }
 
 interface SearchParams {
+  page: number;
   query?: string;
   dateRange?: DateRange;
-  page: number;
+  time?: {
+    morning: boolean;
+    afternoon: boolean;
+    evening: boolean;
+    night: boolean;
+  };
 }
 
 const minShowExpireTimespanInDays = 90;
@@ -91,6 +97,29 @@ export class MarketService {
       params = params
         .append('min_date', searchParams.dateRange.start.toISOString())
         .append('max_date', searchParams.dateRange.end.toISOString());
+    }
+
+    if (searchParams.time !== undefined) {
+      const addTimeParams =
+        searchParams.time.morning ||
+        searchParams.time.afternoon ||
+        searchParams.time.evening ||
+        searchParams.time.night;
+
+      if (addTimeParams) {
+        if (searchParams.time.morning) {
+          params = params.append('morning', 'true');
+        }
+        if (searchParams.time.afternoon) {
+          params = params.append('afternoon', 'true');
+        }
+        if (searchParams.time.evening) {
+          params = params.append('evening', 'true');
+        }
+        if (searchParams.time.night) {
+          params = params.append('night', 'true');
+        }
+      }
     }
 
     if (!hasSearchParams) {
