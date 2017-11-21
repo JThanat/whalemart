@@ -86,7 +86,7 @@ class Command(BaseCommand):
         random.seed(1950)
         for market in markets:
             # dump image
-            # self._generate_scene(market)
+            self._generate_scene(market)
             # dump Tag
             self._dump_tag(market)
             # dump provided accessories
