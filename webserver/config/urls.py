@@ -42,7 +42,7 @@ router.register(r'register', user_views.RegistrationViewSet)
 router.register(r'vendor-profile', user_views.UserViewSet)
 router.register(r'product', product_views.ProduceViewSet, base_name='product')
 router.register(r'markets', market_views.MarketViewSet, base_name='markets')
-router.register(r'market-feed', market_views.MarketFeedViewSet, base_name='feed')
+router.register(r'market-search', market_views.MarketFeedViewSet, base_name='search')
 router.register(r'booth', booth_views.BoothViewSet, base_name='booth')
 router.register(r'tag', tag_views.TagViewSet, base_name='tag')
 router.register(r'scene', market_views.SceneViewSet, base_name='scene')
@@ -54,6 +54,7 @@ urlpatterns = [
     url(r'^', include(router.urls)),
     url(r'^ping/', ping_views.Ping.as_view()),
     url(r'^validate-email/', user_views.ValidateUserEmailView.as_view()),
+    url(r'^market-feed', market_views.CategorizedFeedView.as_view(), name='market-feed'),
     url(r'^login-facebook/', user_views.login_facebook),
     url(r'^login-username/', user_views.login_username),
     url(r'^logout/', user_views.logout),
