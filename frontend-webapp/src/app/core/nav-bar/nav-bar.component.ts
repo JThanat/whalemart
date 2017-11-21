@@ -7,11 +7,10 @@ import {
   Router
 } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs/Subscription';
 
 import { AlertService } from '../alert/alert.service';
-import { UserService } from '../user/user.service';
+import { UserService, UserStatus } from '../user/user.service';
 import { SubNavBarService } from './sub-nav-bar.service';
 
 @Component({
@@ -41,7 +40,12 @@ import { SubNavBarService } from './sub-nav-bar.service';
 })
 export class NavBarComponent implements OnInit, OnDestroy {
   isMenuOpened = false;
-  userName: Observable<string | undefined>;
+
+  /**
+   * A name of a logged-in user that will be displayed on the top. If a user is not logged in, it
+   * will be undefined.
+   */
+  userStatus: Observable<UserStatus>;
 
   private routerSubcription: Subscription;
 
@@ -53,9 +57,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.userName = this.userService.userInfo.pipe(
-      map(userInfo => userInfo ? userInfo.firstName : undefined)
-    );
+    this.userStatus = this.userService.getUserStatus();
 
     this.routerSubcription = this.router.events.subscribe(event => {
       if (event instanceof RouteConfigLoadStart ||

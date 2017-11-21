@@ -22,12 +22,11 @@ class CoverPhotoThumbnailSerializer(serializers.ModelSerializer):
 
 
 class SceneSerializer(serializers.ModelSerializer):
+    market = serializers.PrimaryKeyRelatedField(queryset=Market.objects.all())
+
     class Meta:
         model = Scene
-        fields = ('scene_image',)
-
-        # def to_representation(self, instance):
-        #     return super(SceneSerializer, self).to_representation(instance)
+        fields = ('id', 'scene_image', 'market')
 
 
 class BoothSerializer(serializers.ModelSerializer):
@@ -59,16 +58,18 @@ class MarketSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Market
-        fields = ('id', 'name', 'caption', 'description', 'opening_date', 'closing_date', 'opening_time', 'closing_time',
-                  'contact_person_fullname', 'contact_person_phone_number', 'contact_person_email', 'location',
-                  'location_latitude', 'location_longitude', 'term_and_condition', 'deposit_payment_due',
-                  'full_payment_due', 'reservation_due_date', 'estimate_visitor', 'min_price', 'max_price',
-                  'layout_photo', 'provided_accessories', 'cover_photo', 'scene_photo_list', 'tag_list')
+        fields = (
+            'id', 'name', 'caption', 'description', 'opening_date', 'closing_date', 'opening_time', 'closing_time',
+            'contact_person_fullname', 'contact_person_phone_number', 'contact_person_email', 'location',
+            'location_latitude', 'location_longitude', 'term_and_condition', 'deposit_payment_due',
+            'full_payment_due', 'reservation_due_date', 'estimate_visitor', 'min_price', 'max_price',
+            'layout_photo', 'provided_accessories', 'cover_photo', 'scene_photo_list', 'tag_list'
+        )
 
     def create(self, validated_data):
-        tags_data = validated_data.pop('tag_list')
-        cover_photo = validated_data.pop('cover_photo')
-        scene_images = validated_data.pop('scene_photo_list')
+        tags_data = validated_data.pop('tag_list', None)
+        cover_photo = validated_data.pop('cover_photo', None)
+        scene_images = validated_data.pop('scene_photo_list', None)
         # booths = validated_data.pop('booths')
 
         validated_data['created_user'] = self.context.get('request').user
@@ -95,20 +96,42 @@ class MarketSerializer(serializers.ModelSerializer):
 
         scene_list = Scene.objects.filter(market=instance.id)
         tag_list = Tag.objects.filter(market=instance.id)
+        cover_photo_id = CoverPhoto.objects.filter(market=instance.id).first().pk
 
-        a = []
+        scenes = []
         for scene in scene_list:
             serialized_scene = SceneSerializer().to_representation(scene)
-            a.append(serialized_scene)
+            serialized_scene['id'] = scene.id
+            scenes.append(serialized_scene)
 
-        b = []
+        tags = []
         for tag in tag_list:
             serialized_tag = TagSerializer().to_representation(tag)
-            b.append(serialized_tag)
+            tags.append(serialized_tag)
 
-        repr['scene_photo_list'] = a
-        repr['tag_list'] = b
+        repr['scene_photo_list'] = scenes
+        repr['tag_list'] = tags
+        repr['cover_photo']['id'] = cover_photo_id
         return repr
+
+    def update(self, instance, validated_data):
+        print(validated_data)
+        market = super(MarketSerializer, self).update(instance, validated_data)
+
+        # Update Tag
+        tags_data = validated_data.pop('tag_list', None)
+        existing_tag = market.tag_set()
+        for tag in tags_data:
+            tag_obj, is_created = Tag.objects.get_or_create(tag=tag)
+            # Get all tag already in the market
+            tag_obj.market.add(market)
+
+        # Remove deleted tag
+        for tag in existing_tag:
+            if not tag in tags_data:
+                Tag.objects.get(tag=tag).market.remove(market)
+
+        return market
 
 
 class MarketFeedSerializer(serializers.ModelSerializer):
@@ -117,6 +140,7 @@ class MarketFeedSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Market
-        fields = ('id', 'name', 'caption', 'description', 'opening_date', 'closing_date', 'opening_time', 'closing_time',
-                  'contact_person_fullname', 'location', 'reservation_due_date', 'min_price', 'max_price',
-                  'cover_photo', 'tags', 'id')
+        fields = (
+            'id', 'name', 'caption', 'description', 'opening_date', 'closing_date', 'opening_time', 'closing_time',
+            'contact_person_fullname', 'location', 'reservation_due_date', 'min_price', 'max_price',
+            'cover_photo', 'tags', 'id')
