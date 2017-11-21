@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework import viewsets, mixins
 
-from apps.rental_payment_info.models import Installment
-from apps.rental_payment_info.serializers import FirstInstallmentSerializer
+from apps.payments.models import Installment
+from apps.payments.serializers import FirstInstallmentSerializer
 
 
 class FirstInstallmentViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin):

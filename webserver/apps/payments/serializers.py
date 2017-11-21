@@ -3,7 +3,7 @@ from datetime import datetime
 from rest_framework import serializers
 
 from apps.market_reservations.models import MarketReservation
-from apps.rental_payment_info.models import RentalPaymentInfo, Installment
+from apps.payments.models import RentalPaymentInfo, Installment
 from apps.users.models import CreditCard
 from apps.users.serializers import CreditCardSerializer
 
