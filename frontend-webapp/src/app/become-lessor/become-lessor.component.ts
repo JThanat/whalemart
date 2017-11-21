@@ -28,10 +28,7 @@ export class BecomeLessorComponent implements OnInit {
 
     this.becomeLessorForm = new FormGroup({
       lessorName: new FormControl('', [Validators.required]),
-      isOrganization: new FormControl(
-        false,
-        { updateOn: 'change', validators: [Validators.required] }
-      ),
+      isOrganization: new FormControl(false, { updateOn: 'change' }),
       organizationName: new FormControl('', [Validators.required]),
       organizationContactName: new FormControl('', [Validators.required]),
       organizationEmail: new FormControl('', [Validators.required, Validators.email]),
