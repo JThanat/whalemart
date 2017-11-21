@@ -46,6 +46,7 @@ router.register(r'market-feed', market_views.MarketFeedViewSet, base_name='feed'
 router.register(r'booth', booth_views.BoothViewSet, base_name='booth')
 router.register(r'tag', tag_views.TagViewSet, base_name='tag')
 router.register(r'scene', market_views.SceneViewSet, base_name='scene')
+router.register(r'simialr-market', market_views.SimilarMarketView, base_name='similar-market')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
