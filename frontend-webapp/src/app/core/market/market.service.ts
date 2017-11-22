@@ -36,7 +36,7 @@ interface MarketSearchServerResponse {
   results: MarketServerResponse[];
 }
 
-interface MarketServerResponse {
+export interface MarketServerResponse {
   id: number;
   name: string;
   caption: string;
@@ -94,7 +94,7 @@ export class MarketService {
       )));
   }
 
-  private normalizeMarket(serverMarket: MarketServerResponse): Market {
+  normalizeMarket(serverMarket: MarketServerResponse): Market {
     const millisecondsInDay = 1000 * 60 * 60 * 24;
     const expiryDays = Math.ceil(serverMarket.expiry_time / millisecondsInDay);
 

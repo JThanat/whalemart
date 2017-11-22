@@ -1,24 +1,24 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
+import { map } from 'rxjs/operators';
 
-import { Market } from '../../core/market/market.service';
+import { Market, MarketServerResponse, MarketService } from '../../core/market/market.service';
 
 @Injectable()
 export class SimilarMarketsResolver implements Resolve<Market[]> {
+  constructor(private http: HttpClient, private marketService: MarketService) {}
+
   resolve(route: ActivatedRouteSnapshot) {
-    const marketId = route.paramMap.get('id');
+    // TODO: Send market ID with the API.
+    // const marketId = route.paramMap.get('id');
 
-    const testMarket = {
-      id: 1,
-      imageURL: 'https://url' + marketId,
-      expireDay: 3,
-      name: 'foo',
-      startDate: new Date(),
-      endDate: new Date(),
-      location: 'bar',
-      minPrice: 1200
-    };
-
-    return [testMarket, testMarket, testMarket, testMarket];
+    return this.http
+      .get<{ results: MarketServerResponse[] }>('/api/similar-market/')
+      .pipe(
+        map(res =>
+          res.results.map(serverMarket => this.marketService.normalizeMarket(serverMarket))
+        )
+      );
   }
 }
