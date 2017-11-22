@@ -1,9 +1,9 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, mixins
 from apps.reservations.models import Reservation
-from apps.reservations.serializer import ReservationSerializer
+from apps.reservations.serializers import ReservationSerializer
 
 
-class ReservationViewSet(viewsets.ModelViewSet):
+class ReservationViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin):
     queryset = Reservation.objects.all()
     serializer_class = ReservationSerializer
 

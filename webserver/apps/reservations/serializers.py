@@ -13,11 +13,11 @@ class ReservedBoothSerializer(serializers.ModelSerializer):
 
 
 class ReservationSerializer(serializers.ModelSerializer):
-    reserved_booths = ReservedBoothSerializer(many=True)
+    reserved_booths = ReservedBoothSerializer(many=False)
 
     class Meta:
         model = Reservation
-        fields = ('id', 'shop_name', 'reservation_time', 'status', 'market')
+        fields = ('id', 'shop_name', 'reservation_time', 'market', 'reserved_booths')
         extra_kwargs = {
             'id': {'read_only': True},
             'status': {'read_only': True},
