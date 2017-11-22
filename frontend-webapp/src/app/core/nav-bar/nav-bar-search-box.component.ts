@@ -3,7 +3,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, first, map } from 'rxjs/operators';
 import { Subscription } from 'rxjs/Subscription';
-import { DateRange, DateRangeService } from '../utils/date-range.service';
 
 @Component({
   selector: 'app-nav-bar-search-box',
@@ -15,34 +14,28 @@ export class NavBarSearchBoxComponent implements OnInit, OnDestroy {
 
   private queryParamUpdater: Subscription;
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private dateRangeService: DateRangeService
-  ) { }
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
     this.route.queryParamMap.pipe(first()).subscribe(queryParamMap => {
-      const dateRange = this.dateRangeService.deserialize(queryParamMap.get('daterange') || '');
+      const queryString = queryParamMap.get('q') || '';
       this.searchForm = new FormGroup({
-        query: new FormControl(queryParamMap.get('q') || ''),
-        dateRange: new FormControl(dateRange)
+        query: new FormControl(queryString)
       });
     });
 
-    this.queryParamUpdater = this.searchForm.valueChanges.pipe(
-      map(() => this.searchForm.value as { query: string, dateRange: DateRange | null }),
-      distinctUntilChanged(),
-      debounceTime(300)
-    ).subscribe(value => {
-      this.router.navigate(['/search'], {
-        queryParams: {
-          q: value.query,
-          daterange: value.dateRange ? this.dateRangeService.serialize(value.dateRange) : undefined
-        },
-        queryParamsHandling: 'merge'
+    this.queryParamUpdater = this.searchForm.valueChanges
+      .pipe(
+        map(() => this.searchForm.value.query as string),
+        distinctUntilChanged(),
+        debounceTime(300)
+      )
+      .subscribe(queryString => {
+        this.router.navigate(['/search'], {
+          queryParams: { q: queryString },
+          queryParamsHandling: 'merge'
+        });
       });
-    });
   }
 
   ngOnDestroy() {

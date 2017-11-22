@@ -1,0 +1,37 @@
+@import '~styles/common';
+
+.btn-menu {
+  display: flex;
+  align-items: center;
+  background: $white;
+  color: $dark-gray;
+  font-size: 0.9rem;
+  padding: 7px 12px;
+  border-radius: $border-radius;
+  margin-left: -12px;
+  cursor: pointer;
+  &:hover {
+    background: lighten($light-gray, 8%);
+  }
+  > span {
+    @include font-family(heading);
+    @include font-weight(regular);
+    white-space: nowrap;
+  }
+  > app-svg-icon {
+    margin-top: 2px;
+    margin-left: 0.3rem;
+  }
+}
+
+.clear-backdrop {
+  background: rgba(0, 0, 0, 0);
+}
+
+.menu-content {
+  margin-top: 3px;
+  transform-origin: 0% 0%;
+  background: $white;
+  border: 1px solid $light-gray;
+  box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.1);
+}

@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { of as observableOf } from 'rxjs/observable/of';
 import { map } from 'rxjs/operators';
 
 import { DateRange } from '../utils/date-range.service';
@@ -58,40 +59,117 @@ interface MarketServerResponse {
   reserved_no?: number;
 }
 
-interface SearchParams {
-  query: string;
-  dateRange?: DateRange;
+export interface MarketSearchParams {
+  page: number;
+  query: string | undefined;
+  dateRange: DateRange | undefined;
+  time: {
+    morning: boolean;
+    afternoon: boolean;
+    evening: boolean;
+    night: boolean;
+  };
+  price: {
+    min: number | undefined;
+    max: number | undefined;
+  };
 }
 
 const maxExpireDays = 90;
 
+const searchResultItemsPerPage = 12;
+
+export interface MarketSearchResult {
+  currentPage: number;
+  totalPage: number;
+  markets: Market[];
+}
+
 @Injectable()
 export class MarketService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   public getFeed(): Observable<MarketFeed> {
-    return this.http.get<MarketFeedServerResponse>('/api/market-feed/').pipe(map(result => {
-      return {
-        recommended: result.recommend_market.map(market => this.normalizeMarket(market)),
-        recentlyAdded: result.recently_added.map(market => this.normalizeMarket(market)),
-        night: result.night_market.map(market => this.normalizeMarket(market)),
-        winter: result.winter_market.map(market => this.normalizeMarket(market))
-      };
-    }));
+    return this.http.get<MarketFeedServerResponse>('/api/market-feed/').pipe(
+      map(result => {
+        return {
+          recommended: result.recommend_market.map(market => this.normalizeMarket(market)),
+          recentlyAdded: result.recently_added.map(market => this.normalizeMarket(market)),
+          night: result.night_market.map(market => this.normalizeMarket(market)),
+          winter: result.winter_market.map(market => this.normalizeMarket(market))
+        };
+      })
+    );
   }
 
-  public search(searchParams: SearchParams) {
-    let params = new HttpParams().append('search', searchParams.query);
+  public search(searchParams: MarketSearchParams): Observable<MarketSearchResult | undefined> {
+    let hasSearchParams = false;
+    let params = new HttpParams();
+
+    if (searchParams.query !== undefined) {
+      hasSearchParams = true;
+      params = params.append('search', searchParams.query);
+    }
+
     if (searchParams.dateRange) {
+      hasSearchParams = true;
       params = params
         .append('min_date', searchParams.dateRange.start.toISOString())
         .append('max_date', searchParams.dateRange.end.toISOString());
     }
 
-    return this.http.get<MarketSearchServerResponse>('/api/market-search/', { params })
-      .pipe(map(result => result.results.map(
-        serverMarket => this.normalizeMarket(serverMarket)
-      )));
+    if (searchParams.time !== undefined) {
+      const addTimeParams =
+        searchParams.time.morning ||
+        searchParams.time.afternoon ||
+        searchParams.time.evening ||
+        searchParams.time.night;
+
+      if (addTimeParams) {
+        hasSearchParams = true;
+        if (searchParams.time.morning) {
+          params = params.append('morning', 'true');
+        }
+        if (searchParams.time.afternoon) {
+          params = params.append('afternoon', 'true');
+        }
+        if (searchParams.time.evening) {
+          params = params.append('evening', 'true');
+        }
+        if (searchParams.time.night) {
+          params = params.append('night', 'true');
+        }
+      }
+    }
+
+    if (searchParams.price) {
+      if (searchParams.price.min !== undefined) {
+        hasSearchParams = true;
+        params = params.append('min_price', String(searchParams.price.min));
+      }
+      if (searchParams.price.max !== undefined) {
+        hasSearchParams = true;
+        params = params.append('max_price', String(searchParams.price.max));
+      }
+    }
+
+    if (!hasSearchParams) {
+      return observableOf(undefined);
+    }
+
+    return this.http
+      .get<MarketSearchServerResponse>('/api/market-search/', {
+        params: params.append('page', String(searchParams.page))
+      })
+      .pipe(
+        map(result => {
+          return {
+            currentPage: searchParams.page,
+            totalPage: Math.ceil(result.count / searchResultItemsPerPage),
+            markets: result.results.map(serverMarket => this.normalizeMarket(serverMarket))
+          };
+        })
+      );
   }
 
   private normalizeMarket(serverMarket: MarketServerResponse): Market {
@@ -106,7 +184,7 @@ export class MarketService {
       endDate: new Date(serverMarket.closing_date),
       minPrice: Number(serverMarket.min_price),
       imageURL: serverMarket.cover_photo.thumbnail,
-      expiryDays: (expiryDays <= maxExpireDays && expiryDays > 0) ? expiryDays : undefined,
+      expiryDays: expiryDays <= maxExpireDays && expiryDays > 0 ? expiryDays : undefined,
       reservedNo: serverMarket.reserved_no
     };
   }

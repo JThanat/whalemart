@@ -1,4 +1,7 @@
+import { A11yModule } from '@angular/cdk/a11y';
+import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
+import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
@@ -15,6 +18,7 @@ import { InputErrorComponent } from './input/input-error.component';
 import { InputGroupComponent } from './input/input-group.component';
 import { InputDirective } from './input/input.directive';
 import { MarketComponent } from './market/market.component';
+import { MenuComponent } from './menu/menu.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { SubNavBarDirective } from './sub-nav-bar/sub-nav-bar.directive';
 import { SvgIconComponent } from './svg-icon/svg-icon.component';
@@ -29,7 +33,10 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
       cookieName: 'csrftoken',
       headerName: 'X-CSRFToken'
     }),
-    PortalModule
+    PortalModule,
+    OverlayModule,
+    A11yModule,
+    ScrollDispatchModule
   ],
   declarations: [
     InputGroupComponent,
@@ -42,7 +49,8 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
     DateRangePipe,
     DateRangeInputDirective,
     BreadcrumbComponent,
-    BreadcrumbItemDirective
+    BreadcrumbItemDirective,
+    MenuComponent
   ],
   exports: [
     CommonModule,
@@ -55,12 +63,16 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
     SvgIconComponent,
     PaginationComponent,
     PortalModule,
+    OverlayModule,
+    A11yModule,
+    ScrollDispatchModule,
     SubNavBarDirective,
     MarketComponent,
     DateRangePipe,
     DateRangeInputDirective,
     BreadcrumbComponent,
-    BreadcrumbItemDirective
+    BreadcrumbItemDirective,
+    MenuComponent
   ],
   providers: [
     DatePipe,

@@ -1,0 +1,9 @@
+<button class="btn btn-menu" #menuBtn (click)="openMenu()" [disabled]="isOpening()">
+  <span>{{ text }}</span>
+  <app-svg-icon key="arrow-head-down" width="12"></app-svg-icon>
+</button>
+
+<div *cdkPortal class="menu-content" @menuInOut>
+  <!-- TODO: Do focus trapping -->
+  <ng-content></ng-content>
+</div>

@@ -1,30 +1,74 @@
 <ng-container *appSubNavBar>
-  <div class="filter-bar">
-    <div class="filter-item">
-      <span>ช่วงราคา</span>
-      <app-svg-icon key="arrow-head-down" width="12"></app-svg-icon>
-    </div>
-    <div class="filter-item">
-      <span>วันจัดตลาด</span>
-      <app-svg-icon key="arrow-head-down" width="12"></app-svg-icon>
-    </div>
-    <div class="filter-item">
-      <span>ช่วงเวลาที่ตลาดเปิด</span>
-      <app-svg-icon key="arrow-head-down" width="12"></app-svg-icon>
-    </div>
+  <form class="filter-bar" [formGroup]="searchFilterForm">
+    <app-menu text="ช่วงราคา">
+      <div class="my-3 mx-4" formGroupName="price">
+        <div class="row">
+          <div class="col-6">
+            <app-input-group label="ราคาต่ำสุด">
+              <input appInput type="text" class="form-control" formControlName="min" placeholder="ราคาต่ำสุด">
+              <app-input-error *ngIf="searchFilterForm.hasError('pattern', 'price.min')">
+                กรุณาใส่เฉพาะตัวเลข
+              </app-input-error>
+            </app-input-group>
+          </div>
+          <div class="col-6">
+            <app-input-group label="ราคาสูงสุด">
+              <input appInput type="text" class="form-control" formControlName="max" placeholder="ราคาสูงสุด">
+              <app-input-error *ngIf="searchFilterForm.hasError('pattern', 'price.max')">
+                กรุณาใส่เฉพาะตัวเลข
+              </app-input-error>
+            </app-input-group>
+          </div>
+        </div>
+      </div>
+    </app-menu>
+    <app-menu text="วันจัดตลาด">
+      <div class="my-3 mx-4">
+        <input appDateRangeInput [inlineDatePickerTarget]="datePickerContainer" type="text" class="form-control form-control-lg" formControlName="dateRange" placeholder="ตั้งแต่วันที่ &ndash; ถึงวันที่">
+        <div #datePickerContainer></div>
+      </div>
+    </app-menu>
+    <app-menu text="ช่วงเวลาที่ตลาดเปิด">
+      <div class="my-3 mx-4" formGroupName="time">
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" formControlName="morning" class="form-check-input"> เช้า
+          </label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" formControlName="afternoon" class="form-check-input"> บ่าย
+          </label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" formControlName="evening" class="form-check-input"> เย็น
+          </label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" formControlName="night" class="form-check-input"> กลางคืน
+          </label>
+        </div>
+      </div>
+    </app-menu>
     <button *ngIf="canGoBack()" type="button" class="ml-auto btn btn-link" (click)="goBack()">
       ปิดการค้นหา
     </button>
-  </div>
+  </form>
 </ng-container>
 
 <div class="container mt-5 mb-5" *ngIf="(searchResult | async) as result">
   <ng-container *ngIf="result.status === 'ok'; else noSearchQuery">
-    <div class="row" *ngIf="result?.markets.length > 0; else emptySearchResult">
-      <div class="col-12 col-sm-6 col-lg-3 mb-5" *ngFor="let market of result?.markets; trackBy: marketTrackByFn" @marketInOut>
-        <app-market-item [market]="market"></app-market-item>
+    <ng-container *ngIf="result?.markets.length > 0; else emptySearchResult">
+      <div class="row" [@pageChangeAnim]="result.currentPage">
+        <div class="col-12 col-sm-6 col-lg-3 mb-5" *ngFor="let market of result?.markets; trackBy: marketTrackByFn" @marketInOut>
+          <app-market-item [market]="market"></app-market-item>
+        </div>
       </div>
-    </div>
+
+      <app-pagination class="mt-2" [current]="currentPage | async" [max]="result.totalPage" [padding]="3" (navigate)="goToSearchPage($event)"></app-pagination>
+    </ng-container>
 
     <ng-template #emptySearchResult>
       <div class="empty-search-result">
@@ -43,7 +87,7 @@
   </ng-container>
 
   <ng-template #noSearchQuery>
-    <div class="no-search-query" *ngIf="result.status === 'emptyQuery'">
+    <div class="no-search-query" *ngIf="result.status === 'emptySearchParams'">
       <h3>กรุณากรอกคำค้นหา</h3>
       <div class="no-result-suggestion">
         คุณสามารถค้นหาตลาดได้ง่ายๆ จากการ
