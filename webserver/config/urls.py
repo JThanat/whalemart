@@ -58,7 +58,7 @@ urlpatterns = [
     url(r'^current-user/', user_views.get_current_user),
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^unverified-receipt/', user_views.get_unverified_receipt),
+    url(r'^verify-receipt/', user_views.verify_receipt),
     # JWT
     url(r'^api-token-auth/', obtain_jwt_token),
     url(r'^api-token-refresh/', refresh_jwt_token),
