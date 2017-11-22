@@ -2,12 +2,15 @@ from datetime import datetime
 
 from rest_framework import filters
 from rest_framework import viewsets
+from rest_framework.generics import ListAPIView
 from rest_framework.parsers import JSONParser, FormParser
 from rest_framework.response import Response
 
 from apps.commons.parser import MultipartFormencodeParser
 from apps.markets.models import Market, Scene
 from apps.markets.serializers import MarketSerializer, MarketFeedSerializer, SceneSerializer
+
+import random
 
 
 class MarketViewSet(viewsets.ModelViewSet):
@@ -21,20 +24,8 @@ class MarketViewSet(viewsets.ModelViewSet):
 
 
 class MarketFeedViewSet(viewsets.GenericViewSet):
-    """
-    ### Search
-    `search`: search with name or location
-    ### Filter Params
-    `min_price`, `max_price`: decimal\n
-    `morning`, `afternoon`, `evening`, `night`: true/false\n
-    `min_date`, `max_date`: date\n
-    ### Sort
-    `sort_by`: created_time, opening_date
-    """
     serializer_class = MarketFeedSerializer
     queryset = Market.objects.all().order_by('-created_at')
-    filter_backends = (filters.SearchFilter,)
-    search_fields = ('name', 'location')
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
@@ -46,6 +37,21 @@ class MarketFeedViewSet(viewsets.GenericViewSet):
 
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
+
+
+class MarketSearchFeedViewSet(MarketFeedViewSet):
+    """
+    ### Search
+    `search`: search with name or location
+    ### Filter Params
+    `min_price`, `max_price`: decimal\n
+    `morning`, `afternoon`, `evening`, `night`: true/false\n
+    `min_date`, `max_date`: date\n
+    ### Sort
+    `sort_by`: created_time, opening_date
+    """
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('name', 'location')
 
     def filter_queryset(self, queryset):
         queryset = super(MarketFeedViewSet, self).filter_queryset(queryset)
@@ -140,3 +146,69 @@ class MarketFeedViewSet(viewsets.GenericViewSet):
 class SceneViewSet(viewsets.ModelViewSet):
     queryset = Scene.objects.all().order_by('-id')
     serializer_class = SceneSerializer
+
+
+class SimilarMarketView(viewsets.GenericViewSet):
+
+    serializer_class = MarketFeedSerializer
+    queryset = Market.objects.all().order_by('-created_at')[:4]
+
+    def list(self, request, *args, **kwargs):
+        # This logic should be changed
+        queryset = self.filter_queryset(self.get_queryset())
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+class CategorizedFeedView(ListAPIView):
+    """
+    API endpoint that lists all categorized market
+    """
+    serializer_class = MarketFeedSerializer
+    paginate_by = 20
+
+    def _get_result_list(self, sort_order):
+        markets = Market.objects.all().order_by(sort_order)[:4]
+        result = list()
+        for market in markets:
+            serializer = MarketFeedSerializer(market)
+            data = serializer.data
+            data['expiry_time'] = market.time_to_expire()
+            result.append(data)
+        return result
+
+    def _get_recommend_list(self):
+        markets = Market.objects.all().order_by('name')[:2]
+        result = list()
+        for market in markets:
+            serializer = MarketFeedSerializer(market)
+            data = serializer.data
+            data['expiry_time'] = market.time_to_expire()
+            data['reserved_no'] = random.randint(50, 150)
+            result.append(data)
+        return result
+
+    def list(self, request, *args, **kwargs):
+        # TODO - Change logic of sort order
+        result_recommend = self._get_recommend_list()
+        result_recently = self._get_result_list('-created_at')
+        result_night = self._get_result_list('-name')
+        result_winter = self._get_result_list('-created_at')
+
+        return_data = {
+            'recommend_market': result_recommend,
+            'recently_added': result_recently,
+            'night_market': result_night,
+            'winter_market': result_winter
+        }
+
+        return Response(return_data)
+
+
+
