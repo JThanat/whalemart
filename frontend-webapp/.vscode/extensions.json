@@ -1,0 +1,10 @@
+{
+	"recommendations": [
+		"Angular.ng-template",
+		"johnpapa.angular2",
+		"msjsdiag.debugger-for-chrome",
+		"xabikos.javascriptsnippets",
+		"mrmlnc.vscode-scss",
+		"eg2.tslint"
+	]
+}
