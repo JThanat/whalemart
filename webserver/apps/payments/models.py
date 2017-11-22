@@ -32,7 +32,16 @@ class Installment(models.Model):
     amount = models.DecimalField(verbose_name='Amount', max_digits=15, decimal_places=2)
     credit_card = models.ForeignKey('users.CreditCard', null=True, verbose_name='Credit Card')
     receipt_image = models.ImageField(verbose_name='Receipt Image', null=True, upload_to='receipt_images/%Y/%m/%d')
-    is_verified = models.BooleanField(verbose_name='Is Verified', default=False)
+    PENDING = 1
+    APPROVED = 2
+    REJECTED = 3
+    VERIFICATION_STATUS_CHOICES = (
+        (PENDING, 'Pending'),
+        (APPROVED, 'Approved'),
+        (REJECTED, 'Rejected'),
+    )
+    verification_status = models.IntegerField(choices=VERIFICATION_STATUS_CHOICES, verbose_name='Verification Status',
+                                              default=PENDING)
     rental_payment_info = models.ForeignKey('rental_payment_info.RentalPaymentInfo',
                                             verbose_name='Rental Payment Info',
                                             related_name='installments')

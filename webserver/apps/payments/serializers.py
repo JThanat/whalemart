@@ -23,9 +23,9 @@ class FirstInstallmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Installment
         fields = ('id', 'payment_type', 'reservation_info', 'new_credit_card', 'payment_method', 'payment_date',
-                  'amount', 'credit_card', 'receipt_image', 'is_verified')
+                  'amount', 'credit_card', 'receipt_image', 'verification_status')
         extra_kwargs = {
-            'is_verified': {'read_only': True}
+            'verification_status': {'read_only': True}
         }
 
     def validate_new_credit_card(self, card_info):
@@ -48,7 +48,7 @@ class FirstInstallmentSerializer(serializers.ModelSerializer):
         user = self.context['request'].user
         status = RentalPaymentInfo.DRAFTED
         if validated_data['payment_method'] == Installment.CREDIT_CARD:
-            validated_data['is_verified'] = True
+            validated_data['verification_status'] = Installment.APPROVED
             if payment_type == self.PARTIAL:
                 status = RentalPaymentInfo.DEPOSITED
             elif payment_type == self.FULL:
