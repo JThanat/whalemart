@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { VendorProfileResolver } from './profile/vendor-profile-resolver.service';
 import { VendorProfileComponent } from './profile/vendor-profile.component';
 import { VendorDashboardComponent } from './vendor-dashboard.component';
 
@@ -16,7 +17,10 @@ const routes: Routes = [
       },
       {
         path: 'profile',
-        component: VendorProfileComponent
+        component: VendorProfileComponent,
+        resolve: {
+          vendorProfile: VendorProfileResolver
+        }
       }
     ]
   }

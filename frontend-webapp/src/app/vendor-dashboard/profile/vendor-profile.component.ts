@@ -1,23 +1,37 @@
 import { Component, OnInit } from '@angular/core';
+import { OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AlertService } from '../../core/alert/alert.service';
-import { VendorProfileService } from './vendor-profile.service';
+import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs/operators';
+import { Subscription } from 'rxjs/Subscription';
+
+// import { AlertService } from '../../core/alert/alert.service';
+import { VendorProfile } from './vendor-profile.service';
 
 @Component({
   selector: 'app-vendor-profile',
   templateUrl: './vendor-profile.component.html',
   styleUrls: ['./vendor-profile.component.scss']
 })
-export class VendorProfileComponent implements OnInit {
+export class VendorProfileComponent implements OnInit, OnDestroy {
+  vendorProfileSubscription: Subscription;
+  vendorProfile: VendorProfile;
   vendorProfileForm: FormGroup;
   isEdit = false;
 
   constructor(
-    private vendorProfileService: VendorProfileService,
-    private alert: AlertService
+    // private vendorProfileService: VendorProfileService,
+    // private alert: AlertService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    this.vendorProfileSubscription = this.route.data
+      .pipe(map(data => data.vendorProfile))
+      .subscribe(data => {
+        this.vendorProfile = data;
+      });
+
     this.vendorProfileForm = new FormGroup({
       firstName: new FormControl('', [Validators.required]),
       lastName: new FormControl('', [Validators.required]),
@@ -25,34 +39,15 @@ export class VendorProfileComponent implements OnInit {
     }, { updateOn: 'blur' });
   }
 
-  toggleEditProfile(isEdit: boolean) {
+  setEditProfile(isEdit: boolean) {
     this.isEdit = isEdit;
-  }
 
-  updateProfile() {
-    if (!this.vendorProfileForm.valid) {
-      return;
+    if (isEdit) {
+      this.vendorProfileForm.reset(this.vendorProfile);
     }
-
-    this.vendorProfileForm.disable();
-
-    const {
-      firstName,
-      lastName,
-      phone
-    } = this.vendorProfileForm.value;
-
-    this.vendorProfileService.updateVendorProfile({
-      first_name: firstName,
-      last_name: lastName,
-      phone: phone
-    }).subscribe(() => {
-      // TODO: Redirect to lessor profile
-      this.alert.show({ message: 'สมัครผู้ให้เช่าตลาดสมบูรณ์', type: 'success' });
-    }, err => {
-      this.vendorProfileForm.enable();
-      this.alert.show({ message: 'เกิดข้อผิดพลาด', type: 'danger' });
-    });
   }
 
+  ngOnDestroy() {
+    this.vendorProfileSubscription.unsubscribe();
+  }
 }

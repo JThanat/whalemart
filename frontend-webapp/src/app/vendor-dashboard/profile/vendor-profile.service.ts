@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { _throw as observableThrow } from 'rxjs/observable/throw';
 import { catchError, mapTo } from 'rxjs/operators';
+import { map } from 'rxjs/operators/map';
 
 interface VendorProfileRequest {
   first_name: string;
@@ -10,7 +11,23 @@ interface VendorProfileRequest {
   phone: string;
 }
 
-export class UpdateVendorProfileError { }
+export interface VendorProfileResponse {
+  email: string;
+  first_name: string;
+  last_name: string;
+  phone: string;
+  profile_image: string;
+}
+
+export interface VendorProfile {
+  email: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  profileImage: string;
+}
+
+export class VendorProfileError { }
 
 @Injectable()
 export class VendorProfileService {
@@ -20,12 +37,34 @@ export class VendorProfileService {
   ) { }
 
   updateVendorProfile(vendorProfileParams: VendorProfileRequest): Observable<boolean> {
-    return this.http.post('/api/current-user', vendorProfileParams).pipe(
+    return this.http.post('/api/current-user/', vendorProfileParams).pipe(
       mapTo(true),
       catchError((err: any) => {
         if (err instanceof HttpErrorResponse) {
           if (err.status >= 400 && err.status < 500) {
-            return observableThrow(new UpdateVendorProfileError());
+            return observableThrow(new VendorProfileError());
+          }
+        }
+        return observableThrow(err);
+      })
+    );
+  }
+
+  getVendorProfile() {
+    return this.http.get<VendorProfileResponse>('/api/current-user/').pipe(
+      map(data => {
+        return {
+          firstName: data.first_name,
+          lastName: data.last_name,
+          phone: data.phone,
+          profileImage: data.profile_image,
+          email: data.email
+        };
+      }),
+      catchError((err: any) => {
+        if (err instanceof HttpErrorResponse) {
+          if (err.status >= 400 && err.status < 500) {
+            return observableThrow(new VendorProfileError());
           }
         }
         return observableThrow(err);
