@@ -10,6 +10,8 @@ from apps.commons.parser import MultipartFormencodeParser
 from apps.markets.models import Market, Scene
 from apps.markets.serializers import MarketSerializer, MarketFeedSerializer, SceneSerializer
 
+import random
+
 
 class MarketViewSet(viewsets.ModelViewSet):
     queryset = Market.objects.all().order_by('-created_at')
@@ -176,14 +178,25 @@ class CategorizedFeedView(ListAPIView):
         result = list()
         for market in markets:
             serializer = MarketFeedSerializer(market)
-            result.append(serializer.data)
+            data = serializer.data
             data['expiry_time'] = market.time_to_expire()
+            result.append(data)
+        return result
+
+    def _get_recommend_list(self):
+        markets = Market.objects.all().order_by('name')[:2]
+        result = list()
+        for market in markets:
+            serializer = MarketFeedSerializer(market)
+            data = serializer.data
             data['expiry_time'] = market.time_to_expire()
+            data['reserved_no'] = random.randint(50, 150)
+            result.append(data)
         return result
 
     def list(self, request, *args, **kwargs):
         # TODO - Change logic of sort order
-        result_recommend = self._get_result_list('name')
+        result_recommend = self._get_recommend_list()
         result_recently = self._get_result_list('-created_at')
         result_night = self._get_result_list('-name')
         result_winter = self._get_result_list('-created_at')
