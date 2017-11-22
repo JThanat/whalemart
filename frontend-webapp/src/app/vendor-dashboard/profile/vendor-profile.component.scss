@@ -1,7 +1,6 @@
 @import '~styles/common';
 
 .title {
-  font-size: 1.2rem;
   margin-bottom: map-get($spacers, 0.5);
   @include font-family(heading);
   @include font-weight(regular);
