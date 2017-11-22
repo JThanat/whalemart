@@ -11,6 +11,10 @@
   .btn {
     cursor: pointer;
     width: 2.2rem;
+    margin-left: 0.5rem;
+    &:first-child {
+      margin-left: 0;
+    }
     &:hover {
       background: $light-gray;
     }
