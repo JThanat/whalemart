@@ -9,9 +9,10 @@ class MockMarketService {
 }
 
 const testMarketFeed: MarketFeed = {
-  recommendations: [],
-  nights: [],
-  days: []
+  recommended: [],
+  recentlyAdded: [],
+  night: [],
+  winter: []
 };
 
 describe('FeedResolver', () => {

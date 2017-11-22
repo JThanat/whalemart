@@ -4,6 +4,14 @@
   "exportOptions": {
     "_class": "exportOptions",
     "exportFormats": [
+      {
+        "_class": "exportFormat",
+        "absoluteSize": 0,
+        "fileFormat": "svg",
+        "namingScheme": 0,
+        "scale": 1,
+        "visibleScaleType": 0
+      }
     ],
     "includedLayerIds": [
     ],
@@ -22,7 +30,7 @@
   "isFlippedHorizontal": false,
   "isFlippedVertical": false,
   "isLocked": false,
-  "isVisible": true,
+  "isVisible": false,
   "layerListExpandedType": 1,
   "layers": [
     {
@@ -34,7 +42,7 @@
       "id": "8B2E9CB6-C0CA-40D7-BD20-51810A45BE64"
     }
   ],
-  "name": "logo",
+  "name": "whalemart-logo-with-name-original",
   "nameIsFixed": true,
   "resizingConstraint": 9,
   "resizingType": 0,

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CanActivate } from '@angular/router';
+import { map } from 'rxjs/operators';
 
-import { first, map } from 'rxjs/operators';
-import { UserService } from './user.service';
+import { UserService, UserStatusType } from './user.service';
 
 @Injectable()
 export class UserLoginGuard implements CanActivate {
@@ -11,9 +11,8 @@ export class UserLoginGuard implements CanActivate {
   ) { }
 
   canActivate() {
-    return this.userService.userInfo.pipe(
-      first(),
-      map(userInfo => userInfo !== undefined)
+    return this.userService.getKnownUserStatus().pipe(
+      map(userStatus => userStatus.type === UserStatusType.LoggedIn)
     );
   }
 }

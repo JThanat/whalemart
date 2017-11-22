@@ -6,12 +6,16 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { of as observableOf } from 'rxjs/observable/of';
 
 import { AlertService } from '../alert/alert.service';
-import { UserInfo, UserService } from '../user/user.service';
+import { UserService, UserStatus, UserStatusType } from '../user/user.service';
 import { NavBarComponent } from './nav-bar.component';
 import { SubNavBarService } from './sub-nav-bar.service';
 
 class MockUserService {
-  userInfo = new BehaviorSubject<UserInfo | undefined>(undefined);
+  userStatus = new BehaviorSubject<UserStatus>({ type: UserStatusType.Unknown });
+
+  getUserStatus() {
+    return this.userStatus;
+  }
 }
 
 class MockSubNavBarService {
@@ -47,21 +51,7 @@ describe('NavBarComponent', () => {
     userService = mockUserService;
   }));
 
-  afterEach(() => userService.userInfo.complete());
-
-  it('should have userName property set correctly', () => {
-    // Set new userInfo into UserService before ngOnInit
-    userService.userInfo = new BehaviorSubject<UserInfo | undefined>(undefined);
-    fixture.detectChanges();
-
-    let userName: string | undefined;
-    component.userName.subscribe(un => { userName = un; });
-
-    expect(userName).toBe(undefined);
-
-    userService.userInfo.next({ email: 'test@abcde.com', firstName: 'John', lastName: 'Cena' });
-    expect(userName).toBe('John');
-  });
+  afterEach(() => userService.userStatus.complete());
 
   it('should open and close navbar on clicking toggle button', () => {
     fixture.autoDetectChanges(true);

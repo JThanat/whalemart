@@ -4,6 +4,14 @@
   "exportOptions": {
     "_class": "exportOptions",
     "exportFormats": [
+      {
+        "_class": "exportFormat",
+        "absoluteSize": 0,
+        "fileFormat": "svg",
+        "namingScheme": 0,
+        "scale": 1,
+        "visibleScaleType": 0
+      }
     ],
     "includedLayerIds": [
     ],
@@ -23,7 +31,7 @@
   "isFlippedVertical": false,
   "isLocked": false,
   "isVisible": true,
-  "layerListExpandedType": 1,
+  "layerListExpandedType": 0,
   "layers": [
     {
       "class": "shapeGroup",
@@ -34,7 +42,7 @@
       "id": "100E455C-6B58-486F-843D-337797A99E40"
     }
   ],
-  "name": "icon",
+  "name": "person-circle",
   "nameIsFixed": true,
   "resizingConstraint": 63,
   "resizingType": 0,
