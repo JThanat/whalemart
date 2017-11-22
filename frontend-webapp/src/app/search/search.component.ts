@@ -5,11 +5,18 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { combineLatest as observableCombineLatest } from 'rxjs/observable/combineLatest';
-import { distinctUntilChanged, filter, map, startWith, switchMap, debounceTime } from 'rxjs/operators';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  map,
+  startWith,
+  switchMap
+} from 'rxjs/operators';
 
 import { Market, MarketSearchResult, MarketService } from '../core/market/market.service';
 import { SearchBackButtonService } from '../core/search/search-back-button.service';
-import { DateRange, DateRangeService } from '../core/utils/date-range.service';
+import { DateRange } from '../core/utils/date-range.service';
 
 const enum SearchResultStatus {
   OK = 'ok',
@@ -56,7 +63,6 @@ export class SearchComponent implements OnInit {
   searchResult: Observable<SearchResult>;
   searchFilterForm: FormGroup;
   queryString: Observable<string>;
-  dateRange: Observable<DateRange | undefined>;
   currentPage: Observable<number>;
 
   marketTrackByFn: TrackByFunction<Market> = (_, market) => market.id;
@@ -66,9 +72,9 @@ export class SearchComponent implements OnInit {
     private router: Router,
     private marketService: MarketService,
     private searchBackButtonService: SearchBackButtonService,
-    private dateRangeService: DateRangeService,
+    // private dateRangeService: DateRangeService,
     @Inject(DOCUMENT) private document: Document
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.searchFilterForm = new FormGroup({
@@ -78,6 +84,7 @@ export class SearchComponent implements OnInit {
         evening: new FormControl(false),
         night: new FormControl(false)
       }),
+      dateRange: new FormControl(null),
       price: new FormGroup({
         min: new FormControl('', [Validators.pattern(/^\d+$/)]),
         max: new FormControl('', [Validators.pattern(/^\d+$/)])
@@ -89,17 +96,6 @@ export class SearchComponent implements OnInit {
       distinctUntilChanged()
     );
 
-    this.dateRange = this.route.queryParamMap.pipe(
-      map(queryParam => queryParam.get('daterange')),
-      distinctUntilChanged(),
-      map(dateRangeStr => {
-        if (dateRangeStr) {
-          return this.dateRangeService.deserialize(dateRangeStr);
-        }
-        return undefined;
-      })
-    );
-
     this.currentPage = this.route.queryParamMap.pipe(
       map(queryParam => queryParam.get('page')),
       distinctUntilChanged(),
@@ -108,45 +104,55 @@ export class SearchComponent implements OnInit {
           return 1;
         }
         const page = Number(pageStr);
-        return (page >= 1) ? page : 1;
+        return page >= 1 ? page : 1;
       })
     );
 
     const searchParams = observableCombineLatest(
       this.currentPage,
       this.queryString,
-      this.dateRange,
       this.searchFilterForm.valueChanges.pipe(
         startWith({}),
         filter(() => this.searchFilterForm.valid),
         debounceTime(300),
-        map(() => this.searchFilterForm.value as {
-          time: {
-            morning: boolean;
-            afternoon: boolean;
-            evening: boolean;
-            night: boolean;
-          };
-          price: {
-            min: string;
-            max: string;
-          };
-        })
+        map(
+          () =>
+            this.searchFilterForm.value as {
+              time: {
+                morning: boolean;
+                afternoon: boolean;
+                evening: boolean;
+                night: boolean;
+              };
+              dateRange: DateRange | null;
+              price: {
+                min: string;
+                max: string;
+              };
+            }
+        )
       )
     );
 
     this.searchResult = searchParams.pipe(
-      switchMap(([page, queryString, dateRange, searchFilter]) => {
+      switchMap(([page, queryString, searchFilter]) => {
         const query = queryString !== '' ? queryString : undefined;
         const time = searchFilter.time;
+        const dateRange = searchFilter.dateRange || undefined;
         const price = {
           min: searchFilter.price.min !== '' ? Number(searchFilter.price.min) : undefined,
           max: searchFilter.price.max !== '' ? Number(searchFilter.price.max) : undefined
         };
 
-        return this.marketService.search({
-          page, query, dateRange, time, price
-        }).pipe(this.mapSearchResult());
+        return this.marketService
+          .search({
+            page,
+            query,
+            dateRange,
+            time,
+            price
+          })
+          .pipe(this.mapSearchResult());
       }),
       startWith({ status: SearchResultStatus.Searching } as SearchResult)
     );

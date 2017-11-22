@@ -23,7 +23,10 @@
       </div>
     </app-menu>
     <app-menu text="วันจัดตลาด">
-      <div class="p-5">วันจัดตลาด</div>
+      <div class="my-3 mx-4">
+        <input appDateRangeInput [inlineDatePickerTarget]="datePickerContainer" type="text" class="form-control form-control-lg" formControlName="dateRange" placeholder="ตั้งแต่วันที่ &ndash; ถึงวันที่">
+        <div #datePickerContainer></div>
+      </div>
     </app-menu>
     <app-menu text="ช่วงเวลาที่ตลาดเปิด">
       <div class="my-3 mx-4" formGroupName="time">

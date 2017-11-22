@@ -77,8 +77,7 @@ interface SearchParams {
 
 const maxExpireDays = 90;
 
-// TODO: Change this to 12.
-const searchResultItemsPerPage = 10;
+const searchResultItemsPerPage = 12;
 
 export interface MarketSearchResult {
   currentPage: number;
