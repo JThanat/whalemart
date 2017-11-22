@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
 
+from apps.booths.models import Booth
 from apps.reservations.models import Reservation
 from apps.reservations.models import ReservedBooth
 from apps.reservations.serializers import ReservationSerializer
@@ -29,7 +30,7 @@ def approve_booths(request, *args, **kwargs):
             return Response(status=status.HTTP_400_BAD_REQUEST)
         reservation = reservations[0]
         reserved_booths = reservation.reserved_booths
-        # TODO: Set approved_booth to the booth approved
+        reservation.approved_booth = Booth.objects.get(pk=booth_id)
         for reserved_booth in reserved_booths:
             if reserved_booth.booth != booth_id:
                 reserved_booth.status = ReservedBooth.APPROVED
