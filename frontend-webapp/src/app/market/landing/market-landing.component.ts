@@ -88,22 +88,30 @@ export class MarketLandingComponent implements OnInit, OnDestroy, AfterViewInit 
     @Inject(DOCUMENT) private document: Document,
     private scrollDispatcher: ScrollDispatcher,
     private cd: ChangeDetectorRef
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.marketDetailObs = this.route.data.pipe(map(data => data.marketDetail));
     this.similarMarketsObs = this.route.data.pipe(map(data => data.similarMarkets));
-    this.marketMapIframeUrl = this.marketDetailObs.pipe(map(marketDetail => {
-      const url = `https://www.google.com/maps/embed/v1/place?key=${environment.google.apiKey}&q=` +
-        encodeURIComponent(`${marketDetail.location.latitude},${marketDetail.location.longitude}`);
-      return this.domSanitizer.bypassSecurityTrustResourceUrl(url);
-    }));
+    this.marketMapIframeUrl = this.marketDetailObs.pipe(
+      map(marketDetail => {
+        const url =
+          `https://www.google.com/maps/embed/v1/place?key=${environment.google.apiKey}&q=` +
+          encodeURIComponent(
+            `${marketDetail.location.latitude},${marketDetail.location.longitude}`
+          );
+        return this.domSanitizer.bypassSecurityTrustResourceUrl(url);
+      })
+    );
   }
 
   ngAfterViewInit() {
     // TODO: Separate nav bar logic into component/directive.
 
     this.fragmentSubscription = this.route.fragment.subscribe(fragment => {
+      if (fragment === '') {
+        return;
+      }
       const elem = this.document.querySelector('#' + fragment);
       if (elem) {
         elem.scrollIntoView(true);
