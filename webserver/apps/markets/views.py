@@ -177,6 +177,8 @@ class CategorizedFeedView(ListAPIView):
         for market in markets:
             serializer = MarketFeedSerializer(market)
             result.append(serializer.data)
+            data['expiry_time'] = market.time_to_expire()
+            data['expiry_time'] = market.time_to_expire()
         return result
 
     def list(self, request, *args, **kwargs):
