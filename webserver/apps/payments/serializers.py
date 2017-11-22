@@ -2,7 +2,7 @@ from datetime import datetime
 
 from rest_framework import serializers
 
-from apps.market_reservations.models import MarketReservation
+from apps.reservations.models import Reservation
 from apps.payments.models import RentalPaymentInfo, Installment
 from apps.users.models import CreditCard
 from apps.users.serializers import CreditCardSerializer
@@ -16,7 +16,7 @@ class FirstInstallmentSerializer(serializers.ModelSerializer):
         (FULL, 'Full')
     )
     payment_type = serializers.ChoiceField(choices=PAYMENT_TYPE_CHOICES, label='Payment Type', write_only=True)
-    reservation_info = serializers.PrimaryKeyRelatedField(many=False, queryset=MarketReservation.objects.all(),
+    reservation_info = serializers.PrimaryKeyRelatedField(many=False, queryset=Reservation.objects.all(),
                                                           write_only=True, label='Reservation Info')
     new_credit_card = CreditCardSerializer(many=False, required=False)
 
