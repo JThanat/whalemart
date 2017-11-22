@@ -107,7 +107,7 @@ export class FacebookLoginService {
         const accessToken = loginResult.authResponse.accessToken;
         return this.getUserDetail(accessToken).pipe(mergeMap(userInfo => {
           if (userInfo) {
-            this.userService.userInfo.next(userInfo);
+            this.userService.setLoginData(userInfo);
             return observableOf({
               success: true,
               fbAccessToken: accessToken,
