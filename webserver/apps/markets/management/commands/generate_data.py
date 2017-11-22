@@ -89,7 +89,7 @@ class Command(BaseCommand):
         for i in range(number_of_zone):
             for j in range(number_of_booth_in_each_zone):
                 rental_fee = 100 * randint(5, 50)
-                booth_number = chr(i+65).upper() + j
+                booth_number = chr(i+65).upper() + str(j)
                 Booth.objects.create(market=market, booth_number=booth_number, rental_fee=rental_fee)
 
     def _fix_datetime(self, market):
@@ -114,6 +114,6 @@ class Command(BaseCommand):
             # dump terms and conditions
             self._dump_terms_and_conditions(market)
             # dump booths
-            self._dump_booths(self, market)
+            self._dump_booths(market)
             # fix date time
             self._fix_datetime(market)
