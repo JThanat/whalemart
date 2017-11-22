@@ -69,6 +69,10 @@ interface SearchParams {
     evening: boolean;
     night: boolean;
   };
+  price?: {
+    min?: number;
+    max?: number;
+  };
 }
 
 const maxExpireDays = 90;
@@ -135,6 +139,15 @@ export class MarketService {
         if (searchParams.time.night) {
           params = params.append('night', 'true');
         }
+      }
+    }
+
+    if (searchParams.price !== undefined) {
+      if (searchParams.price.min) {
+        params = params.append('min_price', String(searchParams.price.min));
+      }
+      if (searchParams.price.max) {
+        params = params.append('max_price', String(searchParams.price.max));
       }
     }
 

@@ -1,7 +1,26 @@
 <ng-container *appSubNavBar>
   <form class="filter-bar" [formGroup]="searchFilterForm">
     <app-menu text="ช่วงราคา">
-      <div class="p-5">ช่วงราคา</div>
+      <div class="my-3 mx-4" formGroupName="price">
+        <div class="row">
+          <div class="col-6">
+            <app-input-group label="ราคาต่ำสุด">
+              <input appInput type="text" class="form-control" formControlName="min" placeholder="ราคาต่ำสุด">
+              <app-input-error *ngIf="searchFilterForm.hasError('pattern', 'price.min')">
+                กรุณาใส่เฉพาะตัวเลข
+              </app-input-error>
+            </app-input-group>
+          </div>
+          <div class="col-6">
+            <app-input-group label="ราคาสูงสุด">
+              <input appInput type="text" class="form-control" formControlName="max" placeholder="ราคาสูงสุด">
+              <app-input-error *ngIf="searchFilterForm.hasError('pattern', 'price.max')">
+                กรุณาใส่เฉพาะตัวเลข
+              </app-input-error>
+            </app-input-group>
+          </div>
+        </div>
+      </div>
     </app-menu>
     <app-menu text="วันจัดตลาด">
       <div class="p-5">วันจัดตลาด</div>
@@ -10,26 +29,22 @@
       <div class="my-3 mx-4" formGroupName="time">
         <div class="form-check">
           <label class="form-check-label">
-            <input type="checkbox" formControlName="morning" class="form-check-input">
-            เช้า
+            <input type="checkbox" formControlName="morning" class="form-check-input"> เช้า
           </label>
         </div>
         <div class="form-check">
           <label class="form-check-label">
-            <input type="checkbox" formControlName="afternoon" class="form-check-input">
-            บ่าย
+            <input type="checkbox" formControlName="afternoon" class="form-check-input"> บ่าย
           </label>
         </div>
         <div class="form-check">
           <label class="form-check-label">
-            <input type="checkbox" formControlName="evening" class="form-check-input">
-            เย็น
+            <input type="checkbox" formControlName="evening" class="form-check-input"> เย็น
           </label>
         </div>
         <div class="form-check">
           <label class="form-check-label">
-            <input type="checkbox" formControlName="night" class="form-check-input">
-            กลางคืน
+            <input type="checkbox" formControlName="night" class="form-check-input"> กลางคืน
           </label>
         </div>
       </div>
