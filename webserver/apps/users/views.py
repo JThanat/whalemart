@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import check_password
 from django.contrib import auth
+from django.shortcuts import get_object_or_404
 from rest_framework import viewsets, mixins, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -108,9 +109,36 @@ def logout(request, *args, **kwargs):
     return Response(status=status.HTTP_200_OK)
 
 
-@api_view(['GET',])
+@api_view(['GET', 'POST'])
 def get_current_user(request, *args, **kwargs):
+    """
+    ### Get / Update Current User
+    {
+        "first_name": "aaa",
+        "last_name": "bbb",
+        "phone": "0812345678"
+    }
+    """
     if request.user.is_anonymous():
         return Response('Please login', status=status.HTTP_400_BAD_REQUEST)
-    user = request.user
-    return Response(UserSerializer(user).data)
+    if request.method == "GET":
+        user = request.user
+        return Response(UserSerializer(user).data)
+    else:
+        user = request.user
+    
+        first_name = request.data.get('first_name', None)
+        last_name = request.data.get('last_name', None)
+        phone = request.data.get('phone', None)
+
+        if first_name:
+            user.first_name = first_name
+        if last_name:
+            user.last_name = last_name
+        if phone:
+            user.phone = phone
+
+        user.save()
+        return Response(UserSerializer(user).data)
+
+    
