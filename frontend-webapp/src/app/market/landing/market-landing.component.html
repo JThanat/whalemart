@@ -12,9 +12,15 @@
             <h1>{{ marketDetail.name }}</h1>
             <p class="lead">{{ marketDetail.caption }}</p>
           </div>
-          <div class="mb-1 text-left text-md-right">
-            <p class="location">{{ marketDetail.location.name }}</p>
-            <p class="date">วันที่ {{ [marketDetail.openingDate, marketDetail.closingDate] | dateRange }}</p>
+          <div class="mb-1 header-right">
+            <p class="location">
+              <app-svg-icon key="location-pin" width="15"></app-svg-icon>
+              <span>{{ marketDetail.location.name }}</span>
+            </p>
+            <p class="date">
+              <app-svg-icon key="date" width="18"></app-svg-icon>
+              <span>{{ [marketDetail.openingDate, marketDetail.closingDate] | dateRange }}</span>
+            </p>
           </div>
         </div>
       </div>
@@ -44,8 +50,14 @@
         <p>{{ marketDetail.description }}</p>
 
         <h3>วัน&ndash;เวลา</h3>
-        <p class="date">วันที่ {{ [marketDetail.openingDate, marketDetail.closingDate] | dateRange }}</p>
-        <p class="time">{{ marketDetail.openingTime | date:'shortTime' }} &ndash; {{ marketDetail.closingTime | date:'shortTime' }}น.</p>
+        <p class="date">
+          <app-svg-icon key="date" width="18"></app-svg-icon>
+          <span>{{ [marketDetail.openingDate, marketDetail.closingDate] | dateRange }}</span>
+        </p>
+        <p class="time">
+          <app-svg-icon key="time" width="18"></app-svg-icon>
+          <span>{{ marketDetail.openingTime | date:'shortTime' }} &ndash; {{ marketDetail.closingTime | date:'shortTime' }}น.</span>
+        </p>
 
         <h3>สถานที่</h3>
         <iframe width="100%" height="300" frameborder="0" style="border:0" [src]="marketMapIframeUrl | async" allowfullscreen></iframe>
