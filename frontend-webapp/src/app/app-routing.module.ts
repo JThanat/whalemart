@@ -35,7 +35,6 @@ const routes: Routes = [
   },
   {
     path: 'vendor',
-    pathMatch: 'full',
     loadChildren: './vendor-dashboard/vendor-dashboard.module#VendorDashboardModule'
   }
 ];
