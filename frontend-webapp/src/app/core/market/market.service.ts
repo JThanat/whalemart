@@ -84,17 +84,19 @@ export interface MarketSearchResult {
 
 @Injectable()
 export class MarketService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   public getFeed(): Observable<MarketFeed> {
-    return this.http.get<MarketFeedServerResponse>('/api/market-feed/').pipe(map(result => {
-      return {
-        recommended: result.recommend_market.map(market => this.normalizeMarket(market)),
-        recentlyAdded: result.recently_added.map(market => this.normalizeMarket(market)),
-        night: result.night_market.map(market => this.normalizeMarket(market)),
-        winter: result.winter_market.map(market => this.normalizeMarket(market))
-      };
-    }));
+    return this.http.get<MarketFeedServerResponse>('/api/market-feed/').pipe(
+      map(result => {
+        return {
+          recommended: result.recommend_market.map(market => this.normalizeMarket(market)),
+          recentlyAdded: result.recently_added.map(market => this.normalizeMarket(market)),
+          night: result.night_market.map(market => this.normalizeMarket(market)),
+          winter: result.winter_market.map(market => this.normalizeMarket(market))
+        };
+      })
+    );
   }
 
   public search(searchParams: SearchParams): Observable<MarketSearchResult | undefined> {
@@ -140,17 +142,19 @@ export class MarketService {
       return observableOf(undefined);
     }
 
-    return this.http.get<MarketSearchServerResponse>('/api/market-search/', {
-      params: params.append('page', String(searchParams.page))
-    }).pipe(map(result => {
-      return {
-        currentPage: searchParams.page,
-        totalPage: Math.ceil(result.count / searchResultItemsPerPage),
-        markets: result.results.map(
-          serverMarket => this.normalizeMarket(serverMarket)
-        )
-      };
-    }));
+    return this.http
+      .get<MarketSearchServerResponse>('/api/market-search/', {
+        params: params.append('page', String(searchParams.page))
+      })
+      .pipe(
+        map(result => {
+          return {
+            currentPage: searchParams.page,
+            totalPage: Math.ceil(result.count / searchResultItemsPerPage),
+            markets: result.results.map(serverMarket => this.normalizeMarket(serverMarket))
+          };
+        })
+      );
   }
 
   private normalizeMarket(serverMarket: MarketServerResponse): Market {
@@ -165,7 +169,7 @@ export class MarketService {
       endDate: new Date(serverMarket.closing_date),
       minPrice: Number(serverMarket.min_price),
       imageURL: serverMarket.cover_photo.thumbnail,
-      expiryDays: (expiryDays <= maxExpireDays && expiryDays > 0) ? expiryDays : undefined,
+      expiryDays: expiryDays <= maxExpireDays && expiryDays > 0 ? expiryDays : undefined,
       reservedNo: serverMarket.reserved_no
     };
   }
