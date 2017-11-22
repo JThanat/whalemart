@@ -4,27 +4,79 @@
   </div>
   <div class="row mt-4">
     <div class="col-md-6">
-      <img class="profile-img img-fluid rounded mx-auto d-block" src="http://via.placeholder.com/600x800">
+      <div>
+        <img class="profile-img img-fluid rounded mx-auto d-block" src="http://via.placeholder.com/600x800">
+      </div>
+      <div *ngIf="isEdit" class="mt-3">
+        <button class="btn btn-outline-primary mx-auto d-block">แก้ไขรูป</button>
+      </div>
     </div>
     <div class="col-md-6">
-      <div class="mb-2">
-        <div class="title">อีเมล์</div>
-        <div>ข้อมูลของนายน้องหนึ่ง อิอิ</div>
+      <div *ngIf="!isEdit">
+        <div class="mb-2">
+          <div class="title">อีเมล์</div>
+          <div>ข้อมูลของนายน้องหนึ่ง อิอิ</div>
+        </div>
+        <div class="mb-2">
+          <div class="title">ชื่อ</div>
+          <div>ข้อมูลของนายน้องหนึ่ง อิอิ</div>
+        </div>
+        <div class="mb-2">
+          <div class="title">นามสกุล</div>
+          <div>ข้อมูลของนายน้องหนึ่ง อิอิ</div>
+        </div>
+        <div class="mb-2">
+          <div class="title">เบอร์โทรศัพท์</div>
+          <div>ข้อมูลของนายน้องหนึ่ง อิอิ</div>
+        </div>
+        <button class="btn btn-outline-danger" (click)="toggleEditProfile(true)">แก้ไขข้อมูล</button>
       </div>
-      <div class="mb-2">
-        <div class="title">ชื่อ</div>
-        <div>ข้อมูลของนายน้องหนึ่ง อิอิ</div>
-      </div>
-      <div class="mb-2">
-        <div class="title">นามสกุล</div>
-        <div>ข้อมูลของนายน้องหนึ่ง อิอิ</div>
-      </div>
-      <div class="mb-2">
-        <div class="title">เบอร์โทรศัพท์</div>
-        <div>ข้อมูลของนายน้องหนึ่ง อิอิ</div>
-      </div>
-      <button class="btn btn-outline-danger">แก้ไขข้อมูล</button>
-      <button class="btn btn-primary">บันทึกข้อมูล</button>
+      <form *ngIf="isEdit" [formGroup]="vendorProfileForm">
+        <div>
+          <div class="mb-2">
+            <div class="title">อีเมล์</div>
+            <input type="text" class="form-control" value="1234" disabled="disabled">
+          </div>
+
+          <app-input-group>
+            <div appInput>
+              <div class="title">ชื่อ</div>
+              <input type="text" class="form-control" formControlName="firstName" placeholder="ชื่อ" value="1234">
+            </div>
+            <app-input-error *ngIf="vendorProfileForm.controls['firstName'].hasError('required')">
+              กรุณากรอกชื่อผู้ให้เช่า
+            </app-input-error>
+          </app-input-group>
+
+          <app-input-group>
+            <div appInput>
+              <div class="title">นามสกุล</div>
+              <input appInput type="text" class="form-control" formControlName="lastName" placeholder="นามสกุล">
+            </div>
+            <app-input-error *ngIf="vendorProfileForm.controls['lastName'].hasError('required')">
+              กรุณากรอกนามสกุล
+            </app-input-error>
+          </app-input-group>
+
+          <app-input-group>
+            <div appInput>
+              <div class="title">เบอร์โทรศัพท์</div>
+              <input appInput type="text" class="form-control" formControlName="phone" placeholder="081234567">
+            </div>
+            <app-input-error *ngIf="vendorProfileForm.controls['phone'].hasError('required')">
+              กรุณากรอกเบอร์โทรศัพท์
+            </app-input-error>
+            <app-input-error *ngIf="vendorProfileForm.controls['phone'].hasError('pattern')">
+              เบอร์โทรศัพท์ต้องอยู่ในรูป 0812345678
+            </app-input-error>
+          </app-input-group>
+
+          <button class="btn btn-primary" class="btn btn-outline-danger mr-2" (click)="toggleEditProfile(false)">ยกเลิก</button>
+          <button type="submit" class="btn btn-primary" (submit)="updateProfile()" [disabled]="vendorProfileForm.disabled" class="btn btn-primary">
+            บันทึกข้อมูล
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
