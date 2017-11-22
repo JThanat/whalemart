@@ -9,10 +9,27 @@
     font-size: 1.1rem;
     margin-bottom: 0;
   }
+  .header-right {
+    display: flex;
+    flex-direction: column;
+    @include media-breakpoint-up(md) {
+      align-items: flex-end;
+    }
+  }
   .location, .date {
+    display: flex;
+    align-items: center;
     color: $dark-gray;
-    margin-bottom: 0;
+    margin-bottom: map-get($spacers, 1);
     font-size: 0.9rem;
+    > app-svg-icon {
+      margin-right: 0.3rem;
+      @include media-breakpoint-up(md) {
+        order: 99;
+        margin-left: 0.4rem;
+        margin-right: initial;
+      }
+    }
   }
 }
 
@@ -67,6 +84,11 @@ nav {
 
   .date, .time {
     margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    > app-svg-icon {
+      margin-right: 0.4rem;
+    }
   }
 
   .lease-info {
