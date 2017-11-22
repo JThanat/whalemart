@@ -1,4 +1,5 @@
 import { ScrollDispatcher } from '@angular/cdk/scrolling';
+import { DOCUMENT } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -11,7 +12,7 @@ import {
   QueryList,
   ViewChildren
 } from '@angular/core';
-import { DOCUMENT, DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators/map';
