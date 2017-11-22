@@ -7,13 +7,14 @@ import { DateRange } from '../utils/date-range.service';
 
 export interface Market {
   readonly id: number;
-  readonly expireDay?: number;
   readonly imageURL: string;
   readonly name: string;
   readonly location: string;
   readonly startDate: Date;
   readonly endDate: Date;
   readonly minPrice: number;
+  readonly expiryDays?: number;
+  readonly reservedNo?: number;
 }
 
 export interface MarketFeed {
@@ -36,6 +37,7 @@ interface MarketSearchServerResponse {
 }
 
 interface MarketServerResponse {
+  id: number;
   name: string;
   caption: string;
   description: string;
@@ -52,7 +54,8 @@ interface MarketServerResponse {
     thumbnail: string;
   };
   tags: any[];
-  id: number;
+  expiry_time: number;
+  reserved_no?: number;
 }
 
 interface SearchParams {
@@ -60,7 +63,7 @@ interface SearchParams {
   dateRange?: DateRange;
 }
 
-const minShowExpireTimespanInDays = 90;
+const maxExpireDays = 90;
 
 @Injectable()
 export class MarketService {
@@ -92,10 +95,8 @@ export class MarketService {
   }
 
   private normalizeMarket(serverMarket: MarketServerResponse): Market {
-    // TODO: Calculate expire day from server instead.
     const millisecondsInDay = 1000 * 60 * 60 * 24;
-    const dueDate = new Date(serverMarket.reservation_due_date).getTime();
-    const expireDay = Math.ceil((dueDate - Date.now()) / millisecondsInDay);
+    const expiryDays = Math.ceil(serverMarket.expiry_time / millisecondsInDay);
 
     return {
       id: serverMarket.id,
@@ -104,9 +105,9 @@ export class MarketService {
       startDate: new Date(serverMarket.opening_date),
       endDate: new Date(serverMarket.closing_date),
       minPrice: Number(serverMarket.min_price),
-      expireDay: (0 < expireDay && expireDay <= minShowExpireTimespanInDays)
-        ? expireDay : undefined,
-      imageURL: serverMarket.cover_photo.thumbnail
+      imageURL: serverMarket.cover_photo.thumbnail,
+      expiryDays: (expiryDays <= maxExpireDays && expiryDays > 0) ? expiryDays : undefined,
+      reservedNo: serverMarket.reserved_no
     };
   }
 }
