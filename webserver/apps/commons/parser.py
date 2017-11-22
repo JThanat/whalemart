@@ -17,5 +17,4 @@ class MultipartFormencodeParser(parsers.MultiPartParser):
         qdict = QueryDict('', mutable=True)
         qdict.update(data)
         data_and_files = parsers.DataAndFiles(qdict, result.files)
-        
         return data_and_files

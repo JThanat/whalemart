@@ -3,7 +3,7 @@ import re
 from rest_framework import serializers
 
 from apps.booths.models import Booth
-from apps.commons.custom_field import MyListField
+from apps.commons.custom_field import MyListField, MyDictField
 from apps.markets.models import Market, CoverPhoto, Scene
 from apps.tags.models import Tag
 from apps.tags.serializers import TagSerializer
@@ -53,7 +53,10 @@ class MarketSerializer(serializers.ModelSerializer):
                                     use_url=False),
         write_only=True
     )
-
+    booth_list = MyListField(
+        child=MyDictField(child=serializers.DecimalField(max_digits=10, decimal_places=6)),
+        write_only=True
+    )
     # booths = BoothSerializer(many=True)
 
     class Meta:
@@ -63,17 +66,35 @@ class MarketSerializer(serializers.ModelSerializer):
             'contact_person_fullname', 'contact_person_phone_number', 'contact_person_email', 'location',
             'location_latitude', 'location_longitude', 'term_and_condition', 'deposit_payment_due',
             'full_payment_due', 'reservation_due_date', 'estimate_visitor', 'min_price', 'max_price',
-            'layout_photo', 'provided_accessories', 'cover_photo', 'scene_photo_list', 'tag_list'
+            'layout_photo', 'provided_accessories', 'cover_photo', 'scene_photo_list', 'tag_list', 'booth_list'
         )
+
 
     def create(self, validated_data):
         tags_data = validated_data.pop('tag_list', None)
         cover_photo = validated_data.pop('cover_photo', None)
         scene_images = validated_data.pop('scene_photo_list', None)
-        # booths = validated_data.pop('booths')
+        booths = validated_data.pop('booth_list', None)
+
+        min_price = None
+        max_price = None
+
+        for booth in booths:
+            price = list(booth.values())[0]
+            if min_price is None and max_price is None:
+                min_price = price
+                max_price = price
+
+            if price < min_price:
+                min_price = price
+
+            if price > max_price:
+                max_price = price
 
         validated_data['created_user'] = self.context.get('request').user
         validated_data['updated_user'] = self.context.get('request').user
+        validated_data['min_price'] = min_price
+        validated_data['max_price'] = max_price
 
         market = Market.objects.create(**validated_data)
 
@@ -86,8 +107,10 @@ class MarketSerializer(serializers.ModelSerializer):
         for scene_image in scene_images:
             Scene.objects.create(market=market, scene_image=scene_image)
 
-        # for booth in booths:
-        #     Booth.objects.create(market=market, **booth)
+        for booth in booths:
+            booth_num = list(booth.keys())[0]
+            price = list(booth.values())[0]
+            Booth.objects.create(market=market, booth_number=booth_num, rental_fee=price)
 
         return market
 
