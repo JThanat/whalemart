@@ -33,6 +33,7 @@ from apps.products import views as product_views
 from apps.tags import views as tag_views
 from apps.reservations import views as reservation_views
 from apps.payments import views as payment_views
+from apps.admins import views as admin_views
 
 router = routers.DefaultRouter()
 router.register(r'users', user_views.UserViewSet)
@@ -63,7 +64,7 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^reserved-markets', user_views.get_reserved_markets),
     url(r'^approve_booths', reservation_views.approve_booths),
-    url(r'^verify-receipt/', user_views.verify_receipt),
+    url(r'^verify-receipt/', admin_views.verify_receipt),
     # JWT
     url(r'^api-token-auth/', obtain_jwt_token),
     url(r'^api-token-refresh/', refresh_jwt_token),

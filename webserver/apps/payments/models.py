@@ -41,6 +41,6 @@ class Installment(models.Model):
     )
     verification_status = models.IntegerField(choices=VERIFICATION_STATUS_CHOICES, verbose_name='Verification Status',
                                               default=PENDING)
-    rental_payment_info = models.ForeignKey('rental_payment_info.RentalPaymentInfo',
+    rental_payment_info = models.ForeignKey('payments.RentalPaymentInfo',
                                             verbose_name='Rental Payment Info',
                                             related_name='installments')
