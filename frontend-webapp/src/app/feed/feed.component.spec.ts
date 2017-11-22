@@ -1,4 +1,4 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { NO_ERRORS_SCHEMA, Pipe, PipeTransform } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,7 +13,8 @@ import { FeedComponent } from './feed.component';
 const testMarket: Market = {
   id: 1,
   imageURL: 'https://url',
-  expireDay: 3,
+  expiryDays: 3,
+  reservedNo: 150,
   name: 'foo',
   startDate: new Date(),
   endDate: new Date(),
@@ -22,10 +23,18 @@ const testMarket: Market = {
 };
 
 const testMarketFeed: MarketFeed = {
-  recommendations: [testMarket, testMarket],
-  nights: [testMarket, testMarket, testMarket, testMarket],
-  days: [testMarket, testMarket, testMarket, testMarket]
+  recommended: [testMarket, testMarket],
+  recentlyAdded: [testMarket, testMarket, testMarket, testMarket],
+  night: [testMarket, testMarket, testMarket, testMarket],
+  winter: [testMarket, testMarket, testMarket, testMarket]
 };
+
+@Pipe({ name: 'dateRange' })
+export class MockDateRangePipe implements PipeTransform {
+  transform(value: Date[], ...args: any[]): any {
+    return value.map(date => date.toISOString()).join(',');
+  }
+}
 
 describe('FeedComponent', () => {
   let component: FeedComponent;
@@ -34,7 +43,7 @@ describe('FeedComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, NoopAnimationsModule, RouterTestingModule],
-      declarations: [FeedComponent],
+      declarations: [FeedComponent, MockDateRangePipe],
       providers: [
         {
           provide: ActivatedRoute, useValue: {

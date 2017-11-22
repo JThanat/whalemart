@@ -7,7 +7,8 @@ import { MarketComponent } from './market.component';
 const testMarket: Market = {
   id: 1,
   imageURL: 'https://url',
-  expireDay: 3,
+  expiryDays: 3,
+  reservedNo: 150,
   name: 'foo',
   startDate: new Date(),
   endDate: new Date(),
@@ -15,12 +16,10 @@ const testMarket: Market = {
   minPrice: 1200
 };
 
-@Pipe({
-  name: 'dateRange'
-})
+@Pipe({ name: 'dateRange' })
 export class MockDateRangePipe implements PipeTransform {
   transform(value: Date[], ...args: any[]) {
-    return value.map(date => date.toUTCString());
+    return value.map(date => date.toUTCString()).join(',');
   }
 }
 

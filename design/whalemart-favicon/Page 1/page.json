@@ -1,0 +1,114 @@
+{
+  "_class": "page",
+  "do_objectID": "2ED7740B-182C-460A-BB40-2997CEDE0778",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "height": 300,
+    "width": 300,
+    "x": 0,
+    "y": 0
+  },
+  "hasClickThrough": true,
+  "horizontalRulerData": {
+    "_class": "rulerData",
+    "base": 0,
+    "guides": [
+    ]
+  },
+  "includeInCloudUpload": true,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "layers": [
+    {
+      "class": "group",
+      "id": "378CD607-2358-4EC6-B498-98AF2F1BF140"
+    },
+    {
+      "class": "artboard",
+      "id": "1061D902-19CB-4BF4-BB47-0DA91F3A2ADA"
+    },
+    {
+      "class": "artboard",
+      "id": "D56A7873-44E5-4BC5-A7E6-8D97403F924D"
+    },
+    {
+      "class": "artboard",
+      "id": "89C832FF-7CD7-4048-AD8E-3BFF5ADADC3C"
+    },
+    {
+      "class": "artboard",
+      "id": "1A0876A1-A92A-4896-BEC3-6ACFC65CF09E"
+    },
+    {
+      "class": "artboard",
+      "id": "42F11BD0-05AE-4300-A740-68775C6B3FA8"
+    },
+    {
+      "class": "artboard",
+      "id": "4C2E5A3C-3A37-4B18-A29A-BE8AA3023F01"
+    },
+    {
+      "class": "artboard",
+      "id": "4C1FCE10-2AB2-47D2-BFB9-0FE1C803C45C"
+    },
+    {
+      "class": "artboard",
+      "id": "4547AE49-871D-4571-BF34-547117DDB70F"
+    },
+    {
+      "class": "artboard",
+      "id": "8316D703-2F53-460F-978D-D9D33DE6E82C"
+    },
+    {
+      "class": "artboard",
+      "id": "3E813854-A999-422C-9209-06ED1FAEB4C5"
+    },
+    {
+      "class": "artboard",
+      "id": "92801D52-A1A3-4BB1-AE09-BEDFDAABF4A4"
+    },
+    {
+      "class": "artboard",
+      "id": "ABBC294F-57FC-42DF-B703-3DA87390E60D"
+    },
+    {
+      "class": "artboard",
+      "id": "C17E944A-6146-4835-8578-F179B6A2BD1A"
+    },
+    {
+      "class": "artboard",
+      "id": "ECC0F248-6038-4B68-87B6-BA2B26DAA35B"
+    }
+  ],
+  "name": "Page 1",
+  "nameIsFixed": false,
+  "resizingConstraint": 0,
+  "resizingType": 0,
+  "rotation": 0,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  },
+  "verticalRulerData": {
+    "_class": "rulerData",
+    "base": 0,
+    "guides": [
+    ]
+  }
+}
