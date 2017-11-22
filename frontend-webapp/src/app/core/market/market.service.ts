@@ -1,15 +1,23 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
+import { DateRange } from '../utils/date-range.service';
 
 export interface Market {
-  expireDay?: number;
-  imageURL: string;
-  name: string;
-  location: string;
-  startDate: Date;
-  endDate: Date;
-  minPrice: number;
+  readonly id: number;
+  readonly expireDay?: number;
+  readonly imageURL: string;
+  readonly name: string;
+  readonly location: string;
+  readonly startDate: Date;
+  readonly endDate: Date;
+  readonly minPrice: number;
+}
+
+export interface MarketFeed {
+  readonly recommendations: Market[];
+  readonly nights: Market[];
+  readonly days: Market[];
 }
 
 interface MarketSearchResult {
@@ -34,10 +42,12 @@ interface MarketServerResponse {
     thumbnail: string;
   };
   tags: any[];
+  id: number;
 }
 
 interface SearchParams {
   query: string;
+  dateRange?: DateRange;
 }
 
 const minShowExpireTimespanInDays = 90;
@@ -46,14 +56,26 @@ const minShowExpireTimespanInDays = 90;
 export class MarketService {
   constructor(private http: HttpClient) { }
 
-  public search(params: SearchParams) {
-    return this.http.get<MarketSearchResult>('/api/market-feed/', {
-      params: {
-        search: params.query
-      }
-    }).pipe(map(result => result.results.map(
-      serverMarket => this.transformResponse(serverMarket)
-    )));
+  public getFeed() {
+    // TODO: Use categorized markets feed data from server.
+    return this.http.get<MarketSearchResult>('/api/market-feed/').pipe(
+      map(result => result.results.map(serverMarket => this.transformResponse(serverMarket))),
+      map(markets => this.transformToMarketsFeed(markets))
+    );
+  }
+
+  public search(searchParams: SearchParams) {
+    let params = new HttpParams().append('search', searchParams.query);
+    if (searchParams.dateRange) {
+      params = params
+        .append('min_date', searchParams.dateRange.start.toISOString())
+        .append('max_date', searchParams.dateRange.end.toISOString());
+    }
+
+    return this.http.get<MarketSearchResult>('/api/market-feed/', { params })
+      .pipe(map(result => result.results.map(
+        serverMarket => this.transformResponse(serverMarket)
+      )));
   }
 
   private transformResponse(serverMarket: MarketServerResponse): Market {
@@ -63,6 +85,7 @@ export class MarketService {
     const expireDay = Math.ceil((dueDate - Date.now()) / millisecondsInDay);
 
     return {
+      id: serverMarket.id,
       name: serverMarket.name,
       location: serverMarket.location,
       startDate: new Date(serverMarket.opening_date),
@@ -70,7 +93,21 @@ export class MarketService {
       minPrice: Number(serverMarket.min_price),
       expireDay: (0 < expireDay && expireDay <= minShowExpireTimespanInDays)
         ? expireDay : undefined,
-      imageURL: serverMarket.cover_photo.thumbnail.replace('4200', '8000')
+      imageURL: serverMarket.cover_photo.thumbnail
+    };
+  }
+
+  private transformToMarketsFeed(markets: Market[]): MarketFeed {
+    if (markets.length === 0) {
+      throw new Error('No market. Please run loaddata first');
+    }
+
+    const m = (index: number) => markets[index % markets.length];
+
+    return {
+      recommendations: [m(0), m(1)],
+      days: [m(2), m(3), m(4), m(5)],
+      nights: [m(6), m(7), m(8), m(9)]
     };
   }
 }

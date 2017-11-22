@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AlertService } from '../core/alert/alert.service';
+import { IntercomponentDataService } from '../core/utils/intercomponent-data.service';
+import { FacebookLoginService } from './facebook-login.service';
 import { InvalidLoginCredentialError, LoginService } from './login.service';
 
 @Component({
@@ -13,10 +15,16 @@ import { InvalidLoginCredentialError, LoginService } from './login.service';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
+  isFb = false;
+  fbAccessToken: string | undefined = undefined;
+  fbUserId: string | undefined = undefined;
+
   constructor(
     private loginService: LoginService,
     private router: Router,
-    private alert: AlertService
+    private alert: AlertService,
+    private fbLoginService: FacebookLoginService,
+    private intercomponentDataService: IntercomponentDataService
   ) { }
 
   ngOnInit() {
@@ -24,6 +32,8 @@ export class LoginComponent implements OnInit {
       email: new FormControl('', [Validators.email]),
       password: new FormControl('', [Validators.required])
     }, { updateOn: 'blur' });
+
+    this.fbLoginService.ensureFbScriptLoad();
   }
 
   login() {
@@ -40,7 +50,7 @@ export class LoginComponent implements OnInit {
     const email = this.loginForm.value.email as string;
     const password = this.loginForm.value.password as string;
     this.loginService.login(email, password).subscribe(userInfo => {
-      this.alert.show({ message: `เข้าสู่ระบบสำเร็จ`, type: 'success' });
+      this.alert.show({ message: 'เข้าสู่ระบบสำเร็จ', type: 'success' });
       this.router.navigate(['/']);
     }, err => {
       this.loginForm.enable();
@@ -51,6 +61,22 @@ export class LoginComponent implements OnInit {
         });
       } else {
         throw err;
+      }
+    });
+  }
+
+  loginWithFacebook() {
+    this.fbLoginService.loginFacebook().subscribe(result => {
+      if (!result.success) {
+        return;
+      }
+
+      if (result.requireRegistration) {
+        this.intercomponentDataService.set('fbRegister', result.registrationInfo);
+        this.router.navigate(['/register/facebook']);
+      } else {
+        this.alert.show({ message: 'เข้าสู่ระบบสำเร็จ', type: 'success' });
+        this.router.navigate(['/']);
       }
     });
   }

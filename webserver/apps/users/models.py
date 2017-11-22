@@ -8,7 +8,7 @@ class User(AbstractUser):
     first_name = models.CharField(verbose_name='First Name', max_length=50)
     last_name = models.CharField(verbose_name='Last Name', max_length=50)
     phone = models.CharField(verbose_name='Phone', max_length=20)
-    facebook_token = models.TextField(verbose_name='Facebook Token', blank=True, max_length=1000)
+    facebook_id = models.CharField(verbose_name='Facebook Token', blank=True, max_length=20, unique=True)
     is_verified = models.BooleanField(verbose_name='Is Verified', default=False)
     profile_image = models.ImageField(verbose_name='Profile Image', null=True, upload_to='profile_images/%Y/%m/%d')
 
@@ -32,4 +32,4 @@ class CreditCard(models.Model):
     verification_no = models.CharField(verbose_name='Verification Number', max_length=10)
 
     def __str__(self):
-        return self.card_number
+        return self.card_number[-4:]

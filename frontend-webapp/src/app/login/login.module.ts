@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../shared/shared.module';
+import { FacebookLoginService } from './facebook-login.service';
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 import { LoginService } from './login.service';
@@ -14,7 +15,8 @@ import { LoginService } from './login.service';
     LoginComponent
   ],
   providers: [
-    LoginService
+    LoginService,
+    FacebookLoginService
   ]
 })
 export class LoginModule { }

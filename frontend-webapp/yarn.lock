@@ -185,7 +185,15 @@
   dependencies:
     "@angular-devkit/core" "0.0.20"
 
-"@types/jasmine@*", "@types/jasmine@~2.8.2":
+"@types/facebook-js-sdk@2.8.3":
+  version "2.8.3"
+  resolved "https://registry.yarnpkg.com/@types/facebook-js-sdk/-/facebook-js-sdk-2.8.3.tgz#28db179c28bcd4faca13d38f27f72e1702f330f6"
+
+"@types/jasmine@*":
+  version "2.6.3"
+  resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-2.6.3.tgz#586963bfdd35e38f24a0a0b63a438cf521292ed9"
+
+"@types/jasmine@~2.8.2":
   version "2.8.2"
   resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-2.8.2.tgz#6ae4d8740c0da5d5a627df725b4eed71b8e36668"
 
@@ -2141,6 +2149,10 @@ find-up@^2.0.0, find-up@^2.1.0:
   resolved "https://registry.yarnpkg.com/find-up/-/find-up-2.1.0.tgz#45d1b7e506c717ddd482775a2b77920a3c0c57a7"
   dependencies:
     locate-path "^2.0.0"
+
+flatpickr@^4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-4.1.2.tgz#2bbebe46e1fd74d7ef10bf987229aa23eaac1265"
 
 flatten@^1.0.2:
   version "1.0.2"

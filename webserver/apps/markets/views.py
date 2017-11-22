@@ -1,41 +1,23 @@
-from datetime import time, datetime, timedelta
+from datetime import datetime
 
-from django.db.models import F
-from rest_framework import status
-from rest_framework import viewsets
-from rest_framework.response import Response
-from rest_framework.settings import api_settings
 from rest_framework import filters
+from rest_framework import viewsets
+from rest_framework.parsers import JSONParser, FormParser
+from rest_framework.response import Response
 
-from apps.markets.models import Market
-from apps.markets.serializers import MarketSerializer, MarketFeedSerializer
-
-
-#
-# class MarketViewSet(viewsets.ViewSet):
-#     """
-#     A ViewSet for listing market
-#     """
-#     # queryset = Market.objects.all().order_by('-created_at')
-#     # serializer_class = MarketFeedSerializer
-#     def list(self, request):
-#         queryset = Market.objects.all()
-#         serializer = MarketFeedSerializer(queryset, many=True)
-#         return Response(serializer.data)
-#
-#     def retrieve(self, request, pk=None):
-#         queryset = Market.objects.all()
-#         market = get_object_or_404(queryset, pk=pk)
-#         serializer = MarketSerializer(market)
-#         return Response(serializer.data)
-#
-#     def create(self, request):
-#         serializers = MarketSerializer
+from apps.commons.parser import MultipartFormencodeParser
+from apps.markets.models import Market, Scene
+from apps.markets.serializers import MarketSerializer, MarketFeedSerializer, SceneSerializer
 
 
 class MarketViewSet(viewsets.ModelViewSet):
     queryset = Market.objects.all().order_by('-created_at')
     serializer_class = MarketSerializer
+    parser_classes = (JSONParser, FormParser, MultipartFormencodeParser)
+
+    def update(self, request, *args, **kwargs):
+        kwargs['partial'] = True
+        return super(MarketViewSet, self).update(request, *args, **kwargs)
 
 
 class MarketFeedViewSet(viewsets.GenericViewSet):
@@ -152,4 +134,9 @@ class MarketFeedViewSet(viewsets.GenericViewSet):
         start = datetime.strptime(start_time, '%Y-%m-%d %H:%M:%S')
         end = datetime.strptime(end_time, '%Y-%m-%d %H:%M:%S')
         diff = end - start
-        return diff.seconds//60
+        return diff.seconds // 60
+
+
+class SceneViewSet(viewsets.ModelViewSet):
+    queryset = Scene.objects.all().order_by('-id')
+    serializer_class = SceneSerializer

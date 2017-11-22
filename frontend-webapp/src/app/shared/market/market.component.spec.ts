@@ -1,7 +1,19 @@
 import { NO_ERRORS_SCHEMA, Pipe, PipeTransform } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { Market } from '../../core/market/market.service';
 import { MarketComponent } from './market.component';
+
+const testMarket: Market = {
+  id: 1,
+  imageURL: 'https://url',
+  expireDay: 3,
+  name: 'foo',
+  startDate: new Date(),
+  endDate: new Date(),
+  location: 'bar',
+  minPrice: 1200
+};
 
 @Pipe({
   name: 'dateRange'
@@ -18,20 +30,20 @@ describe('MarketComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ ],
+      imports: [],
       declarations: [
         MarketComponent,
         MockDateRangePipe
       ],
-      schemas: [ NO_ERRORS_SCHEMA ],
-      providers: [  ]
-    })
-    .compileComponents();
+      schemas: [NO_ERRORS_SCHEMA],
+      providers: []
+    }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MarketComponent);
     component = fixture.componentInstance;
+    component.market = testMarket;
     fixture.detectChanges();
   });
 
