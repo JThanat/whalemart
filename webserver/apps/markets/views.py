@@ -22,16 +22,6 @@ class MarketViewSet(viewsets.ModelViewSet):
 
 
 class MarketFeedViewSet(viewsets.GenericViewSet):
-    """
-    ### Search
-    `search`: search with name or location
-    ### Filter Params
-    `min_price`, `max_price`: decimal\n
-    `morning`, `afternoon`, `evening`, `night`: true/false\n
-    `min_date`, `max_date`: date\n
-    ### Sort
-    `sort_by`: created_time, opening_date
-    """
     serializer_class = MarketFeedSerializer
     queryset = Market.objects.all().order_by('-created_at')
 
@@ -48,6 +38,16 @@ class MarketFeedViewSet(viewsets.GenericViewSet):
 
 
 class MarketSearchFeedViewSet(MarketFeedViewSet):
+    """
+    ### Search
+    `search`: search with name or location
+    ### Filter Params
+    `min_price`, `max_price`: decimal\n
+    `morning`, `afternoon`, `evening`, `night`: true/false\n
+    `min_date`, `max_date`: date\n
+    ### Sort
+    `sort_by`: created_time, opening_date
+    """
     filter_backends = (filters.SearchFilter,)
     search_fields = ('name', 'location')
 
