@@ -1,0 +1,16 @@
+@import '~styles/common';
+
+.vendor-bar {
+  display: flex;
+
+  .vendor-item {
+    @include font-family(heading);
+    @include font-weight(regular);
+    color: $dark-gray;
+
+    &.active {
+      color: $primary;
+      border-bottom: 0.2rem solid $primary;
+    }
+  }
+}

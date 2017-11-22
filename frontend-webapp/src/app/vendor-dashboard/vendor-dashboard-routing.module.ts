@@ -2,16 +2,23 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { VendorProfileComponent } from './profile/vendor-profile.component';
+import { VendorDashboardComponent } from './vendor-dashboard.component';
 
 const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
-    component: VendorProfileComponent
-  },
-  {
-    path: 'profile',
-    component: VendorProfileComponent
+    component: VendorDashboardComponent,
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'profile'
+      },
+      {
+        path: 'profile',
+        component: VendorProfileComponent
+      }
+    ]
   }
 ];
 

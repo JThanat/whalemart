@@ -1,16 +1,12 @@
 @import '~styles/common';
 
-.vendor-bar {
-  display: flex;
+.title {
+  font-size: 1.3rem;
+  @include font-family(heading);
+  @include font-weight(regular);
+}
 
-  .vendor-item {
-    @include font-family(heading);
-    @include font-weight(regular);
-    color: $dark-gray;
-
-    &.active {
-      color: $primary;
-      border-bottom: 0.2rem solid $primary;
-    }
-  }
+.profile-img {
+  max-width: 400px;
+  max-height: 300px;
 }
