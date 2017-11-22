@@ -114,3 +114,15 @@ def get_current_user(request, *args, **kwargs):
         return Response('Please login', status=status.HTTP_400_BAD_REQUEST)
     user = request.user
     return Response(UserSerializer(user).data)
+
+@api_view(['GET',])
+def get_reserved_markets(request, *args, **kwargs):
+    user = request.user
+    if user.is_anonymous():
+        return Response(status=status.HTTP_401_UNAUTHORIZED)
+    reservations = user.reservations.all()
+    markets = []
+    for reservation in reservations:
+        markets += [reservation.market]
+    return Response(markets,
+                    status=status.HTTP_200_OK)
