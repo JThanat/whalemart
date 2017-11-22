@@ -1,3 +1,5 @@
+from datetime import datetime, timezone
+
 from django.contrib.postgres import fields
 from django.db import models
 
@@ -74,6 +76,14 @@ class Market(ControlModel):
         tags = Tag.objects.filter(market=self.pk)
         tags = [x.tag for x in tags]
         return tags
+
+    def time_to_expire(self):
+        """
+        Return Expiry time in milliseconds
+        :return: Decimal
+        """
+        expiry_time = self.reservation_due_date - datetime.now(timezone.utc)
+        return expiry_time.total_seconds() * 1000
 
 
 class CoverPhoto(UploadedImage):

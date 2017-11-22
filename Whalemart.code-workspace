@@ -1,0 +1,40 @@
+{
+  "folders": [
+    {
+      "path": "webserver",
+      "name": "Webserver"
+    },
+    {
+      "path": "frontend-webapp",
+      "name": "Frontend Webapp"
+    },
+    {
+      "path": "doc",
+      "name": "Documents"
+    }
+  ],
+  "settings": {
+    "editor.insertSpaces": true,
+    "[typescript]": {
+      "editor.tabSize": 2,
+      "editor.rulers": [
+        100
+      ]
+    },
+    "[html]": {
+      "editor.tabSize": 2
+    },
+    "[scss]": {
+      "editor.tabSize": 2
+    },
+    "[json]": {
+      "editor.tabSize": 2
+    },
+    "typescript.tsdk": "frontend-webapp/node_modules/typescript/lib"
+  },
+  "extensions": {
+    "recommendations": [
+      "PeterJausovec.vscode-docker"
+    ]
+  }
+}
