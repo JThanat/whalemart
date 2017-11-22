@@ -1,13 +1,40 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { of as observableOf } from 'rxjs/observable/of';
 import { _throw as observableThrow } from 'rxjs/observable/throw';
-import { catchError, map, mapTo, tap } from 'rxjs/operators';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { catchError, filter, first, map, mapTo, tap } from 'rxjs/operators';
+
+export enum UserStatusType {
+  LoggedIn = 'loggedIn',
+  LoggedOut = 'loggedOut',
+  Unknown = 'unknown'
+}
+
+interface UserStatusLoggedIn {
+  type: UserStatusType.LoggedIn;
+  user: UserInfo;
+}
+
+interface UserStatusNotLoggedIn {
+  type: UserStatusType.LoggedOut;
+}
+
+interface UserStatusUnknown {
+  type: UserStatusType.Unknown;
+}
+
+export type KnownUserStatus = UserStatusLoggedIn | UserStatusNotLoggedIn;
 
 /**
- * An immutable interface representing current user state.
+ * A type representing an immutable object representing current user state .
+ */
+export type UserStatus = KnownUserStatus | UserStatusUnknown;
+
+
+/**
+ * An immutable interface representing current user info.
  */
 export interface UserInfo {
   readonly firstName: string;
@@ -27,52 +54,80 @@ export class UserService {
    * An observable that will emits current UserInfo. If there is no information (logged out), it
    * will return undefined. The first emission will be on initial UserInfo fetching.
    */
-  readonly userInfo = new ReplaySubject<UserInfo | undefined>(1);
+  private userStatus = new BehaviorSubject<UserStatus>({ type: UserStatusType.Unknown });
 
   constructor(private http: HttpClient) {
-    this.getInitialUserInfo().subscribe(userInfo => {
-      this.userInfo.next(userInfo);
+    this.getFreshUserStatusInternally().subscribe(userStatus => {
+      this.userStatus.next(userStatus);
     });
   }
 
-  getCurrentUserInfo(): UserInfo | undefined {
-    let currentUserInfo;
-    let isInitialized = false;
+  getUserStatus() {
+    return this.userStatus.asObservable();
+  }
 
-    this.userInfo.subscribe(userInfo => {
-      currentUserInfo = userInfo;
-      isInitialized = true;
-    }).unsubscribe();
+  /**
+   * A helper method for getting single known UserStatus, i.e. a UserStatus object with type not
+   * equal to `UserStatusType.Unknown`.
+   *
+   * @returns an observable that emits single known UserStatus.
+   */
+  getKnownUserStatus(): Observable<KnownUserStatus> {
+    return this.userStatus.pipe(
+      filter(this.isUserStatusKnown),
+      first()
+    );
+  }
 
-    if (!isInitialized) {
-      throw new Error('Cannot get current UserInfo: userInfo is not available yet');
-    }
+  /**
+   * Gets a single fresh UserStatus, i.e. a UserStatus data that is always fetched from the API.
+   * Note that this method changes `UserService.userStatus`.
+   *
+   * @returns an observable that emits single known UserStatus.
+   */
+  getFreshUserStatus() {
+    return this.getFreshUserStatusInternally().pipe(
+      tap(userStatus => this.userStatus.next(userStatus))
+    );
+  }
 
-    return currentUserInfo;
+  getCurrentUserStatus() {
+    return this.userStatus.value;
+  }
+
+  setLoginData(newUserInfo: UserInfo) {
+    this.userStatus.next({ type: UserStatusType.LoggedIn, user: newUserInfo });
   }
 
   logout() {
     // This API returns no body, so we have to set to text to prevent JSON parsing.
     return this.http.post('/api/logout/', null, { responseType: 'text' })
-      .pipe(tap(() => this.userInfo.next(undefined)))
+      .pipe(tap(() => this.userStatus.next({ type: UserStatusType.LoggedOut })))
       .pipe(mapTo(true));
   }
 
-  private getInitialUserInfo(): Observable<UserInfo | undefined> {
+  private getFreshUserStatusInternally(): Observable<KnownUserStatus> {
     return this.http.get<UserInfoServerResponse>('/api/current-user/').pipe(
       map(result => {
         return {
-          firstName: result.first_name,
-          lastName: result.last_name,
-          email: result.email
+          type: UserStatusType.LoggedIn as UserStatusType.LoggedIn,
+          user: {
+            firstName: result.first_name,
+            lastName: result.last_name,
+            email: result.email
+          }
         };
       }),
       catchError((err: any) => {
         if (err instanceof HttpErrorResponse && err.status >= 400 && err.status < 500) {
-          return observableOf(undefined);
+          return observableOf({ type: UserStatusType.LoggedOut as UserStatusType.LoggedOut });
         }
-        return observableThrow(err) as Observable<UserInfo | undefined>;
+        return observableThrow(err) as Observable<KnownUserStatus>;
       })
     );
+  }
+
+  private isUserStatusKnown(userStatus: UserStatus): userStatus is KnownUserStatus {
+    return userStatus.type !== UserStatusType.Unknown;
   }
 }

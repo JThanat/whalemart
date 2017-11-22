@@ -1,7 +1,9 @@
-from django.db import connection, models
+from django.db import connection
+
+from apps.commons.control_model import SoftDeletionManager
 
 
-class MarketManager(models.Manager):
+class MarketManager(SoftDeletionManager):
     def raw_as_qs(self, raw_query, params=()):
         """Execute a raw query and return a QuerySet.  The first column in the
         result set must be the id field for the model.
