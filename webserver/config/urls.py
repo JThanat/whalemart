@@ -16,7 +16,6 @@ Including another URLconf
 
 from django.conf import settings
 from django.conf.urls import url, include
-from django.conf.urls.static import static
 from django.contrib import admin
 from django.conf.urls.static import static
 from rest_framework import routers
@@ -32,6 +31,7 @@ from apps.bank_accounts import views as bank_accounts_views
 from apps.booths import views as booth_views
 from apps.products import views as product_views
 from apps.tags import views as tag_views
+from apps.payments import views as payment_views
 
 router = routers.DefaultRouter()
 router.register(r'users', user_views.UserViewSet)
@@ -58,6 +58,7 @@ urlpatterns = [
     url(r'^current-user/', user_views.get_current_user),
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^unverified-receipt/', payment_views.get_unverified_receipt),
     # JWT
     url(r'^api-token-auth/', obtain_jwt_token),
     url(r'^api-token-refresh/', refresh_jwt_token),
