@@ -5,8 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs/Subscription';
 
-// import { AlertService } from '../../core/alert/alert.service';
-import { VendorProfile } from './vendor-profile.service';
+import { AlertService } from '../../core/alert/alert.service';
+import { VendorProfile, VendorProfileService } from './vendor-profile.service';
 
 @Component({
   selector: 'app-vendor-profile',
@@ -20,8 +20,8 @@ export class VendorProfileComponent implements OnInit, OnDestroy {
   isEdit = false;
 
   constructor(
-    // private vendorProfileService: VendorProfileService,
-    // private alert: AlertService,
+    private vendorProfileService: VendorProfileService,
+    private alert: AlertService,
     private route: ActivatedRoute
   ) { }
 
@@ -45,6 +45,32 @@ export class VendorProfileComponent implements OnInit, OnDestroy {
     if (isEdit) {
       this.vendorProfileForm.reset(this.vendorProfile);
     }
+  }
+
+  updateProfile() {
+    if (!this.vendorProfileForm.valid) {
+      return;
+    }
+
+    this.vendorProfileForm.disable();
+
+    const {
+      firstName,
+      lastName,
+      phone
+    } = this.vendorProfileForm.value;
+
+    this.vendorProfileService.updateVendorProfile({
+      first_name: firstName,
+      last_name: lastName,
+      phone: phone
+    }).subscribe(() => {
+      this.vendorProfileForm.enable();
+      this.alert.show({ message: 'อัพเดทเสร็จสมบูรณ์', type: 'success' });
+    }, err => {
+      this.vendorProfileForm.enable();
+      this.alert.show({ message: 'เกิดข้อผิดพลาด', type: 'danger' });
+    });
   }
 
   ngOnDestroy() {

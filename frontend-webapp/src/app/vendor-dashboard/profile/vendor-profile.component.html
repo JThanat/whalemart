@@ -31,7 +31,7 @@
         </div>
         <button class="btn btn-outline-danger" (click)="setEditProfile(true)">แก้ไขข้อมูล</button>
       </div>
-      <form *ngIf="isEdit" [formGroup]="vendorProfileForm">
+      <form *ngIf="isEdit" [formGroup]="vendorProfileForm" (submit)="updateProfile()">
         <div>
           <div class="mb-2">
             <div class="title">อีเมล์</div>
@@ -63,7 +63,7 @@
           </app-input-group>
 
           <button class="btn btn-primary" class="btn btn-outline-danger mr-2" (click)="setEditProfile(false)">ยกเลิก</button>
-          <button type="submit" class="btn btn-primary" (submit)="updateProfile()" [disabled]="vendorProfileForm.disabled" class="btn btn-primary">
+          <button type="submit" class="btn btn-primary" [disabled]="vendorProfileForm.disabled" class="btn btn-primary">
             บันทึกข้อมูล
           </button>
         </div>
