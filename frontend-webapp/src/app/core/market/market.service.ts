@@ -58,7 +58,7 @@ export class MarketService {
 
   public getFeed() {
     // TODO: Use categorized markets feed data from server.
-    return this.http.get<MarketSearchResult>('/api/market-feed/').pipe(
+    return this.http.get<MarketSearchResult>('/api/market-search/').pipe(
       map(result => result.results.map(serverMarket => this.transformResponse(serverMarket))),
       map(markets => this.transformToMarketsFeed(markets))
     );
@@ -72,7 +72,7 @@ export class MarketService {
         .append('max_date', searchParams.dateRange.end.toISOString());
     }
 
-    return this.http.get<MarketSearchResult>('/api/market-feed/', { params })
+    return this.http.get<MarketSearchResult>('/api/market-search/', { params })
       .pipe(map(result => result.results.map(
         serverMarket => this.transformResponse(serverMarket)
       )));
