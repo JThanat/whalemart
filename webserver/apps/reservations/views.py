@@ -6,3 +6,7 @@ from apps.reservations.serializer import ReservationSerializer
 class ReservationViewSet(viewsets.ModelViewSet):
     queryset = Reservation.objects.all()
     serializer_class = ReservationSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        return Reservation.objects.filter(user=user)
