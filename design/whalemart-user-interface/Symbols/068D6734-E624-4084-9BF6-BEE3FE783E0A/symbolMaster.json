@@ -7,7 +7,7 @@
     "green": 1,
     "red": 1
   },
-  "changeIdentifier": 0,
+  "changeIdentifier": 39,
   "do_objectID": "068D6734-E624-4084-9BF6-BEE3FE783E0A",
   "exportOptions": {
     "_class": "exportOptions",
@@ -46,6 +46,10 @@
     {
       "class": "group",
       "id": "D6158737-E461-4ED6-9373-3CAF9AB45E63"
+    },
+    {
+      "class": "group",
+      "id": "CDC37BE2-74D9-4944-A2F9-2EB584CF9E40"
     }
   ],
   "name": "nav-bar/logo",
