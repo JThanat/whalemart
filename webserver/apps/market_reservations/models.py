@@ -14,28 +14,23 @@ class MarketReservation(models.Model):
         (REJECTED, 'Rejected'),
         (CANCELED, 'Canceled')
     )
-
     shop_name = models.CharField(verbose_name='Shop Name', max_length=100)
     reservation_time = models.DateTimeField(verbose_name='Reservation Time', auto_now=False, auto_now_add=True)
     status = models.IntegerField(verbose_name='Status',
                                  choices=STATUS_CHOICE,
                                  default=PENDING)
-
-
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         verbose_name='User',
         related_name='market_reservations'
     )
-
     booth = models.ForeignKey(
         Booth,
         on_delete=models.PROTECT,
         verbose_name='Booth',
         related_name='market_reservations'
     )
-
 
 
     def __str__(self):
