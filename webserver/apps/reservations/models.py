@@ -8,6 +8,8 @@ class Reservation(models.Model):
     user = models.ForeignKey('users.User', on_delete=models.CASCADE, verbose_name='User', related_name='reservations')
     market = models.ForeignKey('markets.Market', on_delete=models.CASCADE, verbose_name='Market',
                                related_name='reservations')
+    approved_booth = models.ForeignKey('booths.Booth', null=True, verbose_name='Approved Booth',
+                                       related_name='approved_reservations', on_delete=models.CASCADE)
 
     def __str__(self):
         return '%s-%s-%s' % (self.user.first_name, self.shop_name, self.market)
