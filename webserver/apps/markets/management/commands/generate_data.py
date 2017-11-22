@@ -1,5 +1,6 @@
 import os
 import random
+from datetime import datetime, timezone
 
 from PIL import Image
 from django.conf import settings
@@ -81,6 +82,18 @@ class Command(BaseCommand):
         market.save()
 
 
+    def _fix_datetime(self, market):
+        reservation_due = market.reservation_due_date
+        current_time = datetime.now(timezone.utc)
+        if reservation_due < current_time:
+            openning_date = market.opening_date
+            delt = (openning_date-current_time)/2
+            market.reservation_due_date = current_time + delt
+            market.save()
+
+
+
+
     def handle(self, *args, **options):
         markets = Market.objects.all()
         random.seed(1950)
@@ -93,3 +106,5 @@ class Command(BaseCommand):
             self._dump_provided_accessories(market)
             # dump terms and conditions
             self._dump_terms_and_conditions(market)
+            # fix date time
+            self._fix_datetime(market)
