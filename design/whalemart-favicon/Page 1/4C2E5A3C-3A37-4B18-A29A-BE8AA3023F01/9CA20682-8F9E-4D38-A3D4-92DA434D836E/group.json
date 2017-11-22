@@ -1,0 +1,69 @@
+{
+  "_class": "group",
+  "do_objectID": "9CA20682-8F9E-4D38-A3D4-92DA434D836E",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "height": 109.6393442622951,
+    "width": 114,
+    "x": 0,
+    "y": 2.180327868852601
+  },
+  "hasClickThrough": false,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "layers": [
+    {
+      "class": "shapeGroup",
+      "id": "2DDB2C78-86C5-4C65-9C27-FCF3126F5158"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "F16BFD8B-B715-49FE-812A-9E84E9B42FAB"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "9A8834FE-A8E9-49AC-9985-006D55BD00DA"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "AFAD5C1B-42AB-4971-B9FE-054C2A707A6B"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "C98772B9-2A85-4E41-B4B5-C42CE99505FE"
+    }
+  ],
+  "name": "whalemart-logo",
+  "nameIsFixed": true,
+  "resizingConstraint": 63,
+  "resizingType": 0,
+  "rotation": 0,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "blur": {
+      "_class": "blur",
+      "center": "{0.5, 0.5}",
+      "isEnabled": false,
+      "motionAngle": 0,
+      "radius": 2.527338560228084,
+      "type": 0
+    },
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  }
+}

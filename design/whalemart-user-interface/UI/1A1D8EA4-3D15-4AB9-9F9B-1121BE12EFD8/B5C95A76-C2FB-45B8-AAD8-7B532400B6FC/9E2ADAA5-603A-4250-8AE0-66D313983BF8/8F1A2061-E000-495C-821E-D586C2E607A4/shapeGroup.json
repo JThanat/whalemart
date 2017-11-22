@@ -5,6 +5,14 @@
   "exportOptions": {
     "_class": "exportOptions",
     "exportFormats": [
+      {
+        "_class": "exportFormat",
+        "absoluteSize": 0,
+        "fileFormat": "svg",
+        "namingScheme": 0,
+        "scale": 1,
+        "visibleScaleType": 0
+      }
     ],
     "includedLayerIds": [
     ],
@@ -32,8 +40,8 @@
       "id": "C533426C-33F0-4BD6-A400-6643B1ED85F2"
     }
   ],
-  "name": "Fill 1",
-  "nameIsFixed": false,
+  "name": "arrow-head-down",
+  "nameIsFixed": true,
   "resizingConstraint": 63,
   "resizingType": 0,
   "rotation": 270,
