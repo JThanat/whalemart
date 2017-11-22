@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit, TrackByFunction } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, TrackByFunction } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -9,14 +9,21 @@ import {
   debounceTime,
   distinctUntilChanged,
   filter,
+  first,
   map,
   startWith,
   switchMap
 } from 'rxjs/operators';
+import { Subscription } from 'rxjs/Subscription';
 
-import { Market, MarketSearchResult, MarketService } from '../core/market/market.service';
+import {
+  Market,
+  MarketSearchParams,
+  MarketSearchResult,
+  MarketService
+} from '../core/market/market.service';
 import { SearchBackButtonService } from '../core/search/search-back-button.service';
-import { DateRange } from '../core/utils/date-range.service';
+import { DateRange, DateRangeService } from '../core/utils/date-range.service';
 
 const enum SearchResultStatus {
   OK = 'ok',
@@ -33,6 +40,20 @@ interface SearchResultNotOK {
 }
 
 type SearchResult = SearchResultOK | SearchResultNotOK;
+
+interface SearchFilterFormValue {
+  time: {
+    morning: boolean;
+    afternoon: boolean;
+    evening: boolean;
+    night: boolean;
+  };
+  dateRange: DateRange | null;
+  price: {
+    min: string;
+    max: string;
+  };
+}
 
 @Component({
   selector: 'app-search',
@@ -59,11 +80,11 @@ type SearchResult = SearchResultOK | SearchResultNotOK;
     ])
   ]
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnDestroy {
   searchResult: Observable<SearchResult>;
   searchFilterForm: FormGroup;
-  queryString: Observable<string>;
   currentPage: Observable<number>;
+  private routeParamsUpdater: Subscription;
 
   marketTrackByFn: TrackByFunction<Market> = (_, market) => market.id;
 
@@ -72,90 +93,129 @@ export class SearchComponent implements OnInit {
     private router: Router,
     private marketService: MarketService,
     private searchBackButtonService: SearchBackButtonService,
-    // private dateRangeService: DateRangeService,
+    private dateRangeService: DateRangeService,
     @Inject(DOCUMENT) private document: Document
   ) {}
 
   ngOnInit() {
-    this.searchFilterForm = new FormGroup({
-      time: new FormGroup({
-        morning: new FormControl(false),
-        afternoon: new FormControl(false),
-        evening: new FormControl(false),
-        night: new FormControl(false)
-      }),
-      dateRange: new FormControl(null),
-      price: new FormGroup({
-        min: new FormControl('', [Validators.pattern(/^\d+$/)]),
-        max: new FormControl('', [Validators.pattern(/^\d+$/)])
-      })
+    this.route.queryParamMap.pipe(first()).subscribe(queryParamMap => {
+      this.searchFilterForm = new FormGroup({
+        time: new FormGroup({
+          morning: new FormControl(queryParamMap.get('morning') === 'true'),
+          afternoon: new FormControl(queryParamMap.get('afternoon') === 'true'),
+          evening: new FormControl(queryParamMap.get('evening') === 'true'),
+          night: new FormControl(queryParamMap.get('night') === 'true')
+        }),
+        dateRange: new FormControl(
+          this.dateRangeService.deserialize(queryParamMap.get('daterange'))
+        ),
+        price: new FormGroup({
+          min: new FormControl(this.deserializePrice(queryParamMap.get('minprice')) || '', [
+            Validators.pattern(/^\d+$/)
+          ]),
+          max: new FormControl(this.deserializePrice(queryParamMap.get('maxprice')) || '', [
+            Validators.pattern(/^\d+$/)
+          ])
+        })
+      });
     });
 
-    this.queryString = this.route.queryParamMap.pipe(
-      map(queryParam => queryParam.get('q') || ''),
-      distinctUntilChanged()
-    );
+    this.routeParamsUpdater = this.searchFilterForm.valueChanges
+      .pipe(
+        startWith({}),
+        filter(() => this.searchFilterForm.valid),
+        debounceTime(300),
+        map(() => this.searchFilterForm.value as SearchFilterFormValue)
+      )
+      .subscribe(v => this.updateSearchRouteParams(v));
 
     this.currentPage = this.route.queryParamMap.pipe(
       map(queryParam => queryParam.get('page')),
       distinctUntilChanged(),
-      map(pageStr => {
-        if (pageStr === null) {
-          return 1;
-        }
-        const page = Number(pageStr);
-        return page >= 1 ? page : 1;
-      })
+      map(pageStr => (pageStr === null ? 1 : Math.max(1, Number(pageStr))))
     );
 
-    const searchParams = observableCombineLatest(
-      this.currentPage,
-      this.queryString,
-      this.searchFilterForm.valueChanges.pipe(
-        startWith({}),
-        filter(() => this.searchFilterForm.valid),
-        debounceTime(300),
-        map(
-          () =>
-            this.searchFilterForm.value as {
-              time: {
-                morning: boolean;
-                afternoon: boolean;
-                evening: boolean;
-                night: boolean;
-              };
-              dateRange: DateRange | null;
-              price: {
-                min: string;
-                max: string;
-              };
-            }
-        )
-      )
-    );
-
-    this.searchResult = searchParams.pipe(
-      switchMap(([page, queryString, searchFilter]) => {
-        const query = queryString !== '' ? queryString : undefined;
-        const time = searchFilter.time;
-        const dateRange = searchFilter.dateRange || undefined;
-        const price = {
-          min: searchFilter.price.min !== '' ? Number(searchFilter.price.min) : undefined,
-          max: searchFilter.price.max !== '' ? Number(searchFilter.price.max) : undefined
-        };
-
-        return this.marketService
-          .search({
-            page,
-            query,
-            dateRange,
-            time,
-            price
-          })
-          .pipe(this.mapSearchResult());
-      }),
+    this.searchResult = this.getSearchParams().pipe(
+      switchMap(searchParams => this.marketService.search(searchParams)),
+      this.mapSearchResult(),
       startWith({ status: SearchResultStatus.Searching } as SearchResult)
     );
+  }
+
+  ngOnDestroy() {
+    this.routeParamsUpdater.unsubscribe();
+  }
+
+  private updateSearchRouteParams(form: SearchFilterFormValue) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        page: null,
+        daterange: form.dateRange ? this.dateRangeService.serialize(form.dateRange) : undefined,
+        // Time
+        morning: form.time.morning ? true : undefined,
+        afternoon: form.time.afternoon ? true : undefined,
+        evening: form.time.evening ? true : undefined,
+        night: form.time.night ? true : undefined,
+        // Price
+        minprice: form.price.min || undefined,
+        maxprice: form.price.max || undefined
+      },
+      queryParamsHandling: 'merge'
+    });
+  }
+
+  private getSearchParams(): Observable<MarketSearchParams> {
+    return observableCombineLatest(
+      this.currentPage,
+      this.route.queryParamMap,
+      (page, queryParamMap) => {
+        const queryStr = queryParamMap.get('q');
+        const query = queryStr !== null && queryStr !== '' ? queryStr : undefined;
+
+        const dateRangeStr = queryParamMap.get('daterange');
+        const dateRange =
+          dateRangeStr === null ? undefined : this.dateRangeService.deserialize(dateRangeStr);
+
+        const morning = queryParamMap.get('morning') ? true : false;
+        const afternoon = queryParamMap.get('afternoon') ? true : false;
+        const evening = queryParamMap.get('evening') ? true : false;
+        const night = queryParamMap.get('night') ? true : false;
+
+        const minPrice = this.deserializePrice(queryParamMap.get('minprice'));
+        const maxPrice = this.deserializePrice(queryParamMap.get('maxprice'));
+
+        return {
+          page,
+          query,
+          dateRange,
+          time: {
+            morning,
+            afternoon,
+            evening,
+            night
+          },
+          price: {
+            min: minPrice,
+            max: maxPrice
+          }
+        };
+      }
+    );
+  }
+
+  private deserializePrice(priceStr: string | null) {
+    if (priceStr === null) {
+      return undefined;
+    }
+    if (priceStr === '') {
+      return undefined;
+    }
+    const price = Number(priceStr);
+    if (!Number.isInteger(price) || price <= 0) {
+      return undefined;
+    }
+    return price;
   }
 
   private mapSearchResult() {

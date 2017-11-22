@@ -26,13 +26,14 @@ export class NavBarSearchBoxComponent implements OnInit, OnDestroy {
 
     this.queryParamUpdater = this.searchForm.valueChanges
       .pipe(
-        map(() => this.searchForm.value as { query: string }),
+        map(() => this.searchForm.value.query as string),
         distinctUntilChanged(),
         debounceTime(300)
       )
-      .subscribe(value => {
+      .subscribe(queryString => {
         this.router.navigate(['/search'], {
-          queryParams: { q: value.query }
+          queryParams: { q: queryString },
+          queryParamsHandling: 'merge'
         });
       });
   }

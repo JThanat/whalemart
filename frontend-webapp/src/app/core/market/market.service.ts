@@ -59,19 +59,19 @@ interface MarketServerResponse {
   reserved_no?: number;
 }
 
-interface SearchParams {
+export interface MarketSearchParams {
   page: number;
-  query?: string;
-  dateRange?: DateRange;
-  time?: {
+  query: string | undefined;
+  dateRange: DateRange | undefined;
+  time: {
     morning: boolean;
     afternoon: boolean;
     evening: boolean;
     night: boolean;
   };
-  price?: {
-    min?: number;
-    max?: number;
+  price: {
+    min: number | undefined;
+    max: number | undefined;
   };
 }
 
@@ -102,7 +102,7 @@ export class MarketService {
     );
   }
 
-  public search(searchParams: SearchParams): Observable<MarketSearchResult | undefined> {
+  public search(searchParams: MarketSearchParams): Observable<MarketSearchResult | undefined> {
     let hasSearchParams = false;
     let params = new HttpParams();
 
@@ -111,7 +111,7 @@ export class MarketService {
       params = params.append('search', searchParams.query);
     }
 
-    if (searchParams.dateRange !== undefined) {
+    if (searchParams.dateRange) {
       hasSearchParams = true;
       params = params
         .append('min_date', searchParams.dateRange.start.toISOString())
@@ -126,6 +126,7 @@ export class MarketService {
         searchParams.time.night;
 
       if (addTimeParams) {
+        hasSearchParams = true;
         if (searchParams.time.morning) {
           params = params.append('morning', 'true');
         }
@@ -141,11 +142,13 @@ export class MarketService {
       }
     }
 
-    if (searchParams.price !== undefined) {
-      if (searchParams.price.min) {
+    if (searchParams.price) {
+      if (searchParams.price.min !== undefined) {
+        hasSearchParams = true;
         params = params.append('min_price', String(searchParams.price.min));
       }
-      if (searchParams.price.max) {
+      if (searchParams.price.max !== undefined) {
+        hasSearchParams = true;
         params = params.append('max_price', String(searchParams.price.max));
       }
     }
