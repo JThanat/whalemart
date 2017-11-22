@@ -3,7 +3,7 @@
 :host {
   background: $white;
   z-index: $zindex-fixed;
-  box-shadow: 0 0 1rem transparentize($black, 0.85);
+  border-bottom: 1px solid $light-gray;
 }
 
 .navbar {
