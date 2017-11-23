@@ -57,15 +57,15 @@
 </form>
 
 <div class="container my-5" *ngIf="(searchResult | async) as result">
-  <div class="text-right mb-3">
-    <app-menu [right]="true" text="เรียงผลการค้นหาตาม">
-      <app-menu-item (click)="setSorting('createdTime')">เรียงตามความใหม่ของตลาด</app-menu-item>
-      <app-menu-item (click)="setSorting('openingDate')">เรียงตามวันที่ตลาดจัดงาน</app-menu-item>
-    </app-menu>
-  </div>
-
   <ng-container *ngIf="result.status === 'ok'; else noSearchQuery">
     <ng-container *ngIf="result?.markets.length > 0; else emptySearchResult">
+      <div class="text-right mb-3">
+        <app-menu [right]="true" text="เรียงผลการค้นหาตาม">
+          <app-menu-item (click)="setSorting('createdTime')">เรียงตามความใหม่ของตลาด</app-menu-item>
+          <app-menu-item (click)="setSorting('openingDate')">เรียงตามวันที่ตลาดจัดงาน</app-menu-item>
+        </app-menu>
+      </div>
+
       <div class="row" [@pageChangeAnim]="result.currentPage">
         <div class="col-12 col-sm-6 col-lg-3 mb-5" *ngFor="let market of result?.markets; trackBy: marketTrackByFn" @marketInOut>
           <app-market-item [market]="market"></app-market-item>
@@ -85,7 +85,7 @@
             <li>เปลี่ยนช่วงวันจัดตลาด</li>
             <li>เปลี่ยนตัวกรองผลการค้นหา หรือเอาตัวกรองผลการค้นหาบางอันออก</li>
           </ul>
-          <button type="button" class="btn btn-primary my-2 my-sm-0" routerLink="#">เอาตัวกรองทั้งหมดออก</button>
+          <button type="button" class="btn btn-primary my-2 my-sm-0" (click)="clearSearchFilter()">เอาตัวกรองทั้งหมดออก</button>
         </div>
       </div>
     </ng-template>

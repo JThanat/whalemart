@@ -274,4 +274,15 @@ export class SearchComponent implements OnInit, OnDestroy {
   goBack() {
     return this.searchBackButtonService.goBack();
   }
+
+  clearSearchFilter() {
+    this.route.queryParamMap
+      .pipe(first(), map(queryParamMap => queryParamMap.get('q')))
+      .subscribe(queryString => {
+        this.router.navigate([], {
+          relativeTo: this.route,
+          queryParams: { q: queryString }
+        });
+      });
+  }
 }
