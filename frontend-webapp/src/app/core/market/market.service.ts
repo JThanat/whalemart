@@ -73,6 +73,7 @@ export interface MarketSearchParams {
     min: number | undefined;
     max: number | undefined;
   };
+  sortBy: 'createdTime' | 'openingDate';
 }
 
 const maxExpireDays = 90;
@@ -118,48 +119,52 @@ export class MarketService {
         .append('max_date', searchParams.dateRange.end.toISOString());
     }
 
-    if (searchParams.time !== undefined) {
-      const addTimeParams =
-        searchParams.time.morning ||
-        searchParams.time.afternoon ||
-        searchParams.time.evening ||
-        searchParams.time.night;
+    const addTimeParams =
+      searchParams.time.morning ||
+      searchParams.time.afternoon ||
+      searchParams.time.evening ||
+      searchParams.time.night;
 
-      if (addTimeParams) {
-        hasSearchParams = true;
-        if (searchParams.time.morning) {
-          params = params.append('morning', 'true');
-        }
-        if (searchParams.time.afternoon) {
-          params = params.append('afternoon', 'true');
-        }
-        if (searchParams.time.evening) {
-          params = params.append('evening', 'true');
-        }
-        if (searchParams.time.night) {
-          params = params.append('night', 'true');
-        }
+    if (addTimeParams) {
+      hasSearchParams = true;
+      if (searchParams.time.morning) {
+        params = params.append('morning', 'true');
+      }
+      if (searchParams.time.afternoon) {
+        params = params.append('afternoon', 'true');
+      }
+      if (searchParams.time.evening) {
+        params = params.append('evening', 'true');
+      }
+      if (searchParams.time.night) {
+        params = params.append('night', 'true');
       }
     }
 
-    if (searchParams.price) {
-      if (searchParams.price.min !== undefined) {
-        hasSearchParams = true;
-        params = params.append('min_price', String(searchParams.price.min));
-      }
-      if (searchParams.price.max !== undefined) {
-        hasSearchParams = true;
-        params = params.append('max_price', String(searchParams.price.max));
-      }
+    if (searchParams.price.min !== undefined) {
+      hasSearchParams = true;
+      params = params.append('min_price', String(searchParams.price.min));
+    }
+    if (searchParams.price.max !== undefined) {
+      hasSearchParams = true;
+      params = params.append('max_price', String(searchParams.price.max));
     }
 
     if (!hasSearchParams) {
       return observableOf(undefined);
     }
 
+    if (searchParams.sortBy === 'createdTime') {
+      params = params.append('sort_by', 'created_at');
+    } else if (searchParams.sortBy === 'openingDate') {
+      params = params.append('sort_by', 'opening_date');
+    }
+
+    params = params.append('page', String(searchParams.page));
+
     return this.http
       .get<MarketSearchServerResponse>('/api/market-search/', {
-        params: params.append('page', String(searchParams.page))
+        params
       })
       .pipe(
         map(result => {

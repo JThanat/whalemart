@@ -1,6 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnDestroy, OnInit, TrackByFunction } from '@angular/core';
+import { Component, OnDestroy, OnInit, TrackByFunction } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -55,7 +54,10 @@ interface SearchFilterFormValue {
   };
 }
 
-type SortingMethod = 'byCreatedTime' | 'byOpeningDate';
+const enum SortByMethod {
+  CreatedTime = 'createdTime',
+  OpeningTime = 'openingDate'
+}
 
 @Component({
   selector: 'app-search',
@@ -95,8 +97,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     private router: Router,
     private marketService: MarketService,
     private searchBackButtonService: SearchBackButtonService,
-    private dateRangeService: DateRangeService,
-    @Inject(DOCUMENT) private document: Document
+    private dateRangeService: DateRangeService
   ) {}
 
   ngOnInit() {
@@ -187,6 +188,8 @@ export class SearchComponent implements OnInit, OnDestroy {
         const minPrice = this.deserializePrice(queryParamMap.get('minprice'));
         const maxPrice = this.deserializePrice(queryParamMap.get('maxprice'));
 
+        const sortBy = this.deserializeSortBy(queryParamMap.get('sortby'));
+
         return {
           page,
           query,
@@ -200,7 +203,8 @@ export class SearchComponent implements OnInit, OnDestroy {
           price: {
             min: minPrice,
             max: maxPrice
-          }
+          },
+          sortBy
         };
       }
     );
@@ -220,6 +224,16 @@ export class SearchComponent implements OnInit, OnDestroy {
     return price;
   }
 
+  private deserializeSortBy(sortByStr: string | null) {
+    if (sortByStr === 'created_time') {
+      return SortByMethod.CreatedTime;
+    } else if (sortByStr === 'opening_time') {
+      return SortByMethod.OpeningTime;
+    } else {
+      return SortByMethod.CreatedTime;
+    }
+  }
+
   private mapSearchResult() {
     return map((result: MarketSearchResult | undefined): SearchResult => {
       if (result === undefined) {
@@ -235,12 +249,17 @@ export class SearchComponent implements OnInit, OnDestroy {
     });
   }
 
-  setSorting(sortingMethod: SortingMethod) {
-    console.log(sortingMethod);
+  setSorting(sortingMethod: SortByMethod) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParamsHandling: 'merge',
+      queryParams: {
+        sortby: sortingMethod === SortByMethod.CreatedTime ? 'created_time' : 'opening_time'
+      }
+    });
   }
 
   goToSearchPage(page: number) {
-    this.document.body.scrollTop = this.document.documentElement.scrollTop = 0;
     this.router.navigate([], {
       relativeTo: this.route,
       queryParamsHandling: 'merge',

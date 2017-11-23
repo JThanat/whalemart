@@ -59,8 +59,8 @@
 <div class="container my-5" *ngIf="(searchResult | async) as result">
   <div class="text-right mb-3">
     <app-menu [right]="true" text="เรียงผลการค้นหาตาม">
-      <app-menu-item (click)="setSorting('byCreatedTime')">เรียงตามความใหม่ของตลาด</app-menu-item>
-      <app-menu-item (click)="setSorting('byOpeningDate')">เรียงตามวันที่ตลาดจัดงาน</app-menu-item>
+      <app-menu-item (click)="setSorting('createdTime')">เรียงตามความใหม่ของตลาด</app-menu-item>
+      <app-menu-item (click)="setSorting('openingDate')">เรียงตามวันที่ตลาดจัดงาน</app-menu-item>
     </app-menu>
   </div>
 
