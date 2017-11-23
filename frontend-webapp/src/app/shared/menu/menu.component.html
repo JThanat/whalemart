@@ -3,7 +3,7 @@
   <app-svg-icon key="arrow-head-down" width="12"></app-svg-icon>
 </button>
 
-<div *cdkPortal class="menu-content" @menuInOut>
+<div *cdkPortal class="menu-content" [class.right]="right" @menuInOut>
   <!-- TODO: Do focus trapping -->
   <ng-content></ng-content>
 </div>

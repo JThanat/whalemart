@@ -56,7 +56,14 @@
   </button>
 </form>
 
-<div class="container mt-5 mb-5" *ngIf="(searchResult | async) as result">
+<div class="container my-5" *ngIf="(searchResult | async) as result">
+  <div class="text-right mb-3">
+    <app-menu [right]="true" text="เรียงผลการค้นหาตาม">
+      <app-menu-item (click)="setSorting('byCreatedTime')">เรียงตามความใหม่ของตลาด</app-menu-item>
+      <app-menu-item (click)="setSorting('byOpeningDate')">เรียงตามวันที่ตลาดจัดงาน</app-menu-item>
+    </app-menu>
+  </div>
+
   <ng-container *ngIf="result.status === 'ok'; else noSearchQuery">
     <ng-container *ngIf="result?.markets.length > 0; else emptySearchResult">
       <div class="row" [@pageChangeAnim]="result.currentPage">

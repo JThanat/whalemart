@@ -18,6 +18,7 @@ import { InputErrorComponent } from './input/input-error.component';
 import { InputGroupComponent } from './input/input-group.component';
 import { InputDirective } from './input/input.directive';
 import { MarketComponent } from './market/market.component';
+import { MenuItemComponent } from './menu/menu-item.component';
 import { MenuComponent } from './menu/menu.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { SubNavBarDirective } from './sub-nav-bar/sub-nav-bar.directive';
@@ -50,7 +51,8 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
     DateRangeInputDirective,
     BreadcrumbComponent,
     BreadcrumbItemDirective,
-    MenuComponent
+    MenuComponent,
+    MenuItemComponent
   ],
   exports: [
     CommonModule,
@@ -72,7 +74,8 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
     DateRangeInputDirective,
     BreadcrumbComponent,
     BreadcrumbItemDirective,
-    MenuComponent
+    MenuComponent,
+    MenuItemComponent
   ],
   providers: [
     DatePipe,

@@ -1,5 +1,9 @@
 @import '~styles/common';
 
+:host {
+  display: inline-block;
+}
+
 .btn-menu {
   display: flex;
   align-items: center;
@@ -34,4 +38,7 @@
   background: $white;
   border: 1px solid $light-gray;
   box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.1);
+  &.right {
+    transform-origin: 100% 0%;
+  }
 }

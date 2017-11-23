@@ -55,6 +55,8 @@ interface SearchFilterFormValue {
   };
 }
 
+type SortingMethod = 'byCreatedTime' | 'byOpeningDate';
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -231,6 +233,10 @@ export class SearchComponent implements OnInit, OnDestroy {
         };
       }
     });
+  }
+
+  setSorting(sortingMethod: SortingMethod) {
+    console.log(sortingMethod);
   }
 
   goToSearchPage(page: number) {

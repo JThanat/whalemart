@@ -36,6 +36,7 @@ import {
 export class MenuComponent implements OnInit, OnDestroy {
   @Input() text = '';
   @Input() clearBackdrop = true;
+  @Input() right = false;
   @ViewChild(TemplatePortalDirective) menuPortal: TemplatePortal<any>;
   @ViewChild('menuBtn') menuBtn: ElementRef;
 
@@ -48,8 +49,8 @@ export class MenuComponent implements OnInit, OnDestroy {
       // panelClass: 'menu-content',
       positionStrategy: this.overlay.position().connectedTo(
         this.menuBtn,
-        { originX: 'start', originY: 'bottom' },
-        { overlayX: 'start', overlayY: 'top' }
+        { originX: this.right ? 'end' : 'start', originY: 'bottom' },
+        { overlayX: this.right ? 'end' : 'start', overlayY: 'top' }
       ),
       scrollStrategy: this.overlay.scrollStrategies.block(),
       hasBackdrop: true,
@@ -65,6 +66,11 @@ export class MenuComponent implements OnInit, OnDestroy {
       this.menuOverlay.detach();
       this.cd.markForCheck();
     });
+  }
+
+  closeMenu() {
+    this.menuOverlay.detach();
+    this.cd.markForCheck();
   }
 
   ngOnDestroy() {
