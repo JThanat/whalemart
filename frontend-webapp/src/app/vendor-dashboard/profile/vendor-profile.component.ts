@@ -58,13 +58,14 @@ export class VendorProfileComponent implements OnInit, OnDestroy {
 
     this.vendorProfileForm.disable();
 
-    const { firstName, lastName, phone } = this.vendorProfileForm.value;
+    const { firstName, lastName, phone, profileImage } = this.vendorProfileForm.value;
 
     this.vendorProfileService
       .updateVendorProfile({
         first_name: firstName,
         last_name: lastName,
-        phone: phone
+        phone: phone,
+        profile_image: profileImage[0]
       })
       .subscribe(
         () => {

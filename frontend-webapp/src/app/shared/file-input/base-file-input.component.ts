@@ -13,15 +13,18 @@ export abstract class BaseFileInputComponent implements ControlValueAccessor {
   writeValue(value: FileList | undefined | null) {
     if (value) {
       this.fileList = value;
-    
+    }
   }
 
-  protected updateInputFile(event: any) {
+  updateInputFile(event: any) {
     if (!this.disabled) {
       this.fileList = event.target.files;
 
       if (this.onChange) {
         this.onChange(this.fileList);
+      }
+
+      if (this.onTouched) {
         this.onTouched();
       }
     }

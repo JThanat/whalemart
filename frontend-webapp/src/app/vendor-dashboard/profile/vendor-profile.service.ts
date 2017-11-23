@@ -9,6 +9,7 @@ interface VendorProfileRequest {
   first_name: string;
   last_name: string;
   phone: string;
+  profile_image: File;
 }
 
 export interface VendorProfileResponse {
