@@ -276,13 +276,18 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   clearSearchFilter() {
-    this.route.queryParamMap
-      .pipe(first(), map(queryParamMap => queryParamMap.get('q')))
-      .subscribe(queryString => {
-        this.router.navigate([], {
-          relativeTo: this.route,
-          queryParams: { q: queryString }
-        });
-      });
+    this.searchFilterForm.reset({
+      time: {
+        morning: false,
+        afternoon: false,
+        evening: false,
+        night: false
+      },
+      dateRange: null,
+      price: {
+        min: '',
+        max: ''
+      }
+    });
   }
 }
