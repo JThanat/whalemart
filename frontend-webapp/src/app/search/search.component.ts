@@ -274,4 +274,20 @@ export class SearchComponent implements OnInit, OnDestroy {
   goBack() {
     return this.searchBackButtonService.goBack();
   }
+
+  clearSearchFilter() {
+    this.searchFilterForm.reset({
+      time: {
+        morning: false,
+        afternoon: false,
+        evening: false,
+        night: false
+      },
+      dateRange: null,
+      price: {
+        min: '',
+        max: ''
+      }
+    });
+  }
 }

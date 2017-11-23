@@ -37,6 +37,7 @@ export class MenuComponent implements OnInit, OnDestroy {
   @Input() text = '';
   @Input() clearBackdrop = true;
   @Input() right = false;
+  @Input() highlight = false;
   @ViewChild(TemplatePortalDirective) menuPortal: TemplatePortal<any>;
   @ViewChild('menuBtn') menuBtn: ElementRef;
 
