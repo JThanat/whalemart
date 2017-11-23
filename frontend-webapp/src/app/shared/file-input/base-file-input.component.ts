@@ -4,7 +4,7 @@ import { ControlValueAccessor } from '@angular/forms';
 export abstract class BaseFileInputComponent implements ControlValueAccessor {
   @Input() disabled = false;
 
-  protected fileList: FileList;
+  fileList: FileList;
   private onChange: Function;
   private onTouched: Function;
 
@@ -13,7 +13,7 @@ export abstract class BaseFileInputComponent implements ControlValueAccessor {
   writeValue(value: FileList | undefined | null) {
     if (value) {
       this.fileList = value;
-    }
+    
   }
 
   protected updateInputFile(event: any) {

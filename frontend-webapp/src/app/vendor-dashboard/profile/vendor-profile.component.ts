@@ -23,7 +23,7 @@ export class VendorProfileComponent implements OnInit, OnDestroy {
     private vendorProfileService: VendorProfileService,
     private alert: AlertService,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.vendorProfileSubscription = this.route.data
@@ -32,12 +32,15 @@ export class VendorProfileComponent implements OnInit, OnDestroy {
         this.vendorProfile = data;
       });
 
-    this.vendorProfileForm = new FormGroup({
-      firstName: new FormControl('', [Validators.required]),
-      lastName: new FormControl('', [Validators.required]),
-      phone: new FormControl('', [Validators.required, Validators.pattern(/^\+?\d{9,15}$/)]),
-      profileImage: new FormControl()
-    }, { updateOn: 'blur' });
+    this.vendorProfileForm = new FormGroup(
+      {
+        firstName: new FormControl('', [Validators.required]),
+        lastName: new FormControl('', [Validators.required]),
+        phone: new FormControl('', [Validators.required, Validators.pattern(/^\+?\d{9,15}$/)]),
+        profileImage: new FormControl()
+      },
+      { updateOn: 'blur' }
+    );
   }
 
   setEditProfile(isEdit: boolean) {
@@ -55,23 +58,24 @@ export class VendorProfileComponent implements OnInit, OnDestroy {
 
     this.vendorProfileForm.disable();
 
-    const {
-      firstName,
-      lastName,
-      phone
-    } = this.vendorProfileForm.value;
+    const { firstName, lastName, phone } = this.vendorProfileForm.value;
 
-    this.vendorProfileService.updateVendorProfile({
-      first_name: firstName,
-      last_name: lastName,
-      phone: phone
-    }).subscribe(() => {
-      this.vendorProfileForm.enable();
-      this.alert.show({ message: 'อัพเดทเสร็จสมบูรณ์', type: 'success' });
-    }, err => {
-      this.vendorProfileForm.enable();
-      this.alert.show({ message: 'เกิดข้อผิดพลาด', type: 'danger' });
-    });
+    this.vendorProfileService
+      .updateVendorProfile({
+        first_name: firstName,
+        last_name: lastName,
+        phone: phone
+      })
+      .subscribe(
+        () => {
+          this.vendorProfileForm.enable();
+          this.alert.show({ message: 'อัพเดทเสร็จสมบูรณ์', type: 'success' });
+        },
+        err => {
+          this.vendorProfileForm.enable();
+          this.alert.show({ message: 'เกิดข้อผิดพลาด', type: 'danger' });
+        }
+      );
   }
 
   ngOnDestroy() {

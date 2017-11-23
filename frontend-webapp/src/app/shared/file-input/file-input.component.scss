@@ -1,0 +1,14 @@
+@import '~styles/common';
+
+:host {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}

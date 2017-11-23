@@ -9,9 +9,10 @@
           <img class="profile-img img-fluid rounded d-block" [src]="vendorProfile.profileImage || '/media/profile_images/2017/11/13/kitten-3.jpg'">
         </div>
         <div *ngIf="isEdit" class="mt-3">
-          <app-file-input></app-file-input>
-          <button class="btn btn-outline-primary mx-auto d-block">แก้ไขรูป</button>
-        </div>  
+          <div class="mx-auto d-block">
+            <app-file-input></app-file-input>
+          </div>
+        </div>
       </div>
       <div class="col-md-6">
         <div *ngIf="!isEdit">
