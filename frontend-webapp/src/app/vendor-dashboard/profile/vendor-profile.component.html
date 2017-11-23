@@ -6,11 +6,11 @@
     <div class="row mt-4">
       <div class="col-md-6">
         <div>
-          <img class="profile-img img-fluid rounded d-block" [src]="vendorProfile.profileImage || '/media/profile_images/2017/11/13/kitten-3.jpg'">
+          <img class="profile-img img-fluid rounded d-block mx-auto" [src]="vendorProfile.profileImage || '/media/profile_images/2017/11/13/kitten-3.jpg'">
         </div>
         <div *ngIf="isEdit" class="mt-3">
-          <div class="mx-auto d-block">
-            <app-file-input formControlName="profileImage"></app-file-input>
+          <div class="d-flex">
+            <app-file-input class="mx-auto d-block" formControlName="profileImage"></app-file-input>
           </div>
         </div>
       </div>
