@@ -14,8 +14,8 @@ export class DateRangeService {
     return `${startStr}/${endStr}`;
   }
 
-  deserialize(dateRangeStr: string): DateRange | undefined {
-    if (dateRangeStr === '') {
+  deserialize(dateRangeStr: string | null | undefined): DateRange | undefined {
+    if (dateRangeStr === null || dateRangeStr === undefined || dateRangeStr === '') {
       return undefined;
     }
 
@@ -24,17 +24,8 @@ export class DateRangeService {
       const [startYear, startMonth, startDate] = startStr.split('-');
       const [endYear, endMonth, endDate] = endStr.split('-');
 
-      const start = new Date(
-        Number(startYear),
-        Number(startMonth) - 1,
-        Number(startDate)
-      );
-
-      const end = new Date(
-        Number(endYear),
-        Number(endMonth) - 1,
-        Number(endDate)
-      );
+      const start = new Date(Number(startYear), Number(startMonth) - 1, Number(startDate));
+      const end = new Date(Number(endYear), Number(endMonth) - 1, Number(endDate));
 
       return { start, end };
     } catch (e) {

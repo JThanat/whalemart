@@ -14,9 +14,9 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaginationComponent implements OnChanges {
-  public showLeft: boolean;
-  public showRight: boolean;
-  public centers: number[];
+  showLeft: boolean;
+  showRight: boolean;
+  centers: number[];
 
   @Input() min = 1;
   @Input() max = 1;
