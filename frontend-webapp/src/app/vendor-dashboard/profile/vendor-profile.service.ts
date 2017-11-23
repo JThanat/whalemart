@@ -38,7 +38,12 @@ export class VendorProfileService {
   ) { }
 
   updateVendorProfile(vendorProfileParams: VendorProfileRequest): Observable<boolean> {
-    return this.http.post('/api/current-user/', vendorProfileParams).pipe(
+    const formData = new FormData();
+    formData.append('first_name', vendorProfileParams.first_name);
+    formData.append('last_name', vendorProfileParams.last_name);
+    formData.append('phone', vendorProfileParams.phone);
+    formData.append('profile_image', vendorProfileParams.profile_image);
+    return this.http.post('/api/current-user/', formData).pipe(
       mapTo(true),
       catchError((err: any) => {
         if (err instanceof HttpErrorResponse) {

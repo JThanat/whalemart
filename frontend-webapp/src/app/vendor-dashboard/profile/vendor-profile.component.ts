@@ -65,7 +65,7 @@ export class VendorProfileComponent implements OnInit, OnDestroy {
         first_name: firstName,
         last_name: lastName,
         phone: phone,
-        profile_image: profileImage[0]
+        profile_image: profileImage ? profileImage[0] : null
       })
       .subscribe(
         () => {
