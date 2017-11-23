@@ -12,10 +12,15 @@
   font-size: 0.9rem;
   padding: 7px 12px;
   border-radius: $border-radius;
-  margin-left: -12px;
   cursor: pointer;
+  padding: 0.25rem 0.5rem;
   &:hover {
     background: lighten($light-gray, 8%);
+  }
+  &.btn-highlight {
+    color: $secondary;
+    background: theme-color-level(secondary, -11);
+    @include font-weight(bold);
   }
   > span {
     @include font-family(heading);

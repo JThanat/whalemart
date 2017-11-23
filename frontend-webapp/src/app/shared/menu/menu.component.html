@@ -1,4 +1,4 @@
-<button class="btn btn-menu" #menuBtn (click)="openMenu()" [disabled]="isOpening()">
+<button class="btn btn-menu" #menuBtn (click)="openMenu()" [disabled]="isOpening()" [class.btn-highlight]="highlight">
   <span>{{ text }}</span>
   <app-svg-icon key="arrow-head-down" width="12"></app-svg-icon>
 </button>

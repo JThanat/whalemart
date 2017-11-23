@@ -1,5 +1,5 @@
 <form *appSubNavBar class="filter-bar" [formGroup]="searchFilterForm">
-  <app-menu text="ช่วงราคา">
+  <app-menu text="ช่วงราคา" [highlight]="searchFilterForm.value.price.min.length || searchFilterForm.value.price.max.length">
     <div class="my-3 mx-4" formGroupName="price">
       <div class="row">
         <div class="col-6">
@@ -21,13 +21,15 @@
       </div>
     </div>
   </app-menu>
-  <app-menu text="วันจัดตลาด">
+
+  <app-menu text="วันจัดตลาด" [highlight]="searchFilterForm.value.dateRange">
     <div class="my-3 mx-4">
       <input appDateRangeInput [inlineDatePickerTarget]="datePickerContainer" type="text" class="form-control form-control-lg" formControlName="dateRange" placeholder="ตั้งแต่วันที่ &ndash; ถึงวันที่">
       <div #datePickerContainer></div>
     </div>
   </app-menu>
-  <app-menu text="ช่วงเวลาที่ตลาดเปิด">
+
+  <app-menu text="ช่วงเวลาที่ตลาดเปิด" [highlight]="searchFilterForm.value.time.morning || searchFilterForm.value.time.afternoon || searchFilterForm.value.time.evening || searchFilterForm.value.time.night">
     <div class="my-3 mx-4" formGroupName="time">
       <div class="form-check">
         <label class="form-check-label">
