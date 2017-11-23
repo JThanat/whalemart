@@ -5,12 +5,12 @@
     <form [formGroup]="searchForm" class="row align-items-end" (submit)="search()">
       <div class="col-12 col-lg-5">
         <app-input-group label="ชื่อตลาดหรือสถานที่">
-          <input appInput [hideValidation]="true" type="text" formControlName="searchQuery" class="form-control form-control-lg" placeholder="ชื่อตลาดหรือสถานที่">
+          <input appInput [hideValidation]="true" type="text" formControlName="searchQuery" class="form-control form-control-lg -shadow" placeholder="ชื่อตลาดหรือสถานที่">
         </app-input-group>
       </div>
       <div class="col-12 col-lg-4">
         <app-input-group label="ช่วงวันจัดตลาด">
-          <input appInput [hideValidation]="true" appDateRangeInput type="text" class="form-control form-control-lg" formControlName="dateRange" placeholder="ตั้งแต่วันที่ &ndash; ถึงวันที่">
+          <input appInput [hideValidation]="true" appDateRangeInput type="text" class="form-control form-control-lg -shadow" formControlName="dateRange" placeholder="ตั้งแต่วันที่ &ndash; ถึงวันที่">
         </app-input-group>
       </div>
       <div class="col-12 col-lg-3 mb-3 mt-2">
