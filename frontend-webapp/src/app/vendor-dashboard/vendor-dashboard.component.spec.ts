@@ -1,3 +1,5 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { VendorDashboardComponent } from './vendor-dashboard.component';
@@ -8,7 +10,9 @@ describe('VendorDashboardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VendorDashboardComponent ]
+      imports: [HttpClientTestingModule],
+      declarations: [VendorDashboardComponent],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   }));
