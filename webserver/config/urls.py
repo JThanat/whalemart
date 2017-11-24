@@ -49,7 +49,7 @@ router.register(r'booth', booth_views.BoothViewSet, base_name='booth')
 router.register(r'tag', tag_views.TagViewSet, base_name='tag')
 router.register(r'scene', market_views.SceneViewSet, base_name='scene')
 router.register(r'similar-market', market_views.SimilarMarketView, base_name='similar-market')
-router.register(r'reservation', reservation_views.ReservationViewSet, base_name='reservation')
+router.register(r'reserve-booth', reservation_views.ReservationViewSet, base_name='reserve-booth')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
@@ -64,7 +64,7 @@ urlpatterns = [
     url(r'^current-user/', user_views.get_current_user),
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^reserved-markets/', user_views.get_reserved_markets),
+    url(r'^reservation-status/', user_views.get_reserved_markets),
     url(r'^approve-reservation/', reservation_views.approve_booths),
     url(r'^verify-receipt/', admin_views.verify_receipt),
     # JWT
