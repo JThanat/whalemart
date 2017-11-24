@@ -1,14 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';;
+import { LessorService, MarketList } from '../lessor.service';
 import { Observable } from 'rxjs/Observable';
-import { Market } from '../../core/market/market.service';
-import { LessorService } from '../lessor.service';
 
 @Injectable()
 export class LessorMarketResolverService {
 
   constructor(private lessorService: LessorService) { }
 
-  resolve(): Observable< Market[] > {
+  resolve(): Observable<MarketList> {
     return this.lessorService.getMarketList();
   }
 

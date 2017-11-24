@@ -1,9 +1,15 @@
 import { HttpClient , HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { _throw as observableThrow } from 'rxjs/observable/throw';
 import { catchError, map} from 'rxjs/operators';
-import { MarketServerResponse, Market, MarketService } from '../core/market/market.service';
-import { Observable } from 'rxjs/Observable';
+import { Market, MarketServerResponse, MarketService } from '../core/market/market.service';
+
+
+export interface MarketList {
+  upcoming_markets: Market[];
+  passed_markets: Market[];
+}
 
 export interface LessorResponse {
   id: number;
@@ -36,18 +42,23 @@ export class LessorService {
 
   constructor(private http: HttpClient, private marketService: MarketService) { }
 
-  getMarketList(): Observable<Market[]> {
+  getMarketList() {
     return this.http.get<LessorResponse>('/api/lessor/').pipe(
       map(data => {
-        return data.markets.map(market => this.marketService.normalizeMarket(market));
+        return {
+          upcoming_markets: (data.markets.map(market => this.marketService.normalizeMarket(market)))
+          .filter(market => market.startDate > new Date(2019, 2, 1)),
+          passed_markets: (data.markets.map(market => this.marketService.normalizeMarket(market)))
+          .filter(market => market.startDate < new Date(2019, 2, 1))
+        };
       }),
       catchError((err: any) => {
         if (err instanceof HttpErrorResponse) {
           if (err.status >= 400 && err.status < 500) {
-            return observableThrow(new MarketsError()) as Observable<Market[]>;
+            return observableThrow(new MarketsError());
           }
         }
-        return observableThrow(err) as Observable<Market[]>;
+        return observableThrow(err);
       })
     );
   }
