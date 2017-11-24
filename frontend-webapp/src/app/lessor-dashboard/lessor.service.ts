@@ -1,6 +1,5 @@
 import { HttpClient , HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { _throw as observableThrow } from 'rxjs/observable/throw';
 import { catchError, map} from 'rxjs/operators';
 import { Market, MarketServerResponse, MarketService } from '../core/market/market.service';
