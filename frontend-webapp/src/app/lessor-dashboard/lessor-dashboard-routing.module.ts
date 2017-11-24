@@ -5,6 +5,7 @@ import { IsLessorGuardService } from './is-lessor-guard.service';
 import {LessorDashboardComponent} from './lessor-dashboard.component';
 import { LessorManageMarketComponent } from './lessor-manage-market/lessor-manage-market.component';
 import { LessorInfoComponent } from './lessor-info/lessor-info.component';
+import { LessorMarketResolverService } from './lessor-manage-market/lessor-market-resolver.service';
 
 const routes: Routes = [
   {
@@ -19,10 +20,10 @@ const routes: Routes = [
       },
       {
         path: 'manage',
-        component: LessorManageMarketComponent
-        // resolve: {
-        //   vendorProfile: VendorProfileResolver
-        // }
+        component: LessorManageMarketComponent,
+        resolve: {
+          markets: LessorMarketResolverService
+        }
       },
       {
         path: 'profile',
