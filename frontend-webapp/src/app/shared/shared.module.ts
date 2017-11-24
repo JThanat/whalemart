@@ -14,6 +14,7 @@ import { BreadcrumbItemDirective } from './breadcrumb/breadcrumb-item.directive'
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { DateRangeInputDirective } from './date-range/date-range-input.directive';
 import { DateRangePipe } from './date-range/date-range.pipe';
+import { FileInputComponent } from './file-input/file-input.component';
 import { InputErrorComponent } from './input/input-error.component';
 import { InputGroupComponent } from './input/input-group.component';
 import { InputDirective } from './input/input.directive';
@@ -51,6 +52,7 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
     DateRangeInputDirective,
     BreadcrumbComponent,
     BreadcrumbItemDirective,
+    FileInputComponent,
     MenuComponent,
     MenuItemComponent
   ],
@@ -74,6 +76,7 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
     DateRangeInputDirective,
     BreadcrumbComponent,
     BreadcrumbItemDirective,
+    FileInputComponent,
     MenuComponent,
     MenuItemComponent
   ],
