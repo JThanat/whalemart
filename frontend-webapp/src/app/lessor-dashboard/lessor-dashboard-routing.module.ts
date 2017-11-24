@@ -3,11 +3,35 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { IsLessorGuardService } from './is-lessor-guard.service';
 import {LessorDashboardComponent} from './lessor-dashboard.component';
+import { LessorManageMarketComponent } from './lessor-manage-market/lessor-manage-market.component';
+import { LessorInfoComponent } from './lessor-info/lessor-info.component';
+
 const routes: Routes = [
   {
     path: '',
     component: LessorDashboardComponent,
-    canActivate: [IsLessorGuardService]
+    canActivate: [IsLessorGuardService],
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'manage'
+      },
+      {
+        path: 'manage',
+        component: LessorManageMarketComponent
+        // resolve: {
+        //   vendorProfile: VendorProfileResolver
+        // }
+      },
+      {
+        path: 'profile',
+        component: LessorInfoComponent
+        // resolve: {
+        //   vendorProfile: VendorProfileResolver
+        // }
+      }
+    ]
   }
 ];
 
