@@ -1,16 +1,22 @@
 from django.db import models
-from apps.lessors.models import Lessor
+from apps.markets.models import Market
+from apps.users.models import User
 
 class Rating(models.Model):
-    rating_score = models.FloatField(verbose_name='Rating Score')
+    rating_score = models.IntegerField(verbose_name='Rating Score')
     time_stamp = models.DateTimeField(verbose_name='Time Stamp')
-    rater_name = models.CharField(verbose_name='Rater Name', max_length=100)
 
-    lessor = models.ForeignKey(
-        Lessor,
+    user = models.ForeignKey(
+        User,
         on_delete=models.CASCADE,
-        verbose_name='Lessor',
+        verbose_name='User',
+    )
+
+    market = models.ForeignKey(
+        Market,
+        on_delete=models.CASCADE,
+        verbose_name='Market',
     )
 
     def __str__(self):
-        return self.rating_score
+        return str(self.rating_score)
