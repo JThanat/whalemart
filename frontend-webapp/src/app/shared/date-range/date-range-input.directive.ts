@@ -46,15 +46,15 @@ export class DateRangeInputDirective implements OnInit, OnDestroy, ControlValueA
       dateFormat: 'j M Y',
       inline: this.inlineDatePickerTarget ? true : false,
       appendTo: this.inlineDatePickerTarget ? this.inlineDatePickerTarget.nativeElement : undefined,
+      onChange: dates => {
+        if (dates.length !== 1) {
+          this.onValueChange(dates);
+        }
+      },
       onClose: dates => {
         this.onValueChange(dates.length === 2 ? dates : []);
         if (this.onTouched) {
           this.onTouched();
-        }
-      },
-      onValueUpdate: dates => {
-        if (dates.length !== 1) {
-          this.onValueChange(dates);
         }
       }
     }) as flatpickr.Instance;
