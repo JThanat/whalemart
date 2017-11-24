@@ -47,9 +47,9 @@ export class LessorService {
       map(data => {
         return {
           upcoming_markets: (data.markets.map(market => this.marketService.normalizeMarket(market)))
-          .filter(market => market.startDate > new Date(2019, 2, 1)),
+          .filter(market => market.startDate > new Date()),
           passed_markets: (data.markets.map(market => this.marketService.normalizeMarket(market)))
-          .filter(market => market.startDate < new Date(2019, 2, 1))
+          .filter(market => market.startDate < new Date())
         };
       }),
       catchError((err: any) => {
