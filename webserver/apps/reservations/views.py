@@ -25,17 +25,20 @@ def approve_booths(request, *args, **kwargs):
     market = request.data.get('market', None)
     booths = request.data.get('booths', [])
     for booth in booths:
-        vendor = booth.get('vendor')
+        user = booth.get('user')
         booth_id = booth.get('id')
-        reservations = Reservation.objects.filter(user=vendor, market=market)
+        reservations = Reservation.objects.filter(user=user, market=market)
         if len(reservations) == 0:
             return Response(status=status.HTTP_400_BAD_REQUEST)
         reservation = reservations[0]
-        reserved_booths = reservation.reserved_booths
-        reservation.approved_booth = Booth.objects.get(pk=booth_id)
+        booth_obj = Booth.objects.get(pk=booth_id)
+        reservation.approved_booth = booth_obj
+        reservation.save()
+        reserved_booths = reservation.reserved_booths.all()
         for reserved_booth in reserved_booths:
-            if reserved_booth.booth != booth_id:
+            if reserved_booth.booth == booth_obj:
                 reserved_booth.status = ReservedBooth.APPROVED
             else:
                 reserved_booth.status = ReservedBooth.REJECTED
+            reserved_booth.save()
     return Response(status=status.HTTP_200_OK)

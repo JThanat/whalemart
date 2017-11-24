@@ -64,8 +64,8 @@ urlpatterns = [
     url(r'^current-user/', user_views.get_current_user),
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^reserved-markets', user_views.get_reserved_markets),
-    url(r'^approve_booths', reservation_views.approve_booths),
+    url(r'^reserved-markets/', user_views.get_reserved_markets),
+    url(r'^approve-reservation/', reservation_views.approve_booths),
     url(r'^verify-receipt/', admin_views.verify_receipt),
     # JWT
     url(r'^api-token-auth/', obtain_jwt_token),
