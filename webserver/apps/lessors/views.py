@@ -8,6 +8,8 @@ from rest_framework.views import APIView
 from rest_framework.decorators import list_route
 
 from apps.lessors.serializers import LessorInputSerializer, LessorEditSerializer, LessorSerializer
+from apps.markets.models import Market
+from apps.markets.serializers import MarketFeedSerializer
 from .models import Lessor
 
 User = get_user_model()
@@ -41,7 +43,13 @@ class LessorViewSet(viewsets.ViewSet):
     def list(self, request, format=None):
         user = get_object_or_404(User, id=request.user.id)
         lessor = get_object_or_404(Lessor, user=user)
-        return Response(LessorSerializer(lessor).data)
+        data = LessorSerializer(lessor).data
+        markets = Market.objects.filter(created_user=user)
+        market_list = list()
+        for market in markets:
+            market_list.append(MarketFeedSerializer(market).data)
+        data['markets'] = market_list
+        return Response(data)
 
     @list_route(methods=['post'])
     def change(self, request, format=None):
