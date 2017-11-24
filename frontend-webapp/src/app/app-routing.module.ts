@@ -8,7 +8,7 @@ const routes: Routes = [
     loadChildren: './feed/feed.module#FeedModule'
   },
   {
-    path: 'lessor-dashboard',
+    path: 'lessor',
     loadChildren: './lessor-dashboard/lessor-dashboard.module#LessorDashboardModule'
   },
   {
