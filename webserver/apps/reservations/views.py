@@ -22,6 +22,19 @@ class ReservationViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin):
 
 @api_view(['POST',])
 def approve_booths(request, *args, **kwargs):
+    """
+    {\n
+        "market": 1,\n
+        "booths": [\n
+            {\n
+                "user": 1,\n
+                "id": 1\n
+            },\n
+            ...,\n
+            {...}\n
+        ]\n
+    }\n
+    """
     market = request.data.get('market', None)
     booths = request.data.get('booths', [])
     for booth in booths:
