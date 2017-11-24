@@ -51,6 +51,9 @@ INSTALLED_APPS = [
     'apps.tags',
     'apps.commons',
     'apps.booths',
+    'apps.reservations',
+    'apps.payments',
+    'apps.admins',
 ]
 
 AUTH_USER_MODEL = 'users.User'

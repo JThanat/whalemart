@@ -1,6 +1,7 @@
 import os
 import random
 from datetime import datetime, timezone
+from random import randint
 
 from PIL import Image
 from django.conf import settings
@@ -9,6 +10,7 @@ from django.core.management.base import BaseCommand
 from apps.markets.models import Market
 from apps.markets.models import Scene
 from apps.tags.models import Tag
+from apps.booths.models import Booth
 
 
 class Command(BaseCommand):
@@ -81,6 +83,14 @@ class Command(BaseCommand):
         market.term_and_condition = terms
         market.save()
 
+    def _dump_booths(self, market):
+        number_of_zone = randint(3, 5)
+        number_of_booth_in_each_zone = randint(20, 30)
+        for i in range(number_of_zone):
+            for j in range(number_of_booth_in_each_zone):
+                rental_fee = 100 * randint(5, 50)
+                booth_number = chr(i+65).upper() + str(j)
+                Booth.objects.create(market=market, booth_number=booth_number, rental_fee=rental_fee)
 
     def _fix_datetime(self, market):
         reservation_due = market.reservation_due_date
@@ -90,9 +100,6 @@ class Command(BaseCommand):
             delt = (openning_date-current_time)/2
             market.reservation_due_date = current_time + delt
             market.save()
-
-
-
 
     def handle(self, *args, **options):
         markets = Market.objects.all()
@@ -106,5 +113,7 @@ class Command(BaseCommand):
             self._dump_provided_accessories(market)
             # dump terms and conditions
             self._dump_terms_and_conditions(market)
+            # dump booths
+            self._dump_booths(market)
             # fix date time
             self._fix_datetime(market)
