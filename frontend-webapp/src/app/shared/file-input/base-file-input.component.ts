@@ -3,12 +3,11 @@ import { ControlValueAccessor } from '@angular/forms';
 
 export abstract class BaseFileInputComponent implements ControlValueAccessor {
   @Input() disabled = false;
+  @Input() label = 'เลือกไฟล์';
 
   fileList: FileList;
   private onChange: Function;
   private onTouched: Function;
-
-  constructor() {}
 
   writeValue(value: FileList | undefined | null) {
     if (value) {
@@ -16,9 +15,9 @@ export abstract class BaseFileInputComponent implements ControlValueAccessor {
     }
   }
 
-  updateInputFile(event: any) {
+  updateInputFile(event: Event) {
     if (!this.disabled) {
-      this.fileList = event.target.files;
+      this.fileList = (event.target as HTMLInputElement).files!;
 
       if (this.onChange) {
         this.onChange(this.fileList);

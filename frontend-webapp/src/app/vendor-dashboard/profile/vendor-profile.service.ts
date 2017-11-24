@@ -2,8 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { _throw as observableThrow } from 'rxjs/observable/throw';
-import { catchError, mapTo } from 'rxjs/operators';
-import { map } from 'rxjs/operators/map';
+import { catchError, map, mapTo } from 'rxjs/operators';
 
 interface VendorProfileRequest {
   first_name: string;
@@ -28,14 +27,11 @@ export interface VendorProfile {
   profileImage: string;
 }
 
-export class VendorProfileError { }
+export class VendorProfileError {}
 
 @Injectable()
 export class VendorProfileService {
-
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) {}
 
   updateVendorProfile(vendorProfileParams: VendorProfileRequest): Observable<boolean> {
     const formData = new FormData();

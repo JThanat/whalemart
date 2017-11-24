@@ -90,3 +90,7 @@ input.-shadow {
     box-shadow: 0 2px 4px rgba($gray, 0.15) !important;
   }
 }
+
+dt {
+  @include font-family(heading);
+}

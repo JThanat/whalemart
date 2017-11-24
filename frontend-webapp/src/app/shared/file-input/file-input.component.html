@@ -1,4 +1,4 @@
-<button type="button"  class="btn btn-outline-primary">
-{{ (fileList && fileList.length === 1) ? fileList[0].name : 'อัพโหลดรูปภาพ' }}
+<button type="button" class="btn btn-outline-primary" (click)="fileInput.click()">
+  {{ (fileList?.length === 1) ? fileList[0].name : label }}
 </button>
-<input type="file" (change)="updateInputFile($event)" />
+<input #fileInput type="file" (change)="updateInputFile($event)" />

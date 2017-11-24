@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
-import { Subscription } from 'rxjs/Subscription';
 
+import { Observable } from 'rxjs/Observable';
 import { AlertService } from '../../core/alert/alert.service';
 import { VendorProfile, VendorProfileService } from './vendor-profile.service';
 
@@ -13,9 +12,8 @@ import { VendorProfile, VendorProfileService } from './vendor-profile.service';
   templateUrl: './vendor-profile.component.html',
   styleUrls: ['./vendor-profile.component.scss']
 })
-export class VendorProfileComponent implements OnInit, OnDestroy {
-  vendorProfileSubscription: Subscription;
-  vendorProfile: VendorProfile;
+export class VendorProfileComponent implements OnInit {
+  vendorProfile$: Observable<VendorProfile>;
   vendorProfileForm: FormGroup;
   isEdit = false;
 
@@ -26,11 +24,8 @@ export class VendorProfileComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.vendorProfileSubscription = this.route.data
-      .pipe(map(data => data.vendorProfile))
-      .subscribe(data => {
-        this.vendorProfile = data;
-      });
+    this.vendorProfile$ = this.route.data
+      .pipe(map(data => data.vendorProfile));
 
     this.vendorProfileForm = new FormGroup(
       {
@@ -47,7 +42,7 @@ export class VendorProfileComponent implements OnInit, OnDestroy {
     this.isEdit = isEdit;
 
     if (isEdit) {
-      this.vendorProfileForm.reset(this.vendorProfile);
+      this.vendorProfileForm.reset(this.vendorProfile$);
     }
   }
 
@@ -77,9 +72,5 @@ export class VendorProfileComponent implements OnInit, OnDestroy {
           this.alert.show({ message: 'เกิดข้อผิดพลาด', type: 'danger' });
         }
       );
-  }
-
-  ngOnDestroy() {
-    this.vendorProfileSubscription.unsubscribe();
   }
 }

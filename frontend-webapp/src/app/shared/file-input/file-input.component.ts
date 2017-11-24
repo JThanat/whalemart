@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { BaseFileInputComponent } from './base-file-input.component';
@@ -16,8 +15,6 @@ import { BaseFileInputComponent } from './base-file-input.component';
     }
   ]
 })
-export class FileInputComponent extends BaseFileInputComponent implements OnInit {
+export class FileInputComponent extends BaseFileInputComponent {
   @Input() title: string;
-
-  ngOnInit() {}
 }
