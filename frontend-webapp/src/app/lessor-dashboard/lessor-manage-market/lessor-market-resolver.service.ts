@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';;
-import { LessorService, MarketList } from '../lessor.service';
 import { Observable } from 'rxjs/Observable';
+import { LessorService, MarketList } from '../lessor.service';
 
 @Injectable()
 export class LessorMarketResolverService {
