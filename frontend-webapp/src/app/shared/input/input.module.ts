@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { DateInputDirective } from './date-time/date-input.directive';
 import { DateRangeInputDirective } from './date-time/date-range-input.directive';
 import { FileInputComponent } from './file/file-input.component';
 import { InputErrorComponent } from './input-error.component';
@@ -10,20 +11,22 @@ import { InputDirective } from './input.directive';
 @NgModule({
   imports: [CommonModule],
   declarations: [
-    InputErrorComponent,
-    InputGroupComponent,
-    InputDirective,
-    FileInputComponent,
+    DateInputDirective,
     DateRangeInputDirective,
-    FileInputComponent
+    FileInputComponent,
+    FileInputComponent,
+    InputDirective,
+    InputErrorComponent,
+    InputGroupComponent
   ],
   exports: [
-    InputErrorComponent,
-    InputGroupComponent,
-    InputDirective,
-    FileInputComponent,
+    DateInputDirective,
     DateRangeInputDirective,
-    FileInputComponent
+    FileInputComponent,
+    FileInputComponent,
+    InputDirective,
+    InputErrorComponent,
+    InputGroupComponent
   ]
 })
 export class InputModule {}
