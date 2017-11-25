@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 
+from apps.commons.choices import ReservationStatus
 from .serializers import RegistrationSerializer, UserSerializer, get_facebook_id
 
 User = get_user_model()
@@ -154,8 +155,10 @@ def get_reserved_markets(request, *args, **kwargs):
     for reservation in reservations:
         market = dict()
         market['id'] = reservation.market.id
-        approved_booth = reservation.approved_booth
-        market['approved_booth'] = approved_booth.id
         market['status'] = reservation.status
+        if market['status'] == ReservationStatus.APPROVED:
+            market['approved_booth'] = reservation.approved_booth.id
+        else:
+            market['approved_booth'] = None
         markets.append(market)
     return Response(markets, status=status.HTTP_200_OK)

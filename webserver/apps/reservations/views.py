@@ -12,6 +12,10 @@ from apps.reservations.serializers import ReservationSerializer
 
 class ReservationViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin):
     """
+    ### Urls
+    `/reserve-booth/`: api for vendor to reserve booths in a market\n
+    `/approve-reservation/`: api for lessor to approve reservations\n
+    `/reservation-status/`: api for vendor to view their reserved markets' status\n
     {\n
         "shop_name": "Couppee",
         "market": 1,
