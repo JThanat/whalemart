@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'apps.tags',
     'apps.commons',
     'apps.booths',
+    'apps.reports',
     'apps.ratings',
 ]
 
