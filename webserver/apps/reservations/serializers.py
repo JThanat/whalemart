@@ -1,4 +1,6 @@
 from rest_framework import serializers
+
+from apps.commons.choices import ReservationStatus
 from .models import Reservation, ReservedBooth
 
 
@@ -31,5 +33,5 @@ class ReservationSerializer(serializers.ModelSerializer):
         reservation = Reservation.objects.create(**validated_data)
         for reserved_booth in reserved_booths:
             ReservedBooth.objects.create(reservation=reservation, booth=reserved_booth['booth'],
-                                         status=ReservedBooth.PENDING)
+                                         status=ReservationStatus.PENDING)
         return reservation
