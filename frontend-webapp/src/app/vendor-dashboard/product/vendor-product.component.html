@@ -2,6 +2,29 @@
 
 <div class="description">รายการสินค้าที่จะนำไปวางขายในตลาด</div>
 
-<p>
-  vendor-product works!
-</p>
+<div *ngFor="let product of products" class="product-list">
+  <div class="mb-2 mp-2">
+    <div class="d-flex align-items-center mt-3">
+      <div class="p-2">
+        <div class="thumb-img">
+          <img class="img-fluid" [src]="product.image" />
+        </div>
+      </div>
+      <div class="p-2">
+        <dl>
+          <dt>{{ product.name }}</dt>
+          <dd>{{ product.description }}</dd>
+        </dl>
+      </div>
+      <div class="ml-auto p-2">
+        <button class="btn btn-danger">ลบ</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<code>
+  <pre>
+    {{ products | json }}
+  </pre>
+</code>
