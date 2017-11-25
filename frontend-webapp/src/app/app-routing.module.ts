@@ -8,6 +8,10 @@ const routes: Routes = [
     loadChildren: './feed/feed.module#FeedModule'
   },
   {
+    path: 'admin-verify',
+    loadChildren: './admin-verify-receipt/admin-verify-receipt.module#AdminVerifyReceiptModule'
+  },
+  {
     path: 'ping',
     loadChildren: './ping/ping.module#PingModule'
   },

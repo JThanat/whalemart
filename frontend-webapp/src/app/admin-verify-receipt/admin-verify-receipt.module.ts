@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
-import { AdminVerifyReceiptComponent } from './admin-verify-receipt.component';
 import { AdminVerifyReceiptRoutingModule } from './admin-verify-receipt-routing.module';
+import { AdminVerifyReceiptComponent } from './admin-verify-receipt.component';
 
 
 @NgModule({
