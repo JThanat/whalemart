@@ -11,6 +11,17 @@ from apps.reservations.serializers import ReservationSerializer
 
 
 class ReservationViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin):
+    """
+    {\n
+        "shop_name": "Couppee",
+        "market": 1,
+        "reserved_booths": [
+            {"booth": 2},
+            ...
+            {...}
+        ]
+    }
+    """
     queryset = Reservation.objects.all()
     serializer_class = ReservationSerializer
     permission_classes = (IsAuthenticated,)
@@ -24,16 +35,16 @@ class ReservationViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin):
 def approve_booths(request, *args, **kwargs):
     """
     {\n
-        "market": 1,\n
-        "booths": [\n
-            {\n
-                "user": 1,\n
-                "id": 1\n
-            },\n
-            ...,\n
-            {...}\n
-        ]\n
-    }\n
+        "market": 1,
+        "booths": [
+            {
+                "user": 1,
+                "id": 1
+            },
+            ...,
+            {...}
+        ]
+    }
     """
     market = request.data.get('market', None)
     booths = request.data.get('booths', [])
