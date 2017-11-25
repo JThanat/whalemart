@@ -1,11 +1,11 @@
-from rest_framework import viewsets, mixins, status
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
+from rest_framework import viewsets, mixins
+from rest_framework.permissions import IsAuthenticated
 
-from apps.payments.models import Installment
-from apps.payments.serializers import FirstInstallmentSerializer
+from apps.payments.models import Installment, RentalPaymentInfo
+from apps.payments.serializers import InstallmentSerializer
 
 
-class FirstInstallmentViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin):
+class PaymentViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin):
     queryset = Installment.objects.all()
-    serializer_class = FirstInstallmentSerializer()
+    serializer_class = InstallmentSerializer
+    permission_classes = (IsAuthenticated,)
