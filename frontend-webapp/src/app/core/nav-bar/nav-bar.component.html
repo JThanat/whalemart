@@ -5,7 +5,7 @@
       <img class="d-lg-none" src="/assets/icons/whalemart-logo.svg" height="35">
     </a>
 
-    <app-nav-bar-search-box *ngIf="isShowNavBarSearchBox()" @searchBoxIn></app-nav-bar-search-box>
+    <app-nav-bar-search-box [class.d-none]="isMenuOpened" *ngIf="isShowNavBarSearchBox()" @searchBoxIn></app-nav-bar-search-box>
 
     <button type="button" class="hamburger d-md-none my-2 my-sm-0" [class.active]="isMenuOpened" (click)="toggleMenu()">
       <span></span>
