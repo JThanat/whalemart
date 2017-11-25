@@ -1,3 +1,4 @@
+from django.forms.models import model_to_dict
 from rest_framework import serializers
 
 from apps.reservations.models import Reservation
@@ -32,17 +33,19 @@ class InstallmentSerializer(serializers.ModelSerializer):
         }
 
     def validate_new_credit_card(self, card_info):
-        success, message = pay_with_credit_card(**card_info)
-        if not success:
-            raise serializers.ValidationError(message)
-        return card_info
-
-    def validate_credit_card(self, card_info):
         if card_info:
             success, message = pay_with_credit_card(**card_info)
             if not success:
                 raise serializers.ValidationError(message)
         return card_info
+
+    def validate_credit_card(self, credit_card):
+        if credit_card:
+            card_info = model_to_dict(credit_card)
+            success, message = pay_with_credit_card(**card_info)
+            if not success:
+                raise serializers.ValidationError(message)
+        return credit_card
 
     def create(self, validated_data):
         print(validated_data)
@@ -56,10 +59,9 @@ class InstallmentSerializer(serializers.ModelSerializer):
         new_credit_card = validated_data.pop('new_credit_card', None)
         save_new_credit_card = validated_data.pop('save_new_credit_card', False)
         _ = validated_data.pop('credit_card', None)
-        if new_credit_card:
+        if save_new_credit_card:
             new_credit_card['user'] = user
-            if save_new_credit_card:
-                CreditCard.object.create(**new_credit_card)
+            CreditCard.objects.create(**new_credit_card)
 
         # If user have already paid partially
         if RentalPaymentInfo.objects.filter(user=user, reservation=reservation).exists():
@@ -67,7 +69,8 @@ class InstallmentSerializer(serializers.ModelSerializer):
             rental_payment_info = RentalPaymentInfo.objects.get(user=user, reservation=reservation)
             if validated_data['payment_method'] == Installment.CREDIT_CARD:
                 validated_data['verification_status'] = Installment.APPROVED
-                validated_data['status'] = RentalPaymentInfo.FULLY_PAID
+                rental_payment_info.status = RentalPaymentInfo.FULLY_PAID
+                rental_payment_info.save()
             validated_data['round'] = 2
         else:
             # Create new Rental Payment Info
@@ -87,7 +90,7 @@ class InstallmentSerializer(serializers.ModelSerializer):
         return Installment.objects.create(**validated_data)
 
 
-def pay_with_credit_card(self, **data):
+def pay_with_credit_card(**data):
     # TODO: Call service -- Boat-sama
     status = True
     message = 'Payment success'
