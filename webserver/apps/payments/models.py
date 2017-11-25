@@ -12,8 +12,8 @@ class RentalPaymentInfo(models.Model):
     )
     status = models.IntegerField(verbose_name='Status', choices=STATUS_CHOICES, default=DRAFTED)
     user = models.ForeignKey('users.User', verbose_name='User', related_name='rental_payment_info')
-    reservation = models.ForeignKey('reservations.Reservation', verbose_name='Reservation',
-                                         related_name='rental_payment_infos')
+    reservation = models.OneToOneField('reservations.Reservation', verbose_name='Reservation',
+                                       related_name='rental_payment_info')
 
     def __str__(self):
         return '%s %s' % (self.user.first_name, self.reservation)
