@@ -1,14 +1,6 @@
 /// <reference path="./flatpickr-locale.d.ts" />
 
-import {
-  ChangeDetectorRef,
-  Directive,
-  ElementRef,
-  HostBinding,
-  Input,
-  OnDestroy,
-  OnInit
-} from '@angular/core';
+import { Directive, ElementRef, HostBinding, Input, OnDestroy, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as flatpickr from 'flatpickr';
 import { Thai } from 'flatpickr/dist/l10n/th.js';
@@ -26,8 +18,7 @@ import { DateRange } from '../../../core/utils/date-range.service';
   ]
 })
 export class DateRangeInputDirective implements OnInit, OnDestroy, ControlValueAccessor {
-  @HostBinding('class.date-range') dateRangeClass = true;
-  @HostBinding('disabled') disabled = false;
+  @HostBinding('class.datetime') dateRangeClass = true;
 
   @Input() inlineDatePickerTarget: ElementRef | undefined;
 
@@ -36,7 +27,7 @@ export class DateRangeInputDirective implements OnInit, OnDestroy, ControlValueA
   private onTouched: (() => void) | undefined = undefined;
   private dateRange: DateRange | null = null;
 
-  constructor(private cd: ChangeDetectorRef, private elem: ElementRef) {}
+  constructor(private elem: ElementRef) {}
 
   ngOnInit() {
     const containerElem = this.elem.nativeElement as HTMLInputElement;
@@ -111,10 +102,5 @@ export class DateRangeInputDirective implements OnInit, OnDestroy, ControlValueA
 
   registerOnTouched(fn: any) {
     this.onTouched = fn;
-  }
-
-  setDisabledState(isDisabled: boolean) {
-    this.disabled = isDisabled;
-    this.cd.detectChanges();
   }
 }
