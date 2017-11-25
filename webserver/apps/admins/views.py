@@ -3,7 +3,6 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 
 from apps.payments.models import Installment, RentalPaymentInfo
-from apps.reservations.models import Reservation
 
 
 @api_view(['GET', 'POST'])
