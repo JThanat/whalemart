@@ -1,5 +1,5 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { LessorManageMarketComponent } from './lessor-manage-market.component';
 
 describe('LessorManageMarketComponent', () => {
@@ -8,7 +8,8 @@ describe('LessorManageMarketComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LessorManageMarketComponent ]
+      declarations: [ LessorManageMarketComponent ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   }));
