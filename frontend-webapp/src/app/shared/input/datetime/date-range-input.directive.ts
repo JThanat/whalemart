@@ -13,7 +13,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as flatpickr from 'flatpickr';
 import { Thai } from 'flatpickr/dist/l10n/th.js';
 
-import { DateRange } from '../../core/utils/date-range.service';
+import { DateRange } from '../../../core/utils/date-range.service';
 
 @Directive({
   selector: '[appDateRangeInput]',
