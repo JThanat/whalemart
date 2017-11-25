@@ -21,6 +21,16 @@ class VerifyReceiptSerializer(serializers.ModelSerializer):
         fields = ('id', 'payment_date', 'amount', 'verification_status', 'receipt_image')
         read_only_fields = ('payment_date', 'amount', 'receipt_image')
 
+    def update(self, instance, validated_data):
+        installment = super(VerifyReceiptSerializer, self).update(instance, validated_data)
+        rental_payment_info = installment.rental_payment_info
+        if installment.round == 2 or installment.amount == rental_payment_info.reservation.approved_booth.rental_fee:
+            rental_payment_info.status = RentalPaymentInfo.FULLY_PAID
+        else:
+            rental_payment_info.status = RentalPaymentInfo.DEPOSITED
+        rental_payment_info.save()
+        return installment
+
 
 class InstallmentSerializer(serializers.ModelSerializer):
     PARTIAL = 1
