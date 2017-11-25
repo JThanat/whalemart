@@ -4,6 +4,7 @@ import { _throw as observableThrow } from 'rxjs/observable/throw';
 import { catchError, mergeMap } from 'rxjs/operators';
 
 export interface Product {
+  id: number;
   name: string;
   description: string;
   image: string;
@@ -15,23 +16,25 @@ interface ProductRequest {
   image: File;
 }
 
-class VendorProductError { }
+class VendorProductError {}
 
 @Injectable()
 export class VendorProductService {
   constructor(private http: HttpClient) {}
 
-  get getProducts$() {
-    return this.http.get<Product[]>('/api/product/').pipe(
-      catchError((err: any) => {
-        if (err instanceof HttpErrorResponse) {
-          if (err.status >= 400 && err.status < 500) {
-            return observableThrow(new VendorProductError());
-          }
+  get productError() {
+    return catchError((err: any) => {
+      if (err instanceof HttpErrorResponse) {
+        if (err.status >= 400 && err.status < 500) {
+          return observableThrow(new VendorProductError());
         }
-        return observableThrow(err);
-      })
-    );
+      }
+      return observableThrow(err);
+    });
+  }
+
+  get getProducts$() {
+    return this.http.get<Product[]>('/api/product/').pipe(this.productError);
   }
 
   addProduct$(product: ProductRequest) {
@@ -40,17 +43,14 @@ export class VendorProductService {
     formData.append('description', product.description);
     formData.append('image', product.image);
 
-    return this.http.post<ProductRequest>('/api/product/', formData).pipe(
-      mergeMap(() => this.getProducts$),
-      catchError((err: any) => {
-        console.log(err);
-        if (err instanceof HttpErrorResponse) {
-          if (err.status >= 400 && err.status < 500) {
-            return observableThrow(new VendorProductError());
-          }
-        }
-        return observableThrow(err);
-      })
-    );
+    return this.http
+      .post<ProductRequest>('/api/product/', formData)
+      .pipe(mergeMap(() => this.getProducts$), this.productError);
+  }
+
+  deleteProduct$(id: number) {
+    return this.http
+      .delete(`/api/product/${id}/`, { responseType: 'text' })
+      .pipe(mergeMap(() => this.getProducts$), this.productError);
   }
 }
