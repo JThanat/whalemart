@@ -8,8 +8,7 @@ from apps.payments.models import Installment
 @api_view(['GET', 'POST'])
 def verify_receipt(request, *args, **kwargs):
     if request.method == 'GET':
-        installments = Installment.objects.filter(payment_method=Installment.BANK_TRANSFER,
-                                                  verification_status=Installment.PENDING)
+        installments = Installment.objects.filter(payment_method=Installment.BANK_TRANSFER)
         response = []
         for installment in installments:
             obj = dict()
@@ -17,6 +16,7 @@ def verify_receipt(request, *args, **kwargs):
             obj['payment_date'] = installment.payment_date
             obj['amount'] = installment.amount
             obj['receipt_image'] = installment.receipt_image
+            obj['verification_status'] = installment.verification_status
             response.append(obj)
         return Response(response, status=status.HTTP_200_OK)
     elif request.method == 'POST':
