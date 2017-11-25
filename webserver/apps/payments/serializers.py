@@ -15,6 +15,13 @@ class UploadReceiptSerializer(serializers.ModelSerializer):
         read_only_fields = ('amount', 'verification_status')
 
 
+class VerifyReceiptSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Installment
+        fields = ('id', 'payment_date', 'amount', 'verification_status', 'receipt_image')
+        read_only_fields = ('payment_date', 'amount', 'receipt_image')
+
+
 class InstallmentSerializer(serializers.ModelSerializer):
     PARTIAL = 1
     FULL = 2
