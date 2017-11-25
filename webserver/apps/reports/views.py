@@ -15,6 +15,15 @@ class ReportViewSet(viewsets.ModelViewSet):
     serializer_class = ReportSerializer
     queryset = Report.objects.all()
 
+    def create(self, request, format=None):
+        data = request.data.copy()
+        data['user'] = request.user.id
+        serializer = ReportSerializer(data=data, context=self.get_serializer_context())
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     def destroy(self, request, pk=None):
         market = get_object_or_404(Market, id=pk)
         report = Report.objects.filter(market=market)
