@@ -8,6 +8,13 @@ from apps.users.models import CreditCard
 from apps.users.serializers import CreditCardSerializer
 
 
+class UploadReceiptSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Installment
+        fields = ('payment_date', 'amount', 'verification_status', 'receipt_image',)
+        read_only_fields = ('amount', 'verification_status')
+
+
 class InstallmentSerializer(serializers.ModelSerializer):
     PARTIAL = 1
     FULL = 2
@@ -48,7 +55,6 @@ class InstallmentSerializer(serializers.ModelSerializer):
         return credit_card
 
     def create(self, validated_data):
-        print(validated_data)
         # Get reservation object
         market = validated_data.pop('market', None)
         user = self.context['request'].user
