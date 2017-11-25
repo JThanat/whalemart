@@ -54,6 +54,8 @@ INSTALLED_APPS = [
     'apps.reservations',
     'apps.payments',
     'apps.admins',
+    'apps.reports',
+    'apps.ratings',
 ]
 
 AUTH_USER_MODEL = 'users.User'
