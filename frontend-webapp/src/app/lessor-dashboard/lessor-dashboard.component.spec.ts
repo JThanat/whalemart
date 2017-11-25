@@ -6,12 +6,13 @@ describe('LessorDashboardComponent', () => {
   let component: LessorDashboardComponent;
   let fixture: ComponentFixture<LessorDashboardComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ LessorDashboardComponent ]
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        declarations: [LessorDashboardComponent]
+      }).compileComponents();
     })
-    .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LessorDashboardComponent);

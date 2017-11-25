@@ -6,13 +6,14 @@ describe('LessorManageMarketComponent', () => {
   let component: LessorManageMarketComponent;
   let fixture: ComponentFixture<LessorManageMarketComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ LessorManageMarketComponent ],
-      schemas: [NO_ERRORS_SCHEMA]
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        declarations: [LessorManageMarketComponent],
+        schemas: [NO_ERRORS_SCHEMA]
+      }).compileComponents();
     })
-    .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LessorManageMarketComponent);

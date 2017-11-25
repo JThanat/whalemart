@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { IsLessorGuardService } from './is-lessor-guard.service';
-import {LessorDashboardComponent} from './lessor-dashboard.component';
-import { LessorManageMarketComponent } from './lessor-manage-market/lessor-manage-market.component';
+import { LessorDashboardComponent } from './lessor-dashboard.component';
 import { LessorInfoComponent } from './lessor-info/lessor-info.component';
+import { LessorManageMarketComponent } from './lessor-manage-market/lessor-manage-market.component';
 import { LessorMarketResolverService } from './lessor-manage-market/lessor-market-resolver.service';
 
 const routes: Routes = [
@@ -28,9 +28,6 @@ const routes: Routes = [
       {
         path: 'profile',
         component: LessorInfoComponent
-        // resolve: {
-        //   vendorProfile: VendorProfileResolver
-        // }
       }
     ]
   }
@@ -41,4 +38,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [IsLessorGuardService]
 })
-export class LessorDashboardRoutingModule { }
+export class LessorDashboardRoutingModule {}

@@ -1,5 +1,4 @@
 <div *ngIf="(lessorMarkets$ | async) as markets">
-  <!-- <code><pre>{{ markets.markets | json }}</pre></code> -->
   <section class="mb-3">
     <div class="section-title">
       <h2>ตลาดปัจจุบัน</h2>
@@ -9,7 +8,7 @@
     </div>
 
     <div class="row">
-      <div class="col-12 col-sm-6 col-lg-3 mb-5" *ngFor="let market of markets.upcoming_markets">
+      <div class="col-12 col-sm-6 col-lg-3 mb-5" *ngFor="let market of markets.upcomingMarkets">
         <app-market-item [market]="market"></app-market-item>
       </div>
     </div>
@@ -21,7 +20,7 @@
     </div>
 
     <div class="row">
-      <div class="col-12 col-sm-6 col-lg-3 mb-5" *ngFor="let market of markets.passed_markets">
+      <div class="col-12 col-sm-6 col-lg-3 mb-5" *ngFor="let market of markets.passedMarkets">
         <app-market-item [market]="market"></app-market-item>
       </div>
     </div>

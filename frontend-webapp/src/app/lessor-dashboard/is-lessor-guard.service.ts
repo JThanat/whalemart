@@ -3,15 +3,11 @@ import { Injectable } from '@angular/core';
 import { CanActivate } from '@angular/router';
 import { of as observableOf } from 'rxjs/observable/of';
 import { _throw as observableThrow } from 'rxjs/observable/throw';
-import { catchError } from 'rxjs/operators/catchError';
-import { mapTo } from 'rxjs/operators/mapTo';
+import { catchError, mapTo } from 'rxjs/operators';
 
 @Injectable()
-export class IsLessorGuardService  implements CanActivate {
-
-  constructor(
-    private http: HttpClient
-  ) { }
+export class IsLessorGuardService implements CanActivate {
+  constructor(private http: HttpClient) {}
 
   canActivate() {
     return this.http.get('/api/lessor/').pipe(

@@ -1,4 +1,4 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { inject, TestBed } from '@angular/core/testing';
 
 import { IsLessorGuardService } from './is-lessor-guard.service';
 
@@ -9,7 +9,10 @@ describe('IsLessorGuardService', () => {
     });
   });
 
-  it('should be created', inject([IsLessorGuardService], (service: IsLessorGuardService) => {
-    expect(service).toBeTruthy();
-  }));
+  it(
+    'should be created',
+    inject([IsLessorGuardService], (service: IsLessorGuardService) => {
+      expect(service).toBeTruthy();
+    })
+  );
 });

@@ -6,12 +6,13 @@ describe('LessorInfoComponent', () => {
   let component: LessorInfoComponent;
   let fixture: ComponentFixture<LessorInfoComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ LessorInfoComponent ]
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        declarations: [LessorInfoComponent]
+      }).compileComponents();
     })
-    .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LessorInfoComponent);

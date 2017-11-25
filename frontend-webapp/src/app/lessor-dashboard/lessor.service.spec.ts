@@ -10,7 +10,10 @@ describe('LessorService', () => {
     });
   });
 
-  it('should be created', inject([LessorService], (service: LessorService) => {
-    expect(service).toBeTruthy();
-  }));
+  it(
+    'should be created',
+    inject([LessorService], (service: LessorService) => {
+      expect(service).toBeTruthy();
+    })
+  );
 });

@@ -9,11 +9,8 @@ import { LessorMarketResolverService } from './lessor-manage-market/lessor-marke
 import { LessorService } from './lessor.service';
 
 @NgModule({
-  imports: [
-    SharedModule,
-    LessorDashboardRoutingModule
-  ],
+  imports: [SharedModule, LessorDashboardRoutingModule],
   declarations: [LessorDashboardComponent, LessorInfoComponent, LessorManageMarketComponent],
   providers: [LessorService, LessorMarketResolverService]
 })
-export class LessorDashboardModule { }
+export class LessorDashboardModule {}

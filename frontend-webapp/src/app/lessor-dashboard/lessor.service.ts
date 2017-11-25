@@ -1,13 +1,14 @@
-import { HttpClient , HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { _throw as observableThrow } from 'rxjs/observable/throw';
-import { catchError, map} from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
+
 import { Market, MarketServerResponse, MarketService } from '../core/market/market.service';
 
-
 export interface MarketList {
-  upcoming_markets: Market[];
-  passed_markets: Market[];
+  upcomingMarkets: Market[];
+  passedMarkets: Market[];
 }
 
 export interface LessorResponse {
@@ -38,26 +39,28 @@ export class MarketsError {}
 
 @Injectable()
 export class LessorService {
+  constructor(private http: HttpClient, private marketService: MarketService) {}
 
-  constructor(private http: HttpClient, private marketService: MarketService) { }
-
-  getMarketList() {
+  getMarketList(): Observable<MarketList> {
     return this.http.get<LessorResponse>('/api/lessor/').pipe(
       map(data => {
+        const normalizedMarkets = data.markets.map(market =>
+          this.marketService.normalizeMarket(market)
+        );
+        const nowDate = new Date();
+
         return {
-          upcoming_markets: (data.markets.map(market => this.marketService.normalizeMarket(market)))
-          .filter(market => market.startDate > new Date()),
-          passed_markets: (data.markets.map(market => this.marketService.normalizeMarket(market)))
-          .filter(market => market.startDate < new Date())
+          upcomingMarkets: normalizedMarkets.filter(market => market.startDate > nowDate),
+          passedMarkets: normalizedMarkets.filter(market => market.startDate <= nowDate)
         };
       }),
       catchError((err: any) => {
         if (err instanceof HttpErrorResponse) {
           if (err.status >= 400 && err.status < 500) {
-            return observableThrow(new MarketsError());
+            return observableThrow(new MarketsError()) as Observable<MarketList>;
           }
         }
-        return observableThrow(err);
+        return observableThrow(err) as Observable<MarketList>;
       })
     );
   }
