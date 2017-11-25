@@ -9,7 +9,7 @@ class BoothSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Booth
-        fields = ('booth_number', 'rental_fee', 'market')
+        fields = ('id', 'booth_number', 'rental_fee', 'market')
 
     def validate_booth_number(self, data):
         if not re.match(r'^[A-Za-z0-9]+$', data):
