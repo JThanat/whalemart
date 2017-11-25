@@ -1,7 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import check_password
 from django.contrib import auth
-from django.shortcuts import get_object_or_404
 from rest_framework import viewsets, mixins, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -144,6 +143,7 @@ def get_current_user(request, *args, **kwargs):
         user.save()
         return Response(UserSerializer(user).data)
 
+
 @api_view(['GET',])
 def get_reserved_markets(request, *args, **kwargs):
     user = request.user
@@ -152,6 +152,10 @@ def get_reserved_markets(request, *args, **kwargs):
     reservations = user.reservations.all()
     markets = []
     for reservation in reservations:
-        markets += [reservation.market]
-    return Response(markets,
-                    status=status.HTTP_200_OK)
+        market = dict()
+        market['id'] = reservation.market.id
+        approved_booth = reservation.approved_booth
+        market['approved_booth'] = approved_booth.id
+        market['status'] = reservation.status
+        markets.append(market)
+    return Response(markets, status=status.HTTP_200_OK)
