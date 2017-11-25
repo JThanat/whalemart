@@ -1,4 +1,4 @@
-<nav class="container navbar">
+<nav class="container navbar" [class.menu-opened]="isMenuOpened">
   <div class="main-nav">
     <a class="logo" routerLink="/">
       <img class="d-none d-lg-block" src="/assets/icons/whalemart-logo-with-name.svg" height="35">
@@ -34,7 +34,7 @@
     </div>
   </div>
 
-  <div class="sub-nav" *ngIf="(getSubNavBarPortal() | async) as portal" @subNavIn>
+  <div class="sub-nav" [class.d-none]="isMenuOpened" *ngIf="(getSubNavBarPortal() | async) as portal" @subNavIn>
     <ng-container [cdkPortalOutlet]="portal"></ng-container>
   </div>
 </nav>
