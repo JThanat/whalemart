@@ -170,8 +170,10 @@ def get_reserved_markets(request, *args, **kwargs):
         market['reservation_status'] = reservation.status
         if market['reservation_status'] == ReservationStatus.APPROVED:
             market['approved_booth'] = reservation.approved_booth.id
+            market['booth_rental_fee'] = reservation.approved_booth.rental_fee
         else:
             market['approved_booth'] = None
+            market['booth_rental_fee'] = None
         if reservation.rental_payment_info:
             market['payment_status'] = reservation.rental_payment_info.status
         else:
