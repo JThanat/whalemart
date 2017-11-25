@@ -27,6 +27,12 @@ class ReservationSerializer(serializers.ModelSerializer):
             'approved_booth': {'read_only': True},
         }
 
+    def validate(self, data):
+        user = self.context['request'].user
+        if Reservation.objects.filter(market=data['market'], user=user).exists():
+            raise serializers.ValidationError('This user have already reserve this market')
+        return data
+
     def create(self, validated_data):
         validated_data['user'] = self.context['request'].user
         reserved_booths = validated_data.pop('reserved_booths', None)
