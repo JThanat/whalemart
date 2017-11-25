@@ -2,7 +2,7 @@ from rest_framework import viewsets, mixins
 from rest_framework.permissions import IsAuthenticated
 
 from apps.payments.models import Installment, RentalPaymentInfo
-from apps.payments.serializers import InstallmentSerializer
+from apps.payments.serializers import InstallmentSerializer, UploadReceiptSerializer
 
 
 class PaymentViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin):
@@ -40,4 +40,10 @@ class PaymentViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin):
     """
     queryset = Installment.objects.all()
     serializer_class = InstallmentSerializer
+    permission_classes = (IsAuthenticated,)
+
+
+class UploadReceiptViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin, mixins.UpdateModelMixin):
+    queryset = Installment.objects.all()
+    serializer_class = UploadReceiptSerializer
     permission_classes = (IsAuthenticated,)

@@ -57,6 +57,8 @@ router.register(r'similar-market', market_views.SimilarMarketView, base_name='si
 router.register(r'credit-card', user_views.CreditCardView, base_name='credit-card')
 router.register(r'reserve-booth', reservation_views.ReservationViewSet, base_name='reserve-booth')
 router.register(r'payment', payment_views.PaymentViewSet, base_name='payment')
+router.register(r'upload-receipt', payment_views.UploadReceiptViewSet, base_name='upload-image')
+
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
