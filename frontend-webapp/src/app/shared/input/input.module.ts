@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { DateRangeInputDirective } from './datetime/date-range-input.directive';
+import { DateRangeInputDirective } from './date-time/date-range-input.directive';
 import { FileInputComponent } from './file/file-input.component';
 import { InputErrorComponent } from './input-error.component';
 import { InputGroupComponent } from './input-group.component';
