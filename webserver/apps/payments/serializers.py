@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from rest_framework import serializers
 
 from apps.reservations.models import Reservation
@@ -21,8 +19,8 @@ class InstallmentSerializer(serializers.ModelSerializer):
     market = serializers.PrimaryKeyRelatedField(many=False, queryset=Market.objects.all(), write_only=True,
                                                 label='Market')
     credit_card = serializers.PrimaryKeyRelatedField(many=False, queryset=CreditCard.objects.all(), write_only=True,
-                                                     label='Credit Card')
-    new_credit_card = CreditCardSerializer(many=False, required=False)
+                                                     label='Credit Card', required=False, allow_null=True)
+    new_credit_card = CreditCardSerializer(many=False, required=False, allow_null=True)
     save_new_credit_card = serializers.BooleanField(default=False, label='Save new credit card')
 
     class Meta:
@@ -39,26 +37,29 @@ class InstallmentSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(message)
         return card_info
 
-    def validate_credit_card(self, pk):
-        card_info = CreditCard.object.get(id=pk)
-        success, message = pay_with_credit_card(**card_info)
-        if not success:
-            raise serializers.ValidationError(message)
+    def validate_credit_card(self, card_info):
+        if card_info:
+            success, message = pay_with_credit_card(**card_info)
+            if not success:
+                raise serializers.ValidationError(message)
         return card_info
 
     def create(self, validated_data):
+        print(validated_data)
         # Get reservation object
-        market = validated_data.pop('market')
+        market = validated_data.pop('market', None)
         user = self.context['request'].user
         reservation = Reservation.objects.get(user=user, market=market)
+        payment_type = validated_data.pop('payment_type', None)
 
         # Create new credit card if user pay with new credit card
         new_credit_card = validated_data.pop('new_credit_card', None)
         save_new_credit_card = validated_data.pop('save_new_credit_card', False)
         _ = validated_data.pop('credit_card', None)
-        new_credit_card['user'] = user
-        if save_new_credit_card:
-            CreditCard.object.create(**new_credit_card)
+        if new_credit_card:
+            new_credit_card['user'] = user
+            if save_new_credit_card:
+                CreditCard.object.create(**new_credit_card)
 
         # If user have already paid partially
         if RentalPaymentInfo.objects.filter(user=user, reservation=reservation).exists():
@@ -70,10 +71,6 @@ class InstallmentSerializer(serializers.ModelSerializer):
             validated_data['round'] = 2
         else:
             # Create new Rental Payment Info
-            payment_type = validated_data.pop('payment_type')
-            market = validated_data.pop('market')
-            user = self.context['request'].user
-            reservation = Reservation.objects.filter(user=user, market=market)
             status = RentalPaymentInfo.DRAFTED
             if validated_data['payment_method'] == Installment.CREDIT_CARD:
                 validated_data['verification_status'] = Installment.APPROVED
