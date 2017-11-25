@@ -7,7 +7,8 @@ from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 
 from apps.commons.choices import ReservationStatus
-from .serializers import RegistrationSerializer, UserSerializer, get_facebook_id
+from .serializers import RegistrationSerializer, UserSerializer, CreditCardSerializer, get_facebook_id
+from .models import CreditCard
 
 User = get_user_model()
 
@@ -62,6 +63,14 @@ class ValidateUserEmailView(APIView):
             return Response({'is_ok': True})
         else:
             return Response({'is_ok': False})
+
+
+class CreditCardView(viewsets.ModelViewSet):
+    serializer_class = CreditCardSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        return user.credit_cards.all()
 
 
 @api_view(['POST',])

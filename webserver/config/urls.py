@@ -54,6 +54,7 @@ router.register(r'booth', booth_views.BoothViewSet, base_name='booth')
 router.register(r'tag', tag_views.TagViewSet, base_name='tag')
 router.register(r'scene', market_views.SceneViewSet, base_name='scene')
 router.register(r'similar-market', market_views.SimilarMarketView, base_name='similar-market')
+router.register(r'credit-card', user_views.CreditCardView, base_name='credit-card')
 router.register(r'reserve-booth', reservation_views.ReservationViewSet, base_name='reserve-booth')
 router.register(r'payment', payment_views.PaymentViewSet, base_name='payment')
 
