@@ -12,12 +12,6 @@ from apps.markets.models import Market
 from apps.users.models import User
 
 class ReportViewSet(viewsets.ModelViewSet):
-    """
-    GET  `report`: Display bank account information of active lessor
-    POST `report`: Add bank account to active lessor
-    GET  `report/{id}`: Get report #id
-    DELETE `report/{id}`: Delete report #id
-    """
     serializer_class = ReportSerializer
     queryset = Report.objects.all()
 
