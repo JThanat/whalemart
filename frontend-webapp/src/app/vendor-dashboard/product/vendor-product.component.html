@@ -32,8 +32,8 @@
       </app-input-error>
     </app-input-group>
     <app-input-group label="รายละเอียดสินค้า">
-      <input appInput type="text" class="form-control" formControlName="name" placeholder="รายละเอียดสินค้า">
-      <app-input-error *ngIf="addProductForm.controls['name'].hasError('required')">
+      <input appInput type="text" class="form-control" formControlName="description" placeholder="รายละเอียดสินค้า">
+      <app-input-error *ngIf="addProductForm.controls['description'].hasError('required')">
         กรุณากรอกรายละเอียดสินค้า
       </app-input-error>
     </app-input-group>
@@ -43,7 +43,7 @@
         กรุณาเลือกรูปภาพ
       </app-input-error>
     </app-input-group>
-    <button class="btn btn-primary mt-2" type="submit">เพิ่มสินค้า</button>
+    <button type="submit" class="btn btn-primary mt-2" [disabled]="addProductForm.disabled">เพิ่มสินค้า</button>
   </form>
 </div>
 

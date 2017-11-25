@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
+import { combineLatest } from 'rxjs/observable/combineLatest';
+import { AlertService } from '../../core/alert/alert.service';
 import { Product, VendorProductService } from './vendor-product.service';
 
 @Component({
@@ -13,11 +15,14 @@ export class VendorProductComponent implements OnInit {
   isShowAddProduct = true;
   addProductForm: FormGroup;
 
-  constructor(private vendorProductService: VendorProductService) {}
+  constructor(
+    private vendorProductService: VendorProductService
+    private alert: AlertService
+  ) {}
 
   ngOnInit() {
     this.vendorProductService
-      .getProducts$()
+      .getProducts$
       .subscribe(data => (this.products = data));
 
     this.addProductForm = new FormGroup(
@@ -34,5 +39,25 @@ export class VendorProductComponent implements OnInit {
     this.isShowAddProduct = true;
   }
 
-  addProduct() {}
+  addProduct() {
+    if (!this.addProductForm.valid) {
+      return;
+    }
+
+    this.addProductForm.disable();
+
+    const { name, description, image } = this.addProductForm.value;
+
+    this.vendorProductService.addProduct$({
+      name: name,
+      description: description,
+      image: image ? image[0] : null
+    }).subscribe((data: any) => {
+        this.products = data;
+        this.addProductForm.enable();
+      }, err => {
+        this.addProductForm.enable();
+        this.alert.show({ message: 'เกิดข้อผิดพลาด', type: 'danger' });
+      });
+  }
 }

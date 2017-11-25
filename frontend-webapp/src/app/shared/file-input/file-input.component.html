@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-outline-primary" (click)="fileInput.click()">
+<button type="button" class="btn btn-outline-primary" (click)="fileInput.click()" [disabled]="disabled">
   {{ (fileList?.length === 1) ? fileList[0].name : label }}
 </button>
-<input #fileInput type="file" (change)="updateInputFile($event)" />
+<input #fileInput type="file" (change)="updateInputFile($event)" [disabled]="disabled" />
