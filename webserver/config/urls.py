@@ -16,7 +16,6 @@ Including another URLconf
 
 from django.conf import settings
 from django.conf.urls import url, include
-from django.conf.urls.static import static
 from django.contrib import admin
 from django.conf.urls.static import static
 from rest_framework import routers
@@ -32,6 +31,9 @@ from apps.bank_accounts import views as bank_accounts_views
 from apps.booths import views as booth_views
 from apps.products import views as product_views
 from apps.tags import views as tag_views
+from apps.reservations import views as reservation_views
+from apps.payments import views as payment_views
+from apps.admins import views as admin_views
 from apps.reports import views as report_views
 from apps.ratings import views as ratings_views
 
@@ -53,6 +55,8 @@ router.register(r'tag', tag_views.TagViewSet, base_name='tag')
 router.register(r'scene', market_views.SceneViewSet, base_name='scene')
 router.register(r'similar-market', market_views.SimilarMarketView, base_name='similar-market')
 router.register(r'credit-card', user_views.CreditCardView, base_name='credit-card')
+router.register(r'reserve-booth', reservation_views.ReservationViewSet, base_name='reserve-booth')
+router.register(r'payment', payment_views.PaymentViewSet, base_name='payment')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
@@ -67,6 +71,9 @@ urlpatterns = [
     url(r'^current-user/', user_views.get_current_user),
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^reservation-status/', user_views.get_reserved_markets),
+    url(r'^approve-reservation/', reservation_views.approve_booths),
+    url(r'^verify-receipt/', admin_views.verify_receipt),
     # JWT
     url(r'^api-token-auth/', obtain_jwt_token),
     url(r'^api-token-refresh/', refresh_jwt_token),
