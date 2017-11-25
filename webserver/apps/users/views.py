@@ -126,7 +126,7 @@ def get_current_user(request, *args, **kwargs):
         return Response(UserSerializer(user).data)
     else:
         user = request.user
-    
+
         first_name = request.data.get('first_name', None)
         last_name = request.data.get('last_name', None)
         phone = request.data.get('phone', None)
@@ -137,6 +137,9 @@ def get_current_user(request, *args, **kwargs):
             user.last_name = last_name
         if phone:
             user.phone = phone
+
+        if 'profile_image' in request.FILES:
+            user.profile_image = request.FILES['profile_image']
 
         user.save()
         return Response(UserSerializer(user).data)

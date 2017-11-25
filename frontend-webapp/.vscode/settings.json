@@ -3,5 +3,9 @@
   "prettier.singleQuote": true,
   "editor.rulers": [
     100
-  ]
+  ],
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/coverage": true
+  }
 }

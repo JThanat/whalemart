@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'apps.commons',
     'apps.booths',
     'apps.reports',
+    'apps.ratings',
 ]
 
 AUTH_USER_MODEL = 'users.User'

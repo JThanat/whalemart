@@ -34,12 +34,12 @@ $input-btn-padding-x-lg: 1.4rem;
     regular: 400,
     bold: 700
   );
-  
+
   $output: $weight;
   @if map-has-key($normalized-weights, $weight) {
     $output: map-get($normalized-weights, $weight);
   }
-  
+
   font-weight: $output;
 }
 
