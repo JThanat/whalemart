@@ -16,15 +16,15 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     credit_cards data example:\n
     "credit_cards": [\n
-        {\n
-            "id": 10,\n
-            "card_number": "1",\n
-            "card_holder_name": "2",\n
-            "type": 1,\n
-            "expiry_date": "2017-05-16",\n
-            "verification_no": "1"\n
-        }\n
-    ]\n
+        {
+            "id": 10,
+            "card_number": "1",
+            "card_holder_name": "2",
+            "type": 1,
+            "expiry_date": "2017-05-16",
+            "verification_no": "1"
+        }
+    ]
     """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
@@ -147,6 +147,18 @@ def get_current_user(request, *args, **kwargs):
 
 @api_view(['GET',])
 def get_reserved_markets(request, *args, **kwargs):
+    """
+    `reservation_status`:\n
+    0: waiting for approval\n
+    1: approved\n
+    2: rejected\n
+    3: cancelled\n
+    `approved_booth`: approved booth id or null(if status is waiting for approval, rejected, or cancelled)\n
+    `payment_status`:\n
+    0: draft\n
+    1: deposited\n
+    2: fully paid\n
+    """
     user = request.user
     if user.is_anonymous():
         return Response(status=status.HTTP_401_UNAUTHORIZED)
@@ -154,11 +166,15 @@ def get_reserved_markets(request, *args, **kwargs):
     markets = []
     for reservation in reservations:
         market = dict()
-        market['id'] = reservation.market.id
-        market['status'] = reservation.status
-        if market['status'] == ReservationStatus.APPROVED:
+        market['market_id'] = reservation.market.id
+        market['reservation_status'] = reservation.status
+        if market['reservation_status'] == ReservationStatus.APPROVED:
             market['approved_booth'] = reservation.approved_booth.id
         else:
             market['approved_booth'] = None
+        if reservation.rental_payment_info:
+            market['payment_status'] = reservation.rental_payment_info.status
+        else:
+            market['payment_status'] = None
         markets.append(market)
     return Response(markets, status=status.HTTP_200_OK)
