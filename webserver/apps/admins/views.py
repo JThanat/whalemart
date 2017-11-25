@@ -24,5 +24,6 @@ def verify_receipt(request, *args, **kwargs):
         installment = Installment.objects.get(id=installment_id)
         verification_status = request.data.get('verification_status', None)
         installment.verification_status = verification_status
+        installment.save()
         return Response({'is_success': True}, status=status.HTTP_200_OK)
     return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
