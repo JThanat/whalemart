@@ -50,6 +50,7 @@ router.register(r'tag', tag_views.TagViewSet, base_name='tag')
 router.register(r'scene', market_views.SceneViewSet, base_name='scene')
 router.register(r'similar-market', market_views.SimilarMarketView, base_name='similar-market')
 router.register(r'reserve-booth', reservation_views.ReservationViewSet, base_name='reserve-booth')
+router.register(r'payment', payment_views.PaymentViewSet, base_name='payment')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
