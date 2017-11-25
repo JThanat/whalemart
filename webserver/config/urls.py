@@ -32,11 +32,16 @@ from apps.bank_accounts import views as bank_accounts_views
 from apps.booths import views as booth_views
 from apps.products import views as product_views
 from apps.tags import views as tag_views
+from apps.reports import views as report_views
+from apps.ratings import views as ratings_views
 
 router = routers.DefaultRouter()
 router.register(r'users', user_views.UserViewSet)
 router.register(r'bank-account', bank_accounts_views.BankAccountInfoViewSet, base_name='bank-account')
 router.register(r'become-lessor', lessor_views.BecomeALessorViewSet, base_name='become-lessor')
+router.register(r'report', report_views.ReportViewSet, base_name='report')
+router.register(r'rating', ratings_views.RatingInfoViewSet, base_name='rating')
+router.register(r'rating-star', ratings_views.RatingStarViewSet, base_name='rating-star')
 router.register(r'lessor', lessor_views.LessorViewSet, base_name='lessor')
 router.register(r'register', user_views.RegistrationViewSet)
 router.register(r'vendor-profile', user_views.UserViewSet)
@@ -46,7 +51,7 @@ router.register(r'market-search', market_views.MarketSearchFeedViewSet, base_nam
 router.register(r'booth', booth_views.BoothViewSet, base_name='booth')
 router.register(r'tag', tag_views.TagViewSet, base_name='tag')
 router.register(r'scene', market_views.SceneViewSet, base_name='scene')
-router.register(r'simialr-market', market_views.SimilarMarketView, base_name='similar-market')
+router.register(r'similar-market', market_views.SimilarMarketView, base_name='similar-market')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

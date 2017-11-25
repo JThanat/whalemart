@@ -30,7 +30,7 @@
     "[json]": {
       "editor.tabSize": 2
     },
-    "typescript.tsdk": "frontend-webapp/node_modules/typescript/lib"
+    "typescript.tsdk": "Frontend Webapp/node_modules/typescript/lib"
   },
   "extensions": {
     "recommendations": [

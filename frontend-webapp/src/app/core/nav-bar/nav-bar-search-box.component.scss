@@ -2,6 +2,10 @@ input {
   font-size: 0.9rem;
   background: #F8F8F8 !important;
   border-color: #DDDDDD;
+  transition: background 0.15 ease-in-out;
+  &:focus {
+    background: white !important;
+  }
 }
 
 .query-input {

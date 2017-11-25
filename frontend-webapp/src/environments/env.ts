@@ -12,4 +12,13 @@ export interface Env {
      */
     appId: string;
   };
+  /**
+   * Google-related settings.
+   */
+  google: {
+    /**
+     * An API key.
+     */
+    apiKey: string;
+  };
 }

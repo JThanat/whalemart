@@ -49,6 +49,17 @@ input.date-range[readonly] {
   background: $white;
 }
 
+// Angular CDK classes
+
+@import '~@angular/cdk/overlay';
+
+$cdk-z-index-overlay-container: $zindex-modal;
+$cdk-z-index-overlay: $zindex-modal;
+$cdk-z-index-overlay-backdrop: $zindex-modal-backdrop;
+$cdk-overlay-dark-backdrop-background: rgba(0, 0, 0, 0.3);
+
+@include cdk-overlay();
+
 // Other stylings
 
 .form-control-lg {
@@ -78,4 +89,8 @@ input.-shadow {
   &:focus {
     box-shadow: 0 2px 4px rgba($gray, 0.15) !important;
   }
+}
+
+dt {
+  @include font-family(heading);
 }

@@ -9,8 +9,7 @@ a.market {
   border-radius: $border-radius;
 
   &:hover {
-    box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.2);
-    background: $white;
+    background: rgba($light-gray, 0.25);
   }
 
   .img-container {

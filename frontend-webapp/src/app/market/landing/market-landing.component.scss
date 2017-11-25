@@ -2,7 +2,6 @@
 
 .header {
   h1 {
-    font-weight: bold;
     font-size: 1.6rem;
     margin: 0;
   }
@@ -10,40 +9,69 @@
     font-size: 1.1rem;
     margin-bottom: 0;
   }
+  .header-right {
+    display: flex;
+    flex-direction: column;
+    @include media-breakpoint-up(md) {
+      align-items: flex-end;
+    }
+  }
   .location, .date {
-    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    color: $dark-gray;
+    margin-bottom: map-get($spacers, 1);
     font-size: 0.9rem;
+    > app-svg-icon {
+      margin-right: 0.3rem;
+      @include media-breakpoint-up(md) {
+        order: 99;
+        margin-left: 0.4rem;
+        margin-right: initial;
+      }
+    }
   }
 }
 
 .cover-image-container {
   background: $light-gray;
+  background-size: cover;
   height: 25rem;
 }
 
-.nav-wrapper {
+nav {
   background: $white;
   z-index: 1;
   border-bottom: 1px solid $light-gray;
   position: sticky;
   top: 0;
   .nav-link {
+    @include font-family(heading);
+    color: $dark-gray;
+    display: inline-block;
     padding-top: map-get($spacers, 3);
     padding-bottom: map-get($spacers, 3);
+    margin-left: map-get($spacers, 4);
+    &:first-child {
+      margin-left: 0;
+    }
+    &.active {
+      color: $primary;
+    }
   }
 }
 
 .main-content {
   h2 {
     color: $primary;
-    font-weight: bold;
+    @include font-weight(bold);
     font-size: 1.3rem;
     margin-bottom: map-get($spacers, 4);
   }
 
   h3 {
     color: $dark-gray;
-    font-weight: bold;
+    @include font-weight(bold);
     font-size: 1.1rem;
     margin-top: map-get($spacers, 4);
     margin-bottom: map-get($spacers, 3);
@@ -56,6 +84,11 @@
 
   .date, .time {
     margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    > app-svg-icon {
+      margin-right: 0.4rem;
+    }
   }
 
   .lease-info {
@@ -70,9 +103,8 @@
     height: 15rem;
   }
 
-  .market-map-container {
-    background: $light-gray;
-    height: 40rem;
+  .market-map {
+    width: 100%;
   }
 
   .market-lessor-image {
@@ -86,7 +118,7 @@
     p {
       margin-bottom: 0.2rem;
       &.name {
-        font-weight: bold;
+        @include font-weight(bold);
       }
     }
   }
@@ -99,14 +131,14 @@
   .scene-carousel {
     .image-container {
       background: $light-gray;
-      height: 30rem;
+      height: 20rem;
       border-radius: $border-radius;
     }
     .btn {
       padding: 0;
       background: 0;
       height: 1.8rem;
-      font-weight: bold;
+      @include font-weight(bold);
       &.selected {
         background: $secondary;
         color: $white;
@@ -126,6 +158,7 @@
   .cta-container {
     border: 1px solid $light-gray;
     padding: map-get($spacers, 3) map-get($spacers, 4);
+    box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.05);
     .price {
       p {
         margin-bottom: 0;
@@ -142,12 +175,8 @@
 
 .related-markets {
   h2 {
-    font-weight: bold;
+    @include font-weight(bold);
     font-size: 1.6rem;
     margin: 0;
-  }
-  .market {
-    background: $light-gray;
-    height: 15rem;
   }
 }

@@ -5,6 +5,7 @@ import {
   Directive,
   ElementRef,
   HostBinding,
+  Input,
   OnDestroy,
   OnInit
 } from '@angular/core';
@@ -28,12 +29,14 @@ export class DateRangeInputDirective implements OnInit, OnDestroy, ControlValueA
   @HostBinding('class.date-range') dateRangeClass = true;
   @HostBinding('disabled') disabled = false;
 
+  @Input() inlineDatePickerTarget: ElementRef | undefined;
+
   private datePickerInstance: flatpickr.Instance | undefined = undefined;
   private onChange: ((data: DateRange | null) => void) | undefined = undefined;
   private onTouched: (() => void) | undefined = undefined;
   private dateRange: DateRange | null = null;
 
-  constructor(private cd: ChangeDetectorRef, private elem: ElementRef) { }
+  constructor(private cd: ChangeDetectorRef, private elem: ElementRef) {}
 
   ngOnInit() {
     const containerElem = this.elem.nativeElement as HTMLInputElement;
@@ -41,15 +44,17 @@ export class DateRangeInputDirective implements OnInit, OnDestroy, ControlValueA
       mode: 'range',
       locale: Thai,
       dateFormat: 'j M Y',
+      inline: this.inlineDatePickerTarget ? true : false,
+      appendTo: this.inlineDatePickerTarget ? this.inlineDatePickerTarget.nativeElement : undefined,
+      onChange: dates => {
+        if (dates.length !== 1) {
+          this.onValueChange(dates);
+        }
+      },
       onClose: dates => {
         this.onValueChange(dates.length === 2 ? dates : []);
         if (this.onTouched) {
           this.onTouched();
-        }
-      },
-      onValueUpdate: dates => {
-        if (dates.length !== 1) {
-          this.onValueChange(dates);
         }
       }
     }) as flatpickr.Instance;

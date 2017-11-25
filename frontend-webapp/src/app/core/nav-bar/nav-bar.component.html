@@ -5,7 +5,7 @@
       <img class="d-lg-none" src="/assets/icons/whalemart-logo.svg" height="35">
     </a>
 
-    <app-nav-bar-search-box *ngIf="isShowNavBarSearchBox()"></app-nav-bar-search-box>
+    <app-nav-bar-search-box *ngIf="isShowNavBarSearchBox()" @searchBoxIn></app-nav-bar-search-box>
 
     <button type="button" class="hamburger d-md-none btn btn-outline-primary my-2 my-sm-0" (click)="toggleMenu()">เมนู</button>
 
@@ -32,7 +32,7 @@
     </div>
   </div>
 
-  <div class="sub-nav">
-    <ng-container [cdkPortalOutlet]="getSubNavBarPortal() | async"></ng-container>
+  <div class="sub-nav" *ngIf="(getSubNavBarPortal() | async) as portal" @subNavIn>
+    <ng-container [cdkPortalOutlet]="portal"></ng-container>
   </div>
 </nav>

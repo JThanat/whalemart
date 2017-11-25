@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'apps.tags',
     'apps.commons',
     'apps.booths',
+    'apps.reports',
+    'apps.ratings',
 ]
 
 AUTH_USER_MODEL = 'users.User'
@@ -156,3 +158,13 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
+
+
+# Email credentials
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_PASSWORD = 'whale123mart'
+EMAIL_HOST_USER = 'whalemart.noti@gmail.com'
+EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

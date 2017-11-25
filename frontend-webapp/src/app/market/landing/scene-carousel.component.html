@@ -1,0 +1,4 @@
+<ng-container *ngIf="imgUrls.length > 0">
+  <img class="scene-image" [src]="imgUrls[imgIndex]" alt="Scene Image {{ imgIndex + 1 }}">
+  <app-pagination [current]="imgIndex + 1" [max]="imgUrls.length" (navigate)="selectImage($event - 1)"></app-pagination>
+</ng-container>
