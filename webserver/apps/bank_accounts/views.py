@@ -12,9 +12,9 @@ from apps.lessors.models import Lessor
 
 class BankAccountInfoViewSet(viewsets.ViewSet):
     """
-    GET  `bank-account`: Display bank account information of active lessor
-    POST `bank-account`: Add bank account to active lessor
-    GET  `bank-account/{id}`: Get bank account #id
+    GET  `bank-account`: Display bank account information of active lessor\n
+    POST `bank-account`: Add bank account to active lessor\n
+    GET  `bank-account/{id}`: Get bank account #id\n
     DELETE `bank-account/{id}`: Delete bank account #id
     """
     serializer_class = BankAccountSerializer
