@@ -4,9 +4,9 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
 
+from apps.commons.choices import ReservationStatus
 from apps.booths.models import Booth
 from apps.reservations.models import Reservation
-from apps.reservations.models import ReservedBooth
 from apps.reservations.serializers import ReservationSerializer
 
 
@@ -37,21 +37,36 @@ def approve_booths(request, *args, **kwargs):
     """
     market = request.data.get('market', None)
     booths = request.data.get('booths', [])
+    approved_users = []
+
+    # Approve reservations of all users in list sent by frontend
     for booth in booths:
         user = booth.get('user')
+        approved_users.append(user)
         booth_id = booth.get('id')
-        reservations = Reservation.objects.filter(user=user, market=market)
-        if len(reservations) == 0:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
-        reservation = reservations[0]
+        approved_reservation = Reservation.objects.filter(user=user, market=market)
+        if len(approved_reservation) == 0:
+            return Response("This user didn't reserve any booth in this market.", status=status.HTTP_400_BAD_REQUEST)
+        approved_reservation = approved_reservation[0]
         booth_obj = Booth.objects.get(pk=booth_id)
-        reservation.approved_booth = booth_obj
-        reservation.save()
-        reserved_booths = reservation.reserved_booths.all()
+        approved_reservation.approved_booth = booth_obj
+        approved_reservation.status = ReservationStatus.APPROVED
+        approved_reservation.save()
+        reserved_booths = approved_reservation.reserved_booths.all()
         for reserved_booth in reserved_booths:
             if reserved_booth.booth == booth_obj:
-                reserved_booth.status = ReservedBooth.APPROVED
+                reserved_booth.status = ReservationStatus.APPROVED
             else:
-                reserved_booth.status = ReservedBooth.REJECTED
+                reserved_booth.status = ReservationStatus.REJECTED
+            reserved_booth.save()
+
+    # Reject reservations of all users who are not in list sent by frontend
+    rejected_reservations = Reservation.objects.filter(market=market).exclude(user__id__in=approved_users)
+    for rejected_reservation in rejected_reservations:
+        rejected_reservation.status = ReservationStatus.APPROVED
+        rejected_reservation.save()
+        reserved_booths = rejected_reservation.reserved_booths.all()
+        for reserved_booth in reserved_booths:
+            reserved_booth.status = ReservationStatus.REJECTED
             reserved_booth.save()
     return Response(status=status.HTTP_200_OK)
