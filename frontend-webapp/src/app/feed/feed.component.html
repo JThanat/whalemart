@@ -71,10 +71,7 @@
 
     <div class="row">
       <div class="col-12 col-sm-6 col-lg-3 mb-5" *ngFor="let market of (marketFeed | async).recentlyAdded">
-        <a [routerLink]="['/market', market.id]" class="market">
-          <app-market-item [market]="market"></app-market-item>
-        </a>
-        
+        <app-market-item [market]="market"></app-market-item>
       </div>
     </div>
   </section>
@@ -92,9 +89,7 @@
 
     <div class="row">
       <div class="col-12 col-sm-6 col-lg-3 mb-5" *ngFor="let market of (marketFeed | async).night">
-        <a [routerLink]="['/market', market.id]" class="market">
-          <app-market-item [market]="market"></app-market-item>
-        </a>
+        <app-market-item [market]="market"></app-market-item>
       </div>
     </div>
   </section>
@@ -112,9 +107,7 @@
 
     <div class="row">
       <div class="col-12 col-sm-6 col-lg-3 mb-5" *ngFor="let market of (marketFeed | async).winter">
-        <a [routerLink]="['/market', market.id]" class="market">
-           <app-market-item [market]="market"></app-market-item>
-        </a>
+        <app-market-item [market]="market"></app-market-item>
       </div>
     </div>
   </section>
