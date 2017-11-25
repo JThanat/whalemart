@@ -2,7 +2,8 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
 
-from apps.payments.models import Installment
+from apps.payments.models import Installment, RentalPaymentInfo
+from apps.reservations.models import Reservation
 
 
 @api_view(['GET', 'POST'])
@@ -24,6 +25,12 @@ def verify_receipt(request, *args, **kwargs):
         installment = Installment.objects.get(id=installment_id)
         verification_status = request.data.get('verification_status', None)
         installment.verification_status = verification_status
+        rental_payment_info = installment.rental_payment_info
+        if installment.round == 2:
+            rental_payment_info.status = RentalPaymentInfo.FULLY_PAID
+        else:
+            rental_payment_info.status = RentalPaymentInfo.DEPOSITED
         installment.save()
+        rental_payment_info.save()
         return Response({'is_success': True}, status=status.HTTP_200_OK)
     return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
