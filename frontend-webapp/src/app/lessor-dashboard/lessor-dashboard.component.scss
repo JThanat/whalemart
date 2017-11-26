@@ -1,0 +1,16 @@
+@import '~styles/common';
+
+.lessor-bar {
+  display: flex;
+
+  .lessor-item {
+    @include font-family(heading);
+    @include font-weight(regular);
+    color: $dark-gray;
+
+    &.active {
+      color: $primary;
+      border-bottom: 0.2rem solid $primary;
+    }
+  }
+}
