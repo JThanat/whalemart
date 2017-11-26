@@ -33,7 +33,6 @@ from apps.products import views as product_views
 from apps.tags import views as tag_views
 from apps.reservations import views as reservation_views
 from apps.payments import views as payment_views
-from apps.admins import views as admin_views
 from apps.reports import views as report_views
 from apps.ratings import views as ratings_views
 
