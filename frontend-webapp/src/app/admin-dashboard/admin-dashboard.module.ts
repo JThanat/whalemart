@@ -4,6 +4,7 @@ import { AdminDashboardRoutingModule } from './admin-dashboard-routing.module';
 import { AdminDashboardComponent } from './admin-dashboard.component';
 import { AdminVerifyReceiptComponent } from './admin-verify-receipt/admin-verify-receipt.component';
 import { ReceiptService } from './admin-verify-receipt/receipt.service';
+import { ReportComponent } from './report/report.component';
 
 @NgModule({
   imports: [
@@ -11,6 +12,6 @@ import { ReceiptService } from './admin-verify-receipt/receipt.service';
     AdminDashboardRoutingModule
   ],
   providers: [ReceiptService],
-  declarations: [AdminDashboardComponent, AdminVerifyReceiptComponent]
+  declarations: [AdminDashboardComponent, AdminVerifyReceiptComponent, ReportComponent]
 })
 export class AdminDashboardModule { }
