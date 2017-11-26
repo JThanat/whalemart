@@ -13,7 +13,7 @@ export interface Receipt {
   receipt_image: string;
 }
 
-interface ReceiptServerResponse{
+interface ReceiptServerResponse {
   count: number;
   next: string;
   previous: string;
@@ -22,19 +22,15 @@ interface ReceiptServerResponse{
 
 export class ReceiptError {}
 
-
 @Injectable()
 export class ReceiptService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  verifyReceipt(id: number, verification_status: number): void {
-    const obj = {
-      verification_status: verification_status
-    };
-    this.http.patch('/api/verify-receipt/' + id + '/', obj).subscribe();
+  verifyReceipt(id: number, verificationStatus: 'accept' | 'reject') {
+    return this.http.patch(`/api/verify-receipt/${id}/`, {
+      verification_status: verificationStatus === 'accept' ? 2 : 3
+    });
   }
-
 
   getReceiptList(): Observable<Receipt[]> {
     return this.http.get<ReceiptServerResponse>('/api/verify-receipt/').pipe(
@@ -44,7 +40,7 @@ export class ReceiptService {
       catchError((err: any) => {
         if (err instanceof HttpErrorResponse) {
           if (err.status >= 400 && err.status < 500) {
-            return observableThrow(new Error()) as Observable<Receipt[]>;
+            return observableThrow(new ReceiptError()) as Observable<Receipt[]>;
           }
         }
         return observableThrow(err) as Observable<Receipt[]>;

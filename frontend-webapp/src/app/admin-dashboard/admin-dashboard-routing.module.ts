@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { AdminDashboardComponent } from './admin-dashboard.component';
 import { AdminVerifyReceiptComponent } from './admin-verify-receipt/admin-verify-receipt.component';
 
@@ -21,10 +21,8 @@ const routes: Routes = [
   }
 ];
 @NgModule({
-  imports: [
-    RouterModule.forChild(routes)
-  ],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
   declarations: []
 })
-export class AdminDashboardRoutingModule { }
+export class AdminDashboardRoutingModule {}

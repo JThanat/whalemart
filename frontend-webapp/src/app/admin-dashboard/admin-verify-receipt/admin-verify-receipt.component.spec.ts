@@ -6,12 +6,13 @@ describe('AdminVerifyReceiptComponent', () => {
   let component: AdminVerifyReceiptComponent;
   let fixture: ComponentFixture<AdminVerifyReceiptComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ AdminVerifyReceiptComponent ]
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        declarations: [AdminVerifyReceiptComponent]
+      }).compileComponents();
     })
-    .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AdminVerifyReceiptComponent);
