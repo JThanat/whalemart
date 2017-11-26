@@ -24,6 +24,7 @@ import { MenuComponent } from './menu/menu.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { SubNavBarDirective } from './sub-nav-bar/sub-nav-bar.directive';
 import { SvgIconComponent } from './svg-icon/svg-icon.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   imports: [
@@ -54,7 +55,8 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
     BreadcrumbItemDirective,
     FileInputComponent,
     MenuComponent,
-    MenuItemComponent
+    MenuItemComponent,
+    NotFoundComponent
   ],
   exports: [
     CommonModule,
@@ -78,7 +80,8 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
     BreadcrumbItemDirective,
     FileInputComponent,
     MenuComponent,
-    MenuItemComponent
+    MenuItemComponent,
+    NotFoundComponent
   ],
   providers: [
     DatePipe,
