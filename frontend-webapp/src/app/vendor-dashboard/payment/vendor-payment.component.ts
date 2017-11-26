@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CreditCard, VendorPaymentService } from './vendor-payment.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { CreditCard } from './vendor-payment.service';
 
 @Component({
   selector: 'app-vendor-payment',
@@ -8,13 +10,32 @@ import { CreditCard, VendorPaymentService } from './vendor-payment.service';
 })
 export class VendorPaymentComponent implements OnInit {
   creditCards: CreditCard;
+  addCreditCardForm: FormGroup;
+  isShowAddCreditCard = false;
 
   constructor(
-    private vendorPaymentService: VendorPaymentService
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.vendorPaymentService.getCreditCards$.subscribe(data => this.creditCards = data);
+    this.route.data.subscribe(data => {
+      this.creditCards = data.creditCards;
+    });
+
+    this.addCreditCardForm = new FormGroup(
+      {
+        cardNumber: new FormControl('', [Validators.required]),
+        cardHolderName: new FormControl('', [Validators.required]),
+        type: new FormControl('', [Validators.required]),
+        expiryDate: new FormControl(null, [Validators.required]),
+        verificationNumber: new FormControl(null, [Validators.required])
+      },
+      { updateOn: 'blur' }
+    );
+  }
+
+  showAddCreditCard() {
+    this.isShowAddCreditCard = true;
   }
 
 }

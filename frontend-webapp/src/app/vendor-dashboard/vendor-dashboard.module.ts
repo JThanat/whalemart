@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../shared/shared.module';
+import { VendorPaymentResolver } from './payment/vendor-payment-resolver.service';
 import { VendorPaymentComponent } from './payment/vendor-payment.component';
 import { VendorPaymentService } from './payment/vendor-payment.service';
 import { VendorProductComponent } from './product/vendor-product.component';
@@ -24,6 +25,7 @@ import { VendorDashboardComponent } from './vendor-dashboard.component';
   ],
   providers: [
     VendorProfileService,
+    VendorPaymentResolver,
     VendorProfileResolver,
     VendorProductService,
     VendorPaymentService

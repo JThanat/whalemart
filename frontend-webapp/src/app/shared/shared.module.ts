@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 
 import { BreadcrumbItemDirective } from './breadcrumb/breadcrumb-item.directive';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { CreditCardPipe } from './credit-card/credit-card.pipe';
 import { DateRangeInputDirective } from './date-range/date-range-input.directive';
 import { DateRangePipe } from './date-range/date-range.pipe';
 import { FileInputComponent } from './file-input/file-input.component';
@@ -56,7 +57,8 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
     FileInputComponent,
     MenuComponent,
     MenuItemComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    CreditCardPipe
   ],
   exports: [
     CommonModule,
@@ -81,11 +83,13 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
     FileInputComponent,
     MenuComponent,
     MenuItemComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    CreditCardPipe
   ],
   providers: [
     DatePipe,
     DateRangePipe,
+    CreditCardPipe,
     { provide: LOCALE_ID, useValue: 'th' }
   ]
 })

@@ -13,7 +13,7 @@ export interface CreditCard {
   expiryDate: Date;
 }
 
-interface CreditCardResponse {
+export interface CreditCardResponse {
   card_number: string;
   card_holder_name: string;
   type: number;
