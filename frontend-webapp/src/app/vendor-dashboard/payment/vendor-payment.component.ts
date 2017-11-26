@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { AlertService } from '../../core/alert/alert.service';
 import {
   CreditCard,
   CreditCardRequest,
@@ -19,7 +20,8 @@ export class VendorPaymentComponent implements OnInit {
 
   constructor(
     private vendorPaymentService: VendorPaymentService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private alert: AlertService
   ) {}
 
   ngOnInit() {
@@ -29,11 +31,17 @@ export class VendorPaymentComponent implements OnInit {
 
     this.addCreditCardForm = new FormGroup(
       {
-        cardNumber: new FormControl('', [Validators.required]),
+        cardNumber: new FormControl('', [
+          Validators.required,
+          Validators.pattern(/^\d{16}$/)
+        ]),
         cardHolderName: new FormControl('', [Validators.required]),
         type: new FormControl('', [Validators.required]),
         expiryDate: new FormControl(null, [Validators.required]),
-        verificationNumber: new FormControl(null, [Validators.required])
+        verificationNo: new FormControl(null, [
+          Validators.required,
+          Validators.pattern(/^\d{3}$/)
+        ])
       },
       { updateOn: 'blur' }
     );
@@ -43,7 +51,14 @@ export class VendorPaymentComponent implements OnInit {
     this.isShowAddCreditCard = true;
   }
 
-  addCreditCard(creditCard: CreditCard) {
+  addCreditCard() {
+    if (!this.addCreditCardForm.valid) {
+      return;
+    }
+
+    this.addCreditCardForm.disable();
+
+    const creditCard = this.addCreditCardForm.value;
     // TODO: Change expiry_date to input from date picker
     const creditCardReq: CreditCardRequest = {
       card_number: creditCard.cardNumber,
@@ -52,8 +67,13 @@ export class VendorPaymentComponent implements OnInit {
       expiry_date: new Date().toISOString().substring(0, 10),
       verification_no: creditCard.verificationNo
     };
+    console.log(creditCard, creditCardReq);
     this.vendorPaymentService.addCreditCard$(creditCardReq).subscribe(data => {
+      this.addCreditCardForm.enable();
       this.creditCards = data;
+    }, err => {
+      this.addCreditCardForm.enable();
+      this.alert.show({ message: 'เกิดข้อผิดพลาด', type: 'danger' });
     });
   }
 

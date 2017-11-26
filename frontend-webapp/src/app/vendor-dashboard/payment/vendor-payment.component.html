@@ -16,7 +16,7 @@
             <div class="card-type">{{ card.type == 'master' ? 'Master Card' : 'Visa Card' }}</div>
           </div>
           <div class="ml-auto p-3">
-            <button class="btn btn-danger">ลบ</button>
+            <button class="btn btn-danger" (click)="deleteCreditCard(card)">ลบ</button>
           </div>
         </div>
       </div>
@@ -34,6 +34,9 @@
               <input appInput type="text" class="form-control" formControlName="cardNumber" placeholder="1234123412341234">
               <app-input-error *ngIf="addCreditCardForm.controls['cardNumber'].hasError('required')">
                 กรุณากรอกบัตรเครดิต
+              </app-input-error>
+              <app-input-error *ngIf="addCreditCardForm.controls['cardNumber'].hasError('pattern')">
+                บัตรเครดิตจะต้องเป็นเลข 16 หลัก ไม่มีขีด
               </app-input-error>
             </app-input-group>
           </div>
@@ -59,9 +62,12 @@
           </div>
           <div class="col-sm-6">
             <app-input-group label="รหัสยืนยัน (CSV)">
-              <input appInput type="text" class="form-control" formControlName="verificationNumber" placeholder="234">
-              <app-input-error *ngIf="addCreditCardForm.controls['verificationNumber'].hasError('required')">
-                กรุณากรอกรหัสยืนยัน
+              <input appInput type="text" class="form-control" formControlName="verificationNo" placeholder="234">
+              <app-input-error *ngIf="addCreditCardForm.controls['verificationNo'].hasError('required')">
+                กรุณากรอกเลข CSV
+              </app-input-error>
+              <app-input-error *ngIf="addCreditCardForm.controls['verificationNo'].hasError('pattern')">
+                เลข CSV จะต้องประกอบด้วย 3 ตัวเท่านั้น
               </app-input-error>
             </app-input-group>
           </div>

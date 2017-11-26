@@ -15,19 +15,19 @@ export interface CreditCard {
   expiryDate: Date;
 }
 
-export interface CreditCardResponse {
+interface CreditCardBase {
   card_number: string;
   card_holder_name: string;
   type: number;
   expiry_date: string;
 }
 
-export interface CreditCardRequest extends CreditCardResponse {
-  verification_no: string;
+export interface CreditCardResponse extends CreditCardBase {
+  id: number;
 }
 
-export interface CreditCardRequestWithID extends CreditCardRequest {
-  id: number;
+export interface CreditCardRequest extends CreditCardBase {
+  verification_no: string;
 }
 
 class CreditCardError {}
@@ -54,6 +54,7 @@ export class VendorPaymentService {
         map(data => {
           return data.results.map(d => {
             return {
+              id: d.id,
               cardNumber: d.card_number,
               cardHolderName: d.card_holder_name,
               type: d.type === 1 ? 'master' : 'visa',
