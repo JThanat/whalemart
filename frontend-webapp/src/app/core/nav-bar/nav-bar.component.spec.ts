@@ -59,15 +59,15 @@ describe('NavBarComponent', () => {
     const toggleBtnElem = fixture.debugElement.query(By.css('.hamburger'));
     const toggleBtn = toggleBtnElem.nativeElement as HTMLButtonElement;
 
-    expect(fixture.debugElement.query(By.css('.menu-list')).classes['d-none']).toBe(true);
+    expect(fixture.debugElement.query(By.css('.menu-list')).classes.hidden).toBe(true);
     expect(component.isMenuOpened).toBe(false);
 
     toggleBtn.click();
-    expect(fixture.debugElement.query(By.css('.menu-list')).classes['d-none']).toBe(false);
+    expect(fixture.debugElement.query(By.css('.menu-list')).classes.hidden).toBe(false);
     expect(component.isMenuOpened).toBe(true);
 
     toggleBtn.click();
-    expect(fixture.debugElement.query(By.css('.menu-list')).classes['d-none']).toBe(true);
+    expect(fixture.debugElement.query(By.css('.menu-list')).classes.hidden).toBe(true);
     expect(component.isMenuOpened).toBe(false);
   });
 });
