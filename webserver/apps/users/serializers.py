@@ -68,12 +68,7 @@ class UserSerializer(serializers.ModelSerializer):
         }
 
     def get_is_lessor(self, obj):
-        try:
-            if obj.lessor:
-                return True
-        except Lessor.DoesNotExist:
-            pass
-        return False
+        return Lessor.objects.filter(user=obj).exists()
 
 
 def get_facebook_id(facebook_token):
