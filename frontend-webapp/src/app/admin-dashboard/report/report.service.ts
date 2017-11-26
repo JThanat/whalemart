@@ -5,7 +5,6 @@ import { Observable } from 'rxjs/Observable';
 import { _throw as observableThrow } from 'rxjs/observable/throw';
 import { catchError, map } from 'rxjs/operators';
 
-
 export interface Report {
   report_content: string;
   time_stamp: Date;
@@ -23,8 +22,7 @@ interface ReportServerResponse {
 export class ReportError {}
 @Injectable()
 export class ReportService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
   getReportList(): Observable<Report[]> {
     return this.http.get<ReportServerResponse>('/api/report/').pipe(
       map(data => {
