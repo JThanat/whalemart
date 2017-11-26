@@ -1,21 +1,21 @@
 <div class="container">
-  <ng-container *ngIf="receipts">
+  <ng-container *ngIf="(receipts$ | async) as receipts">
     <div *ngFor="let receipt of receipts" class="receipt-item">
       <div class="row border-bottom-0">
         <div class="col-4">
-          <img width="100%"  [src]="receipt.profileImage">
+          <img width="100%"  [src]="receipt.receipt_image">
         </div>
         <div class="col-8">
           <dl>
             <dt>ID</dt>
             <dd>{{ receipt.id }}</dd>
             <dt>Payment date</dt>
-            <dd>{{ receipt.date }}</dd>
+            <dd>{{ receipt.payment_date }}</dd>
             <dt>Payment amount</dt>
             <dd>{{ receipt.amount }}</dd>
           </dl>
-          <button class="btn btn-outline-success">Accept</button>
-          <button class="btn btn-outline-danger">Reject</button>
+          <button class="btn btn-outline-success"  >Accept</button>
+          <button class="btn btn-outline-danger"  >Reject</button>
         </div>
         <hr width="100%">
       </div>
