@@ -14,5 +14,11 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    .topic {
+      @include font-family(heading);
+      @include font-weight(bold);
+      color: $primary;
+      font-size: 1.1rem;
+    }
   }
 }
