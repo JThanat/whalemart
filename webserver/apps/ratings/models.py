@@ -1,6 +1,7 @@
 from django.db import models
 from apps.markets.models import Market
 from apps.users.models import User
+from apps.lessors.models import Lessor
 
 class Rating(models.Model):
     rating_score = models.IntegerField(verbose_name='Rating Score')
@@ -17,6 +18,15 @@ class Rating(models.Model):
         on_delete=models.CASCADE,
         verbose_name='Market',
     )
+
+    lessor = models.ForeignKey(
+        Lessor,
+        on_delete=models.CASCADE,
+        verbose_name='Lessor',
+    )
+
+    class Meta:
+        unique_together = (('user', 'market'),)
 
     def __str__(self):
         return str(self.rating_score)

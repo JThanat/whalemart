@@ -1,6 +1,7 @@
 from django.db import models
 from apps.markets.models import Market
 from apps.users.models import User
+from apps.lessors.models import Lessor
 
 class Report(models.Model):
     report_content = models.CharField(verbose_name='Report Content', max_length=500)

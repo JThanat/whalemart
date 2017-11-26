@@ -6,10 +6,12 @@ from .models import Rating
 class RatingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rating
-        fields = ('rating_score', 'time_stamp', 'user', 'market')
-        extra_kwargs = {
-            'user': {'required': False},
-        }
+        fields = ('rating_score', 'time_stamp', 'lessor', 'market')
+
+    def create(self, validated_data):
+        validated_data['user'] = self.context.get('request').user
+        rating = Rating.objects.create(**validated_data)
+        return rating
 
     def validate_rating_score(self, data):
         if data < 1 or data > 5:
