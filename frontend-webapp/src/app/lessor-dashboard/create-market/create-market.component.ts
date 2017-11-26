@@ -1,15 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  AbstractControl,
-  FormArray,
-  FormControl,
-  FormGroup,
-  ValidatorFn,
-  Validators
-} from '@angular/forms';
+import { ValidatorFn } from '@angular/forms';
+import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
+import { AlertService } from '../../core/alert/alert.service';
 import { DateRange } from '../../core/utils/date-range.service';
-import { TimeService } from '../../core/utils/time.service';
 import { CreateMarketService } from './create-market.service';
 
 interface ValidCreateMarketFormValue {
@@ -53,7 +48,11 @@ export class CreateMarketComponent implements OnInit {
   providedAccessoriesForm: FormArray;
   boothsForm: FormArray;
 
-  constructor(private createMarketService: CreateMarketService, private timeService: TimeService) {}
+  constructor(
+    private createMarketService: CreateMarketService,
+    private alert: AlertService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.providedAccessoriesForm = new FormArray([]);
@@ -94,8 +93,6 @@ export class CreateMarketComponent implements OnInit {
     // Add initial controls
     this.addProvidedAccessory();
     this.addBooth();
-
-    this.prepopulateData();
   }
 
   addProvidedAccessory() {
@@ -129,7 +126,47 @@ export class CreateMarketComponent implements OnInit {
   }
 
   createMarket() {
-    console.log(this.createMarketForm.value as ValidCreateMarketFormValue);
+    if (!this.createMarketForm.valid) {
+      return;
+    }
+
+    const value = this.createMarketForm.value as ValidCreateMarketFormValue;
+
+    const [lat, lng] = value.locationLatLng.trim().split(',');
+
+    this.createMarketForm.disable();
+    this.createMarketService
+      .createMarket({
+        name: value.name,
+        caption: value.caption,
+        description: value.description,
+        dateRange: value.dateRange,
+        openingTime: value.openingTime,
+        closingTime: value.closingTime,
+        contactPersonFullname: value.contactPersonFullname,
+        contactPersonPhoneNumber: value.contactPersonPhoneNumber,
+        contactPersonEmail: value.contactPersonEmail,
+        location: value.location,
+        locationLatLng: {
+          latitude: Number(lat),
+          longitude: Number(lng)
+        },
+        termsAndCondition: value.termsAndCondition,
+        depositPaymentDue: value.depositPaymentDue,
+        fullPaymentDue: value.fullPaymentDue,
+        reservationDue: value.reservationDue,
+        estimateVisitor: Number(value.estimateVisitor),
+        layoutPhoto: value.layoutPhoto[0],
+        providedAccessories: value.providedAccessories,
+        coverPhoto: value.coverPhoto[0],
+        scenePhotos: value.scenePhotos,
+        tags: this.createMarketService.normalizeTags(value.tags),
+        booths: value.booths
+      })
+      .subscribe(newMarketId => {
+        this.alert.show({ message: 'สร้างตลาดสำเร็จ', type: 'success' });
+        this.router.navigate(['market', newMarketId]);
+      });
   }
 
   private validateBoothNames: ValidatorFn = (c: AbstractControl) => {
@@ -145,44 +182,5 @@ export class CreateMarketComponent implements OnInit {
     }
 
     return null;
-  }
-
-  private prepopulateData() {
-    setTimeout(() => {
-      // tslint:disable:max-line-length
-      this.createMarketForm.patchValue({
-        name: 'เอเชียทีค',
-        caption: 'แหล่งท่องเที่ยวและช้อปปิ้งสไตล์ริมแม่น้ำเจ้าพระยาแห่งแรก',
-        description:
-          'แลนด์มาร์คใหม่ล่าสุดของกรุงเทพฯ กับบรรยากาศร่วมสมัย ผสมกลิ่นอายความเป็นตะวันออกและตะวันตกของมหานครแห่งสายน้ำเจ้าพระยา เเนวความคิดในการออกแบบที่นี่ เป็นการผสมผสานของเก่าที่เคยเป็นอาคารโกดังสินค้า ให้กลายมาเป็นแหล่งชอปปิ้งภายใต้สถาปัตยกรรมสมัย ร.5 ได้อย่างลงตัว',
-        dateRange: {
-          start: new Date('2018-05-14T00:00:00Z'),
-          end: new Date('2018-06-27T00:00:00Z')
-        },
-        openingTime: this.timeService.convertToDate('15:00:00'),
-        closingTime: this.timeService.convertToDate('15:00:00'),
-        contactPersonFullname: 'กิจกร โอชาร',
-        contactPersonPhoneNumber: '0819863257',
-        contactPersonEmail: 'admin@ASIATIQUE.com',
-        location: 'พระราม 3 กทม',
-        locationLatLng: '13.737038, 100.598623',
-        termsAndCondition: `1. ห้ามจำหน่ายเครื่องดื่มแอลกอฮอล์ในพื้นที่ก่อนได้รับอนุญาต หากพบเห็นจะขอยึดสินค้าไว้
-และได้รับใบเตือน 1 ครั้ง
-
-2. รองพื้นบูธด้วยไวนิล เพื่อป้องกันความเสียหาย เช่น คราบน้ำมันรอยไหม้เป็นต้น และต้องทา
-การล้าง หรือขัดพื้น หลังจากทำการขายเสร็จสิ้นในวันสุดท้าย หากพื้นที่ในบูธสกปรก จะมี
-ค่าปรับเพิ่ม 1,000 บาท
-
-3. การทิ้งน้ำและขยะลงในถุงขยะก่อนนำไปทิ้งที่จุดโหลดขยะของศูนย์หากไม่นำไปทิ้งที่จุดตาม
-กำหนดจะได้รับใบเตือน 1 ครั้ง
-`,
-        depositPaymentDue: new Date('2018-05-02T00:00:00'),
-        fullPaymentDue: new Date('2018-05-05T00:00:00'),
-        reservationDue: new Date('2018-04-28T00:00:00'),
-        estimateVisitor: '65450',
-        tags: 'Night, Day'
-      });
-      // tslint:enable:max-line-length
-    }, 100);
-  }
+  };
 }
