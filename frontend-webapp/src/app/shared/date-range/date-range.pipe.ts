@@ -10,8 +10,8 @@ export class DateRangePipe implements PipeTransform {
   transform(value: Date[], args?: any): string | null {
     const [startDate, endDate] = value;
 
-    const startDay: number = startDate.getDay();
-    const endDay: number = endDate.getDay();
+    const startDay: number = startDate.getDate();
+    const endDay: number = endDate.getDate();
     const startMonth: number = startDate.getMonth();
     const endMonth: number = endDate.getMonth();
     const startYear: number = startDate.getFullYear();

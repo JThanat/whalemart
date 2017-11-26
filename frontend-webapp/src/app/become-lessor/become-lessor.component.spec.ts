@@ -2,6 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs/Observable';
 import { of as observableOf } from 'rxjs/observable/of';
 
@@ -14,33 +15,37 @@ export class MockBecomeLessorService {
   checkLessorStatus(): Observable<LessorStatus> {
     return observableOf('is_lessor' as LessorStatus);
   }
-  becomeLessor(lessorParams: any): Observable<boolean> { return observableOf(true); }
+  becomeLessor(lessorParams: any): Observable<boolean> {
+    return observableOf(true);
+  }
 }
 
 describe('BecomeLessorComponent', () => {
   let component: BecomeLessorComponent;
   let fixture: ComponentFixture<BecomeLessorComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      declarations: [BecomeLessorComponent],
-      schemas: [NO_ERRORS_SCHEMA],
-      providers: [
-        { provide: BecomeLessorService, useClass: MockBecomeLessorService },
-        { provide: AlertService, useValue: {} },
-        { provide: UserService, useValue: {} },
-        {
-          provide: ActivatedRoute, useValue: {
-            data: observableOf({
-              lessorStatus: 'is_lessor'
-            })
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        imports: [HttpClientTestingModule, RouterTestingModule],
+        declarations: [BecomeLessorComponent],
+        schemas: [NO_ERRORS_SCHEMA],
+        providers: [
+          { provide: BecomeLessorService, useClass: MockBecomeLessorService },
+          { provide: AlertService, useValue: {} },
+          { provide: UserService, useValue: {} },
+          {
+            provide: ActivatedRoute,
+            useValue: {
+              data: observableOf({
+                lessorStatus: 'is_lessor'
+              })
+            }
           }
-        }
-      ]
+        ]
+      }).compileComponents();
     })
-      .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(BecomeLessorComponent);
