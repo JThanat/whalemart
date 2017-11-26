@@ -1,14 +1,14 @@
+from django.contrib import auth
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import check_password
-from django.contrib import auth
 from rest_framework import viewsets, mixins, status
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.decorators import api_view
 
 from apps.commons.choices import ReservationStatus
+from apps.lessors.models import Lessor
 from .serializers import RegistrationSerializer, UserSerializer, CreditCardSerializer, get_facebook_id
-from .models import CreditCard
 
 User = get_user_model()
 
@@ -52,6 +52,7 @@ class ValidateUserEmailView(APIView):
     """
     API endpoint that allows email to be checked before created
     """
+
     def get(self, request, *args, **kwargs):
         username = request.query_params.get('email', None)
 
@@ -73,7 +74,11 @@ class CreditCardView(viewsets.ModelViewSet):
         return user.credit_cards.all()
 
 
-@api_view(['POST',])
+def is_lessor(user):
+    return Lessor.objects.filter(user=user).exists()
+
+
+@api_view(['POST', ])
 def login_username(request, *args, **kwargs):
     """
     ### Required
@@ -85,14 +90,16 @@ def login_username(request, *args, **kwargs):
         user = User.objects.get(username=username)
         if check_password(password, user.password):
             auth.login(request, user)
-            return Response({'first_name': user.first_name, 'last_name': user.last_name, 'email': user.email},
+            print("...")
+            return Response({'first_name': user.first_name, 'last_name': user.last_name, 'email': user.email,
+                             'is_lessor': is_lessor(user)},
                             status=status.HTTP_200_OK)
         return Response(status=status.HTTP_400_BAD_REQUEST)
     except User.DoesNotExist:
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['POST',])
+@api_view(['POST', ])
 def login_facebook(request, *args, **kwargs):
     """
     ### Required
@@ -104,7 +111,8 @@ def login_facebook(request, *args, **kwargs):
         try:
             user = User.objects.get(facebook_id=response)
             auth.login(request, user)
-            return Response({'first_name': user.first_name, 'last_name': user.last_name, 'email': user.email},
+            return Response({'first_name': user.first_name, 'last_name': user.last_name, 'email': user.email,
+                             'is_lessor': is_lessor(user)},
                             status=status.HTTP_200_OK)
         except User.DoesNotExist:
             return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -112,7 +120,7 @@ def login_facebook(request, *args, **kwargs):
         return Response(response, status=response.status_code)
 
 
-@api_view(['POST',])
+@api_view(['POST', ])
 def logout(request, *args, **kwargs):
     auth.logout(request)
     return Response(status=status.HTTP_200_OK)
@@ -154,7 +162,7 @@ def get_current_user(request, *args, **kwargs):
         return Response(UserSerializer(user).data)
 
 
-@api_view(['GET',])
+@api_view(['GET', ])
 def get_reserved_markets(request, *args, **kwargs):
     """
     `reservation_status`:\n
