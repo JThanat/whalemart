@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Receipt, ReceiptService } from './receipt.service';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-admin-verify-receipt',
@@ -20,8 +19,8 @@ export class AdminVerifyReceiptComponent implements OnInit {
     });
 
   }
-  removeReceipt(){
-
+  removeReceipt(id: number, status: number ) {
+    this.receipts$ = this.receipts$.filter(e => e.id !== id);
   }
 
 }

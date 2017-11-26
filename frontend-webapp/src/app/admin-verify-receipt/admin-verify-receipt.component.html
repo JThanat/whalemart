@@ -14,8 +14,8 @@
             <dt>Payment amount</dt>
             <dd>{{ receipt.amount }}</dd>
           </dl>
-          <button class="btn btn-outline-success"  >Accept</button>
-          <button class="btn btn-outline-danger"  >Reject</button>
+          <button class="btn btn-outline-success " (click)="removeReceipt(receipt.id, 2)" >Accept</button>
+          <button class="btn btn-outline-danger"  (click)="removeReceipt(receipt.id, 3)">Reject</button>
         </div>
         <hr width="100%">
       </div>
