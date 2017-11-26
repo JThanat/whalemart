@@ -8,5 +8,6 @@ import { Market } from '../../core/market/market.service';
   styleUrls: ['./market.component.scss']
 })
 export class MarketComponent {
+  @Input() marketRouterLink: any[] | string;
   @Input() market: Market;
 }

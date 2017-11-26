@@ -21,6 +21,7 @@ import { InputDirective } from './input/input.directive';
 import { MarketComponent } from './market/market.component';
 import { MenuItemComponent } from './menu/menu-item.component';
 import { MenuComponent } from './menu/menu.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { SubNavBarDirective } from './sub-nav-bar/sub-nav-bar.directive';
 import { SvgIconComponent } from './svg-icon/svg-icon.component';
@@ -54,7 +55,8 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
     BreadcrumbItemDirective,
     FileInputComponent,
     MenuComponent,
-    MenuItemComponent
+    MenuItemComponent,
+    NotFoundComponent
   ],
   exports: [
     CommonModule,
@@ -78,7 +80,8 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
     BreadcrumbItemDirective,
     FileInputComponent,
     MenuComponent,
-    MenuItemComponent
+    MenuItemComponent,
+    NotFoundComponent
   ],
   providers: [
     DatePipe,

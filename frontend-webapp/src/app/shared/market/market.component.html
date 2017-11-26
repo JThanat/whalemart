@@ -1,4 +1,4 @@
-<a [routerLink]="['/market', market.id]" class="market">
+<a [routerLink]="marketRouterLink || ['/market', market.id]" class="market">
   <div class="img-container" [style.backgroundImage]="'url(' + market.imageURL + ')'">
     <div *ngIf="market.expiryDays" class="expire-note">หมดเขตจองในอีก {{ market.expiryDays }} วัน</div>
   </div>
