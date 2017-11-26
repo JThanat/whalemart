@@ -1,4 +1,13 @@
 <button type="button" class="btn btn-outline-primary" (click)="fileInput.click()">
-  {{ (fileList?.length === 1) ? fileList[0].name : label }}
+  <ng-container *ngIf="!fileList || fileList.length === 0">
+    {{ label }}
+  </ng-container>
+  <ng-container *ngIf="fileList?.length === 1">
+    {{ fileList[0].name }}
+  </ng-container>
+  <ng-container *ngIf="fileList?.length > 1">
+    {{ fileList.length }} ไฟล์
+  </ng-container>
 </button>
-<input #fileInput type="file" (change)="updateInputFile($event)" />
+
+<input #fileInput type="file" (change)="updateInputFile($event)" [multiple]="allowMultipleFiles">
