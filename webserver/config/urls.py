@@ -73,7 +73,7 @@ urlpatterns = [
     url(r'^current-user/', user_views.get_current_user),
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^reservation-status/', user_views.get_reserved_markets),
+    url(r'^reservation-status/', reservation_views.get_reserved_markets),
     url(r'^approve-reservation/', reservation_views.approve_booths),
     # JWT
     url(r'^api-token-auth/', obtain_jwt_token),
