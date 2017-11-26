@@ -14,7 +14,7 @@ User = get_user_model()
 class CreditCardSerializer(serializers.ModelSerializer):
     class Meta:
         model = CreditCard
-        fields = ('id', 'card_number', 'card_holder_name', 'type', 'expiry_date', 'verification_no')
+        fields = ('id', 'card_number', 'card_holder_name', 'type', 'expiry_month', 'expiry_year', 'verification_no')
 
     def create(self, validated_data):
         user = self.context['request'].user

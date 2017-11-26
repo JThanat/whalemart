@@ -12,14 +12,15 @@ export interface CreditCard {
   cardHolderName: string;
   verificationNo: string;
   type: CreditCardType;
-  expiryDate: Date;
+  expiryDate: string;
 }
 
 interface CreditCardBase {
   card_number: string;
   card_holder_name: string;
   type: number;
-  expiry_date: string;
+  expiry_month: string;
+  expiry_year: string;
 }
 
 export interface CreditCardResponse extends CreditCardBase {
@@ -58,7 +59,7 @@ export class VendorPaymentService {
               cardNumber: d.card_number,
               cardHolderName: d.card_holder_name,
               type: d.type === 1 ? 'master' : 'visa',
-              expiryDate: new Date(d.expiry_date)
+              expiryDate: d.expiry_month + '/' + d.expiry_year
             };
           });
         }),

@@ -37,7 +37,7 @@ export class VendorPaymentComponent implements OnInit {
         ]),
         cardHolderName: new FormControl('', [Validators.required]),
         type: new FormControl('', [Validators.required]),
-        expiryDate: new FormControl(null, [Validators.required]),
+        expiryDate: new FormControl('', [Validators.required]),
         verificationNo: new FormControl(null, [
           Validators.required,
           Validators.pattern(/^\d{3}$/)
@@ -59,12 +59,13 @@ export class VendorPaymentComponent implements OnInit {
     this.addCreditCardForm.disable();
 
     const creditCard = this.addCreditCardForm.value;
-    // TODO: Change expiry_date to input from date picker
+    const [expiryMonth, expiryYear] = creditCard.expiryDate.split('/', 2);
     const creditCardReq: CreditCardRequest = {
       card_number: creditCard.cardNumber,
       card_holder_name: creditCard.cardHolderName,
       type: creditCard.type === 'master' ? 1 : 2,
-      expiry_date: new Date().toISOString().substring(0, 10),
+      expiry_month: expiryMonth,
+      expiry_year: expiryYear,
       verification_no: creditCard.verificationNo
     };
     console.log(creditCard, creditCardReq);
