@@ -17,6 +17,7 @@ import { InputModule } from './input/input.module';
 import { MarketComponent } from './market/market.component';
 import { MenuItemComponent } from './menu/menu-item.component';
 import { MenuComponent } from './menu/menu.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { SubNavBarDirective } from './sub-nav-bar/sub-nav-bar.directive';
 import { SvgIconComponent } from './svg-icon/svg-icon.component';
@@ -46,7 +47,8 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
     BreadcrumbComponent,
     BreadcrumbItemDirective,
     MenuComponent,
-    MenuItemComponent
+    MenuItemComponent,
+    NotFoundComponent
   ],
   exports: [
     CommonModule,
@@ -66,7 +68,8 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
     BreadcrumbItemDirective,
     MenuComponent,
     MenuItemComponent,
-    InputModule
+    InputModule,
+    NotFoundComponent
   ],
   providers: [DatePipe, DateRangePipe, { provide: LOCALE_ID, useValue: 'th' }]
 })

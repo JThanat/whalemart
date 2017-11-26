@@ -1,12 +1,12 @@
 <div class="row">
-  <div class="col-md-10">
+  <div class="offset-md-1 col-md-10">
     <h1>ข้อมูลส่วนตัว</h1>
 
     <form [formGroup]="vendorProfileForm" (submit)="updateProfile()">
       <div class="row mt-4">
         <div class="col-md-6">
-          <div>
-            <img class="profile-img img-fluid rounded d-block mx-auto" [src]="vendorProfile.profileImage">
+          <div class="profile-img-wrapper d-block mx-auto">
+            <img class="img-fluid rounded" [src]="vendorProfile.profileImage">
           </div>
           <div *ngIf="isEdit" class="mt-3">
             <div class="d-flex">
@@ -16,7 +16,7 @@
         </div>
         <div class="col-md-6">
           <ng-container *ngIf="!isEdit">
-            <dl>
+            <dl class="mt-3 mt-md-0">
               <dt>อีเมล</dt>
               <dd>{{ vendorProfile.email }}</dd>
               <dt>ชื่อจริง</dt>
@@ -68,5 +68,10 @@
         </div>
       </div>
     </form>
+
+    <!-- Vendor product section -->
+
+    <hr />
+    <app-vendor-product class="mt-5"></app-vendor-product>
   </div>
 </div>

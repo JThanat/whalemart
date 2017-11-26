@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-outline-primary" (click)="fileInput.click()">
+<button type="button" class="btn btn-outline-primary" (click)="fileInput.click()" [disabled]="disabled">
   <ng-container *ngIf="!fileList || fileList.length === 0">
     {{ label }}
   </ng-container>
@@ -10,4 +10,4 @@
   </ng-container>
 </button>
 
-<input #fileInput type="file" (change)="updateInputFile($event)" [multiple]="allowMultipleFiles">
+<input #fileInput type="file" (change)="updateInputFile($event)" [multiple]="allowMultipleFiles" [disabled]="disabled">
