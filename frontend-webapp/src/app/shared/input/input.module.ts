@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { DateInputDirective } from './date-time/date-input.directive';
 import { DateRangeInputDirective } from './date-time/date-range-input.directive';
+import { TimeInputDirective } from './date-time/time-input.directive';
 import { FileInputComponent } from './file/file-input.component';
 import { InputErrorComponent } from './input-error.component';
 import { InputGroupComponent } from './input-group.component';
@@ -13,6 +14,7 @@ import { InputDirective } from './input.directive';
   declarations: [
     DateInputDirective,
     DateRangeInputDirective,
+    TimeInputDirective,
     FileInputComponent,
     FileInputComponent,
     InputDirective,
@@ -22,6 +24,7 @@ import { InputDirective } from './input.directive';
   exports: [
     DateInputDirective,
     DateRangeInputDirective,
+    TimeInputDirective,
     FileInputComponent,
     FileInputComponent,
     InputDirective,
