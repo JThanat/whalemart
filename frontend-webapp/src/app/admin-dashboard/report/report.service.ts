@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { HttpClient } from '@angular/common/http/src/client';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { _throw as observableThrow } from 'rxjs/observable/throw';
@@ -9,9 +9,8 @@ import { catchError, map } from 'rxjs/operators';
 export interface Report {
   report_content: string;
   time_stamp: Date;
-  user: number;
-  market: number;
-  username: string;
+  user: string;
+  market: string;
 }
 
 interface ReportServerResponse {

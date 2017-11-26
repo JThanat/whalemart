@@ -1,3 +1,25 @@
-<p>
-  report works!
-</p>
+<ng-container *ngIf="(reports$ | async ) as reports">
+  <!-- <code><pre>{{reports | json}}</pre></code> -->
+    <div *ngFor="let report of reports" class="report-item">
+      <div class="row border-bottom-0">
+        <div class="card" class="col-8 offset-2 border">
+          <div class="card-body">
+            <h4 class="card-title">{{ report.market }}</h4>
+            <h6 class="card-subtitle mb-2 text-muted">{{ report.report_content }}</h6>
+            <p class="card-text">{{ report.user }}</p>
+          </div>
+        </div>
+        <hr width="100%">
+      </div>
+      
+    </div>
+    <ng-container *ngIf="reports$.length == 0">
+        <div class="my-5 text-center">
+          <h1 class="display-1">ไม่มีรายงาน</h1>
+          <p class="lead">เชิญไปทำหน้าที่อื่นต่อได้</p>
+        </div>
+      </ng-container>
+  </ng-container>
+  
+  
+      
