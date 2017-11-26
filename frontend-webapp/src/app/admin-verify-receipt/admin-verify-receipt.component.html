@@ -1,5 +1,5 @@
 <div class="container">
-  <ng-container *ngIf="(receipts$ | async) as receipts">
+  <ng-container *ngIf="(receipts$ ) as receipts">
     <div *ngFor="let receipt of receipts" class="receipt-item">
       <div class="row border-bottom-0">
         <div class="col-4">

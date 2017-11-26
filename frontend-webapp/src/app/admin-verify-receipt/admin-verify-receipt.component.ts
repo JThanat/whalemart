@@ -9,13 +9,18 @@ import { Observable } from 'rxjs/Observable';
 })
 export class AdminVerifyReceiptComponent implements OnInit {
 
-  receipts$: Observable < Receipt[]>;
+  receipts$: Receipt[];
 
   constructor(private receiptService: ReceiptService) { }
 
 
   ngOnInit() {
-    this.receipts$ = this.receiptService.getReceiptList();
+    this.receiptService.getReceiptList().subscribe(data =>{
+      this.receipts$ = data;
+    });
+
+  }
+  removeReceipt(){
 
   }
 
