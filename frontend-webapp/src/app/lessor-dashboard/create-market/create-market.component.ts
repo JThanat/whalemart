@@ -1,8 +1,47 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormArray,
+  FormControl,
+  FormGroup,
+  ValidatorFn,
+  Validators
+} from '@angular/forms';
 
+import { DateRange } from '../../core/utils/date-range.service';
 import { TimeService } from '../../core/utils/time.service';
 import { CreateMarketService } from './create-market.service';
+
+interface ValidCreateMarketFormValue {
+  name: string;
+  caption: string;
+  description: string;
+  dateRange: DateRange;
+  openingTime: Date;
+  closingTime: Date;
+  contactPersonFullname: string;
+  contactPersonPhoneNumber: string;
+  contactPersonEmail: string;
+  location: string;
+  locationLatLng: string;
+  termsAndCondition: string;
+  depositPaymentDue: Date;
+  fullPaymentDue: Date;
+  reservationDue: Date;
+  estimateVisitor: string;
+  layoutPhoto: FileList;
+  providedAccessories: {
+    name: string;
+    amount: string;
+  }[];
+  coverPhoto: FileList;
+  scenePhotos: FileList;
+  tags: string;
+  booths: {
+    name: string;
+    price: string;
+  }[];
+}
 
 @Component({
   selector: 'app-create-market',
@@ -11,10 +50,15 @@ import { CreateMarketService } from './create-market.service';
 })
 export class CreateMarketComponent implements OnInit {
   createMarketForm: FormGroup;
+  providedAccessoriesForm: FormArray;
+  boothsForm: FormArray;
 
   constructor(private createMarketService: CreateMarketService, private timeService: TimeService) {}
 
   ngOnInit() {
+    this.providedAccessoriesForm = new FormArray([]);
+    this.boothsForm = new FormArray([], [this.validateBoothNames]);
+
     this.createMarketForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.maxLength(100)]),
       caption: new FormControl('', [Validators.required]),
@@ -24,23 +68,86 @@ export class CreateMarketComponent implements OnInit {
       openingTime: new FormControl('', [Validators.required]),
       closingTime: new FormControl('', [Validators.required]),
       contactPersonFullname: new FormControl('', [Validators.required, Validators.maxLength(100)]),
-      contactPersonPhoneNumber: new FormControl('', [Validators.pattern(/^\+?\d{9,15}$/)]),
+      contactPersonPhoneNumber: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^\+?\d{9,15}$/)
+      ]),
       contactPersonEmail: new FormControl('', [Validators.email, Validators.maxLength(254)]),
       location: new FormControl('', [Validators.required, Validators.maxLength(200)]),
-      locationLatLng: new FormControl('', [Validators.pattern(/^-?\d+(\.\d+)?, -?\d+(\.\d+)?$/)]),
+      locationLatLng: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^-?\d+(\.\d+)?, -?\d+(\.\d+)?$/)
+      ]),
       termsAndCondition: new FormControl('', [Validators.required, Validators.maxLength(1000)]),
       depositPaymentDue: new FormControl(null, [Validators.required]),
       fullPaymentDue: new FormControl(null, [Validators.required]),
       reservationDue: new FormControl(null, [Validators.required]),
-      estimateVisitor: new FormControl('', [Validators.pattern(/^\d{1,10}$/)]),
+      estimateVisitor: new FormControl('', [Validators.required, Validators.pattern(/^\d{1,10}$/)]),
       layoutPhoto: new FormControl(null, [Validators.required]),
-      providedAccessories: new FormArray([]),
-      coverPhoto: new FormControl('', [Validators.required]),
-      scenePhotos: new FormControl('', [Validators.required]),
+      providedAccessories: this.providedAccessoriesForm,
+      coverPhoto: new FormControl(null, [Validators.required]),
+      scenePhotos: new FormControl(null, [Validators.required]),
       tags: new FormControl('', [this.createMarketService.tagsValidators]),
-      booths: new FormControl(null)
+      booths: this.boothsForm
     });
 
+    // Add initial controls
+    this.addProvidedAccessory();
+    this.addBooth();
+
+    this.prepopulateData();
+  }
+
+  addProvidedAccessory() {
+    this.providedAccessoriesForm.push(
+      new FormGroup({
+        name: new FormControl('', [Validators.required]),
+        amount: new FormControl('1', [Validators.required, Validators.pattern(/^\d+$/)])
+      })
+    );
+  }
+
+  removeProvidedAccessory(index: number) {
+    this.providedAccessoriesForm.removeAt(index);
+  }
+
+  addBooth() {
+    const nextBoothName = String('A' + (this.boothsForm.length + 1));
+    this.boothsForm.push(
+      new FormGroup({
+        name: new FormControl(nextBoothName, [
+          Validators.required,
+          Validators.pattern(/^[A-Za-z0-9]+$/)
+        ]),
+        price: new FormControl('100', [Validators.required, Validators.pattern(/^\d+$/)])
+      })
+    );
+  }
+
+  removeBooth(index: number) {
+    this.boothsForm.removeAt(index);
+  }
+
+  createMarket() {
+    console.log(this.createMarketForm.value as ValidCreateMarketFormValue);
+  }
+
+  private validateBoothNames: ValidatorFn = (c: AbstractControl) => {
+    const booths = (c as FormArray).value as { name: string }[];
+    const names = booths.map(booth => booth.name);
+
+    const nameChecker = new Set<string>();
+    for (const name of names) {
+      if (nameChecker.has(name)) {
+        return { boothName: name };
+      }
+      nameChecker.add(name);
+    }
+
+    return null;
+  }
+
+  private prepopulateData() {
     setTimeout(() => {
       // tslint:disable:max-line-length
       this.createMarketForm.patchValue({
@@ -77,9 +184,5 @@ export class CreateMarketComponent implements OnInit {
       });
       // tslint:enable:max-line-length
     }, 100);
-  }
-
-  createMarket() {
-    console.log(this.createMarketForm.value);
   }
 }

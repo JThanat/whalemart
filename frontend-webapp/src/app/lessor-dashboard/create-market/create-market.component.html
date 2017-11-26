@@ -1,6 +1,9 @@
 <div class="my-5">
   <h1>สร้างตลาด</h1>
+
   <form [formGroup]="createMarketForm" (submit)="createMarket()">
+    <h4>ข้อมูลทั่วไป</h4>
+
     <div class="row">
       <div class="col-12">
         <app-input-group label="ชื่อตลาด">
@@ -15,10 +18,10 @@
       </div>
 
       <div class="col-12">
-        <app-input-group label="คำบรรยายตลาด">
-          <input appInput type="text" class="form-control" placeholder="คำบรรยายตลาด" formControlName="caption" required>
+        <app-input-group label="สโลแกนของตลาด">
+          <input appInput type="text" class="form-control" placeholder="สโลแกนของตลาด" formControlName="caption" required>
           <app-input-error *ngIf="createMarketForm.get('caption')!.hasError('required')">
-            กรุณาระบุคำบรรยายตลาด
+            กรุณาระบุสโลแกนของตลาด
           </app-input-error>
         </app-input-group>
       </div>
@@ -74,6 +77,9 @@
       <div class="col-12 col-md-4">
         <app-input-group label="เบอร์โทรศัพท์ของผู้ติดต่อ">
           <input appInput type="text" class="form-control" placeholder="เบอร์โทรศัพท์ของผู้ติดต่อ" formControlName="contactPersonPhoneNumber" required>
+          <app-input-error *ngIf="createMarketForm.get('contactPersonPhoneNumber')!.hasError('required')">
+            กรุณาระบุเบอร์โทรศัพท์ของผู้ติดต่อ
+          </app-input-error>
           <app-input-error *ngIf="createMarketForm.get('contactPersonPhoneNumber')!.hasError('pattern')">
             เบอร์โทรศัพท์ต้องอยู่ในรูป 0812345678
           </app-input-error>
@@ -92,7 +98,7 @@
         </app-input-group>
       </div>
 
-      <div class="col-12">
+      <div class="col-12 col-md-6">
         <app-input-group label="ที่อยู่ของตลาด">
           <input appInput type="text" class="form-control" placeholder="ที่อยู่ของตลาด" formControlName="location" required>
           <app-input-error *ngIf="createMarketForm.get('location')!.hasError('required')">
@@ -104,9 +110,12 @@
         </app-input-group>
       </div>
 
-      <div class="col-12">
+      <div class="col-12 col-md-6">
         <app-input-group label="ตำแหน่งของตลาด">
           <input appInput type="text" class="form-control" placeholder="ตำแหน่งของตลาด" formControlName="locationLatLng" required>
+          <app-input-error *ngIf="createMarketForm.get('locationLatLng')!.hasError('required')">
+            กรุณาระบุตำแหน่งของตลาด
+          </app-input-error>
           <app-input-error *ngIf="createMarketForm.get('locationLatLng')!.hasError('pattern')">
             กรุณากรอกตำแหน่งของตลาดในรูปแบบ 123.45, 67.89
           </app-input-error>
@@ -126,10 +135,19 @@
       </div>
 
       <div class="col-12 col-md-4">
-        <app-input-group label="วันสุดท้ายของการโอนเงิน">
-          <input appInput appDateInput type="text" class="form-control" placeholder="วันสุดท้ายของการโอนเงิน" formControlName="depositPaymentDue" required>
+        <app-input-group label="วันสุดท้ายของการจอง">
+          <input appInput appDateInput type="text" class="form-control" placeholder="วันสุดท้ายของการจอง" formControlName="reservationDue" required>
+          <app-input-error *ngIf="createMarketForm.get('reservationDue')!.hasError('required')">
+            กรุณาระบุวันสุดท้ายของการจอง
+          </app-input-error>
+        </app-input-group>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <app-input-group label="วันสุดท้ายของการจ่ายค่ามัดจำ">
+          <input appInput appDateInput type="text" class="form-control" placeholder="วันสุดท้ายของการจ่ายค่ามัดจำ" formControlName="depositPaymentDue" required>
           <app-input-error *ngIf="createMarketForm.get('depositPaymentDue')!.hasError('required')">
-            กรุณาระบุวันสุดท้ายของการโอนเงิน
+            วันสุดท้ายของการจ่ายค่ามัดจำ
           </app-input-error>
         </app-input-group>
       </div>
@@ -139,15 +157,6 @@
           <input appInput appDateInput type="text" class="form-control" placeholder="วันสุดท้ายของการจ่ายเงิน" formControlName="fullPaymentDue" required>
           <app-input-error *ngIf="createMarketForm.get('fullPaymentDue')!.hasError('required')">
             กรุณาระบุวันสุดท้ายของการจ่ายเงิน
-          </app-input-error>
-        </app-input-group>
-      </div>
-
-      <div class="col-12 col-md-4">
-        <app-input-group label="วันสุดท้ายของการจอง">
-          <input appInput appDateInput type="text" class="form-control" placeholder="วันสุดท้ายของการจอง" formControlName="reservationDue" required>
-          <app-input-error *ngIf="createMarketForm.get('reservationDue')!.hasError('required')">
-            กรุณาระบุวันสุดท้ายของการจอง
           </app-input-error>
         </app-input-group>
       </div>
@@ -202,6 +211,92 @@
       </div>
     </div>
 
-    <button class="btn btn-primary btn-lg" type="submit" [disabled]="createMarketForm.disabled">สร้างตลาด</button>
+    <hr>
+
+    <div class="clearfix mb-3">
+      <button type="button" class="btn btn-outline-primary float-right" (click)="addProvidedAccessory()">เพิ่ม</button>
+      <h4>สิ่งที่ตลาดจัดเตรียมให้</h4>
+    </div>
+
+    <div class="row" formArrayName="providedAccessories">
+      <div class="col-12 col-md-6" *ngFor="let accessory of providedAccessoriesForm.controls; index as i" [formGroupName]="i">
+        <div class="row">
+          <div class="col-2">
+            <app-input-group label="ชิ้นที่">
+              <input appInput type="text" class="form-control" readonly [value]="i + 1">
+            </app-input-group>
+          </div>
+
+          <div class="col-5">
+            <app-input-group label="ชื่อของสิ่งของ">
+              <input appInput type="text" class="form-control" formControlName="name" required>
+              <app-input-error *ngIf="accessory.get('name')!.hasError('required')">
+                กรุณาระบุชื่อของสิ่งของ
+              </app-input-error>
+            </app-input-group>
+          </div>
+
+          <div class="col-3">
+            <app-input-group label="จำนวน">
+              <input appInput type="text" class="form-control" formControlName="amount" required>
+              <app-input-error *ngIf="accessory.get('amount')!.hasError('required')">
+                กรุณาระบุจำนวน
+              </app-input-error>
+              <app-input-error *ngIf="accessory.get('amount')!.hasError('pattern')">
+                กรุณาระบุจำนวนเป็นตัวเลขเท่านั้น
+              </app-input-error>
+            </app-input-group>
+          </div>
+
+          <div class="col-2">
+            <button type="button" class="btn btn-block btn-outline-danger btn-delete" (click)="removeProvidedAccessory(i)">ลบ</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="clearfix mb-3">
+      <button type="button" class="btn btn-outline-primary float-right" (click)="addBooth()">เพิ่ม</button>
+      <h4>บูธ</h4>
+    </div>
+
+    <div class="row" formArrayName="booths">
+      <div class="col-12 col-md-6 col-lg-4" *ngFor="let booth of boothsForm.controls; index as i" [formGroupName]="i">
+        <div class="row">
+          <div class="col-5">
+            <app-input-group label="รหัสบูธ">
+              <input appInput type="text" class="form-control" formControlName="name" required>
+              <app-input-error *ngIf="booth.get('name')!.hasError('required')">
+                กรุณาระบุรหัสบูธ
+              </app-input-error>
+              <app-input-error *ngIf="booth.get('name')!.hasError('pattern')">
+                กรุณาระบุรหัสบูธเป็นตัวอักษรภาษาอังกฤษหรือตัวเลขเท่านั้น
+              </app-input-error>
+            </app-input-group>
+          </div>
+
+          <div class="col-4">
+            <app-input-group label="ราคา (บาท)">
+              <input appInput type="text" class="form-control" formControlName="price" required>
+              <app-input-error *ngIf="booth.get('price')!.hasError('required')">
+                กรุณาระบุราคา
+              </app-input-error>
+              <app-input-error *ngIf="booth.get('price')!.hasError('pattern')">
+                กรุณาระบุราคาเป็นตัวเลขเท่านั้น
+              </app-input-error>
+            </app-input-group>
+          </div>
+
+          <div class="col-3">
+            <button type="button" class="btn btn-block btn-outline-danger btn-delete" (click)="removeBooth(i)">ลบ</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="booth-name-error" *ngIf="boothsForm.hasError('boothName')">มีรหัสบูธซ้ำกัน ({{boothsForm.getError('boothName')}})</div>
+
+    <button class="btn btn-primary btn-lg mt-5" type="submit" [disabled]="createMarketForm.disabled">สร้างตลาด</button>
   </form>
 </div>
