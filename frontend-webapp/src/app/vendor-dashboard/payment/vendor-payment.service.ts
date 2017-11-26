@@ -7,6 +7,7 @@ import { catchError, map } from 'rxjs/operators';
 export type CreditCardType = 'visa' | 'master';
 
 export interface CreditCard {
+  id: number;
   cardNumber: string;
   cardHolderName: string;
   type: CreditCardType;
@@ -21,6 +22,7 @@ export interface CreditCardResponse {
 }
 
 export interface CreditCardRequest extends CreditCardResponse {
+  id: number;
   verification_no: string;
 }
 

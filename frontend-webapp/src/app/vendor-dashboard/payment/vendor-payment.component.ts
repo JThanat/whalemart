@@ -38,4 +38,7 @@ export class VendorPaymentComponent implements OnInit {
     this.isShowAddCreditCard = true;
   }
 
+  addCreditCard() {
+    
+  }
 }
