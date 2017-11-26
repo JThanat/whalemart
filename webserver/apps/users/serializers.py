@@ -23,7 +23,7 @@ class CreditCardSerializer(serializers.ModelSerializer):
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
-    facebook_token = serializers.CharField(write_only=True)
+    facebook_token = serializers.CharField(write_only=True, required=False)
 
     class Meta:
         model = User

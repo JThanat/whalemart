@@ -7,8 +7,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from apps.commons.choices import ReservationStatus
-from apps.payments.models import Installment
 from apps.lessors.models import Lessor
+from apps.payments.models import Installment
 from .serializers import RegistrationSerializer, UserSerializer, CreditCardSerializer, get_facebook_id
 
 User = get_user_model()
@@ -91,7 +91,6 @@ def login_username(request, *args, **kwargs):
         user = User.objects.get(username=username)
         if check_password(password, user.password):
             auth.login(request, user)
-            print("...")
             return Response({'first_name': user.first_name, 'last_name': user.last_name, 'email': user.email,
                              'is_lessor': is_lessor(user)},
                             status=status.HTTP_200_OK)
