@@ -1,15 +1,17 @@
-<nav class="container navbar">
+<nav class="container navbar" [class.menu-opened]="isMenuOpened">
   <div class="main-nav">
     <a class="logo" routerLink="/">
       <img class="d-none d-lg-block" src="/assets/icons/whalemart-logo-with-name.svg" height="35">
       <img class="d-lg-none" src="/assets/icons/whalemart-logo.svg" height="35">
     </a>
 
-    <app-nav-bar-search-box *ngIf="isShowNavBarSearchBox()" @searchBoxIn></app-nav-bar-search-box>
+    <app-nav-bar-search-box [class.d-none]="isMenuOpened" *ngIf="isShowNavBarSearchBox()" @searchBoxIn></app-nav-bar-search-box>
 
-    <button type="button" class="hamburger d-md-none btn btn-outline-primary my-2 my-sm-0" (click)="toggleMenu()">เมนู</button>
+    <button type="button" class="hamburger d-md-none my-2 my-sm-0" [class.active]="isMenuOpened" (click)="toggleMenu()">
+      <span></span>
+    </button>
 
-    <div class="menu-list d-md-block" [class.d-none]="!isMenuOpened">
+    <div class="menu-list d-md-block" [class.hidden]="!isMenuOpened">
       <ul *ngIf="(userStatus | async) as status">
         <li class="nav-item active">
           <a class="nav-link" routerLink="become-lessor">ลงตลาดให้เช่า</a>
@@ -32,7 +34,7 @@
     </div>
   </div>
 
-  <div class="sub-nav" *ngIf="(getSubNavBarPortal() | async) as portal" @subNavIn>
+  <div class="sub-nav" [class.d-none]="isMenuOpened" *ngIf="(getSubNavBarPortal() | async) as portal" @subNavIn>
     <ng-container [cdkPortalOutlet]="portal"></ng-container>
   </div>
 </nav>

@@ -32,7 +32,7 @@ class ProduceViewSet(viewsets.ViewSet):
 
     def list(self, request):
         user = get_object_or_404(User, id=request.user.id)
-        products = Product.objects.filter(user=user)
+        products = Product.objects.filter(user=user).order_by('id')
         return Response(ProductSerializerWithoutUser(products, many=True).data)
 
     def retrieve(self, request, pk=None):

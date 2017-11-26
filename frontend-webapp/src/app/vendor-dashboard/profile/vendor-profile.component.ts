@@ -63,8 +63,8 @@ export class VendorProfileComponent implements OnInit {
       })
       .subscribe(
         () => {
-          this.vendorProfileForm.enable();
           this.alert.show({ message: 'อัพเดทเสร็จสมบูรณ์', type: 'success' });
+          location.reload();
         },
         err => {
           this.vendorProfileForm.enable();

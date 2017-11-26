@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../shared/shared.module';
+import { VendorProductComponent } from './product/vendor-product.component';
+import { VendorProductService } from './product/vendor-product.service';
 import { VendorProfileResolver } from './profile/vendor-profile-resolver.service';
 import { VendorProfileComponent } from './profile/vendor-profile.component';
 import { VendorProfileService } from './profile/vendor-profile.service';
@@ -14,11 +16,13 @@ import { VendorDashboardComponent } from './vendor-dashboard.component';
   ],
   declarations: [
     VendorProfileComponent,
-    VendorDashboardComponent
+    VendorDashboardComponent,
+    VendorProductComponent
   ],
   providers: [
     VendorProfileService,
-    VendorProfileResolver
+    VendorProfileResolver,
+    VendorProductService
   ]
 })
 export class VendorDashboardModule { }
