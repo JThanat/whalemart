@@ -11,7 +11,7 @@ import { Product, VendorProductService } from './vendor-product.service';
 })
 export class VendorProductComponent implements OnInit {
   products: Product[];
-  isShowAddProduct = true;
+  isShowAddProduct = false;
   addProductForm: FormGroup;
 
   constructor(
