@@ -10,8 +10,8 @@ const routes: Routes = [
     loadChildren: './feed/feed.module#FeedModule'
   },
   {
-    path: 'admin-verify',
-    loadChildren: './admin-verify-receipt/admin-verify-receipt.module#AdminVerifyReceiptModule',
+    path: 'admin',
+    loadChildren: './admin-dashboard/admin-dashboard.module#AdminDashboardModule'
   },
   {
     path: 'lessor',
