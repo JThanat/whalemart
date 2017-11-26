@@ -1,9 +1,9 @@
 @import '~styles/common';
 
-.vendor-bar {
+.admin-bar {
   display: flex;
 
-  .vendor-item {
+  .admin-item {
     @include font-family(heading);
     @include font-weight(regular);
     color: $dark-gray;
