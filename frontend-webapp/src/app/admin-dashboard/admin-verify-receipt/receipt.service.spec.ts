@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { inject, TestBed } from '@angular/core/testing';
 
 import { ReceiptService } from './receipt.service';
@@ -5,6 +6,7 @@ import { ReceiptService } from './receipt.service';
 describe('ReceiptService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
       providers: [ReceiptService]
     });
   });
