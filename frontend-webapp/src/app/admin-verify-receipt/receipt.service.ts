@@ -28,6 +28,14 @@ export class ReceiptService {
 
   constructor(private http: HttpClient) { }
 
+  verifyReceipt(id: number, verification_status: number): void {
+    const obj = {
+      verification_status: verification_status
+    };
+    this.http.patch('/api/verify-receipt/' + id + '/', obj).subscribe();
+  }
+
+
   getReceiptList(): Observable<Receipt[]> {
     return this.http.get<ReceiptServerResponse>('/api/verify-receipt/').pipe(
       map(data => {

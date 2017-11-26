@@ -14,12 +14,13 @@ export class AdminVerifyReceiptComponent implements OnInit {
 
 
   ngOnInit() {
-    this.receiptService.getReceiptList().subscribe(data =>{
+    this.receiptService.getReceiptList().subscribe(data => {
       this.receipts$ = data;
     });
 
   }
   removeReceipt(id: number, status: number ) {
+    this.receiptService.verifyReceipt(id, status);
     this.receipts$ = this.receipts$.filter(e => e.id !== id);
   }
 
