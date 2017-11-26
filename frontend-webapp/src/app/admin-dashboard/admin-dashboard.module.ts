@@ -5,13 +5,14 @@ import { AdminDashboardComponent } from './admin-dashboard.component';
 import { AdminVerifyReceiptComponent } from './admin-verify-receipt/admin-verify-receipt.component';
 import { ReceiptService } from './admin-verify-receipt/receipt.service';
 import { ReportComponent } from './report/report.component';
+import { ReportService } from './report/report.service';
 
 @NgModule({
   imports: [
     SharedModule,
     AdminDashboardRoutingModule
   ],
-  providers: [ReceiptService],
+  providers: [ReceiptService, ReportService],
   declarations: [AdminDashboardComponent, AdminVerifyReceiptComponent, ReportComponent]
 })
 export class AdminDashboardModule { }
