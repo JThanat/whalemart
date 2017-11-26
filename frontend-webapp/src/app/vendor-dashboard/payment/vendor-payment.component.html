@@ -1,3 +1,25 @@
-<p>
-  vendor-payment works!
-</p>
+<div class="row">
+  <div class="offset-md-1 col-md-10">
+    <h4>ข้อมูลการเงิน</h4>
+
+    <div *ngFor="let card of creditCards" class="payment-list">
+      <div class="mb-2">
+        <div class="d-flex flex-wrap align-items-center mt-3">
+          <div class="p-3">
+            <div class="thumb-img">
+              <img class="img-fluid" [src]="'/assets/images/payment/' + card.type + '.png'" />
+            </div>
+          </div>
+          <div class="p-2">
+            <div class="font-weight-bold">{{ card.cardNumber }}</div>
+            <div>{{ card.cardHolderName }}</div>
+            <div class="card-type">{{ card.type == 'master' ? 'Master Card' : 'Visa Card' }}</div>
+          </div>
+          <div class="ml-auto p-3">
+            <button class="btn btn-danger">ลบ</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

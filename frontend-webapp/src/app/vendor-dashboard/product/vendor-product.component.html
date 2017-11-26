@@ -3,8 +3,8 @@
 <div class="description">รายการสินค้าที่จะนำไปวางขายในตลาด</div>
 
 <div *ngFor="let product of products" class="product-list">
-  <div class="mb-2 mp-2">
-    <div class="d-flex align-items-center mt-3">
+  <div class="mb-2">
+    <div class="d-flex flex-wrap align-items-center mt-3">
       <div class="p-2">
         <div class="thumb-img">
           <img class="img-fluid" [src]="product.image" />
@@ -16,7 +16,7 @@
           <dd>{{ product.description }}</dd>
         </dl>
       </div>
-      <div class="ml-auto p-2">
+      <div class="ml-auto p-3">
         <button class="btn btn-danger" (click)="deleteProduct(product)">ลบ</button>
       </div>
     </div>
