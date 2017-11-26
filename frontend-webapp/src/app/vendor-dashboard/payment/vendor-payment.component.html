@@ -67,6 +67,7 @@
           </div>
           <div class="col-12">
             <app-input-group label="วันหมดอายุบัตร">
+              <!-- TODO: Change to date picker -->
               <input appInput type="text" class="form-control" formControlName="expiryDate" placeholder="2017-11-26">
               <app-input-error *ngIf="addCreditCardForm.controls['expiryDate'].hasError('required')">
                 กรุณากรอกวันหมดอายุบัตร

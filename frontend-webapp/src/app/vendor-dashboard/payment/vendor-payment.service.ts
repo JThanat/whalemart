@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { _throw as observableThrow } from 'rxjs/observable/throw';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, mergeMap } from 'rxjs/operators';
 
 export type CreditCardType = 'visa' | 'master';
 
@@ -10,6 +10,7 @@ export interface CreditCard {
   id: number;
   cardNumber: string;
   cardHolderName: string;
+  verificationNo: string;
   type: CreditCardType;
   expiryDate: Date;
 }
@@ -22,18 +23,18 @@ export interface CreditCardResponse {
 }
 
 export interface CreditCardRequest extends CreditCardResponse {
-  id: number;
   verification_no: string;
 }
 
-class CreditCardError { }
+export interface CreditCardRequestWithID extends CreditCardRequest {
+  id: number;
+}
+
+class CreditCardError {}
 
 @Injectable()
 export class VendorPaymentService {
-
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) {}
 
   get creditCardError() {
     return catchError((err: any) => {
@@ -47,18 +48,32 @@ export class VendorPaymentService {
   }
 
   get getCreditCards$(): Observable<CreditCard> {
-    return this.http.get<{ results: CreditCardResponse[] }>('/api/credit-card/').pipe(
-      map(data => {
-        return data.results.map(d => {
-          return {
-            cardNumber: d.card_number,
-            cardHolderName: d.card_holder_name,
-            type: (d.type === 1 ? 'master' : 'visa'),
-            expiryDate: new Date(d.expiry_date)
-          };
-        });
-      }),
-      this.creditCardError
-    );
+    return this.http
+      .get<{ results: CreditCardResponse[] }>('/api/credit-card/')
+      .pipe(
+        map(data => {
+          return data.results.map(d => {
+            return {
+              cardNumber: d.card_number,
+              cardHolderName: d.card_holder_name,
+              type: d.type === 1 ? 'master' : 'visa',
+              expiryDate: new Date(d.expiry_date)
+            };
+          });
+        }),
+        this.creditCardError
+      );
+  }
+
+  deleteCreditCard$(id: number) {
+    return this.http
+      .delete(`/api/credit-card/${id}/`)
+      .pipe(mergeMap(() => this.getCreditCards$), this.creditCardError);
+  }
+
+  addCreditCard$(creditCard: CreditCardRequest) {
+    return this.http
+      .post<CreditCardRequest>('/api/credit-card/', creditCard)
+      .pipe(mergeMap(() => this.getCreditCards$), this.creditCardError);
   }
 }

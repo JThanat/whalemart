@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { CreditCard } from './vendor-payment.service';
+import {
+  CreditCard,
+  CreditCardRequest,
+  VendorPaymentService
+} from './vendor-payment.service';
 
 @Component({
   selector: 'app-vendor-payment',
@@ -9,13 +13,14 @@ import { CreditCard } from './vendor-payment.service';
   styleUrls: ['./vendor-payment.component.scss']
 })
 export class VendorPaymentComponent implements OnInit {
-  creditCards: CreditCard;
+  creditCards: CreditCard[];
   addCreditCardForm: FormGroup;
   isShowAddCreditCard = false;
 
   constructor(
+    private vendorPaymentService: VendorPaymentService,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -38,7 +43,27 @@ export class VendorPaymentComponent implements OnInit {
     this.isShowAddCreditCard = true;
   }
 
-  addCreditCard() {
-    
+  addCreditCard(creditCard: CreditCard) {
+    // TODO: Change expiry_date to input from date picker
+    const creditCardReq: CreditCardRequest = {
+      card_number: creditCard.cardNumber,
+      card_holder_name: creditCard.cardHolderName,
+      type: creditCard.type === 'master' ? 1 : 2,
+      expiry_date: new Date().toISOString().substring(0, 10),
+      verification_no: creditCard.verificationNo
+    };
+    this.vendorPaymentService.addCreditCard$(creditCardReq).subscribe(data => {
+      this.creditCards = data;
+    });
+  }
+
+  deleteCreditCard(creditCard: CreditCard) {
+    if (confirm(`Are you sure to delete card ${creditCard.cardNumber}`)) {
+      this.vendorPaymentService
+        .deleteCreditCard$(creditCard.id)
+        .subscribe(data => {
+          this.creditCards = data;
+        });
+    }
   }
 }
