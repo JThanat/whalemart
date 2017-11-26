@@ -53,7 +53,6 @@ INSTALLED_APPS = [
     'apps.booths',
     'apps.reservations',
     'apps.payments',
-    'apps.admins',
     'apps.reports',
     'apps.ratings',
 ]
