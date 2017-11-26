@@ -1,1 +1,18 @@
 @import '~styles/common';
+
+.side-content {
+  position: sticky;
+  top: 5rem;
+}
+
+.info-container {
+  border: 1px solid $light-gray;
+  padding: map-get($spacers, 3) map-get($spacers, 4);
+  box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.05);
+  
+  .data-line {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
