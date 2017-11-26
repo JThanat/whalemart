@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { VendorProfileResolver } from './profile/vendor-profile-resolver.service';
 import { VendorProfileComponent } from './profile/vendor-profile.component';
 import { VendorDashboardComponent } from './vendor-dashboard.component';
+import { VendorPaymentComponent } from './payment/vendor-payment.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
         resolve: {
           vendorProfile: VendorProfileResolver
         }
+      },
+      {
+        path: 'payment',
+        component: VendorPaymentComponent
       }
     ]
   }
