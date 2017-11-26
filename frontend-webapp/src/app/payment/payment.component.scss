@@ -1,5 +1,21 @@
 @import '~styles/common';
 
+.header {
+  h1 {
+    font-size: 1.6rem;
+  }
+  .location, .date {
+    display: flex;
+    align-items: center;
+    color: $dark-gray;
+    margin-bottom: map-get($spacers, 1);
+    font-size: 0.9rem;
+    > app-svg-icon {
+      margin-right: 0.3rem;
+    }
+  }
+}
+
 .left-content {
   h2 {
     color: $primary;
