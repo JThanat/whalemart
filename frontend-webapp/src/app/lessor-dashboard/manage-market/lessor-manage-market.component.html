@@ -1,0 +1,28 @@
+<div *ngIf="(lessorMarkets$ | async) as markets">
+  <section class="mb-3">
+    <div class="section-title">
+      <h2>ตลาดปัจจุบัน</h2>
+      <a class="link-with-icon" routerLink="/">
+        สร้างตลาดใหม่
+      </a>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-sm-6 col-lg-3 mb-5" *ngFor="let market of markets.upcomingMarkets">
+        <app-market-item [market]="market"></app-market-item>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-3">
+    <div class="section-title">
+      <h2>ตลาดที่ผ่านมาแล้ว</h2>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-sm-6 col-lg-3 mb-5" *ngFor="let market of markets.passedMarkets">
+        <app-market-item [market]="market"></app-market-item>
+      </div>
+    </div>
+  </section>
+</div>
