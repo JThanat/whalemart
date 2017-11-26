@@ -1,7 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { inject, TestBed } from '@angular/core/testing';
 
-import { TimeService } from '../../core/utils/time.service';
+import { TimeService } from '../core/utils/time.service';
 import { MarketDetailResolver } from './market-detail-resolver.service';
 
 describe('MarketDetailResolver', () => {

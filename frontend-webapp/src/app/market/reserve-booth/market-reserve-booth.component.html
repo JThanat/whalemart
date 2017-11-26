@@ -1,0 +1,76 @@
+<ng-container *ngIf="(marketDetailObservable | async) as marketDetail">
+  <app-breadcrumb>
+    <a *appBreadcrumbItem routerLink="/">ฟีดตลาด</a>
+    <a *appBreadcrumbItem [routerLink]="['/market', marketDetail.id]">{{ marketDetail.name }}</a>
+    <span *appBreadcrumbItem>{{ marketDetail.name }}</span>
+  </app-breadcrumb>
+
+  <div class="header mb-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-10">
+          <div class="d-flex align-items-start flex-column flex-md-row">
+            <img [src]="marketDetail.coverImageUrl">
+            <div>
+              <h1>{{ marketDetail.name }}</h1>
+              <p class="lead">{{ marketDetail.caption }}</p>
+              <p class="location">
+                <app-svg-icon key="location-pin" width="15"></app-svg-icon>
+                <span>{{ marketDetail.location.name }}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form class="container" [formGroup]="reserveForm">
+    <div class="row justify-content-center align-items-start">
+      <div class="col-12 col-md-10 col-lg-6 mb-5">
+        <section>
+          <h2><span class="number">1</span>เลือกบูธที่ต้องการจอง</h2>
+
+          <p>
+            เลือกบูธที่ท่านต้องการจอง 1 บูธ โดยสามารถเลือกไว้ได้สูงสุดจำนวน 10 อันดับ เพื่อให้ผู้จัดการตลาดคัดเลือก หลังจากการคัดเลือกเสร็จสิ้น ทางระบบจะแจ้งหมายเลขบูธที่ท่านได้พร้อมราคาบูธ
+          </p>
+
+          <img [src]="marketDetail.layoutImageUrl" alt="รูปแผนผังตลาด" class="market-map">
+        </section>
+
+        <hr>
+
+        <section>
+          <h2><span class="number">2</span>ตั้งชื่อร้าน</h2>
+
+          <input type="text" formControlName="name" placeholder="ชื่อร้าน" class="form-control form-control-lg">
+          <small class="text-right form-text text-muted">{{ reserveForm.get('name')?.value.length }}/100</small>
+        </section>
+
+        <hr>
+
+        <section>
+          <h2><span class="number">3</span>ระบุสินค้าที่จะขาย</h2>
+
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quibusdam laudantium a iure ex hic totam sed? Eveniet dolor nisi ullam ab, expedita reiciendis illum, ipsa tenetur possimus, sit eius quasi?
+        </section>
+      </div>
+
+      <div class="col-12 col-md-10 col-lg-4 pl-lg-5 side-panel mb-5">
+        <h4>บูธที่ท่านเลือก</h4>
+
+        <div class="d-flex justify-content-between align-items-baseline">
+          <h4 class="text-nowrap">ชื่อร้าน</h4>
+          <span class="text-truncate pl-3">{{ reserveForm.get('name')?.value }}</span>
+        </div>
+
+        <div class="cta-container d-flex justify-content-between align-items-center">
+          <div class="note">
+            เราจะยังไม่เก็บเงินคุณ<br>ในขั้นตอนนี้
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg">จองบูธ</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-container>
