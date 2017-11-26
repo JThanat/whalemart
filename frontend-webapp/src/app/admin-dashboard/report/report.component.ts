@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ReportService, Report } from './report.service';
 import { Observable } from 'rxjs/Observable';
+import { Report, ReportService } from './report.service';
 
 @Component({
   selector: 'app-report',
