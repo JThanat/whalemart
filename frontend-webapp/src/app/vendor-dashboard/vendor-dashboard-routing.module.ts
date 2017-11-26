@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { VendorPaymentComponent } from './payment/vendor-payment.component';
 import { VendorProfileResolver } from './profile/vendor-profile-resolver.service';
 import { VendorProfileComponent } from './profile/vendor-profile.component';
 import { VendorDashboardComponent } from './vendor-dashboard.component';
-import { VendorPaymentComponent } from './payment/vendor-payment.component';
 
 const routes: Routes = [
   {
