@@ -17,7 +17,7 @@
 
         <ng-container *ngIf="status.type === 'loggedIn'">
           <li class="nav-item">
-            <a href="#" class="navbar-text">{{ status.user.firstName }}</a>
+            <a routerLink="/vendor" class="navbar-text">{{ status.user.firstName }}</a>
           </li>
           <button class="btn btn-link my-2 my-sm-0" (click)="logout()">ออกจากระบบ</button>
         </ng-container>
