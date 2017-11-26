@@ -8,7 +8,6 @@ import { Report, ReportService } from './report.service';
   styleUrls: ['./report.component.scss']
 })
 export class ReportComponent implements OnInit {
-
   reports$: Observable< Report[]>;
 
   constructor(private reportService: ReportService) { }
@@ -16,5 +15,4 @@ export class ReportComponent implements OnInit {
   ngOnInit() {
     this.reports$ = this.reportService.getReportList();
   }
-
 }

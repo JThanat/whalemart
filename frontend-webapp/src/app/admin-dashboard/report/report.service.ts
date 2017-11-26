@@ -20,15 +20,15 @@ interface ReportServerResponse {
 }
 
 export class ReportError {}
+
 @Injectable()
 export class ReportService {
   constructor(private http: HttpClient) {}
+
   getReportList(): Observable<Report[]> {
     return this.http.get<ReportServerResponse>('/api/report/').pipe(
-      map(data => {
-        return data.results;
-      }),
-      catchError((err: any) => {
+      map(data => data.results),
+      catchError(err => {
         if (err instanceof HttpErrorResponse) {
           if (err.status >= 400 && err.status < 500) {
             return observableThrow(new ReportError()) as Observable<Report[]>;
