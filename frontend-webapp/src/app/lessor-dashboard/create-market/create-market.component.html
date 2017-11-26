@@ -1,0 +1,207 @@
+<div class="my-5">
+  <h1>สร้างตลาด</h1>
+  <form [formGroup]="createMarketForm" (submit)="createMarket()">
+    <div class="row">
+      <div class="col-12">
+        <app-input-group label="ชื่อตลาด">
+          <input appInput type="text" class="form-control" placeholder="ชื่อตลาด" formControlName="name" required>
+          <app-input-error *ngIf="createMarketForm.get('name')!.hasError('required')">
+            กรุณาระบุชื่อตลาด
+          </app-input-error>
+          <app-input-error *ngIf="createMarketForm.get('name')!.hasError('maxlength')">
+            ชื่อตลาดยาวเกินไป
+          </app-input-error>
+        </app-input-group>
+      </div>
+
+      <div class="col-12">
+        <app-input-group label="คำบรรยายตลาด">
+          <input appInput type="text" class="form-control" placeholder="คำบรรยายตลาด" formControlName="caption" required>
+          <app-input-error *ngIf="createMarketForm.get('caption')!.hasError('required')">
+            กรุณาระบุคำบรรยายตลาด
+          </app-input-error>
+        </app-input-group>
+      </div>
+
+      <div class="col-12">
+        <app-input-group label="คำอธิบายตลาด">
+          <textarea appInput class="form-control" placeholder="คำอธิบายตลาด" formControlName="description" required></textarea>
+          <app-input-error *ngIf="createMarketForm.get('description')!.hasError('required')">
+            กรุณาระบุคำอธิบายตลาด
+          </app-input-error>
+        </app-input-group>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <app-input-group label="ช่วงวันที่ตลาดจัด">
+          <input appInput appDateRangeInput type="text" class="form-control" placeholder="ช่วงวันที่ตลาดจัด" formControlName="dateRange" required>
+          <app-input-error *ngIf="createMarketForm.get('dateRange')!.hasError('required')">
+            กรุณาระบุช่วงวันที่ตลาดจัด
+          </app-input-error>
+        </app-input-group>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <app-input-group label="เวลาเปิดของตลาด">
+          <input appInput appTimeInput type="text" class="form-control" placeholder="เวลาเปิดของตลาด" formControlName="openingTime" required>
+          <app-input-error *ngIf="createMarketForm.get('openingTime')!.hasError('required')">
+            กรุณาระบุเวลาเปิดของตลาด
+          </app-input-error>
+        </app-input-group>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <app-input-group label="เวลาปิดของตลาด">
+          <input appInput appTimeInput type="text" class="form-control" placeholder="เวลาปิดของตลาด" formControlName="closingTime" required>
+          <app-input-error *ngIf="createMarketForm.get('closingTime')!.hasError('required')">
+            กรุณาระบุเวลาปิดของตลาด
+          </app-input-error>
+        </app-input-group>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <app-input-group label="ชื่อเต็มของผู้ติดต่อ">
+          <input appInput type="text" class="form-control" placeholder="ชื่อเต็มของผู้ติดต่อ" formControlName="contactPersonFullname" required>
+          <app-input-error *ngIf="createMarketForm.get('contactPersonFullname')!.hasError('required')">
+            กรุณาระบุชื่อเต็มของผู้ติดต่อ
+          </app-input-error>
+          <app-input-error *ngIf="createMarketForm.get('contactPersonFullname')!.hasError('maxlength')">
+            ชื่อเต็มของผู้ติดต่อยาวเกินไป
+          </app-input-error>
+        </app-input-group>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <app-input-group label="เบอร์โทรศัพท์ของผู้ติดต่อ">
+          <input appInput type="text" class="form-control" placeholder="เบอร์โทรศัพท์ของผู้ติดต่อ" formControlName="contactPersonPhoneNumber" required>
+          <app-input-error *ngIf="createMarketForm.get('contactPersonPhoneNumber')!.hasError('pattern')">
+            เบอร์โทรศัพท์ต้องอยู่ในรูป 0812345678
+          </app-input-error>
+        </app-input-group>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <app-input-group label="อีเมลของผู้ติดต่อ">
+          <input appInput type="text" class="form-control" placeholder="อีเมลของผู้ติดต่อ" formControlName="contactPersonEmail" required>
+          <app-input-error *ngIf="createMarketForm.get('contactPersonEmail')!.hasError('email')">
+            กรุณากรอกอีเมลของผู้ติดต่อที่ถูกต้อง
+          </app-input-error>
+          <app-input-error *ngIf="createMarketForm.get('contactPersonEmail')!.hasError('maxlength')">
+            อีเมลของผู้ติดต่อยาวเกินไป
+          </app-input-error>
+        </app-input-group>
+      </div>
+
+      <div class="col-12">
+        <app-input-group label="ที่อยู่ของตลาด">
+          <input appInput type="text" class="form-control" placeholder="ที่อยู่ของตลาด" formControlName="location" required>
+          <app-input-error *ngIf="createMarketForm.get('location')!.hasError('required')">
+            กรุณากรอกที่อยู่ของตลาดที่ถูกต้อง
+          </app-input-error>
+          <app-input-error *ngIf="createMarketForm.get('location')!.hasError('maxlength')">
+            ที่อยู่ของตลาดยาวเกินไป
+          </app-input-error>
+        </app-input-group>
+      </div>
+
+      <div class="col-12">
+        <app-input-group label="ตำแหน่งของตลาด">
+          <input appInput type="text" class="form-control" placeholder="ตำแหน่งของตลาด" formControlName="locationLatLng" required>
+          <app-input-error *ngIf="createMarketForm.get('locationLatLng')!.hasError('pattern')">
+            กรุณากรอกตำแหน่งของตลาดในรูปแบบ 123.45, 67.89
+          </app-input-error>
+        </app-input-group>
+      </div>
+
+      <div class="col-12">
+        <app-input-group label="เงื่อนไขของตลาด">
+          <textarea appInput class="form-control" placeholder="เงื่อนไขของตลาด" formControlName="termsAndCondition" required></textarea>
+          <app-input-error *ngIf="createMarketForm.get('termsAndCondition')!.hasError('required')">
+            กรุณากรอกเงื่อนไขของตลาด
+          </app-input-error>
+          <app-input-error *ngIf="createMarketForm.get('termsAndCondition')!.hasError('maxlength')">
+            เงื่อนไขของตลาดยาวเกินไป
+          </app-input-error>
+        </app-input-group>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <app-input-group label="วันสุดท้ายของการโอนเงิน">
+          <input appInput appDateInput type="text" class="form-control" placeholder="วันสุดท้ายของการโอนเงิน" formControlName="depositPaymentDue" required>
+          <app-input-error *ngIf="createMarketForm.get('depositPaymentDue')!.hasError('required')">
+            กรุณาระบุวันสุดท้ายของการโอนเงิน
+          </app-input-error>
+        </app-input-group>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <app-input-group label="วันสุดท้ายของการจ่ายเงิน">
+          <input appInput appDateInput type="text" class="form-control" placeholder="วันสุดท้ายของการจ่ายเงิน" formControlName="fullPaymentDue" required>
+          <app-input-error *ngIf="createMarketForm.get('fullPaymentDue')!.hasError('required')">
+            กรุณาระบุวันสุดท้ายของการจ่ายเงิน
+          </app-input-error>
+        </app-input-group>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <app-input-group label="วันสุดท้ายของการจอง">
+          <input appInput appDateInput type="text" class="form-control" placeholder="วันสุดท้ายของการจอง" formControlName="reservationDue" required>
+          <app-input-error *ngIf="createMarketForm.get('reservationDue')!.hasError('required')">
+            กรุณาระบุวันสุดท้ายของการจอง
+          </app-input-error>
+        </app-input-group>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <app-input-group label="จำนวนผู้เข้าชมโดยประมาณ">
+          <input appInput type="text" class="form-control" placeholder="จำนวนผู้เข้าชมโดยประมาณ" formControlName="estimateVisitor" required>
+          <app-input-error *ngIf="createMarketForm.get('estimateVisitor')!.hasError('required')">
+            กรุณาระบุจำนวนผู้เข้าชมโดยประมาณ
+          </app-input-error>
+          <app-input-error *ngIf="createMarketForm.get('estimateVisitor')!.hasError('pattern')">
+            กรุณาระบุจำนวนผู้เข้าชมโดยประมาณในรูปแบบตัวเลขเท่านั้น เช่น 150000
+          </app-input-error>
+        </app-input-group>
+      </div>
+
+      <div class="col-12 col-md-8">
+        <app-input-group label="แท็ก">
+          <input appInput type="text" class="form-control" placeholder="แท็ก" formControlName="tags" required>
+          <app-input-error *ngIf="createMarketForm.get('tags')!.hasError('tags')">
+            กรุณาใส่อย่างน้อยหนึ่งแท็ก
+          </app-input-error>
+          <small class="form-text text-muted">คั่นแต่ละแท็กด้วยจุลภาค (,) เช่น <em>วัยรุ่น, เสื้อผ้า, อาหาร</em></small>
+        </app-input-group>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <app-input-group label="รูปภาพแผนผังตลาด">
+          <app-file-input appInput class="mx-auto d-block" formControlName="layoutPhoto" label="เลือกรูปภาพ"></app-file-input>
+          <app-input-error *ngIf="createMarketForm.get('layoutPhoto')!.hasError('required')">
+            กรุณาอัปโหลดรูปภาพแผนผังตลาด
+          </app-input-error>
+        </app-input-group>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <app-input-group label="รูปภาพปก">
+          <app-file-input appInput class="mx-auto d-block" formControlName="coverPhoto" label="เลือกรูปภาพ"></app-file-input>
+          <app-input-error *ngIf="createMarketForm.get('coverPhoto')!.hasError('required')">
+            กรุณาอัปโหลดรูปภาพปก
+          </app-input-error>
+        </app-input-group>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <app-input-group label="ภาพถ่ายบรรยากาศตลาด">
+          <app-file-input appInput [allowMultipleFiles]="true" class="mx-auto d-block" formControlName="scenePhotos" label="เลือกรูปภาพ"></app-file-input>
+          <app-input-error *ngIf="createMarketForm.get('scenePhotos')!.hasError('minLength')">
+            กรุณาอัปโหลดภาพถ่ายบรรยากาศตลาด
+          </app-input-error>
+        </app-input-group>
+      </div>
+    </div>
+
+    <button class="btn btn-primary btn-lg" type="submit" [disabled]="createMarketForm.disabled">สร้างตลาด</button>
+  </form>
+</div>
