@@ -11,6 +11,7 @@ from apps.reservations.models import Reservation, ReservedBooth
 from apps.payments.models import Installment
 from apps.reservations.serializers import ReservationSerializer
 from apps.markets.serializers import MarketFeedSerializer
+from apps.products.serializers import ProductSerializer
 
 
 class ReservationViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin):
@@ -19,13 +20,17 @@ class ReservationViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin):
     `/reserve-booth/`: api for vendor to reserve booths in a market\n
     `/approve-reservation/`: api for lessor to approve reservations\n
     `/reservation-status/`: api for vendor to view his/her reserved markets' status\n
-    {\n
-        "shop_name": "Couppee",
-        "market": 1,
+    {
+        "shop_name": "Ngue",
+        "market": 4,
         "reserved_booths": [
-            {"booth": 2},
-            ...
-            {...}
+            {"booth": 296},
+            {"booth": 297},
+            {"booth": 298},
+            {"booth": 299}
+        ],
+        "products": [
+            1
         ]
     }
     """
@@ -96,7 +101,7 @@ def get_products_of_reservation(reservation):
         product_json = dict()
         product_json['id'] = product.id
         product_json['name'] = product.name
-        product_json['image'] = product.image
+        product_json['image'] = ProductSerializer(product).data['image']
         product_json['description'] = product.description
         result.append(product_json)
     return result
