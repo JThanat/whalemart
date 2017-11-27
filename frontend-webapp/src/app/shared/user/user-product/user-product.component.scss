@@ -6,12 +6,12 @@
 
 .product-list>div {
   background: #F8F8F8;
-  border-radius: $border-radius;
+  border-radius: $border-radius * 2;
 
   .thumb-img img {
     object-fit: cover;
     object-position: center;
-    min-width: 5em;
+    max-width: 5em;
     max-height: 5em;
   }
 }
