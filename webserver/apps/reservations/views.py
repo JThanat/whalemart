@@ -75,20 +75,31 @@ def get_booths_in_unapproved_market(request, *args, **kwargs):
 
 
 def get_vendors_reserving_booth(booth):
-    """
-    Return all vendors reserved the given booth
-    """
     reserved_booths = ReservedBooth.objects.filter(booth=booth)
-    response = []
+    result = []
     for reserved_booth in reserved_booths:
         vendor_json = dict()
         user = reserved_booth.reservation.user
         vendor_json['id'] = user.pk
         vendor_json['first_name'] = user.first_name
         vendor_json['last_name'] = user.last_name
-        vendor_json['shop_name'] = reserved_booth.reservation.shop_name
-        response.append(vendor_json)
-    return response
+        reservation = reserved_booth.reservation
+        vendor_json['shop_name'] = reservation.shop_name
+        vendor_json['products'] = get_products_of_reservation(reservation)
+        result.append(vendor_json)
+    return result
+
+
+def get_products_of_reservation(reservation):
+    result = []
+    for product in reservation.products.all():
+        product_json = dict()
+        product_json['id'] = product.id
+        product_json['name'] = product.name
+        product_json['image'] = product.image
+        product_json['description'] = product.description
+        result.append(product_json)
+    return result
 
 
 @api_view(['POST', ])
