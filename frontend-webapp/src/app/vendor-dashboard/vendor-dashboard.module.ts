@@ -10,6 +10,7 @@ import { VendorPaymentComponent } from './payment/vendor-payment.component';
 import { VendorPaymentService } from './payment/vendor-payment.service';
 import { VendorProfileComponent } from './profile/vendor-profile.component';
 import { VendorReservationComponent } from './reservation/vendor-reservation.component';
+import { VendorReservationService } from './reservation/vendor-reservation.service';
 import { VendorDashboardRoutingModule } from './vendor-dashboard-routing.module';
 import { VendorDashboardComponent } from './vendor-dashboard.component';
 
@@ -28,6 +29,7 @@ import { VendorDashboardComponent } from './vendor-dashboard.component';
     VendorProfileService,
     VendorPaymentResolver,
     VendorProfileResolver,
+    VendorReservationService,
     UserProductService,
     VendorPaymentService,
     LessorService

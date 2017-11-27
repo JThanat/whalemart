@@ -4,14 +4,14 @@ import { of as observableOf } from 'rxjs/observable/of';
 import { _throw as observableThrow } from 'rxjs/observable/throw';
 import { catchError, map } from 'rxjs/operators';
 
-type ReservationStatus = 'waiting' | 'approved' | 'rejected' | 'cancelled';
-type PaymentStatus = 'draft' | 'deposited' | 'fully' | null;
+export type ReservationStatus = 'waiting' | 'approved' | 'rejected' | 'cancelled';
+export type PaymentStatus = 'draft' | 'deposited' | 'fully' | null;
 
 export interface ReservationInformation {
   marketID: number;
   reservationStatus: ReservationStatus;
   approvedBooth: number | null;
-  boothRentalFree: number | null;
+  boothRentalFee: number | null;
   paymentStatus: PaymentStatus;
   incompleteInstallmentID: number | null;
 }
@@ -63,7 +63,7 @@ export class VendorReservationService {
       marketID: data.market_id,
       reservationStatus,
       approvedBooth: data.approved_booth,
-      boothRentalFree: data.booth_rental_fee,
+      boothRentalFee: data.booth_rental_fee,
       paymentStatus,
       incompleteInstallmentID: data.incomplete_installment_id
     };
