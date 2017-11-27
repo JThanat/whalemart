@@ -15,6 +15,17 @@ import random
 class Command(BaseCommand):
     help = 'Create Reservation'
 
+    def _create_product(self, user):
+        product_name = str(user) + ' Product'
+        des = 'This is the best product of ' + str(user) + '. It costs 100 baht'
+        p = Product.objects.create(
+            name=product_name,
+            user=user,
+            description=des,
+            image='/product.jpg'
+        )
+        return p
+
     def _get_market(self):
         return [
             Market.objects.get(pk=31),
@@ -29,6 +40,8 @@ class Command(BaseCommand):
         users = User.objects.all()
         markets = self._get_market()
         for i, user in enumerate(users):
+            print(i)
+            product = self._create_product(user)
             if str(user) == 'whalemart@mail.com':
                 continue
             for market in markets:
@@ -38,6 +51,8 @@ class Command(BaseCommand):
                     user=user,
                     market=market,
                 )
+
+                reservation.products.add(product)
 
                 for j in range(10):
                     booths = Booth.objects.filter(market=market)
@@ -53,6 +68,8 @@ class Command(BaseCommand):
         approved_list = list()
         for n, user in enumerate(users):
             print(n)
+            if user.pk < 15:
+                continue
             reservations = Reservation.objects.filter(user=user)
             for reservation in reservations:
                 reserved_booths = ReservedBooth.objects.filter(reservation=reservation)
@@ -60,12 +77,16 @@ class Command(BaseCommand):
                     if reserved_booths[i].booth in approved_list:
                         continue
                     reservation.approved_booth = reserved_booths[i].booth
+                    reservation.status = ReservationStatus.APPROVED
                     approved_list.append(reserved_booths[i].booth)
                     reservation.save()
+
+    def _payment(self):
+        pass
 
 
     def handle(self, *args, **options):
         random.seed(1959)
-        # self._create_reservation()
+        self._create_reservation()
         self._approve()
 
