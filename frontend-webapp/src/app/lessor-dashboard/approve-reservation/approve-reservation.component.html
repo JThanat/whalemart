@@ -1,0 +1,21 @@
+<h1>อนุมัติบูธ</h1>
+
+<section>
+  <h2>เลือกบูธ</h2>
+  <div class="booth-selector-container">
+    <button *ngFor="let booth of (boothsData | async)" class="btn" [class.btn-outline-secondary]="!hasSelectedVendor(booth)" [class.btn-outline-success]="hasSelectedVendor(booth)" [class.active]="booth === selectedBooth" (click)="selectBooth(booth)">
+      {{ booth.name }}
+    </button>
+  </div>
+</section>
+
+<section *ngIf="selectedBooth">
+  <h2>เลือกผู้เช่า</h2>
+
+  <div class="row">
+    <div *ngFor="let vendor of selectedBooth.vendors" class="col-12 col-lg-6">
+      <app-vendor [vendor]="vendor" [selected]="isSelectingSelectedBooth(vendor)" (select)="selectVendorBooth(vendor, selectedBooth)" [note]="isSelectingAnotherBooth(vendor) ? 'ผู้เช่ารายนี้ถูกเลือกกับบูธ ' + (getSelectingBooth(vendor) | async).name + ' ไปแล้ว การเลือกผู้เช่าคนนี้กับบูธนี้จะยกเลิกการเลือกผู้เช่านี้กับบูธที่เคยเลือกไว้' : ''"></app-vendor>
+    </div>
+  </div>
+</section>
+
