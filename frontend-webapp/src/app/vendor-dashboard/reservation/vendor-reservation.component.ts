@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ReservationInformation, VendorReservationService } from './vendor-reservation.service';
 
 @Component({
   selector: 'app-vendor-reservation',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./vendor-reservation.component.scss']
 })
 export class VendorReservationComponent implements OnInit {
+  reservationInformation: ReservationInformation[];
 
-  constructor() { }
+  constructor(
+    private vendorReservationService: VendorReservationService
+  ) { }
 
   ngOnInit() {
+    this.vendorReservationService.reservationInformation$.subscribe(
+      data => this.reservationInformation = data
+    );
   }
 
 }
