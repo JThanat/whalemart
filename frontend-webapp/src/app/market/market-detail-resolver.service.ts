@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { TimeService } from '../core/utils/time.service';
 
 export interface MarketDetail {
+  id: number;
   name: string;
   caption: string;
   description: string;
@@ -41,6 +42,7 @@ export interface MarketDetail {
 }
 
 interface MarketDetailServerResponse {
+  id: number;
   name: string;
   caption: string;
   description: string;
@@ -92,6 +94,7 @@ export class MarketDetailResolver implements Resolve<MarketDetail> {
     });
 
     return {
+      id: sr.id,
       name: sr.name,
       caption: sr.caption,
       description: sr.description,
