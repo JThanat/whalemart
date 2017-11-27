@@ -26,32 +26,31 @@
       ไม่มีข้อมูลบัตรเครดิตปรากฏอยู่
     </div>
 
-    <div *ngIf="isShowAddCreditCard" class="mt-3">
+    <div *ngIf="isShowAddCreditCard" class="mt-4">
       <form [formGroup]="addCreditCardForm" (submit)="addCreditCard()">
         <div class="row">
           <div class="col-12">
-            <app-input-group label="รหัสบัตรเครดิต">
-              <input appInput type="text" class="form-control" formControlName="cardNumber" placeholder="1234123412341234">
-              <app-input-error *ngIf="addCreditCardForm.controls['cardNumber'].hasError('required')">
-                กรุณากรอกบัตรเครดิต
-              </app-input-error>
-              <app-input-error *ngIf="addCreditCardForm.controls['cardNumber'].hasError('pattern')">
-                บัตรเครดิตจะต้องเป็นเลข 16 หลัก ไม่มีขีด
-              </app-input-error>
-            </app-input-group>
-          </div>
-          <div class="col-12">
-            <app-input-group label="ผู้ถือบัตร">
-              <input appInput type="text" class="form-control" formControlName="cardHolderName" placeholder="ผู้ถือบัตร">
+            <app-input-group label="ชื่อผู้ถือบัตร">
+              <input appInput type="text" class="form-control" formControlName="cardHolderName" placeholder="ชื่อ - นามสกุล">
               <app-input-error *ngIf="addCreditCardForm.controls['cardHolderName'].hasError('required')">
                 กรุณากรอกผู้ถือบัตร
               </app-input-error>
             </app-input-group>
           </div>
           <div class="col-sm-6">
+            <app-input-group label="หมายเลขบัตรเดบิต/เครดิต">
+              <input appInput type="text" class="form-control" formControlName="cardNumber" placeholder="หมายเลขบัตรเดบิต/เครดิต">
+              <app-input-error *ngIf="addCreditCardForm.controls['cardNumber'].hasError('required')">
+                กรุณากรอกหมายเลขบัตรเดบิต/เครดิต
+              </app-input-error>
+              <app-input-error *ngIf="addCreditCardForm.controls['cardNumber'].hasError('pattern')">
+                บัตรเครดิตจะต้องเป็นเลข 16 หลัก ไม่มีขีด
+              </app-input-error>
+            </app-input-group>
+          </div>
+          <div class="col-sm-6">
             <app-input-group label="ประเภทบัตรเครดิต">
               <select appInput formControlName="type" class="form-control">
-                <option selected>เลือกประเภทบัตร</option>
                 <option value="visa">Visa Card</option>
                 <option value="master">Master Card</option>
               </select>
@@ -61,25 +60,25 @@
             </app-input-group>
           </div>
           <div class="col-sm-6">
-            <app-input-group label="รหัสยืนยัน (CSV)">
+            <app-input-group label="CVV">
               <input appInput type="text" class="form-control" formControlName="verificationNo" placeholder="234">
               <app-input-error *ngIf="addCreditCardForm.controls['verificationNo'].hasError('required')">
-                กรุณากรอกเลข CSV
+                กรุณากรอกเลข CVV
               </app-input-error>
               <app-input-error *ngIf="addCreditCardForm.controls['verificationNo'].hasError('pattern')">
-                เลข CSV จะต้องประกอบด้วย 3 ตัวเท่านั้น
+                เลข CVV จะต้องประกอบด้วย 3 ตัวเท่านั้น
               </app-input-error>
             </app-input-group>
           </div>
-          <div class="col-12">
-            <app-input-group label="วันหมดอายุบัตร">
+          <div class="col-sm-6">
+            <app-input-group label="เดือน/ปี ที่หมดอายุ">
               <input appInput type="text" class="form-control" formControlName="expiryDate" placeholder="01/17">
               <app-input-error *ngIf="addCreditCardForm.controls['expiryDate'].hasError('required')">
-                กรุณากรอกวันหมดอายุบัตร
+                กรุณากรอกเดือน/ปี ที่หมดอายุ
               </app-input-error>
             </app-input-group>
           </div>
-          <div class="col-12">
+          <div class="col-sm-6">
             <button type="submit" class="btn btn-primary mt-3" [disabled]="addCreditCardForm.disabled">เพิ่มบัตรเครดิต</button>
           </div>
         </div>
