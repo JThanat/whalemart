@@ -101,7 +101,13 @@ hr {
     font-size: 1.1rem;
   }
 
+  .no-shop-name {
+    color: $gray;
+    font-style: italic;
+  }
+
   .cta-container {
+    margin-top: 1rem;
     border: 1px solid $light-gray;
     padding: map-get($spacers, 3) map-get($spacers, 4);
     box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.05);

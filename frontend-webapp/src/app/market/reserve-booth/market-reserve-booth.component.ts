@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
-import { map } from 'rxjs/operators';
 import { combineLatest as observableCombineLatest } from 'rxjs/observable/combineLatest';
+import { first, map } from 'rxjs/operators';
 
+import { AlertService } from '../../core/alert/alert.service';
 import { MarketDetail } from '../market-detail-resolver.service';
 import { MarketReserveBoothService } from './market-reserve-booth.service';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 export interface Booth {
   id: number;
@@ -39,6 +40,8 @@ export class MarketReserveBoothComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private alert: AlertService,
+    private router: Router,
     private marketReserveBoothService: MarketReserveBoothService
   ) {}
 
@@ -84,7 +87,7 @@ export class MarketReserveBoothComponent implements OnInit {
       .unsubscribe();
 
     const productId = Number(productIdStr);
-    const product = allProducts.find(product => product.id === productId);
+    const product = allProducts.find(p => p.id === productId);
 
     if (product) {
       this.selectedProducts.next([...this.selectedProducts.value, product]);
@@ -97,5 +100,42 @@ export class MarketReserveBoothComponent implements OnInit {
     this.selectedProducts.next(
       this.selectedProducts.value.filter(product => product !== targetProduct)
     );
+  }
+
+  getBoothWithId(id: number | string) {
+    return this.booths.pipe(map(booths => booths.find(booth => booth.id === Number(id))));
+  }
+
+  reserveBooth() {
+    if (!this.boothsForm.valid) {
+      return;
+    }
+
+    this.boothsForm.disable();
+
+    this.route.paramMap.pipe(first(), map(param => param.get('id'))).subscribe(marketId => {
+      if (marketId === null) {
+        throw new Error('It should not be null');
+      }
+
+      this.marketReserveBoothService
+        .reserveBooth({
+          marketId: Number(marketId),
+          boothIds: this.boothsForm.value.map((booth: string) => Number(booth)),
+          productIds: this.selectedProducts.value.map(product => product.id),
+          shopName: this.reserveForm.value.name as string
+        })
+        .subscribe(
+          () => {
+            this.alert.show({ message: 'จองตลาดสำเร็จ', type: 'success' });
+            this.router.navigate(['/vendor']);
+          },
+          () => {
+            // TODO: Handle error properly
+            this.boothsForm.enable();
+            this.alert.show({ message: 'เกิดข้อผิดพลาดขึ้น', type: 'danger' });
+          }
+        );
+    });
   }
 }

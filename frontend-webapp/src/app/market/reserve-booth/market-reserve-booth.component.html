@@ -2,7 +2,7 @@
   <app-breadcrumb>
     <a *appBreadcrumbItem routerLink="/">ฟีดตลาด</a>
     <a *appBreadcrumbItem [routerLink]="['/market', marketDetail.id]">{{ marketDetail.name }}</a>
-    <span *appBreadcrumbItem>{{ marketDetail.name }}</span>
+    <span *appBreadcrumbItem>จองบูธ</span>
   </app-breadcrumb>
 
   <div class="header mb-5">
@@ -25,14 +25,15 @@
     </div>
   </div>
 
-  <form class="container" [formGroup]="reserveForm">
+  <form class="container" [formGroup]="reserveForm" (submit)="reserveBooth()">
     <div class="row justify-content-center align-items-start">
       <div class="col-12 col-md-10 col-lg-6 mb-5">
         <section>
           <h2><span class="number">1</span>เลือกบูธที่ต้องการจอง</h2>
 
           <p>
-            เลือกบูธที่ท่านต้องการจอง 1 บูธ โดยสามารถเลือกไว้ได้สูงสุดจำนวน 10 อันดับ เพื่อให้ผู้จัดการตลาดคัดเลือก หลังจากการคัดเลือกเสร็จสิ้น ทางระบบจะแจ้งหมายเลขบูธที่ท่านได้พร้อมราคาบูธ
+            เลือกบูธที่ท่านต้องการจอง 1 บูธ โดยสามารถเลือกไว้ได้สูงสุดจำนวน 10 อันดับ เพื่อให้ผู้จัดการตลาดคัดเลือก
+            หลังจากการคัดเลือกเสร็จสิ้น ทางระบบจะแจ้งหมายเลขบูธที่ท่านได้พร้อมราคาบูธ
           </p>
 
           <img [src]="marketDetail.layoutImageUrl" alt="รูปแผนผังตลาด" class="market-map mb-5">
@@ -80,7 +81,7 @@
           <h2><span class="number">3</span>ระบุสินค้าที่จะขาย</h2>
 
           <app-input-group label="เพิ่มสินค้าโดยเลือกจากลิสต์ของคุณ">
-            <select #productAdder appInput class="form-control" (change)="addProduct(productAdder)">
+            <select #productAdder appInput class="form-control" (change)="addProduct(productAdder)" [disabled]="boothsForm.disabled">
               <option value="">เลือกสินค้าจากลิสต์ของคุณ</option>
               <option *ngFor="let product of (unselectedProducts | async)" [value]="product.id">
                 {{ product.name }}
@@ -105,16 +106,41 @@
       <div class="col-12 col-md-10 col-lg-4 pl-lg-5 side-panel mb-5">
         <h4>บูธที่ท่านเลือก</h4>
 
+        <table class="table table-sm">
+          <thead>
+            <tr>
+              <th scope="col">อันดับ</th>
+              <th scope="col">หมายเลขบูธ</th>
+              <th scope="col">ราคา</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let boothControl of boothsForm.controls; index as i">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{ (getBoothWithId(boothControl.value) | async)?.name || '-' }}</td>
+              <td>{{ (getBoothWithId(boothControl.value) | async)?.price || '-' }}</td>
+            </tr>
+          </tbody>
+        </table>
+
         <div class="d-flex justify-content-between align-items-baseline">
           <h4 class="text-nowrap">ชื่อร้าน</h4>
-          <span class="text-truncate pl-3">{{ reserveForm.get('name')?.value }}</span>
+          <span *ngIf="reserveForm.get('name')?.value as shopName; else noShopName" class="text-truncate pl-3">{{ shopName }}</span>
+          <ng-template #noShopName>
+            <span class="no-shop-name">ยังไม่ได้ระบุชื่อร้าน</span>
+          </ng-template>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-baseline">
+          <h4 class="text-nowrap">สินค้า</h4>
+          <span class="text-truncate pl-3">{{ (selectedProducts | async).length }} รายการ</span>
         </div>
 
         <div class="cta-container d-flex justify-content-between align-items-center">
           <div class="note">
             เราจะยังไม่เก็บเงินคุณ<br>ในขั้นตอนนี้
           </div>
-          <button type="submit" class="btn btn-primary btn-lg">จองบูธ</button>
+          <button type="submit" class="btn btn-primary btn-lg" [disabled]="boothsForm.disabled">จองบูธ</button>
         </div>
       </div>
     </div>
