@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { UserLoginGuard } from '../core/user/user-login-guard';
 import { MarketDetailResolver } from './market-detail-resolver.service';
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
       },
       {
         path: 'reserve',
+        canActivate: [UserLoginGuard],
         loadChildren: './reserve-booth/market-reserve-booth.module#MarketReserveBoothModule'
       }
     ]
