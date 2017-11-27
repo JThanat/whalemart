@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
@@ -11,6 +11,8 @@ import { VendorProfile, VendorProfileService } from './vendor-profile.service';
   styleUrls: ['./vendor-profile.component.scss']
 })
 export class VendorProfileComponent implements OnInit {
+  @Input() isLessor = true;
+
   vendorProfile: VendorProfile;
   vendorProfileForm: FormGroup;
   isEdit = false;

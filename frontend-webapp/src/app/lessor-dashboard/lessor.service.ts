@@ -4,7 +4,11 @@ import { Observable } from 'rxjs/Observable';
 import { _throw as observableThrow } from 'rxjs/observable/throw';
 import { catchError, map } from 'rxjs/operators';
 
-import { Market, MarketServerResponse, MarketService } from '../core/market/market.service';
+import {
+  Market,
+  MarketServerResponse,
+  MarketService
+} from '../core/market/market.service';
 
 export interface MarketList {
   upcomingMarkets: Market[];
@@ -23,15 +27,26 @@ export interface LessorResponse {
   markets: MarketServerResponse[];
 }
 
-export interface LessorProfile {
+interface LessorProfileResponse {
   lessor_name: string;
   is_organization: boolean;
   organization_name: string;
   organization_contact_name: string;
   organization_email: string;
   organization_phone_number: string;
-  user: string;
+  user: number;
 }
+
+export interface LessorProfile {
+  lessorName: string;
+  isOrganization: boolean;
+  organizationName: string;
+  organizationContactName: string;
+  organizationEmail: string;
+  organizationPhoneNumber: string;
+}
+
+class LessorProfileError {}
 
 export class VendorProfileError {}
 
@@ -50,18 +65,47 @@ export class LessorService {
         const nowDate = new Date();
 
         return {
-          upcomingMarkets: normalizedMarkets.filter(market => market.startDate > nowDate),
-          passedMarkets: normalizedMarkets.filter(market => market.startDate <= nowDate)
+          upcomingMarkets: normalizedMarkets.filter(
+            market => market.startDate > nowDate
+          ),
+          passedMarkets: normalizedMarkets.filter(
+            market => market.startDate <= nowDate
+          )
         };
       }),
       catchError((err: any) => {
         if (err instanceof HttpErrorResponse) {
           if (err.status >= 400 && err.status < 500) {
-            return observableThrow(new MarketsError()) as Observable<MarketList>;
+            return observableThrow(new MarketsError()) as Observable<
+              MarketList
+            >;
           }
         }
         return observableThrow(err) as Observable<MarketList>;
       })
     );
+  }
+
+  get getLessorProfile$(): Observable<LessorProfile> {
+    return this.http.get<LessorProfileResponse>('/api/lessor/').pipe(
+      map(data => {
+        return {
+          lessorName: data.lessor_name,
+          isOrganization: data.is_organization,
+          organizationName: data.organization_name,
+          organizationContactName: data.organization_contact_name,
+          organizationPhoneNumber: data.organization_phone_number,
+          organizationEmail: data.organization_email
+        };
+      }),
+      catchError((err: any) => {
+        if (err instanceof HttpErrorResponse) {
+          if (err.status >= 400 && err.status < 500) {
+            return observableThrow(new LessorProfileError());
+          }
+        }
+        return observableThrow(err);
+      })
+    )
   }
 }
