@@ -6,7 +6,7 @@
       <div class="row mt-4">
         <div class="col-md-6">
           <div class="profile-img-wrapper d-block mx-auto">
-            <img class="img-fluid rounded" [src]="vendorProfile.profileImage">
+            <img class="img-fluid rounded" [src]="vendorProfile.profileImage || '/media/profile_images/2017/11/13/kitten-2.jpg'">
           </div>
           <div *ngIf="isEdit" class="mt-3">
             <div class="d-flex">
