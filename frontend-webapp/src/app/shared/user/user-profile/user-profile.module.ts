@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { VendorProfileService } from '../../../core/vendor/vendor-profile.service';
 import { InputModule } from '../../input/input.module';
 import { LessorFormComponent } from '../lessor-form/lessor-form.component';
 import { UserProfileComponent } from './user-profile.component';
@@ -19,6 +20,9 @@ import { UserProfileComponent } from './user-profile.component';
   exports: [
     UserProfileComponent,
     LessorFormComponent
+  ],
+  providers: [
+    VendorProfileService
   ]
 })
 export class UserProfileModule { }

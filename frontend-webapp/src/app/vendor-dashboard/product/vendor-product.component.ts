@@ -72,7 +72,6 @@ export class VendorProductComponent implements OnInit {
         this.alert.show({ message: 'ลบเสร็จสิ้น', type: 'success' });
       },
       (err: any) => {
-        console.log(err);
         this.alert.show({ message: 'เกิดข้อผิดพลาด', type: 'danger' });
       }
     );

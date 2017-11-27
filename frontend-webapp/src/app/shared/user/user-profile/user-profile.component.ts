@@ -47,7 +47,6 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
   loadData() {
     this.vendorProfileService.vendorProfile$.subscribe(
       data => {
-        console.log(data);
         this.vendorProfile = data;
       },
       err => this.alert.show({ message: 'เกิดข้อผิดพลาด', type: 'danger' })
