@@ -29,7 +29,7 @@ export class BecomeLessorComponent implements OnInit {
 
     this.becomeLessorForm = new FormGroup({
       lessorName: new FormControl('', [Validators.required]),
-      isOrganization: new FormControl(false, { updateOn: 'change' }),
+      isOrganization: new FormControl(false),
       organizationName: new FormControl('', [Validators.required]),
       organizationContactName: new FormControl('', [Validators.required]),
       organizationEmail: new FormControl('', [Validators.required, Validators.email]),
@@ -37,7 +37,7 @@ export class BecomeLessorComponent implements OnInit {
         '',
         [Validators.required, Validators.pattern(/^\+?\d{9,15}$/)]
       )
-    }, { updateOn: 'blur' });
+    });
 
     this.becomeLessorForm.controls['isOrganization'].valueChanges.pipe(
       distinctUntilChanged()
