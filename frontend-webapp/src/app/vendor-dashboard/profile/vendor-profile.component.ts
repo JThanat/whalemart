@@ -9,7 +9,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
-import { empty as observableEmpty } from 'rxjs/observable/empty';
+import { of as observableOf } from 'rxjs/observable/of';
 import { mergeMap } from 'rxjs/operators';
 import { AlertService } from '../../core/alert/alert.service';
 import {
@@ -26,7 +26,7 @@ import { VendorProfile, VendorProfileService } from './vendor-profile.service';
 })
 export class VendorProfileComponent implements OnInit, AfterViewInit {
   @ViewChild(LessorFormComponent) lessorFormComponent: LessorFormComponent;
-  @Input() isLessor = true;
+  @Input() isLessor = false;
 
   vendorProfile: VendorProfile;
   lessorProfile: LessorProfile;
@@ -150,7 +150,7 @@ export class VendorProfileComponent implements OnInit, AfterViewInit {
       .pipe(
         mergeMap(
           () =>
-            this.lessorProfileForm ? lessorUpdateProfile$ : observableEmpty()
+            this.lessorProfileForm ? lessorUpdateProfile$ : observableOf(true)
         )
       )
       .subscribe(
