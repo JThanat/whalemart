@@ -56,6 +56,7 @@ def get_unapproved_markets(request, *args, **kwargs):
 @permission_classes((IsAuthenticated, ))
 def get_booths_in_unapproved_market(request, *args, **kwargs):
     """
+    Return all booth in the unapproved market
     """
     market_id = kwargs.get('pk', None)
     if not market_id:
