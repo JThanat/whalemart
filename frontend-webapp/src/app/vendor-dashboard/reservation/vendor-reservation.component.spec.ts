@@ -10,7 +10,7 @@ describe('VendorReservationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [VendorReservationComponent]
+      declarations: [VendorReservationComponent],
       providers: [
         {
           provide: VendorReservationService,
