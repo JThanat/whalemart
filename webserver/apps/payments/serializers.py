@@ -13,6 +13,9 @@ class UploadReceiptSerializer(serializers.ModelSerializer):
         model = Installment
         fields = ('payment_date', 'amount', 'verification_status', 'receipt_image',)
         read_only_fields = ('amount', 'verification_status')
+        extra_kwargs = {
+            'payment_date': {'read_only': False, 'required': True}
+        }
 
 
 class VerifyReceiptSerializer(serializers.ModelSerializer):

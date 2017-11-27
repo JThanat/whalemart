@@ -1,0 +1,148 @@
+<ng-container *ngIf="(marketDetailObservable | async) as marketDetail">
+  <app-breadcrumb>
+    <a *appBreadcrumbItem routerLink="/">ฟีดตลาด</a>
+    <a *appBreadcrumbItem [routerLink]="['/market', marketDetail.id]">{{ marketDetail.name }}</a>
+    <span *appBreadcrumbItem>จองบูธ</span>
+  </app-breadcrumb>
+
+  <div class="header mb-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-10">
+          <div class="d-flex align-items-start flex-column flex-md-row">
+            <img [src]="marketDetail.coverImageUrl">
+            <div>
+              <h1>{{ marketDetail.name }}</h1>
+              <p class="lead">{{ marketDetail.caption }}</p>
+              <p class="location">
+                <app-svg-icon key="location-pin" width="15"></app-svg-icon>
+                <span>{{ marketDetail.location.name }}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form class="container" [formGroup]="reserveForm" (submit)="reserveBooth()">
+    <div class="row justify-content-center align-items-start">
+      <div class="col-12 col-md-10 col-lg-6 mb-5">
+        <section>
+          <h2><span class="number">1</span>เลือกบูธที่ต้องการจอง</h2>
+
+          <p>
+            เลือกบูธที่ท่านต้องการจอง 1 บูธ โดยสามารถเลือกไว้ได้สูงสุดจำนวน 10 อันดับ เพื่อให้ผู้จัดการตลาดคัดเลือก
+            หลังจากการคัดเลือกเสร็จสิ้น ทางระบบจะแจ้งหมายเลขบูธที่ท่านได้พร้อมราคาบูธ
+          </p>
+
+          <img [src]="marketDetail.layoutImageUrl" alt="รูปแผนผังตลาด" class="market-map mb-5">
+
+          <div class="booths-duplicate-alert" role="alert" *ngIf="boothsForm.hasError('boothsDuplicate')">
+            กรุณาเลือกบูธที่ไม่ซ้ำกัน
+          </div>
+
+          <div class="row" formArrayName="booths">
+            <div class="col-12 col-md-6" *ngFor="let booth of boothsForm.controls; index as i">
+              <app-input-group label="ลำดับที่ {{ i + 1 }}">
+                <select appInput class="form-control" [formControlName]="i" required>
+                  <option value="">เลือกบูธ</option>
+                  <option *ngFor="let booth of (booths | async)" [value]="booth.id">
+                    {{ booth.name }} (ราคา {{ booth.price | currency:'THB':'symbol-narrow' }})
+                  </option>
+                </select>
+                <app-input-error *ngIf="booth.hasError('required')">
+                  กรุณาระบุบูธที่ต้องการ
+                </app-input-error>
+              </app-input-group>
+            </div>
+          </div>
+        </section>
+
+        <hr>
+
+        <section>
+          <h2><span class="number">2</span>ตั้งชื่อร้าน</h2>
+
+          <app-input-group label="ชื่อร้าน">
+            <input appInput type="text" formControlName="name" placeholder="ชื่อร้าน" class="form-control form-control-lg">
+            <small class="form-text text-muted">
+              {{ reserveForm.get('name')?.value.length }}/100
+            </small>
+            <app-input-error *ngIf="reserveForm.hasError('required', ['name'])">
+              กรุณาระบุชื่อร้าน
+            </app-input-error>
+          </app-input-group>
+        </section>
+
+        <hr>
+
+        <section>
+          <h2><span class="number">3</span>ระบุสินค้าที่จะขาย</h2>
+
+          <app-input-group label="เพิ่มสินค้าโดยเลือกจากลิสต์ของคุณ">
+            <select #productAdder appInput class="form-control" (change)="addProduct(productAdder)" [disabled]="boothsForm.disabled">
+              <option value="">เลือกสินค้าจากลิสต์ของคุณ</option>
+              <option *ngFor="let product of (unselectedProducts | async)" [value]="product.id">
+                {{ product.name }}
+              </option>
+            </select>
+          </app-input-group>
+
+          <div class="product d-flex align-items-center" *ngFor="let selectedProduct of (selectedProducts | async); index as i">
+            <span class="number">{{ i + 1 }}</span>
+            <img [src]="selectedProduct.imageUrl">
+            <div>
+              <h4>{{ selectedProduct.name }}</h4>
+              <span>{{ selectedProduct.description }}</span>
+            </div>
+            <button type="button" class="ml-auto close" aria-label="Delete" (click)="unselectProduct(selectedProduct)">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </section>
+      </div>
+
+      <div class="col-12 col-md-10 col-lg-4 pl-lg-5 side-panel mb-5">
+        <h4>บูธที่ท่านเลือก</h4>
+
+        <table class="table table-sm">
+          <thead>
+            <tr>
+              <th scope="col">อันดับ</th>
+              <th scope="col">หมายเลขบูธ</th>
+              <th scope="col">ราคา</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let boothControl of boothsForm.controls; index as i">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{ (getBoothWithId(boothControl.value) | async)?.name || '-' }}</td>
+              <td>{{ (getBoothWithId(boothControl.value) | async)?.price || '-' }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="d-flex justify-content-between align-items-baseline">
+          <h4 class="text-nowrap">ชื่อร้าน</h4>
+          <span *ngIf="reserveForm.get('name')?.value as shopName; else noShopName" class="text-truncate pl-3">{{ shopName }}</span>
+          <ng-template #noShopName>
+            <span class="no-shop-name">ยังไม่ได้ระบุชื่อร้าน</span>
+          </ng-template>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-baseline">
+          <h4 class="text-nowrap">สินค้า</h4>
+          <span class="text-truncate pl-3">{{ (selectedProducts | async).length }} รายการ</span>
+        </div>
+
+        <div class="cta-container d-flex justify-content-between align-items-center">
+          <div class="note">
+            เราจะยังไม่เก็บเงินคุณ<br>ในขั้นตอนนี้
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg" [disabled]="boothsForm.disabled">จองบูธ</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-container>

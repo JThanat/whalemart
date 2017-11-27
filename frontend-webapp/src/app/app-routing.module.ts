@@ -35,7 +35,7 @@ const routes: Routes = [
   },
   {
     path: 'market/:id',
-    loadChildren: './market/landing/market-landing.module#MarketLandingModule'
+    loadChildren: './market/market.module#MarketModule'
   },
   {
     path: 'search',
@@ -52,9 +52,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    preloadingStrategy: PreloadAllModules
-  })],
+  imports: [
+    RouterModule.forRoot(routes, {
+      preloadingStrategy: PreloadAllModules
+    })
+  ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

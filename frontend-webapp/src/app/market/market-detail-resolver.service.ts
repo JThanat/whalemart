@@ -3,10 +3,46 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { map } from 'rxjs/operators';
 
-import { TimeService } from '../../core/utils/time.service';
-import { MarketDetail } from './market-landing.component';
+import { TimeService } from '../core/utils/time.service';
+
+export interface MarketDetail {
+  id: number;
+  name: string;
+  caption: string;
+  description: string;
+  openingDate: Date;
+  closingDate: Date;
+  openingTime: Date;
+  closingTime: Date;
+  contact: {
+    fullname: string;
+    phoneNumber: string;
+    email: string;
+  };
+  location: {
+    name: string;
+    latitude: string;
+    longitude: string;
+  };
+  termsAndCondition: string;
+  depositPaymentDue: Date;
+  fullPaymentDue: Date;
+  reservationDueDate: Date;
+  estimateVisitor: number;
+  minPrice: number;
+  maxPrice: number;
+  layoutImageUrl: string;
+  providedAccessories: {
+    name: string;
+    amount: number;
+  }[];
+  coverImageUrl: string;
+  scenePhotoUrls: string[];
+  tags: string[];
+}
 
 interface MarketDetailServerResponse {
+  id: number;
   name: string;
   caption: string;
   description: string;
@@ -58,6 +94,7 @@ export class MarketDetailResolver implements Resolve<MarketDetail> {
     });
 
     return {
+      id: sr.id,
       name: sr.name,
       caption: sr.caption,
       description: sr.description,

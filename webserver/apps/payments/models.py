@@ -44,3 +44,6 @@ class Installment(models.Model):
     rental_payment_info = models.ForeignKey('payments.RentalPaymentInfo',
                                             verbose_name='Rental Payment Info',
                                             related_name='installments')
+
+    def __str__(self):
+        return '%s' % self.pk
