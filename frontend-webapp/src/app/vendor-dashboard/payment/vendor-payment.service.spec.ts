@@ -11,7 +11,7 @@ describe('VendorPaymentServiceService', () => {
       providers: [
         VendorPaymentService,
         {
-          provide: VendorReservationService,
+          provide: VendorReservationService
         }
       ]
     });
