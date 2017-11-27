@@ -62,7 +62,13 @@ describe('SearchComponent', () => {
   it(
     'should create',
     inj(marketService => {
-      spyOn(marketService, 'search').and.returnValue(observableOf(undefined));
+      spyOn(marketService, 'search').and.returnValue(
+        observableOf({
+          currentPage: 1,
+          totalPage: 0,
+          markets: []
+        })
+      );
 
       fixture.detectChanges();
       expect(component).toBeTruthy();
