@@ -26,6 +26,27 @@
               <dt>เบอร์โทรศัพท์</dt>
               <dd>{{ vendorProfile.phone }}</dd>
             </dl>
+            <ng-container *ngIf="isLessor && lessorProfile">
+              <hr>
+              <h4 class="my-1">ข้อมูลผู้ให้เช่า</h4>
+              <dl class="mt-3">
+                <dt>ชื่อผู้ให้เช่า</dt>
+                <dd>{{ lessorProfile.lessorName }}</dd>
+                <dt>เป็นองค์กรหรือไม่</dt>
+                <dd>{{ lessorProfile.isOrganization ? 'เป็นองค์กร' : 'ไม่เป็นองค์กร' }}</dd>
+                <ng-container *ngIf="lessorProfile.isOrganization">
+                  <dt>ชื่อองค์กร</dt>
+                  <dd>{{ lessorProfile.organizationName }}</dd>
+                  <dt>ชื่อติดต่อในองค์กร</dt>
+                  <dd>{{ lessorProfile.organizationContactName }}</dd>
+                  <dt>อีเมลองค์กร</dt>
+                  <dd>{{ lessorProfile.organizationEmail }}</dd>
+                  <dt>เบอร์โทรติดต่อองค์กร</dt>
+                  <dd>{{ lessorProfile.organizationPhoneNumber }}</dd>
+                </ng-container>
+              </dl>
+            </ng-container>
+
             <button class="btn btn-outline-danger" (click)="setEditProfile(true)">แก้ไขข้อมูล</button>
           </ng-container>
           <div *ngIf="isEdit">
