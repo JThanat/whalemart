@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { map } from 'rxjs/operators/map';
+import { first, map, mergeMap } from 'rxjs/operators';
+
+import { AlertService } from '../../core/alert/alert.service';
+import { ApproveReservationService } from './approve-reservation.service';
 
 export interface Product {
   id: number;
@@ -32,6 +35,7 @@ export interface Booth {
 export class ApproveReservationComponent implements OnInit {
   boothsData: Observable<Booth[]>;
   selectedBooth: Booth | null = null;
+  isProcessing = false;
 
   /**
    * A map that maps vendor ID to selected booth ID.
@@ -43,7 +47,12 @@ export class ApproveReservationComponent implements OnInit {
    */
   boothVendorSelectMap = new Map<number, number>();
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private approveReservationService: ApproveReservationService,
+    private alert: AlertService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.boothsData = this.route.data.pipe(map(data => data.boothsData));
@@ -51,6 +60,36 @@ export class ApproveReservationComponent implements OnInit {
 
   selectBooth(booth: Booth) {
     this.selectedBooth = booth;
+  }
+
+  submitApproval() {
+    if (confirm('การกระทำนี้ไม่สามารถยกเลิกได้ คุณแน่ใจหรือไม่ว่าจะอนุมัติ?')) {
+      this.isProcessing = true;
+      this.route.paramMap
+        .pipe(
+          first(),
+          map(param => param.get('id')),
+          mergeMap(marketId => {
+            if (marketId === null) {
+              throw new Error('Market ID should not be null');
+            }
+            return this.approveReservationService.approveReservation({
+              marketId: Number(marketId),
+              boothVendorMap: this.boothVendorSelectMap
+            });
+          })
+        )
+        .subscribe(
+          () => {
+            this.alert.show({ message: 'การอนุมัติสำเร็จ', type: 'success' });
+            this.router.navigate(['/lessor']);
+          },
+          () => {
+            // TODO: Properly handle error.
+            this.alert.show({ message: 'การอนุมัติไม่สำเร็จ', type: 'danger' });
+          }
+        );
+    }
   }
 
   hasSelectedVendor(booth: Booth) {
@@ -77,6 +116,10 @@ export class ApproveReservationComponent implements OnInit {
   }
 
   selectVendorBooth(vendor: Vendor, booth: Booth) {
+    if (this.isProcessing) {
+      return;
+    }
+
     const vendorId = vendor.id;
     const boothId = booth.id;
 

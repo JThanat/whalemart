@@ -1,5 +1,9 @@
 <h1>อนุมัติบูธ</h1>
 
+<p>
+  สำหรับแต่ละบูธ กรุณาเลือกผู้เช่าที่ต้องการ เมื่อเลือกอนุมัติผู้เช่าตามที่ต้องการแล้ว กรุณากดอนุมัติ
+</p>
+
 <section>
   <h2>เลือกบูธ</h2>
   <div class="booth-selector-container">
@@ -19,3 +23,4 @@
   </div>
 </section>
 
+<button type="button" class="btn btn-primary btn-lg" [disabled]="isProcessing" (click)="submitApproval()">อนุมัติทั้งหมด</button>
