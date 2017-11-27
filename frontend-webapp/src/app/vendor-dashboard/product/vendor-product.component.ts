@@ -24,14 +24,11 @@ export class VendorProductComponent implements OnInit {
       data => (this.products = data)
     );
 
-    this.addProductForm = new FormGroup(
-      {
-        name: new FormControl('', [Validators.required]),
-        description: new FormControl('', [Validators.required]),
-        image: new FormControl(null, [Validators.required])
-      },
-      { updateOn: 'blur' }
-    );
+    this.addProductForm = new FormGroup({
+      name: new FormControl('', [Validators.required]),
+      description: new FormControl('', [Validators.required]),
+      image: new FormControl(null, [Validators.required])
+    });
   }
 
   showAddProduct() {
