@@ -40,12 +40,12 @@ class ReservationViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin):
 
 @api_view(['GET', ])
 @permission_classes((IsAuthenticated, ))
-def get_unapproved_market(request, *args, **kwargs):
+def get_unapproved_markets(request, *args, **kwargs):
     """
     Return all approved markets created by the current user
     """
     user = request.user
-    markets = Market.objects.filter(user=user, is_approved_all_reservations=False)
+    markets = Market.objects.filter(created_user=user, is_approved_all_reservations=False)
     markets_json = []
     for market in markets:
         markets_json.append(MarketFeedSerializer(market).data)
@@ -54,10 +54,22 @@ def get_unapproved_market(request, *args, **kwargs):
 
 @api_view(['GET', ])
 @permission_classes((IsAuthenticated, ))
-def get_unapproved_booth_in_market(request, *args, **kwargs):
+def get_booths_in_unapproved_market(request, *args, **kwargs):
     """
     """
-    user = request.user
+    market_id = kwargs.get('pk', None)
+    if not market_id:
+        return Response('Please provide market id', status=status.HTTP_400_BAD_REQUEST)
+    if not Market.objects.filter(pk=market_id).exists():
+        return Response('Invalid market id', status=status.HTTP_400_BAD_REQUEST)
+    booths = Market.objects.get(pk=market_id).booths.all().order_by('pk')
+    booths_json = []
+    for booth in booths:
+        booth_json = dict()
+        booth_json['id'] = booth.pk
+        booth_json['booth_number'] = booth.booth_number
+        booths_json.append(booth_json)
+    return Response(booths_json, status=status.HTTP_200_OK)
 
 
 @api_view(['POST', ])
