@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 
 import { BreadcrumbItemDirective } from './breadcrumb/breadcrumb-item.directive';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { CreditCardPipe } from './credit-card/credit-card.pipe';
 import { DateRangePipe } from './date-range/date-range.pipe';
 import { InputModule } from './input/input.module';
 import { MarketComponent } from './market/market.component';
@@ -48,7 +49,8 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
     BreadcrumbItemDirective,
     MenuComponent,
     MenuItemComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    CreditCardPipe
   ],
   exports: [
     CommonModule,
@@ -69,8 +71,14 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
     MenuComponent,
     MenuItemComponent,
     InputModule,
-    NotFoundComponent
+    NotFoundComponent,
+    CreditCardPipe
   ],
-  providers: [DatePipe, DateRangePipe, { provide: LOCALE_ID, useValue: 'th' }]
+  providers: [
+    DatePipe,
+    DateRangePipe,
+    CreditCardPipe,
+    { provide: LOCALE_ID, useValue: 'th' }
+  ]
 })
 export class SharedModule {}
