@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 
+import { LessorService } from '../lessor-dashboard/lessor.service';
 import { SharedModule } from '../shared/shared.module';
 import { VendorPaymentResolver } from './payment/vendor-payment-resolver.service';
 import { VendorPaymentComponent } from './payment/vendor-payment.component';
@@ -28,7 +29,8 @@ import { VendorDashboardComponent } from './vendor-dashboard.component';
     VendorPaymentResolver,
     VendorProfileResolver,
     VendorProductService,
-    VendorPaymentService
+    VendorPaymentService,
+    LessorService
   ]
 })
 export class VendorDashboardModule { }

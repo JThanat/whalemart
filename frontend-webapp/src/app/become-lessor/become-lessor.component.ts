@@ -8,6 +8,18 @@ import { map } from 'rxjs/operators';
 import { AlertService } from '../core/alert/alert.service';
 import { BecomeLessorService, LessorStatus } from './become-lessor.service';
 
+export const becomeLessorForm = new FormGroup({
+  lessorName: new FormControl('', [Validators.required]),
+  isOrganization: new FormControl(false),
+  organizationName: new FormControl('', [Validators.required]),
+  organizationContactName: new FormControl('', [Validators.required]),
+  organizationEmail: new FormControl('', [Validators.required, Validators.email]),
+  organizationPhone: new FormControl(
+    '',
+    [Validators.required, Validators.pattern(/^\+?\d{9,15}$/)]
+  )
+});
+
 @Component({
   selector: 'app-become-lessor',
   templateUrl: './become-lessor.component.html',
@@ -27,17 +39,7 @@ export class BecomeLessorComponent implements OnInit {
   ngOnInit() {
     this.lessorStatus$ = this.route.data.pipe(map(data => data.lessorStatus));
 
-    this.becomeLessorForm = new FormGroup({
-      lessorName: new FormControl('', [Validators.required]),
-      isOrganization: new FormControl(false),
-      organizationName: new FormControl('', [Validators.required]),
-      organizationContactName: new FormControl('', [Validators.required]),
-      organizationEmail: new FormControl('', [Validators.required, Validators.email]),
-      organizationPhone: new FormControl(
-        '',
-        [Validators.required, Validators.pattern(/^\+?\d{9,15}$/)]
-      )
-    });
+    this.becomeLessorForm = becomeLessorForm;
 
     this.becomeLessorForm.controls['isOrganization'].valueChanges.pipe(
       distinctUntilChanged()
