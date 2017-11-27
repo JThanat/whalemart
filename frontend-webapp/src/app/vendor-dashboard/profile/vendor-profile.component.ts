@@ -49,7 +49,6 @@ export class VendorProfileComponent implements OnInit, AfterViewInit {
     if (this.isLessor) {
       this.lessorService.getLessorProfile$.subscribe(
         data => {
-          console.log(data);
           this.lessorProfile = data;
         },
         err => this.alert.show({ message: 'เกิดข้อผิดพลาด', type: 'danger' })
@@ -123,7 +122,6 @@ export class VendorProfileComponent implements OnInit, AfterViewInit {
         organizationEmail,
         organizationPhoneNumber
       } = this.lessorProfileForm.value;
-      console.log(this.lessorProfileForm.value);
 
       lessorUpdateProfile$ = this.lessorService.updateLessorProfile$({
         lessor_name: lessorName,

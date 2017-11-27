@@ -39,11 +39,11 @@
   </app-input-group>
 
   <app-input-group label="เบอร์โทรศัพท์องค์กร">
-    <input appInput type="text" class="form-control" formControlName="organizationPhone" placeholder="เบอร์โทรศัพท์องค์กร">
-    <app-input-error *ngIf="lessorForm.controls['organizationPhone'].hasError('required')">
+    <input appInput type="text" class="form-control" formControlName="organizationPhoneNumber" placeholder="เบอร์โทรศัพท์องค์กร">
+    <app-input-error *ngIf="lessorForm.controls['organizationPhoneNumber'].hasError('required')">
       กรุณากรอกเบอร์โทรศัพท์องค์กร
     </app-input-error>
-    <app-input-error *ngIf="lessorForm.controls['organizationPhone'].hasError('pattern')">
+    <app-input-error *ngIf="lessorForm.controls['organizationPhoneNumber'].hasError('pattern')">
       หมายเลขโทรศัพท์ของคุณควรอยู่ในรูปแบบ 0812345678
     </app-input-error>
   </app-input-group>

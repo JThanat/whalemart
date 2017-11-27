@@ -8,7 +8,7 @@ export const lessorForm = new FormGroup({
   organizationName: new FormControl('', [Validators.required]),
   organizationContactName: new FormControl('', [Validators.required]),
   organizationEmail: new FormControl('', [Validators.required, Validators.email]),
-  organizationPhone: new FormControl(
+  organizationPhoneNumber: new FormControl(
     '',
     [Validators.required, Validators.pattern(/^\+?\d{9,15}$/)]
   )
@@ -41,7 +41,7 @@ export class LessorFormComponent implements OnInit {
       'organizationName',
       'organizationContactName',
       'organizationEmail',
-      'organizationPhone'
+      'organizationPhoneNumber'
     ];
 
     for (let i = 0; i < fields.length; i++) {
