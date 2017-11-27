@@ -10,7 +10,7 @@ export abstract class BaseFileInputComponent implements ControlValueAccessor {
   private onTouched: Function;
 
   writeValue(value: FileList | undefined | null) {
-    if (value) {
+    if (value instanceof FileList) {
       this.fileList = value;
     }
   }

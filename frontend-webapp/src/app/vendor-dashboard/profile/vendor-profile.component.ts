@@ -38,7 +38,12 @@ export class VendorProfileComponent implements OnInit {
     this.isEdit = isEdit;
 
     if (isEdit) {
-      this.vendorProfileForm.reset(this.vendorProfile);
+      const { firstName, lastName, phone } = this.vendorProfile;
+      this.vendorProfileForm.reset({
+        firstName: firstName,
+        lastName: lastName,
+        phone: phone
+      });
     }
   }
 
