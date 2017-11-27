@@ -8,7 +8,7 @@ import { catchError, map } from 'rxjs/operators';
 export interface Report {
   report_content: string;
   time_stamp: Date;
-  user: string;
+  reported_user: string;
   market: string;
 }
 

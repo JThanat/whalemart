@@ -16,17 +16,17 @@ interface ProductRequest {
   image: File;
 }
 
-class VendorProductError {}
+class UserProductError {}
 
 @Injectable()
-export class VendorProductService {
+export class UserProductService {
   constructor(private http: HttpClient) {}
 
   get productError() {
     return catchError((err: any) => {
       if (err instanceof HttpErrorResponse) {
         if (err.status >= 400 && err.status < 500) {
-          return observableThrow(new VendorProductError());
+          return observableThrow(new UserProductError());
         }
       }
       return observableThrow(err);

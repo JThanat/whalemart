@@ -59,7 +59,7 @@
 </form>
 
 <div class="container my-5" *ngIf="(searchResult | async) as result">
-  <ng-container *ngIf="result.status === 'ok'; else noSearchQuery">
+  <ng-container *ngIf="result.status === 'ok'">
     <ng-container *ngIf="result?.markets.length > 0; else emptySearchResult">
       <div class="text-right mb-3">
         <app-menu [right]="true" text="เรียงผลการค้นหาตาม">
@@ -92,18 +92,4 @@
       </div>
     </ng-template>
   </ng-container>
-
-  <ng-template #noSearchQuery>
-    <div class="no-search-query" *ngIf="result.status === 'emptySearchParams'">
-      <h3>กรุณากรอกคำค้นหา</h3>
-      <div class="no-result-suggestion">
-        คุณสามารถค้นหาตลาดได้ง่ายๆ จากการ
-        <ul>
-          <li>ระบุชื่อตลาด หรือสถานที่</li>
-          <li>เลือกช่วงวันจัดตลาด</li>
-          <li>เพิ่มตัวกรองต่างๆ เพื่อตัดตลาดที่ไม่ต้องการออกจากผลการค้นหา</li>
-        </ul>
-      </div>
-    </div>
-  </ng-template>
 </div>

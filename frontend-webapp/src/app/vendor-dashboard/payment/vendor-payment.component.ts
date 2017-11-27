@@ -71,7 +71,6 @@ export class VendorPaymentComponent implements OnInit {
       expiry_year: expiryYear,
       verification_no: creditCard.verificationNo
     };
-    console.log(creditCard, creditCardReq);
     this.vendorPaymentService.addCreditCard$(creditCardReq).subscribe(
       data => {
         this.addCreditCardForm.enable();

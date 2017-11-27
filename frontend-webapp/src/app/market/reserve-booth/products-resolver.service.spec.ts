@@ -1,20 +1,19 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { inject, TestBed } from '@angular/core/testing';
 
-import { MarketService } from '../core/market/market.service';
-import { LessorService } from './lessor.service';
+import { ProductsResolver } from './products-resolver.service';
 
-describe('LessorService', () => {
+describe('ProductsResolver', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [LessorService, MarketService]
+      providers: [ProductsResolver]
     });
   });
 
   it(
     'should be created',
-    inject([LessorService], (service: LessorService) => {
+    inject([ProductsResolver], (service: ProductsResolver) => {
       expect(service).toBeTruthy();
     })
   );

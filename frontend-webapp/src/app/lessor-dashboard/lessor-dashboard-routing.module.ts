@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { VendorProfileResolver } from '../core/vendor/vendor-profile-resolver.service';
 import { CreateMarketComponent } from './create-market/create-market.component';
 import { IsLessorGuardService } from './is-lessor-guard.service';
 import { LessorDashboardComponent } from './lessor-dashboard.component';
@@ -28,7 +29,10 @@ const routes: Routes = [
       },
       {
         path: 'profile',
-        component: LessorInfoComponent
+        component: LessorInfoComponent,
+        resolve: {
+          vendorProfile: VendorProfileResolver
+        }
       },
       {
         path: 'create-market',

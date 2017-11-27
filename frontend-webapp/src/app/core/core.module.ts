@@ -8,6 +8,7 @@ import { LocalDbModule } from './local-db/local-db.module';
 import { MarketService } from './market/market.service';
 import { NavBarModule } from './nav-bar/nav-bar.module';
 import { SearchBackButtonService } from './search/search-back-button.service';
+import { UserLoginGuard } from './user/user-login-guard';
 import { UserService } from './user/user.service';
 import { UtilsModule } from './utils/utils.module';
 
@@ -32,6 +33,7 @@ import { UtilsModule } from './utils/utils.module';
   ],
   providers: [
     UserService,
+    UserLoginGuard,
     MarketService,
     SearchBackButtonService
   ]
