@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../shared/shared.module';
+import { VendorPaymentResolver } from './payment/vendor-payment-resolver.service';
+import { VendorPaymentComponent } from './payment/vendor-payment.component';
+import { VendorPaymentService } from './payment/vendor-payment.service';
 import { VendorProductComponent } from './product/vendor-product.component';
 import { VendorProductService } from './product/vendor-product.service';
 import { VendorProfileResolver } from './profile/vendor-profile-resolver.service';
@@ -17,12 +20,15 @@ import { VendorDashboardComponent } from './vendor-dashboard.component';
   declarations: [
     VendorProfileComponent,
     VendorDashboardComponent,
-    VendorProductComponent
+    VendorProductComponent,
+    VendorPaymentComponent
   ],
   providers: [
     VendorProfileService,
+    VendorPaymentResolver,
     VendorProfileResolver,
-    VendorProductService
+    VendorProductService,
+    VendorPaymentService
   ]
 })
 export class VendorDashboardModule { }

@@ -26,22 +26,24 @@ export class VendorProfileComponent implements OnInit {
       this.vendorProfile = data.vendorProfile;
     });
 
-    this.vendorProfileForm = new FormGroup(
-      {
-        firstName: new FormControl('', [Validators.required]),
-        lastName: new FormControl('', [Validators.required]),
-        phone: new FormControl('', [Validators.required, Validators.pattern(/^\+?\d{9,15}$/)]),
-        profileImage: new FormControl()
-      },
-      { updateOn: 'blur' }
-    );
+    this.vendorProfileForm = new FormGroup({
+      firstName: new FormControl('', [Validators.required]),
+      lastName: new FormControl('', [Validators.required]),
+      phone: new FormControl('', [Validators.required, Validators.pattern(/^\+?\d{9,15}$/)]),
+      profileImage: new FormControl()
+    });
   }
 
   setEditProfile(isEdit: boolean) {
     this.isEdit = isEdit;
 
     if (isEdit) {
-      this.vendorProfileForm.reset(this.vendorProfile);
+      const { firstName, lastName, phone } = this.vendorProfile;
+      this.vendorProfileForm.reset({
+        firstName: firstName,
+        lastName: lastName,
+        phone: phone
+      });
     }
   }
 

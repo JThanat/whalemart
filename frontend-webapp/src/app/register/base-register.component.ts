@@ -22,12 +22,10 @@ export abstract class BaseRegisterComponent implements OnInit {
       lastName: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
       phone: new FormControl('', [Validators.required, Validators.pattern(/^\+?\d{9,15}$/)])
-    }, { updateOn: 'blur' });
+    });
   }
 
   register() {
-    this.registerForm.updateValueAndValidity();
-
     if (!this.registerForm.valid) {
       return;
     }

@@ -33,7 +33,6 @@ from apps.products import views as product_views
 from apps.tags import views as tag_views
 from apps.reservations import views as reservation_views
 from apps.payments import views as payment_views
-from apps.admins import views as admin_views
 from apps.reports import views as report_views
 from apps.ratings import views as ratings_views
 
@@ -57,6 +56,9 @@ router.register(r'similar-market', market_views.SimilarMarketView, base_name='si
 router.register(r'credit-card', user_views.CreditCardView, base_name='credit-card')
 router.register(r'reserve-booth', reservation_views.ReservationViewSet, base_name='reserve-booth')
 router.register(r'payment', payment_views.PaymentViewSet, base_name='payment')
+router.register(r'upload-receipt', payment_views.UploadReceiptViewSet, base_name='upload-receipt')
+router.register(r'verify-receipt', payment_views.VerifyReceiptViewSet, base_name='verify-receipt')
+
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
@@ -73,7 +75,6 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^reservation-status/', user_views.get_reserved_markets),
     url(r'^approve-reservation/', reservation_views.approve_booths),
-    url(r'^verify-receipt/', admin_views.verify_receipt),
     # JWT
     url(r'^api-token-auth/', obtain_jwt_token),
     url(r'^api-token-refresh/', refresh_jwt_token),

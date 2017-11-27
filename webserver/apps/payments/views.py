@@ -1,8 +1,8 @@
 from rest_framework import viewsets, mixins
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 from apps.payments.models import Installment, RentalPaymentInfo
-from apps.payments.serializers import InstallmentSerializer
+from apps.payments.serializers import InstallmentSerializer, UploadReceiptSerializer, VerifyReceiptSerializer
 
 
 class PaymentViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin):
@@ -41,3 +41,17 @@ class PaymentViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin):
     queryset = Installment.objects.all()
     serializer_class = InstallmentSerializer
     permission_classes = (IsAuthenticated,)
+
+
+class UploadReceiptViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin, mixins.UpdateModelMixin):
+    queryset = Installment.objects.all()
+    serializer_class = UploadReceiptSerializer
+    permission_classes = (IsAuthenticated,)
+
+
+class VerifyReceiptViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.RetrieveModelMixin,
+                           mixins.UpdateModelMixin):
+    queryset = Installment.objects.filter(payment_method=Installment.BANK_TRANSFER,
+                                          verification_status=Installment.PENDING)
+    serializer_class = VerifyReceiptSerializer
+    permission_classes = (IsAuthenticated, IsAdminUser)
