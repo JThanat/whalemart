@@ -1,14 +1,16 @@
 from rest_framework import viewsets, mixins
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 
 from apps.commons.choices import ReservationStatus
+from apps.markets.models import Market
 from apps.booths.models import Booth
 from apps.reservations.models import Reservation
 from apps.payments.models import Installment
 from apps.reservations.serializers import ReservationSerializer
+from apps.markets.serializers import MarketFeedSerializer
 
 
 class ReservationViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin):
@@ -36,7 +38,30 @@ class ReservationViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin):
         return Reservation.objects.filter(user=user)
 
 
-@api_view(['POST',])
+@api_view(['GET', ])
+@permission_classes((IsAuthenticated, ))
+def get_unapproved_market(request, *args, **kwargs):
+    """
+    Return all approved markets created by the current user
+    """
+    user = request.user
+    markets = Market.objects.filter(user=user, is_approved_all_reservations=False)
+    markets_json = []
+    for market in markets:
+        markets_json.append(MarketFeedSerializer(market).data)
+    return Response(markets_json, status=status.HTTP_200_OK)
+
+
+@api_view(['GET', ])
+@permission_classes((IsAuthenticated, ))
+def get_unapproved_booth_in_market(request, *args, **kwargs):
+    """
+    """
+    user = request.user
+
+
+@api_view(['POST', ])
+@permission_classes((IsAuthenticated, ))
 def approve_booths(request, *args, **kwargs):
     """
     {\n
@@ -89,6 +114,7 @@ def approve_booths(request, *args, **kwargs):
 
 
 @api_view(['GET', ])
+@permission_classes((IsAuthenticated, ))
 def get_reserved_markets(request, *args, **kwargs):
     """
     ### Provide the reservation status of each market of the logged in user\n
@@ -99,7 +125,7 @@ def get_reserved_markets(request, *args, **kwargs):
     3: cancelled\n
     `approved_booth`:\n
     id: approved booth id\n
-    null: status is waiting for approval, rejected, or cancelled)\n
+    null: status is waiting for approval, rejected, or cancelled\n
     `payment_status`:\n
     0: draft\n
     1: deposited\n
@@ -110,8 +136,6 @@ def get_reserved_markets(request, *args, **kwargs):
     null: all of installments is complete\n
     """
     user = request.user
-    if user.is_anonymous():
-        return Response(status=status.HTTP_401_UNAUTHORIZED)
     reservations = user.reservations.all()
     markets = []
     for reservation in reservations:
