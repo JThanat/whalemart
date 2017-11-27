@@ -7,6 +7,7 @@ from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 
 from .models import CreditCard
+from apps.lessors.models import Lessor
 
 User = get_user_model()
 
@@ -14,7 +15,7 @@ User = get_user_model()
 class CreditCardSerializer(serializers.ModelSerializer):
     class Meta:
         model = CreditCard
-        fields = ('card_number', 'card_holder_name', 'type', 'expiry_date', 'verification_no')
+        fields = ('id', 'card_number', 'card_holder_name', 'type', 'expiry_month', 'expiry_year', 'verification_no')
 
     def create(self, validated_data):
         user = self.context['request'].user
@@ -56,13 +57,18 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
+    is_lessor = serializers.SerializerMethodField()
+
     class Meta:
         model = User
-        fields = ('id', 'email', 'first_name', 'last_name', 'phone', 'is_verified', 'profile_image')
+        fields = ('id', 'email', 'first_name', 'last_name', 'phone', 'is_verified', 'is_lessor', 'profile_image')
         extra_kwargs = {
             'is_verified': {'read_only': True},
             'email': {'read_only': True},
         }
+
+    def get_is_lessor(self, obj):
+        return Lessor.objects.filter(user=obj).exists()
 
 
 def get_facebook_id(facebook_token):

@@ -32,12 +32,13 @@
   <nav>
     <div class="container">
       <div class="row justify-content-center">
-        <div class="col-12 col-md-10">
+        <div class="col-12 col-md-10 inpage-nav-wrapper">
           <a class="nav-link" [class.active]="currentSectionId === 0" routerLink="./" fragment="general">ข้อมูลทั่วไป</a>
           <a class="nav-link" [class.active]="currentSectionId === 1" routerLink="./" fragment="lease-info">ข้อมูลการเช่า</a>
           <a class="nav-link" [class.active]="currentSectionId === 2" routerLink="./" fragment="market-map">แผนผังตลาด</a>
           <a class="nav-link" [class.active]="currentSectionId === 3" routerLink="./" fragment="lessor-contact">ติดต่อผู้ดูแลตลาด</a>
         </div>
+        <div class="scroll-fade"></div>
       </div>
     </div>
   </nav>

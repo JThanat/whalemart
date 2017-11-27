@@ -1,4 +1,3 @@
-from django.contrib import auth
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import check_password
 from rest_framework import viewsets, mixins, status
@@ -16,15 +15,16 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     credit_cards data example:\n
     "credit_cards": [\n
-        {
-            "id": 10,
-            "card_number": "1",
-            "card_holder_name": "2",
-            "type": 1,
-            "expiry_date": "2017-05-16",
-            "verification_no": "1"
-        }
-    ]
+        {\n
+            "id": 10,\n
+            "card_number": "1",\n
+            "card_holder_name": "2",\n
+            "type": 1,\n
+            "expiry_month": "01",\n
+            "expiry_year": "18",\n
+            "verification_no": "1"\n
+        }\n
+    ]\n
     """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
