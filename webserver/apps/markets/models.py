@@ -69,6 +69,9 @@ class Market(ControlModel):
     # Provided Accessories
     provided_accessories = fields.JSONField(verbose_name='Provided Accessories')
 
+    # Reservation Status
+    is_approved_all_reservations = models.BooleanField(default=False, verbose_name='Is approved all reservations')
+
     def __str__(self):
         return '{} - {}'.format(self.name, self.id)
 
