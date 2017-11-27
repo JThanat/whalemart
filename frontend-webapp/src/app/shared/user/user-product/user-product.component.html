@@ -1,0 +1,55 @@
+<h4>ประเภทสินค้าที่จะจำหน่าย</h4>
+
+<div class="description">รายการสินค้าที่จะนำไปวางขายในตลาด</div>
+
+<div *ngFor="let product of products; index as i" class="product-list">
+  <div class="mb-2">
+    <div class="d-flex flex-wrap align-items-center mt-3">
+      <div class="p-3 pl-4">
+        <strong>
+          {{ i + 1 }}
+        </strong>
+      </div>
+      <div class="p-2">
+        <div class="thumb-img">
+          <img class="img-fluid" [src]="product.image" />
+        </div>
+      </div>
+      <div class="p-2">
+        <dl>
+          <dt>{{ product.name }}</dt>
+          <dd>{{ product.description }}</dd>
+        </dl>
+      </div>
+      <div class="ml-auto p-3">
+        <button class="btn btn-danger" (click)="deleteProduct(product)">ลบ</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isShowAddProduct" class="mt-3">
+  <form [formGroup]="addProductForm" (submit)="addProduct()">
+    <app-input-group label="ชื่อสินค้า">
+      <input appInput type="text" class="form-control" formControlName="name" placeholder="ชื่อสินค้า">
+      <app-input-error *ngIf="addProductForm.controls['name'].hasError('required')">
+        กรุณากรอกชื่อสินค้า
+      </app-input-error>
+    </app-input-group>
+    <app-input-group label="รายละเอียดสินค้า">
+      <input appInput type="text" class="form-control" formControlName="description" placeholder="รายละเอียดสินค้า">
+      <app-input-error *ngIf="addProductForm.controls['description'].hasError('required')">
+        กรุณากรอกรายละเอียดสินค้า
+      </app-input-error>
+    </app-input-group>
+    <app-input-group label="รูปภาพสินค้า">
+      <app-file-input appInput class="mx-auto d-block" formControlName="image" label="เลือกรูปภาพ"></app-file-input>
+      <app-input-error *ngIf="addProductForm.controls['image'].hasError('required')">
+        กรุณาเลือกรูปภาพ
+      </app-input-error>
+    </app-input-group>
+    <button type="submit" class="btn btn-primary mt-2" [disabled]="addProductForm.disabled">เพิ่มสินค้า</button>
+  </form>
+</div>
+
+<button *ngIf="!isShowAddProduct" class="btn btn-primary mt-3" (click)="showAddProduct()">เพิ่มสินค้า</button>

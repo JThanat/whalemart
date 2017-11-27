@@ -8,7 +8,7 @@ class User(AbstractUser):
     first_name = models.CharField(verbose_name='First Name', max_length=50)
     last_name = models.CharField(verbose_name='Last Name', max_length=50)
     phone = models.CharField(verbose_name='Phone', max_length=20)
-    facebook_id = models.CharField(verbose_name='Facebook Token', blank=True, max_length=20, unique=True)
+    facebook_id = models.CharField(verbose_name='Facebook Token', blank=True, max_length=20)
     is_verified = models.BooleanField(verbose_name='Is Verified', default=False)
     profile_image = models.ImageField(verbose_name='Profile Image', null=True, upload_to='profile_images/%Y/%m/%d')
 
@@ -28,7 +28,8 @@ class CreditCard(models.Model):
         (VISA, 'Visa')
     )
     type = models.PositiveSmallIntegerField(choices=TYPE_CHOICES)
-    expiry_date = models.DateField(verbose_name='Expiry Date')
+    expiry_month = models.CharField(verbose_name='Expiry Month', max_length=2)
+    expiry_year = models.CharField(verbose_name='Expiry Year', max_length=2)
     verification_no = models.CharField(verbose_name='Verification Number', max_length=10)
 
     def __str__(self):

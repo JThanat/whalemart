@@ -7,14 +7,11 @@ import { BecomeLessorComponent } from './become-lessor.component';
 import { BecomeLessorService } from './become-lessor.service';
 
 @NgModule({
-  imports: [
-    SharedModule,
-    BecomeLessorRoutingModule
-  ],
+  imports: [SharedModule, BecomeLessorRoutingModule],
   declarations: [BecomeLessorComponent],
   providers: [
     BecomeLessorService,
     BecomeLessorResolver
   ]
 })
-export class BecomeLessorModule { }
+export class BecomeLessorModule {}
