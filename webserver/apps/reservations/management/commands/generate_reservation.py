@@ -22,7 +22,7 @@ class Command(BaseCommand):
             Market.objects.get(pk=29),
             Market.objects.get(pk=11),
             Market.objects.get(pk=16),
-            Market.objects.get(pk=15)
+            Market.objects.get(pk=15)\
         ]
 
     def _create_reservation(self):
@@ -48,11 +48,24 @@ class Command(BaseCommand):
                     )
 
 
-    def _create_demo_for_payment(self):
-        pass
+    def _approve(self):
+        users = User.objects.all()
+        approved_list = list()
+        for n, user in enumerate(users):
+            print(n)
+            reservations = Reservation.objects.filter(user=user)
+            for reservation in reservations:
+                reserved_booths = ReservedBooth.objects.filter(reservation=reservation)
+                for i in range(10):
+                    if reserved_booths[i].booth in approved_list:
+                        continue
+                    reservation.approved_booth = reserved_booths[i].booth
+                    approved_list.append(reserved_booths[i].booth)
+                    reservation.save()
+
 
     def handle(self, *args, **options):
         random.seed(1959)
-        self._create_demo_for_payment()
-        self._create_reservation()
+        # self._create_reservation()
+        self._approve()
 
