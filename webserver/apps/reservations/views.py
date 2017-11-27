@@ -197,6 +197,7 @@ def get_reserved_markets(request, *args, **kwargs):
     for reservation in reservations:
         market = dict()
         market['market_id'] = reservation.market.id
+        market['market_name'] = reservation.market.name
         market['reservation_status'] = reservation.status
         if market['reservation_status'] == ReservationStatus.APPROVED:
             market['approved_booth'] = reservation.approved_booth.id
