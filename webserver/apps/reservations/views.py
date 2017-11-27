@@ -27,10 +27,12 @@ class ReservationViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin):
             {"booth": 296},
             {"booth": 297},
             {"booth": 298},
-            {"booth": 299}
+            {"booth": 299},
+            ...
+            {...}
         ],
         "products": [
-            1
+            1, ...
         ]
     }
     """
@@ -195,16 +197,17 @@ def get_reserved_markets(request, *args, **kwargs):
         else:
             market['approved_booth'] = None
             market['booth_rental_fee'] = None
-        if reservation.rental_payment_info:
+        try:
+            rental_payment_info = reservation.rental_payment_info
             market['payment_status'] = reservation.rental_payment_info.status
-        else:
+            if rental_payment_info.installments.filter(payment_method=Installment.BANK_TRANSFER,
+                                                       receipt_image=None).exists():
+                incomplete_installment = reservation.rental_payment_info.installments.filter(
+                    payment_method=Installment.BANK_TRANSFER, receipt_image=None)[0]
+                market['incomplete_installment_id'] = incomplete_installment.id
+            else:
+                market['incomplete_installment_id'] = None
+        except:
             market['payment_status'] = None
-        if reservation.rental_payment_info.installments.filter(payment_method=Installment.BANK_TRANSFER,
-                                                               receipt_image=None).exists():
-            incomplete_installment = reservation.rental_payment_info.installments.filter(
-                payment_method=Installment.BANK_TRANSFER, receipt_image=None)[0]
-            market['incomplete_installment_id'] = incomplete_installment.id
-        else:
-            market['incomplete_installment_id'] = None
         markets.append(market)
     return Response(markets, status=status.HTTP_200_OK)
