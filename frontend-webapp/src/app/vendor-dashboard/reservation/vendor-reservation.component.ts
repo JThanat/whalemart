@@ -17,7 +17,7 @@ export class VendorReservationComponent implements OnInit {
   constructor(private vendorReservationService: VendorReservationService) {}
 
   ngOnInit() {
-    this.vendorReservationService.reservationInformation$.subscribe(
+    this.vendorReservationService.reservationInformation$().subscribe(
       data => (this.reservationInfo = data)
     );
   }
