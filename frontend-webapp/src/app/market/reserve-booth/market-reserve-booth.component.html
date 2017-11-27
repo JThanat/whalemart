@@ -79,7 +79,26 @@
         <section>
           <h2><span class="number">3</span>ระบุสินค้าที่จะขาย</h2>
 
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quibusdam laudantium a iure ex hic totam sed? Eveniet dolor nisi ullam ab, expedita reiciendis illum, ipsa tenetur possimus, sit eius quasi?
+          <app-input-group label="เพิ่มสินค้าโดยเลือกจากลิสต์ของคุณ">
+            <select #productAdder appInput class="form-control" (change)="addProduct(productAdder)">
+              <option value="">เลือกสินค้าจากลิสต์ของคุณ</option>
+              <option *ngFor="let product of (unselectedProducts | async)" [value]="product.id">
+                {{ product.name }}
+              </option>
+            </select>
+          </app-input-group>
+
+          <div class="product d-flex align-items-center" *ngFor="let selectedProduct of (selectedProducts | async); index as i">
+            <span class="number">{{ i + 1 }}</span>
+            <img [src]="selectedProduct.imageUrl">
+            <div>
+              <h4>{{ selectedProduct.name }}</h4>
+              <span>{{ selectedProduct.description }}</span>
+            </div>
+            <button type="button" class="ml-auto close" aria-label="Delete" (click)="unselectProduct(selectedProduct)">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
         </section>
       </div>
 

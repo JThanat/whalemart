@@ -117,3 +117,29 @@ hr {
     }
   }
 }
+
+.product {
+  background: $light-gray;
+  padding: 0.5rem 1.5rem;
+  margin-bottom: 1rem;
+  border-radius: $border-radius;
+
+  .number {
+    @include font-weight(bold);
+    margin-right: 1.5rem;
+  }
+
+  img {
+    width: 4rem;
+    height: 4rem;
+    margin-right: 1.5rem;
+    border-radius: $border-radius;
+    object-fit: cover;
+    background-position: center;
+  }
+
+  h4 {
+    font-size: 1.1rem;
+    @include font-weight(bold);
+  }
+}

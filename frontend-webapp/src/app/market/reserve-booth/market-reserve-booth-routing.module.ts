@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { BoothsResolver } from './booths-resolver.service';
 import { MarketReserveBoothComponent } from './market-reserve-booth.component';
+import { ProductsResolver } from './products-resolver.service';
 
 const routes: Routes = [
   {
@@ -10,7 +11,8 @@ const routes: Routes = [
     pathMatch: 'full',
     component: MarketReserveBoothComponent,
     resolve: {
-      booths: BoothsResolver
+      booths: BoothsResolver,
+      products: ProductsResolver
     }
   }
 ];
