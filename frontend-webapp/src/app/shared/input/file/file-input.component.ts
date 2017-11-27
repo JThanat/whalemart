@@ -17,4 +17,5 @@ import { BaseFileInputComponent } from './base-file-input.component';
 })
 export class FileInputComponent extends BaseFileInputComponent {
   @Input() title: string;
+  @Input() allowMultipleFiles = false;
 }

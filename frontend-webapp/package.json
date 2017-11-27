@@ -9,7 +9,7 @@
     "test": "ng test",
     "test:ci": "ng test --single-run --no-progress --browser=ChromeCI",
     "lint": "ng lint --type-check",
-    "e2e": "ng e2e --proxy-config proxy-config.json",
+    "e2e": "ng e2e --aot --proxy-config proxy-config.json",
     "e2e:ci": "yarn e2e --no-progress --config=protractor-ci.conf.js"
   },
   "private": true,
