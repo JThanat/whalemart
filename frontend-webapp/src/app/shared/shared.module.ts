@@ -22,6 +22,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { SubNavBarDirective } from './sub-nav-bar/sub-nav-bar.directive';
 import { SvgIconComponent } from './svg-icon/svg-icon.component';
+import { LessorFormComponent } from './user/lessor-form/lessor-form.component';
 
 @NgModule({
   imports: [
@@ -50,7 +51,8 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
     MenuComponent,
     MenuItemComponent,
     NotFoundComponent,
-    CreditCardPipe
+    CreditCardPipe,
+    LessorFormComponent
   ],
   exports: [
     CommonModule,
@@ -72,7 +74,8 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
     MenuItemComponent,
     InputModule,
     NotFoundComponent,
-    CreditCardPipe
+    CreditCardPipe,
+    LessorFormComponent
   ],
   providers: [
     DatePipe,
