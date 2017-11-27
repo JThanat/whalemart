@@ -3,6 +3,7 @@ from rest_framework import serializers
 from .models import BankAccount
 import re
 
+
 class BankAccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = BankAccount
@@ -14,5 +15,3 @@ class BankAccountSerializer(serializers.ModelSerializer):
         if len(data) < 10:
             raise serializers.ValidationError('Account id should contains atleast 10 characters')
         return data
-        
-    

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { CreateMarketComponent } from './create-market/create-market.component';
 import { IsLessorGuardService } from './is-lessor-guard.service';
 import { LessorDashboardComponent } from './lessor-dashboard.component';
 import { LessorInfoComponent } from './lessor-info/lessor-info.component';
@@ -28,6 +29,10 @@ const routes: Routes = [
       {
         path: 'profile',
         component: LessorInfoComponent
+      },
+      {
+        path: 'create-market',
+        component: CreateMarketComponent
       }
     ]
   }

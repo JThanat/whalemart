@@ -10,6 +10,10 @@ const routes: Routes = [
     loadChildren: './feed/feed.module#FeedModule'
   },
   {
+    path: 'admin',
+    loadChildren: './admin-dashboard/admin-dashboard.module#AdminDashboardModule'
+  },
+  {
     path: 'lessor',
     loadChildren: './lessor-dashboard/lessor-dashboard.module#LessorDashboardModule'
   },

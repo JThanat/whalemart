@@ -13,12 +13,8 @@ import { RouterModule } from '@angular/router';
 import { BreadcrumbItemDirective } from './breadcrumb/breadcrumb-item.directive';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { CreditCardPipe } from './credit-card/credit-card.pipe';
-import { DateRangeInputDirective } from './date-range/date-range-input.directive';
 import { DateRangePipe } from './date-range/date-range.pipe';
-import { FileInputComponent } from './file-input/file-input.component';
-import { InputErrorComponent } from './input/input-error.component';
-import { InputGroupComponent } from './input/input-group.component';
-import { InputDirective } from './input/input.directive';
+import { InputModule } from './input/input.module';
 import { MarketComponent } from './market/market.component';
 import { MenuItemComponent } from './menu/menu-item.component';
 import { MenuComponent } from './menu/menu.component';
@@ -40,21 +36,17 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
     PortalModule,
     OverlayModule,
     A11yModule,
-    ScrollDispatchModule
+    ScrollDispatchModule,
+    InputModule
   ],
   declarations: [
-    InputGroupComponent,
-    InputDirective,
-    InputErrorComponent,
     SvgIconComponent,
     PaginationComponent,
     SubNavBarDirective,
     MarketComponent,
     DateRangePipe,
-    DateRangeInputDirective,
     BreadcrumbComponent,
     BreadcrumbItemDirective,
-    FileInputComponent,
     MenuComponent,
     MenuItemComponent,
     NotFoundComponent,
@@ -65,9 +57,6 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
     RouterModule,
     ReactiveFormsModule,
     HttpClientModule,
-    InputGroupComponent,
-    InputDirective,
-    InputErrorComponent,
     SvgIconComponent,
     PaginationComponent,
     PortalModule,
@@ -77,12 +66,11 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
     SubNavBarDirective,
     MarketComponent,
     DateRangePipe,
-    DateRangeInputDirective,
     BreadcrumbComponent,
     BreadcrumbItemDirective,
-    FileInputComponent,
     MenuComponent,
     MenuItemComponent,
+    InputModule,
     NotFoundComponent,
     CreditCardPipe
   ],
@@ -93,4 +81,4 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
     { provide: LOCALE_ID, useValue: 'th' }
   ]
 })
-export class SharedModule { }
+export class SharedModule {}

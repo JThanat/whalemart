@@ -1,0 +1,14 @@
+@import '~styles/common';
+
+.btn-delete {
+  margin-top: 2rem;
+}
+
+.booth-name-error {
+  @include font-family(heading);
+  font-size: 1.1rem;
+  padding: 2rem;
+  border: 1px solid $danger;
+  border-radius: $border-radius;
+  color: $danger;
+}
