@@ -5,8 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { of as observableOf } from 'rxjs/observable/of';
 
 import { AlertService } from '../../core/alert/alert.service';
+import { VendorProfileService } from '../../core/vendor/vendor-profile.service';
 import { VendorProfileComponent } from './vendor-profile.component';
-import { VendorProfileService } from './vendor-profile.service';
 
 describe('VendorProfileComponent', () => {
   let component: VendorProfileComponent;

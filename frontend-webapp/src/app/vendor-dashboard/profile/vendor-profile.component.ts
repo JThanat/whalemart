@@ -12,12 +12,12 @@ import { Observable } from 'rxjs/Observable';
 import { of as observableOf } from 'rxjs/observable/of';
 import { mergeMap } from 'rxjs/operators';
 import { AlertService } from '../../core/alert/alert.service';
+import { VendorProfile, VendorProfileService } from '../../core/vendor/vendor-profile.service';
 import {
   LessorProfile,
   LessorService
 } from '../../lessor-dashboard/lessor.service';
 import { LessorFormComponent } from '../../shared/user/lessor-form/lessor-form.component';
-import { VendorProfile, VendorProfileService } from './vendor-profile.service';
 
 @Component({
   selector: 'app-vendor-profile',
@@ -42,7 +42,7 @@ export class VendorProfileComponent implements OnInit, AfterViewInit {
   ) {}
 
   loadData() {
-    this.vendorProfileService.getVendorProfile().subscribe(
+    this.vendorProfileService.vendorProfile$.subscribe(
       data => this.vendorProfile = data,
       err => this.alert.show({ message: 'เกิดข้อผิดพลาด', type: 'danger' })
     );
