@@ -27,8 +27,102 @@
   <section class="main-content row justify-content-center align-items-start mb-5">
     <div class="col-12 col-md-10 col-lg-6 left-content">
       <h2><span>1</span> เลือกรูปแบบการแบ่งชำระ</h2>
+      <form [formGroup]="chooseInstallmentTypeForm">
+        <app-input-group>
+          <select appInput class="form-control" formControlName="type">
+            <option value="30" selected>แบ่งชำระเงิน 30% ของค่าบูธ</option>
+            <option value="100">ชำระเงินเต็มจำนวน</option>
+          </select>
+          <app-input-error *ngIf="chooseInstallmentTypeForm.controls['type'].hasError('required')">
+            กรุณาเลือกวิธีการแบ่งชำระเงิน
+          </app-input-error>
+        </app-input-group>
+      </form>
       <hr>
       <h2><span>2</span> เลือกวิธีการชำระเงิน</h2>
+
+      <form [formGroup]="choosePaymentMethodForm">
+        <app-input-group label="ชำระเงินโดย">
+          <select appInput class="form-control" formControlName="method">
+            <option value="credit" selected>ตัดจากบัตรเดบิต/เครดิต</option>
+            <option value="bank-transfer">โอนผ่านบัญชีธนาคาร</option>
+          </select>
+          <app-input-error *ngIf="choosePaymentMethodForm.controls['method'].hasError('required')">
+            กรุณาเลือกวิธีการชำระเงิน
+          </app-input-error>
+        </app-input-group>
+      </form>
+
+      <form [formGroup]="creditCardForm">
+        <div class="row">
+          <div class="col-12">
+            <app-input-group label="ชื่อผู้ถือบัตร">
+              <input appInput type="text" class="form-control" formControlName="cardHolderName" placeholder="ชื่อ - นามสกุล">
+              <app-input-error *ngIf="creditCardForm.controls['cardHolderName'].hasError('required')">
+                กรุณากรอกผู้ถือบัตร
+              </app-input-error>
+            </app-input-group>
+          </div>
+          <div class="col-12 col-md-8">
+            <app-input-group label="หมายเลขบัตรเดบิต/เครดิต">
+              <input #cardNumber appInput type="text" class="form-control" formControlName="cardNumber" placeholder="XXXX XXXX XXXX XXXX">
+              <app-input-error *ngIf="creditCardForm.controls['cardNumber'].hasError('required')">
+                กรุณากรอกหมายเลขบัตรเดบิต/เครดิต
+              </app-input-error>
+              <app-input-error *ngIf="creditCardForm.controls['cardNumber'].hasError('pattern')">
+                บัตรเครดิตจะต้องเป็นเลข 16 หลัก ไม่มีขีด
+              </app-input-error>
+            </app-input-group>
+          </div>
+          <div class="col-12 col-md-4">
+            <app-input-group label="ประเภทบัตรเครดิต">
+              <select appInput formControlName="type" class="form-control">
+                <option value="visa" selected>Visa</option>
+                <option value="mastercard">Mastercard</option>
+              </select>
+              <app-input-error *ngIf="creditCardForm.controls['type'].hasError('required')">
+                กรุณาเลือกบัตรเครดิต
+              </app-input-error>
+            </app-input-group>
+          </div>
+          <div class="col-12 col-md-6">
+            <app-input-group label="CVV">
+              <input #verificationNo appInput type="text" class="form-control" formControlName="verificationNo" placeholder="XXX">
+              <app-input-error *ngIf="creditCardForm.controls['verificationNo'].hasError('required')">
+                กรุณากรอกเลข CVV
+              </app-input-error>
+              <app-input-error *ngIf="creditCardForm.controls['verificationNo'].hasError('pattern')">
+                เลข CVV จะต้องประกอบด้วย 3 ตัวเท่านั้น
+              </app-input-error>
+            </app-input-group>
+          </div>
+          <div class="col-12 col-md-6">
+            <app-input-group label="เดือน/ปี ที่หมดอายุ">
+              <input #expiryDate appInput type="text" class="form-control" formControlName="expiryDate" placeholder="MM/YY">
+              <app-input-error *ngIf="creditCardForm.controls['expiryDate'].hasError('required')">
+                กรุณากรอกเดือน/ปี ที่หมดอายุ
+              </app-input-error>
+              <app-input-error *ngIf="creditCardForm.controls['expiryDate'].hasError('pattern')">
+                ข้อมูลต้องอยู่ในรูป 01/17
+              </app-input-error>
+            </app-input-group>
+          </div>
+          
+          <div class="col-12">
+            <app-input-group label="บันทึกบัตรไว้ครั้งหน้า?">
+              <div appInput class="form-check">
+                <label class="form-check-label">
+                  <input appInput type="checkbox" class="form-check-input" formControlName="isSaved">บันทึกบัตรนี้ในโปรไฟล์ของฉันสำหรับการชำระเงินครั้งถัดไป
+                </label>
+              </div>
+            </app-input-group>
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-lg" type="submit">ชำระเงิน</button>
+        <br>
+        <br>
+      </form>
     </div>
 
     <div class="col-12 col-md-10 col-lg-4 pl-lg-5 side-content">
