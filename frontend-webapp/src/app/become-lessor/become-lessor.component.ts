@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 
-import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { AlertService } from '../core/alert/alert.service';
+import { LessorFormComponent } from '../shared/user/lessor-form/lessor-form.component';
 import { BecomeLessorService, LessorStatus } from './become-lessor.service';
-import { LessorFormComponent } from './form/lessor-form.component';
 
 @Component({
   selector: 'app-become-lessor',
