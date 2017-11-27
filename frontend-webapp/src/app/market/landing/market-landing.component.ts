@@ -20,41 +20,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { environment } from '../../../environments/environment';
 import { Market } from '../../core/market/market.service';
-
-export interface MarketDetail {
-  name: string;
-  caption: string;
-  description: string;
-  openingDate: Date;
-  closingDate: Date;
-  openingTime: Date;
-  closingTime: Date;
-  contact: {
-    fullname: string;
-    phoneNumber: string;
-    email: string;
-  };
-  location: {
-    name: string;
-    latitude: string;
-    longitude: string;
-  };
-  termsAndCondition: string;
-  depositPaymentDue: Date;
-  fullPaymentDue: Date;
-  reservationDueDate: Date;
-  estimateVisitor: number;
-  minPrice: number;
-  maxPrice: number;
-  layoutImageUrl: string;
-  providedAccessories: {
-    name: string;
-    amount: number;
-  }[];
-  coverImageUrl: string;
-  scenePhotoUrls: string[];
-  tags: string[];
-}
+import { MarketDetail } from '../market-detail-resolver.service';
 
 /**
  * The offset in pixel for determining whether the section is currently active or not. For example,
