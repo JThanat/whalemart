@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {
+  PaymentStatus,
   ReservationInformation,
-  VendorReservationService,
   ReservationStatus,
-  PaymentStatus
+  VendorReservationService
 } from './vendor-reservation.service';
 
 @Component({

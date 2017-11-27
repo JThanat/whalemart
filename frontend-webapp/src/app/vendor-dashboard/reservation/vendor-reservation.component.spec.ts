@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { of as observableOf } from 'rxjs/observable/of';
 
 import { VendorReservationComponent } from './vendor-reservation.component';
+import { VendorReservationService } from './vendor-reservation.service';
 
 describe('VendorReservationComponent', () => {
   let component: VendorReservationComponent;
@@ -8,7 +10,15 @@ describe('VendorReservationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VendorReservationComponent ]
+      declarations: [VendorReservationComponent]
+      providers: [
+        {
+          provide: VendorReservationService,
+          useValue: {
+            reservationInformation$: observableOf([])
+          }
+        }
+      ]
     })
     .compileComponents();
   }));
