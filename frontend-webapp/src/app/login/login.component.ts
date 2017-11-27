@@ -37,9 +37,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.loginForm.updateValueAndValidity();
-    console.log(this.loginForm.value);
-
     if (!this.loginForm.valid) {
       return;
     }

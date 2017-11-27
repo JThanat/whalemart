@@ -26,8 +26,6 @@ export abstract class BaseRegisterComponent implements OnInit {
   }
 
   register() {
-    this.registerForm.updateValueAndValidity();
-
     if (!this.registerForm.valid) {
       return;
     }

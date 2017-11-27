@@ -66,8 +66,6 @@ export class BecomeLessorComponent implements OnInit {
   }
 
   becomeLessor() {
-    this.becomeLessorForm.updateValueAndValidity();
-
     if (!this.becomeLessorForm.valid) {
       return;
     }
