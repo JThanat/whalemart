@@ -4,6 +4,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 
+from apps.users.models import User
 from apps.commons.choices import ReservationStatus
 from apps.markets.models import Market
 from apps.booths.models import Booth
@@ -12,6 +13,7 @@ from apps.payments.models import Installment
 from apps.reservations.serializers import ReservationSerializer
 from apps.markets.serializers import MarketFeedSerializer
 from apps.products.serializers import ProductSerializer
+from apps.commons.notification import notify_reservation_approved
 
 
 class ReservationViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin):
@@ -151,6 +153,12 @@ def approve_booths(request, *args, **kwargs):
             else:
                 reserved_booth.status = ReservationStatus.REJECTED
             reserved_booth.save()
+
+        # Send email
+        user_obj = User.objects.get(pk=user)
+        market_obj = Market.objects.get(pk=market)
+        notify_reservation_approved(user_obj.email, user_obj.first_name+' '+user_obj.last_name, booth_obj.booth_number,
+                                    market_obj.name, 'localhost:4200', market_obj.deposit_payment_due)
 
     # Reject reservations of all users who are not in list sent by frontend
     rejected_reservations = Reservation.objects.filter(market=market).exclude(user__id__in=approved_users)
