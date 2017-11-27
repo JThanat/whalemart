@@ -77,6 +77,7 @@ urlpatterns = [
     url(r'^approve-reservation/', reservation_views.approve_booths),
     url(r'^unapproved-markets/', reservation_views.get_unapproved_markets),
     url(r'^booths-in-unapproved-market/(?P<pk>[0-9]+)/', reservation_views.get_booths_in_unapproved_market),
+    url(r'^payment-status/(?P<pk>[0-9]+)/', payment_views.get_payment_status),
     # JWT
     url(r'^api-token-auth/', obtain_jwt_token),
     url(r'^api-token-refresh/', refresh_jwt_token),
