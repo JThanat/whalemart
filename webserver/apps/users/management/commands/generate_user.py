@@ -1,7 +1,7 @@
 from django.contrib.auth.hashers import make_password
 from django.core.management.base import BaseCommand
 
-from apps.commons.email_list import USERLIST
+from apps.commons.mock_data import USERLIST
 from apps.users.models import User
 
 
