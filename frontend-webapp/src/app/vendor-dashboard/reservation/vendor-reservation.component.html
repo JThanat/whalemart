@@ -1,0 +1,80 @@
+<div class="row">
+  <div class="offset-md-1 col-md-10">
+    <h4>ข้อมูลการจองตลาดทั้งหมด</h4>
+
+    <div class="mt-3 d-none d-lg-block">
+      <div class="row py-1 px-2">
+        <div class="col-md-1 text-left text-md-center">
+          <strong>ตลาด</strong>
+        </div>
+        <div class="col-md-4 text-left text-md-center">
+          <strong>ชื่อตลาด</strong>
+        </div>
+        <div class="col-md-1 text-left text-md-center">
+          <strong>บูท</strong>
+        </div>
+        <div class="col-md-2 text-left text-md-center">
+          <strong>ราคา</strong>
+        </div>
+        <div class="col-md-2 text-left text-md-center">
+          <strong>สถานะจอง</strong>
+        </div>
+        <div class="col-md-2 text-left text-md-center">
+          <strong>สถานะจ่าย</strong>
+        </div>
+      </div>
+    </div>
+
+    <div *ngFor="let reserve of reservationInfo" class="d-none d-lg-block reserve-list">
+      <div class="mt-2 p-2">
+        <div class="row">
+          <div class="col-md-1 text-left text-md-center">
+            {{ reserve.marketID }}
+          </div>
+          <div class="col-md-4 text-left text-md-center">
+            Test Market Name
+          </div>
+          <div class="col-md-1 text-left text-md-center">
+            {{ reserve.approvedBooth }}
+          </div>
+          <div class="col-md-2 text-left text-md-center">
+            {{ reserve.boothRentalFee }}
+          </div>
+          <div class="col-md-2 text-left text-md-center">
+            <span class="badge badge-{{ reserve.reservationStatus }}">{{ reservationToWord(reserve.reservationStatus) }}</span>
+          </div>
+          <div class="col-md-2 text-left text-md-center">
+            <span class="badge badge-{{ reserve.paymentStatus }}">{{ paymentToWord(reserve.paymentStatus) }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngFor="let reserve of reservationInfo" class="d-block d-lg-none reserve-list">
+      <div class="mt-3 p-2 py-3">
+        <div class="container-fluid">
+          <dl class="row">
+            <dt class="col-sm-3">เลขบูท</dt>
+            <dd class="col-sm-9">{{ reserve.marketID }}</dd>
+            <dt class="col-sm-3">ชื่อตลาด</dt>
+            <dd class="col-sm-9">Test Market Name</dd>
+            <ng-container *ngIf="reserve.approvedBooth">
+              <dt class="col-sm-3">บูทที่ได้รับ</dt>
+              <dd class="col-sm-9">{{ reserve.approvedBooth }}</dd>
+            </ng-container>
+            <ng-container *ngIf="reserve.boothRentalFee">
+              <dt class="col-sm-3">ราคาบูท</dt>
+              <dd class="col-sm-9">{{ reserve.boothRentalFee }}</dd>
+            </ng-container>
+            <dt class="col-sm-3">สถานะการจอง</dt>
+            <dd class="col-sm-9"><span class="badge badge-{{ reserve.reservationStatus }}">{{ reservationToWord(reserve.reservationStatus) }}</span></dd>
+            <ng-container *ngIf="reserve.paymentStatus">
+              <dt class="col-sm-3">สถานะการจ่าย</dt>
+              <dd class="col-sm-9"><span class="badge badge-{{ reserve.paymentStatus }}">{{ paymentToWord(reserve.paymentStatus) }}</span></dd>
+            </ng-container>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
