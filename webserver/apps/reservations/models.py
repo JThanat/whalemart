@@ -13,6 +13,7 @@ class Reservation(models.Model):
                                        related_name='approved_reservations', on_delete=models.CASCADE)
     status = models.IntegerField(verbose_name='Status', choices=ReservationStatus.CHOICES,
                                  default=ReservationStatus.PENDING)
+    products = models.ManyToManyField('products.Product', verbose_name='products', related_name='reservations')
 
     class Meta:
         unique_together = ('user', 'market')
