@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { of as observableOf } from 'rxjs/observable/of';
+// import { of as observableOf } from 'rxjs/observable/of';
 import { map } from 'rxjs/operators';
 
 import { DateRange } from '../utils/date-range.service';
@@ -103,17 +103,14 @@ export class MarketService {
     );
   }
 
-  public search(searchParams: MarketSearchParams): Observable<MarketSearchResult | undefined> {
-    let hasSearchParams = false;
+  public search(searchParams: MarketSearchParams): Observable<MarketSearchResult> {
     let params = new HttpParams();
 
     if (searchParams.query !== undefined) {
-      hasSearchParams = true;
       params = params.append('search', searchParams.query);
     }
 
     if (searchParams.dateRange) {
-      hasSearchParams = true;
       params = params
         .append('min_date', searchParams.dateRange.start.toISOString())
         .append('max_date', searchParams.dateRange.end.toISOString());
@@ -126,7 +123,6 @@ export class MarketService {
       searchParams.time.night;
 
     if (addTimeParams) {
-      hasSearchParams = true;
       if (searchParams.time.morning) {
         params = params.append('morning', 'true');
       }
@@ -142,16 +138,10 @@ export class MarketService {
     }
 
     if (searchParams.price.min !== undefined) {
-      hasSearchParams = true;
       params = params.append('min_price', String(searchParams.price.min));
     }
     if (searchParams.price.max !== undefined) {
-      hasSearchParams = true;
       params = params.append('max_price', String(searchParams.price.max));
-    }
-
-    if (!hasSearchParams) {
-      return observableOf(undefined);
     }
 
     if (searchParams.sortBy === 'createdTime') {
