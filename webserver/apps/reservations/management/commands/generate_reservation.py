@@ -40,7 +40,7 @@ class Command(BaseCommand):
                 )
 
                 for j in range(10):
-                    booths = Booth.objects.filter(market=market).values()
+                    booths = Booth.objects.filter(market=market)
                     ran = random.randint(0, len(booths)-1)
                     reserved_booth = ReservedBooth.objects.create(
                         reservation=reservation,
