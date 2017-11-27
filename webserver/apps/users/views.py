@@ -21,7 +21,8 @@ class UserViewSet(viewsets.ModelViewSet):
             "card_number": "1",\n
             "card_holder_name": "2",\n
             "type": 1,\n
-            "expiry_date": "2017-05-16",\n
+            "expiry_month": "01",\n
+            "expiry_year": "18",\n
             "verification_no": "1"\n
         }\n
     ]\n
