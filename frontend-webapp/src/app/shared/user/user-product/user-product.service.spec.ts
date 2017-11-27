@@ -1,20 +1,19 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { inject, TestBed } from '@angular/core/testing';
 
-import { TimeService } from '../../core/utils/time.service';
-import { MarketDetailResolver } from './market-detail-resolver.service';
+import { UserProductService } from './user-product.service';
 
-describe('MarketDetailResolver', () => {
+describe('UserProductService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [MarketDetailResolver, TimeService]
+      providers: [UserProductService]
     });
   });
 
   it(
     'should be created',
-    inject([MarketDetailResolver], (service: MarketDetailResolver) => {
+    inject([UserProductService], (service: UserProductService) => {
       expect(service).toBeTruthy();
     })
   );

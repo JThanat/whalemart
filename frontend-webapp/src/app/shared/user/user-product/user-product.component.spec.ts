@@ -3,23 +3,23 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { of as observableOf } from 'rxjs/observable/of';
 
-import { AlertService } from '../../core/alert/alert.service';
-import { VendorProductComponent } from './vendor-product.component';
-import { VendorProductService } from './vendor-product.service';
+import { AlertService } from '../../../core/alert/alert.service';
+import { UserProductComponent } from './user-product.component';
+import { UserProductService } from './user-product.service';
 
-describe('VendorProductComponent', () => {
-  let component: VendorProductComponent;
-  let fixture: ComponentFixture<VendorProductComponent>;
+describe('UserProductComponent', () => {
+  let component: UserProductComponent;
+  let fixture: ComponentFixture<UserProductComponent>;
 
   beforeEach(
     async(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        declarations: [VendorProductComponent],
+        declarations: [UserProductComponent],
         schemas: [NO_ERRORS_SCHEMA],
         providers: [
           {
-            provide: VendorProductService,
+            provide: UserProductService,
             useValue: {
               getProducts$: observableOf([])
             }
@@ -31,7 +31,7 @@ describe('VendorProductComponent', () => {
   );
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VendorProductComponent);
+    fixture = TestBed.createComponent(UserProductComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

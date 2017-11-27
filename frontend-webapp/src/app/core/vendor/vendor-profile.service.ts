@@ -52,7 +52,7 @@ export class VendorProfileService {
     );
   }
 
-  getVendorProfile() {
+  get vendorProfile$(): Observable<VendorProfile> {
     return this.http.get<VendorProfileResponse>('/api/current-user/').pipe(
       map(data => {
         return {

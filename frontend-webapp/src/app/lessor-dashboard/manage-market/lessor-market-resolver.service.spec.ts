@@ -2,7 +2,7 @@ import { inject, TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs/Observable';
 import { of as observableOf } from 'rxjs/observable/of';
 
-import { LessorService, MarketList } from '../lessor.service';
+import { LessorService, MarketList } from '../../core/lessor/lessor.service';
 import { LessorMarketResolverService } from './lessor-market-resolver.service';
 
 class MockLessorService {

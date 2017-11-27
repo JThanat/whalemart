@@ -1,6 +1,8 @@
 <div class="form-group">
   <label [for]="inputId">{{ label }}</label>
   <ng-content select="[appInput]"></ng-content>
+  <div *ngIf="showErrors" @errorInOut>
+    <ng-content select="app-input-error"></ng-content>
+  </div>
   <ng-content select=".form-text" *ngIf="!showErrors"></ng-content>
-  <ng-content select="app-input-error" *ngIf="showErrors"></ng-content>
 </div>

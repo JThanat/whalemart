@@ -19,7 +19,7 @@ class ReservationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Reservation
-        fields = ('id', 'shop_name', 'reservation_time', 'market', 'reserved_booths', 'approved_booth')
+        fields = ('id', 'shop_name', 'reservation_time', 'market', 'reserved_booths', 'approved_booth', 'products')
         extra_kwargs = {
             'id': {'read_only': True},
             'status': {'read_only': True},
@@ -36,7 +36,8 @@ class ReservationSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         validated_data['user'] = self.context['request'].user
         reserved_booths = validated_data.pop('reserved_booths', None)
-        reservation = Reservation.objects.create(**validated_data)
+        reservation = super(ReservationSerializer, self).create(validated_data)
+        # reservation = Reservation.objects.create(**validated_data)
         for reserved_booth in reserved_booths:
             ReservedBooth.objects.create(reservation=reservation, booth=reserved_booth['booth'],
                                          status=ReservationStatus.PENDING)

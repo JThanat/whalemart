@@ -11,7 +11,14 @@ User = get_user_model()
 class LessorEditSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lessor
-        fields = ('lessor_name',)
+        fields = (
+            'lessor_name',
+            'is_organization',
+            'organization_name',
+            'organization_contact_name',
+            'organization_email',
+            'organization_phone_number'
+        )
 
 
 class LessorSerializer(serializers.ModelSerializer):

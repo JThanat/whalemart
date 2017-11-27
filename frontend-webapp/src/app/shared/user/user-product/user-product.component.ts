@@ -1,26 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { AlertService } from '../../core/alert/alert.service';
-import { Product, VendorProductService } from './vendor-product.service';
+import { AlertService } from '../../../core/alert/alert.service';
+import { Product, UserProductService } from './user-product.service';
 
 @Component({
-  selector: 'app-vendor-product',
-  templateUrl: './vendor-product.component.html',
-  styleUrls: ['./vendor-product.component.scss']
+  selector: 'app-user-product',
+  templateUrl: './user-product.component.html',
+  styleUrls: ['./user-product.component.scss']
 })
-export class VendorProductComponent implements OnInit {
+export class UserProductComponent implements OnInit {
   products: Product[];
   isShowAddProduct = false;
   addProductForm: FormGroup;
 
   constructor(
-    private vendorProductService: VendorProductService,
+    private userProductService: UserProductService,
     private alert: AlertService
   ) {}
 
   ngOnInit() {
-    this.vendorProductService.getProducts$.subscribe(
+    this.userProductService.getProducts$.subscribe(
       data => (this.products = data)
     );
 
@@ -44,7 +44,7 @@ export class VendorProductComponent implements OnInit {
 
     const { name, description, image } = this.addProductForm.value;
 
-    this.vendorProductService
+    this.userProductService
       .addProduct$({
         name: name,
         description: description,
@@ -66,13 +66,12 @@ export class VendorProductComponent implements OnInit {
     if (!confirm(`Are you sure to delete ${product.name}`)) {
       return;
     }
-    this.vendorProductService.deleteProduct$(product.id).subscribe(
+    this.userProductService.deleteProduct$(product.id).subscribe(
       (data: Product[]) => {
         this.products = data;
         this.alert.show({ message: 'ลบเสร็จสิ้น', type: 'success' });
       },
       (err: any) => {
-        console.log(err);
         this.alert.show({ message: 'เกิดข้อผิดพลาด', type: 'danger' });
       }
     );

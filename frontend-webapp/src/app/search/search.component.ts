@@ -26,8 +26,7 @@ import { DateRange, DateRangeService } from '../core/utils/date-range.service';
 
 const enum SearchResultStatus {
   OK = 'ok',
-  Searching = 'searching',
-  EmptySearchParams = 'emptySearchParams'
+  Searching = 'searching'
 }
 
 interface SearchResultOK extends MarketSearchResult {
@@ -35,7 +34,7 @@ interface SearchResultOK extends MarketSearchResult {
 }
 
 interface SearchResultNotOK {
-  status: SearchResultStatus.EmptySearchParams | SearchResultStatus.Searching;
+  status: SearchResultStatus.Searching;
 }
 
 type SearchResult = SearchResultOK | SearchResultNotOK;
@@ -235,17 +234,11 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   private mapSearchResult() {
-    return map((result: MarketSearchResult | undefined): SearchResult => {
-      if (result === undefined) {
-        return {
-          status: SearchResultStatus.EmptySearchParams
-        };
-      } else {
-        return {
-          status: SearchResultStatus.OK,
-          ...result
-        };
-      }
+    return map((result: MarketSearchResult): SearchResult => {
+      return {
+        status: SearchResultStatus.OK,
+        ...result
+      };
     });
   }
 

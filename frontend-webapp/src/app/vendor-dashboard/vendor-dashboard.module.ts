@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 
+import { LessorService } from '../core/lessor/lessor.service';
+import { VendorProfileResolver } from '../core/vendor/vendor-profile-resolver.service';
+import { VendorProfileService } from '../core/vendor/vendor-profile.service';
 import { SharedModule } from '../shared/shared.module';
+import { UserProductService } from '../shared/user/user-product/user-product.service';
 import { VendorPaymentResolver } from './payment/vendor-payment-resolver.service';
 import { VendorPaymentComponent } from './payment/vendor-payment.component';
 import { VendorPaymentService } from './payment/vendor-payment.service';
-import { VendorProductComponent } from './product/vendor-product.component';
-import { VendorProductService } from './product/vendor-product.service';
-import { VendorProfileResolver } from './profile/vendor-profile-resolver.service';
 import { VendorProfileComponent } from './profile/vendor-profile.component';
-import { VendorProfileService } from './profile/vendor-profile.service';
+import { VendorReservationComponent } from './reservation/vendor-reservation.component';
+import { VendorReservationService } from './reservation/vendor-reservation.service';
 import { VendorDashboardRoutingModule } from './vendor-dashboard-routing.module';
 import { VendorDashboardComponent } from './vendor-dashboard.component';
 
@@ -20,15 +22,17 @@ import { VendorDashboardComponent } from './vendor-dashboard.component';
   declarations: [
     VendorProfileComponent,
     VendorDashboardComponent,
-    VendorProductComponent,
-    VendorPaymentComponent
+    VendorPaymentComponent,
+    VendorReservationComponent
   ],
   providers: [
     VendorProfileService,
     VendorPaymentResolver,
     VendorProfileResolver,
-    VendorProductService,
-    VendorPaymentService
+    VendorReservationService,
+    UserProductService,
+    VendorPaymentService,
+    LessorService
   ]
 })
 export class VendorDashboardModule { }
