@@ -1,15 +1,20 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { inject, TestBed } from '@angular/core/testing';
 
-import { BoothsDataResolverService } from './booths-data-resolver.service';
+import { BoothsDataResolver } from './booths-data-resolver.service';
 
-describe('BoothsDataResolverService', () => {
+describe('BoothsDataResolver', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [BoothsDataResolverService]
+      imports: [HttpClientTestingModule],
+      providers: [BoothsDataResolver]
     });
   });
 
-  it('should be created', inject([BoothsDataResolverService], (service: BoothsDataResolverService) => {
-    expect(service).toBeTruthy();
-  }));
+  it(
+    'should be created',
+    inject([BoothsDataResolver], (service: BoothsDataResolver) => {
+      expect(service).toBeTruthy();
+    })
+  );
 });
