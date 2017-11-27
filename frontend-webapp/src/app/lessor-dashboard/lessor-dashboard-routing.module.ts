@@ -8,6 +8,7 @@ import { LessorDashboardComponent } from './lessor-dashboard.component';
 import { LessorInfoComponent } from './lessor-info/lessor-info.component';
 import { LessorManageMarketComponent } from './manage-market/lessor-manage-market.component';
 import { LessorMarketResolverService } from './manage-market/lessor-market-resolver.service';
+import { PaymentStatusComponent } from './payment-status/payment-status.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,10 @@ const routes: Routes = [
         resolve: {
           vendorProfile: VendorProfileResolver
         }
+      },
+      {
+        path: 'payment-status',
+        component: PaymentStatusComponent
       },
       {
         path: 'create-market',
