@@ -20,6 +20,8 @@ class ReservationViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin):
     `/reserve-booth/`: api for vendor to reserve booths in a market\n
     `/approve-reservation/`: api for lessor to approve reservations\n
     `/reservation-status/`: api for vendor to view his/her reserved markets' status\n
+    `/unapproved-markets/`: api for lessor to view all unapproved booths\n
+    `/booths-in-unapproved-market/<pk>/`: api for lessor to view all vendors reserving each booth in the market\n
     {\n
         "shop_name": "Ngue",
         "market": 4,
