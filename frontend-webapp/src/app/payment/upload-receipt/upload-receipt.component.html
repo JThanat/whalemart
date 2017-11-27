@@ -13,10 +13,13 @@
 
         <div>กรุณาอัพโหลดใบเสร็จด้านล่าง</div>
 
+        <div class="mb-5"></div>
+
         <form [formGroup]="receiptForm" (submit)="uploadReceipt()">
-          <label>เลือกรูปใบเสร็จ</label>
-          <app-file-input formControlName="image" label="เลือกรูปภาพ"></app-file-input>
-          <button type="submit">ยืนยันการอัพโหลด</button>
+          <label><strong>เลือกรูปใบเสร็จ</strong></label><br>
+          <app-file-input formControlName="image" label="เลือกรูปภาพ"></app-file-input><br>
+          <div class="mb-2"></div>
+          <button type="submit" class="btn btn-primary">ยืนยันการอัพโหลด</button>
         </form>
       </div>
     </div>
