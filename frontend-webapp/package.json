@@ -35,6 +35,7 @@
     "@angular/cli": "1.5.4",
     "@angular/compiler-cli": "5.0.3",
     "@angular/language-service": "5.0.3",
+    "@types/cleave.js": "^1.0.1",
     "@types/facebook-js-sdk": "2.8.3",
     "@types/jasmine": "~2.8.2",
     "@types/jasminewd2": "~2.0.2",
