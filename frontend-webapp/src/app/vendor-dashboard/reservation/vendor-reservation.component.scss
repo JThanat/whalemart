@@ -10,9 +10,9 @@
 
   .badge {
     color: white;
-    @include font-family(body);
+    @include font-family(heading);
     @include font-weight(regular);
-    font-size: .8rem;
+    font-size: .85rem;
     padding: .4rem .5rem;
     border-radius: $border-radius * 3;
   }
