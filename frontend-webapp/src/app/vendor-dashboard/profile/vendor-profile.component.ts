@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
-import { becomeLessorForm } from '../../become-lessor/become-lessor.component';
 import { AlertService } from '../../core/alert/alert.service';
 import {
   LessorProfile,
@@ -48,12 +47,11 @@ export class VendorProfileComponent implements OnInit {
         Validators.required,
         Validators.pattern(/^\+?\d{9,15}$/)
       ]),
-      profileImage: new FormControl(),
-      lessor: becomeLessorForm
+      profileImage: new FormControl()
     });
 
     if (!this.isLessor) {
-      (this.vendorProfileForm.controls['lessor'].disable();
+      this.vendorProfileForm.controls['lessor'].disable();
     }
   }
 

@@ -1,0 +1,50 @@
+<form #formElm="ngForm" [formGroup]="lessorForm">
+  <app-input-group label="ชื่อผู้ให้เช่า">
+    <input appInput type="text" class="form-control" formControlName="lessorName" placeholder="ชื่อผู้ให้เช่า">
+    <app-input-error *ngIf="lessorForm.controls['lessorName'].hasError('required')">
+      กรุณากรอกชื่อผู้ให้เช่า
+    </app-input-error>
+  </app-input-group>
+
+  <app-input-group label="เป็นองค์กรหรือไม่">
+    <div appInput class="form-check">
+      <label class="form-check-label">
+        <input appInput type="checkbox" class="form-check-input" formControlName="isOrganization"> เป็นองค์กร
+      </label>
+    </div>
+  </app-input-group>
+
+  <app-input-group label="ชื่อองค์กร">
+    <input appInput type="text" class="form-control" formControlName="organizationName" placeholder="ชื่อองค์กร">
+    <app-input-error *ngIf="lessorForm.controls['organizationName'].hasError('required')">
+      กรุณากรอกชื่อองค์กร
+    </app-input-error>
+  </app-input-group>
+
+  <app-input-group label="ชื่อติดต่อในองค์กร">
+    <input appInput type="text" class="form-control" formControlName="organizationContactName" placeholder="ชื่อติดต่อในองค์กร">
+    <app-input-error *ngIf="lessorForm.controls['organizationContactName'].hasError('required')">
+      กรุณากรอกชื่อติดต่อในองค์กร
+    </app-input-error>
+  </app-input-group>
+
+  <app-input-group label="อีเมลองค์กร">
+    <input appInput type="email" class="form-control" formControlName="organizationEmail" placeholder="อีเมลองค์กร">
+    <app-input-error *ngIf="lessorForm.controls['organizationEmail'].hasError('required')">
+      กรุณากรอกอีเมลในองค์กร
+    </app-input-error>
+    <app-input-error *ngIf="lessorForm.controls['organizationEmail'].hasError('email')">
+      อีเมลของคุณอยู่ในรูปแบบที่ไม่ถูกต้อง
+    </app-input-error>
+  </app-input-group>
+
+  <app-input-group label="เบอร์โทรศัพท์องค์กร">
+    <input appInput type="text" class="form-control" formControlName="organizationPhone" placeholder="เบอร์โทรศัพท์องค์กร">
+    <app-input-error *ngIf="lessorForm.controls['organizationPhone'].hasError('required')">
+      กรุณากรอกเบอร์โทรศัพท์องค์กร
+    </app-input-error>
+    <app-input-error *ngIf="lessorForm.controls['organizationPhone'].hasError('pattern')">
+      หมายเลขโทรศัพท์ของคุณควรอยู่ในรูปแบบ 0812345678
+    </app-input-error>
+  </app-input-group>
+</form>
