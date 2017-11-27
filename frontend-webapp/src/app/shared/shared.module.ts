@@ -22,6 +22,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { SubNavBarDirective } from './sub-nav-bar/sub-nav-bar.directive';
 import { SvgIconComponent } from './svg-icon/svg-icon.component';
+import { UserProductComponent } from './user/user-product/user-product.component';
+import { UserProfileModule } from './user/user-profile/user-profile.module';
 
 @NgModule({
   imports: [
@@ -37,13 +39,15 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
     OverlayModule,
     A11yModule,
     ScrollDispatchModule,
-    InputModule
+    InputModule,
+    UserProfileModule
   ],
   declarations: [
     SvgIconComponent,
     PaginationComponent,
     SubNavBarDirective,
     MarketComponent,
+    UserProductComponent,
     DateRangePipe,
     BreadcrumbComponent,
     BreadcrumbItemDirective,
@@ -59,6 +63,7 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
     HttpClientModule,
     SvgIconComponent,
     PaginationComponent,
+    UserProductComponent,
     PortalModule,
     OverlayModule,
     A11yModule,
@@ -72,7 +77,8 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
     MenuItemComponent,
     InputModule,
     NotFoundComponent,
-    CreditCardPipe
+    CreditCardPipe,
+    UserProfileModule
   ],
   providers: [
     DatePipe,

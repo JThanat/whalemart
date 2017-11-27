@@ -1,12 +1,1 @@
-@import '~styles/common';
-
-.title {
-  margin-bottom: map-get($spacers, 1);
-  @include font-family(heading);
-  @include font-weight(regular);
-}
-
-.profile-img-wrapper {
-  max-width: 20rem;
-  max-height: 100%;
-}
+// @import '~styles/common';

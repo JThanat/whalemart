@@ -1,19 +1,19 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { inject, TestBed } from '@angular/core/testing';
 
-import { VendorProductService } from './vendor-product.service';
+import { UserProductService } from './user-product.service';
 
-describe('VendorProductService', () => {
+describe('UserProductService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [VendorProductService]
+      providers: [UserProductService]
     });
   });
 
   it(
     'should be created',
-    inject([VendorProductService], (service: VendorProductService) => {
+    inject([UserProductService], (service: UserProductService) => {
       expect(service).toBeTruthy();
     })
   );

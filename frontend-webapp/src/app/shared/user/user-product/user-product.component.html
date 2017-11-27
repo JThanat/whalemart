@@ -2,9 +2,12 @@
 
 <div class="description">รายการสินค้าที่จะนำไปวางขายในตลาด</div>
 
-<div *ngFor="let product of products" class="product-list">
+<div *ngFor="let product of products; index as i" class="product-list">
   <div class="mb-2">
     <div class="d-flex flex-wrap align-items-center mt-3">
+      <div class="p-2">
+        {{ i + 1 }}
+      </div>
       <div class="p-2">
         <div class="thumb-img">
           <img class="img-fluid" [src]="product.image" />
