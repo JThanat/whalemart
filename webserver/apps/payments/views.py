@@ -81,7 +81,11 @@ def get_payment_status(request, *args, **kwargs):
         try:
             rental_payment_info = approved_reservation.rental_payment_info
             payment_info['payment_status'] = rental_payment_info.status
+            payment_info['vendor_id'] = rental_payment_info.user.id
+            payment_info['vendor_name'] = rental_payment_info.user.first_name + ' ' + rental_payment_info.user.last_name
         except:
             payment_info['payment_status'] = 0
+            payment_info['vendor_id'] = None
+            payment_info['vendor_name'] = None
         response.append(payment_info)
     return Response(response, status=status.HTTP_200_OK)
