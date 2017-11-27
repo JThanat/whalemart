@@ -248,6 +248,14 @@
   }
 },
 {
+  "model": "markets.coverphoto",
+  "pk": 32,
+  "fields": {
+    "image": "92f2ecaa-d4e4-483a-8e0a-d2f447a4ebf2.jpg",
+    "thumbnail": "9ce433b1-b55c-44d8-892e-11e41e9d0f2f_thumb.jpg"
+  }
+},
+{
   "model": "markets.scene",
   "pk": 1,
   "fields": {
@@ -1488,6 +1496,86 @@
   }
 },
 {
+  "model": "markets.scene",
+  "pk": 156,
+  "fields": {
+    "market": 32,
+    "scene_image": "scene_photo/2017/11/27/f8607245-a27f-403b-9b12-639062385279_scene_0.jpg"
+  }
+},
+{
+  "model": "markets.scene",
+  "pk": 157,
+  "fields": {
+    "market": 32,
+    "scene_image": "scene_photo/2017/11/27/f8607245-a27f-403b-9b12-639062385279_scene_1.jpg"
+  }
+},
+{
+  "model": "markets.scene",
+  "pk": 158,
+  "fields": {
+    "market": 32,
+    "scene_image": "scene_photo/2017/11/27/f8607245-a27f-403b-9b12-639062385279_scene_2.jpg"
+  }
+},
+{
+  "model": "markets.scene",
+  "pk": 159,
+  "fields": {
+    "market": 32,
+    "scene_image": "scene_photo/2017/11/27/f8607245-a27f-403b-9b12-639062385279_scene_3.jpg"
+  }
+},
+{
+  "model": "markets.scene",
+  "pk": 160,
+  "fields": {
+    "market": 32,
+    "scene_image": "scene_photo/2017/11/27/f8607245-a27f-403b-9b12-639062385279_scene_4.jpg"
+  }
+},
+{
+  "model": "markets.scene",
+  "pk": 161,
+  "fields": {
+    "market": 32,
+    "scene_image": "scene_photo/2017/11/27/fa6fcb4c-7de3-4a3a-9aac-ac4a98e1f1ce_scene_0.jpg"
+  }
+},
+{
+  "model": "markets.scene",
+  "pk": 162,
+  "fields": {
+    "market": 32,
+    "scene_image": "scene_photo/2017/11/27/fa6fcb4c-7de3-4a3a-9aac-ac4a98e1f1ce_scene_1.jpg"
+  }
+},
+{
+  "model": "markets.scene",
+  "pk": 163,
+  "fields": {
+    "market": 32,
+    "scene_image": "scene_photo/2017/11/27/fa6fcb4c-7de3-4a3a-9aac-ac4a98e1f1ce_scene_2.jpg"
+  }
+},
+{
+  "model": "markets.scene",
+  "pk": 164,
+  "fields": {
+    "market": 32,
+    "scene_image": "scene_photo/2017/11/27/fa6fcb4c-7de3-4a3a-9aac-ac4a98e1f1ce_scene_3.jpg"
+  }
+},
+{
+  "model": "markets.scene",
+  "pk": 165,
+  "fields": {
+    "market": 32,
+    "scene_image": "scene_photo/2017/11/27/fa6fcb4c-7de3-4a3a-9aac-ac4a98e1f1ce_scene_4.jpg"
+  }
+},
+{
   "model": "tags.tag",
   "pk": 1,
   "fields": {
@@ -1566,7 +1654,8 @@
       23,
       27,
       29,
-      31
+      31,
+      32
     ]
   }
 },
@@ -1607,7 +1696,8 @@
       8,
       11,
       15,
-      31
+      31,
+      32
     ]
   }
 },
@@ -1706,7 +1796,8 @@
       25,
       28,
       30,
-      31
+      31,
+      32
     ]
   }
 },
@@ -1735,6 +1826,16 @@
       8,
       10,
       11
+    ]
+  }
+},
+{
+  "model": "tags.tag",
+  "pk": 14,
+  "fields": {
+    "tag": "Lifestyle",
+    "market": [
+      32
     ]
   }
 },
@@ -28799,6 +28900,96 @@
     "booth_number": "E25",
     "rental_fee": "3100.00",
     "market": 31
+  }
+},
+{
+  "model": "booths.booth",
+  "pk": 3008,
+  "fields": {
+    "booth_number": "A1",
+    "rental_fee": "1000.00",
+    "market": 32
+  }
+},
+{
+  "model": "booths.booth",
+  "pk": 3009,
+  "fields": {
+    "booth_number": "A2",
+    "rental_fee": "1000.00",
+    "market": 32
+  }
+},
+{
+  "model": "booths.booth",
+  "pk": 3010,
+  "fields": {
+    "booth_number": "A3",
+    "rental_fee": "1000.00",
+    "market": 32
+  }
+},
+{
+  "model": "booths.booth",
+  "pk": 3011,
+  "fields": {
+    "booth_number": "A4",
+    "rental_fee": "1000.00",
+    "market": 32
+  }
+},
+{
+  "model": "booths.booth",
+  "pk": 3012,
+  "fields": {
+    "booth_number": "A5",
+    "rental_fee": "1000.00",
+    "market": 32
+  }
+},
+{
+  "model": "booths.booth",
+  "pk": 3013,
+  "fields": {
+    "booth_number": "A6",
+    "rental_fee": "1400.00",
+    "market": 32
+  }
+},
+{
+  "model": "booths.booth",
+  "pk": 3014,
+  "fields": {
+    "booth_number": "A7",
+    "rental_fee": "1500.00",
+    "market": 32
+  }
+},
+{
+  "model": "booths.booth",
+  "pk": 3015,
+  "fields": {
+    "booth_number": "A8",
+    "rental_fee": "1700.00",
+    "market": 32
+  }
+},
+{
+  "model": "booths.booth",
+  "pk": 3016,
+  "fields": {
+    "booth_number": "A9",
+    "rental_fee": "1900.00",
+    "market": 32
+  }
+},
+{
+  "model": "booths.booth",
+  "pk": 3017,
+  "fields": {
+    "booth_number": "A10",
+    "rental_fee": "2000.00",
+    "market": 32
   }
 },
 {
@@ -112506,7 +112697,7 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$36000$YLavSJJ6g9cq$MZWq2+X4vkD6HZw93WZV6VhdGgN9qaZWp3qrWs+d6oA=",
-    "last_login": "2017-11-17T17:53:34.854Z",
+    "last_login": "2017-11-27T23:20:30.544Z",
     "is_superuser": false,
     "username": "whalemart@mail.com",
     "is_staff": false,
@@ -112924,7 +113115,7 @@
   "pk": 20,
   "fields": {
     "password": "pbkdf2_sha256$36000$mc1hJAu6VpOG$0dLn8nx1CjXqc7AVcjLkH/+SSzc9S4SKZ7BkyNPL+Ew=",
-    "last_login": null,
+    "last_login": "2017-11-27T23:15:01.613Z",
     "is_superuser": false,
     "username": "Matthew@gmail.com",
     "is_staff": false,
@@ -115934,6 +116125,19 @@
   }
 },
 {
+  "model": "lessors.lessor",
+  "pk": 1,
+  "fields": {
+    "lessor_name": "\u0e18\u0e19\u0e31\u0e0a \u0e08\u0e15\u0e38\u0e20\u0e31\u0e17\u0e23\u0e09\u0e31\u0e15\u0e23",
+    "is_organization": false,
+    "organization_name": "",
+    "organization_contact_name": "",
+    "organization_email": "",
+    "organization_phone_number": "",
+    "user": 1
+  }
+},
+{
   "model": "products.product",
   "pk": 1,
   "fields": {
@@ -118729,6 +118933,45 @@
       "chair": 2,
       "light": 3,
       "table": 4
+    },
+    "is_approved_all_reservations": false
+  }
+},
+{
+  "model": "markets.market",
+  "pk": 32,
+  "fields": {
+    "alive": true,
+    "created_at": "2017-11-27T23:32:22.112Z",
+    "updated_at": "2017-11-27T23:32:22.112Z",
+    "created_user": 1,
+    "updated_user": 1,
+    "money_transfer_to_lessor_status": 0,
+    "name": "Enginext Market",
+    "caption": "\u0e15\u0e25\u0e32\u0e14\u0e17\u0e35\u0e48\u0e40\u0e1b\u0e34\u0e14\u0e02\u0e32\u0e22\u0e02\u0e2d\u0e07\u0e14\u0e36\u0e01\u0e17\u0e35\u0e48\u0e2a\u0e38\u0e14\u0e43\u0e19\u0e1b\u0e23\u0e30\u0e40\u0e17\u0e28\u0e44\u0e17\u0e22",
+    "description": "\u0e19\u0e2d\u0e01\u0e08\u0e32\u0e01\u0e2a\u0e34\u0e48\u0e07\u0e02\u0e2d\u0e07\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e43\u0e0a\u0e49 \u0e40\u0e2a\u0e37\u0e49\u0e2d\u0e1c\u0e49\u0e32\u0e41\u0e25\u0e49\u0e27 \u0e02\u0e2d\u0e07\u0e01\u0e34\u0e19\u0e01\u0e47\u0e21\u0e35\u0e40\u0e1e\u0e35\u0e22\u0e1a \u0e21\u0e35\u0e43\u0e2b\u0e49\u0e40\u0e25\u0e37\u0e2d\u0e01\u0e17\u0e32\u0e19\u0e21\u0e32\u0e01\u0e21\u0e32\u0e22 \u0e43\u0e04\u0e23\u0e2d\u0e22\u0e32\u0e01\u0e17\u0e32\u0e19\u0e41\u0e1a\u0e1a\u0e1f\u0e39\u0e49\u0e14\u0e17\u0e23\u0e31\u0e04\u0e40\u0e01\u0e4b\u0e46 \u0e01\u0e47\u0e21\u0e35\u0e43\u0e2b\u0e49\u0e40\u0e25\u0e37\u0e2d\u0e01\u0e17\u0e32\u0e19",
+    "opening_date": "2018-01-05T17:00:00Z",
+    "closing_date": "2018-01-12T17:00:00Z",
+    "opening_time": "18:00:00",
+    "closing_time": "00:00:00",
+    "contact_person_fullname": "\u0e18\u0e19\u0e31\u0e0a \u0e08\u0e15\u0e38\u0e20\u0e31\u0e17\u0e23\u0e09\u0e31\u0e15\u0e23",
+    "contact_person_phone_number": "0888889999",
+    "contact_person_email": "chenlong@whale.com",
+    "location": "\u0e1e\u0e0d\u0e32\u0e44\u0e17 \u0e01\u0e23\u0e38\u0e07\u0e40\u0e17\u0e1e",
+    "location_latitude": "13.736352",
+    "location_longitude": "100.533955",
+    "term_and_condition": "1. \u0e2b\u0e49\u0e32\u0e21\u0e08\u0e33\u0e2b\u0e19\u0e48\u0e32\u0e22\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e14\u0e37\u0e48\u0e21\u0e41\u0e2d\u0e25\u0e01\u0e2d\u0e2e\u0e2d\u0e25\u0e4c\u0e43\u0e19\u0e1e\u0e37\u0e49\u0e19\u0e17\u0e35\u0e48\u0e01\u0e48\u0e2d\u0e19\u0e44\u0e14\u0e49\u0e23\u0e31\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15 \u0e2b\u0e32\u0e01\u0e1e\u0e1a\u0e40\u0e2b\u0e47\u0e19\u0e08\u0e30\u0e02\u0e2d\u0e22\u0e36\u0e14\u0e2a\u0e34\u0e19\u0e04\u0e49\u0e32\u0e44\u0e27\u0e49\r\n\u0e41\u0e25\u0e30\u0e44\u0e14\u0e49\u0e23\u0e31\u0e1a\u0e43\u0e1a\u0e40\u0e15\u0e37\u0e2d\u0e19 1 \u0e04\u0e23\u0e31\u0e49\u0e07\r\n2. \u0e23\u0e2d\u0e07\u0e1e\u0e37\u0e49\u0e19\u0e1a\u0e39\u0e18\u0e14\u0e49\u0e27\u0e22\u0e44\u0e27\u0e19\u0e34\u0e25 \u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e1b\u0e49\u0e2d\u0e07\u0e01\u0e31\u0e19\u0e04\u0e27\u0e32\u0e21\u0e40\u0e2a\u0e35\u0e22\u0e2b\u0e32\u0e22 \u0e40\u0e0a\u0e48\u0e19 \u0e04\u0e23\u0e32\u0e1a\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19\u0e23\u0e2d\u0e22\u0e44\u0e2b\u0e21\u0e49\u0e40\u0e1b\u0e47\u0e19\u0e15\u0e49\u0e19 \u0e41\u0e25\u0e30\u0e15\u0e49\u0e2d\u0e07\u0e17\u0e32\r\n\u0e01\u0e32\u0e23\u0e25\u0e49\u0e32\u0e07 \u0e2b\u0e23\u0e37\u0e2d\u0e02\u0e31\u0e14\u0e1e\u0e37\u0e49\u0e19 \u0e2b\u0e25\u0e31\u0e07\u0e08\u0e32\u0e01\u0e17\u0e33\u0e01\u0e32\u0e23\u0e02\u0e32\u0e22\u0e40\u0e2a\u0e23\u0e47\u0e08\u0e2a\u0e34\u0e49\u0e19\u0e43\u0e19\u0e27\u0e31\u0e19\u0e2a\u0e38\u0e14\u0e17\u0e49\u0e32\u0e22 \u0e2b\u0e32\u0e01\u0e1e\u0e37\u0e49\u0e19\u0e17\u0e35\u0e48\u0e43\u0e19\u0e1a\u0e39\u0e18\u0e2a\u0e01\u0e1b\u0e23\u0e01 \u0e08\u0e30\u0e21\u0e35\r\n\u0e04\u0e48\u0e32\u0e1b\u0e23\u0e31\u0e1a\u0e40\u0e1e\u0e34\u0e48\u0e21 1,000 \u0e1a\u0e32\u0e17\r\n3. \u0e01\u0e32\u0e23\u0e17\u0e34\u0e49\u0e07\u0e19\u0e49\u0e33\u0e41\u0e25\u0e30\u0e02\u0e22\u0e30\u0e25\u0e07\u0e43\u0e19\u0e16\u0e38\u0e07\u0e02\u0e22\u0e30\u0e01\u0e48\u0e2d\u0e19\u0e19\u0e33\u0e44\u0e1b\u0e17\u0e34\u0e49\u0e07\u0e17\u0e35\u0e48\u0e08\u0e38\u0e14\u0e42\u0e2b\u0e25\u0e14\u0e02\u0e22\u0e30\u0e02\u0e2d\u0e07\u0e28\u0e39\u0e19\u0e22\u0e4c\u0e2b\u0e32\u0e01\u0e44\u0e21\u0e48\u0e19\u0e33\u0e44\u0e1b\u0e17\u0e34\u0e49\u0e07\u0e17\u0e35\u0e48\u0e08\u0e38\u0e14\u0e15\u0e32\u0e21\r\n\u0e01\u0e33\u0e2b\u0e19\u0e14\u0e08\u0e30\u0e44\u0e14\u0e49\u0e23\u0e31\u0e1a\u0e43\u0e1a\u0e40\u0e15\u0e37\u0e2d\u0e19 1 \u0e04\u0e23\u0e31\u0e49\u0e07",
+    "deposit_payment_due": "2017-12-13T17:00:00Z",
+    "full_payment_due": "2017-12-20T17:00:00Z",
+    "reservation_due_date": "2017-12-06T17:00:00Z",
+    "estimate_visitor": 19000,
+    "min_price": "1000.00000",
+    "max_price": "2000.00000",
+    "layout_photo": "cover_photos/2017/11/27/market-layout_Envl66k.jpg",
+    "provided_accessories": {
+      "\u0e42\u0e15\u0e4a\u0e30": 1,
+      "\u0e1b\u0e25\u0e31\u0e4a\u0e01": 2,
+      "\u0e40\u0e01\u0e49\u0e32\u0e2d\u0e35\u0e49": 2
     },
     "is_approved_all_reservations": false
   }
