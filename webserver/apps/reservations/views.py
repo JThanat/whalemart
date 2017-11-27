@@ -7,7 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 from apps.commons.choices import ReservationStatus
 from apps.markets.models import Market
 from apps.booths.models import Booth
-from apps.reservations.models import Reservation
+from apps.reservations.models import Reservation, ReservedBooth
 from apps.payments.models import Installment
 from apps.reservations.serializers import ReservationSerializer
 from apps.markets.serializers import MarketFeedSerializer
@@ -69,8 +69,26 @@ def get_booths_in_unapproved_market(request, *args, **kwargs):
         booth_json = dict()
         booth_json['id'] = booth.pk
         booth_json['booth_number'] = booth.booth_number
+        booth_json['vendors'] = get_vendors_reserving_booth(booth)
         booths_json.append(booth_json)
     return Response(booths_json, status=status.HTTP_200_OK)
+
+
+def get_vendors_reserving_booth(booth):
+    """
+    Return all vendors reserved the given booth
+    """
+    reserved_booths = ReservedBooth.objects.filter(booth=booth)
+    response = []
+    for reserved_booth in reserved_booths:
+        vendor_json = dict()
+        user = reserved_booth.reservation.user
+        vendor_json['id'] = user.pk
+        vendor_json['first_name'] = user.first_name
+        vendor_json['last_name'] = user.last_name
+        vendor_json['shop_name'] = reserved_booth.reservation.shop_name
+        response.append(vendor_json)
+    return response
 
 
 @api_view(['POST', ])
