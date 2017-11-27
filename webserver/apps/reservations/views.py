@@ -20,7 +20,7 @@ class ReservationViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin):
     `/reserve-booth/`: api for vendor to reserve booths in a market\n
     `/approve-reservation/`: api for lessor to approve reservations\n
     `/reservation-status/`: api for vendor to view his/her reserved markets' status\n
-    {
+    {\n
         "shop_name": "Ngue",
         "market": 4,
         "reserved_booths": [
@@ -159,6 +159,11 @@ def approve_booths(request, *args, **kwargs):
         for reserved_booth in reserved_booths:
             reserved_booth.status = ReservationStatus.REJECTED
             reserved_booth.save()
+
+    # Update market approval status
+    market_obj = Market.objects.get(pk=market)
+    market_obj.is_approved_all_reservations = True
+    market_obj.save()
     return Response(status=status.HTTP_200_OK)
 
 
@@ -201,13 +206,14 @@ def get_reserved_markets(request, *args, **kwargs):
             rental_payment_info = reservation.rental_payment_info
             market['payment_status'] = reservation.rental_payment_info.status
             if rental_payment_info.installments.filter(payment_method=Installment.BANK_TRANSFER,
-                                                       receipt_image=None).exists():
+                                                       receipt_image='').exists():
                 incomplete_installment = reservation.rental_payment_info.installments.filter(
-                    payment_method=Installment.BANK_TRANSFER, receipt_image=None)[0]
+                    payment_method=Installment.BANK_TRANSFER, receipt_image='')[0]
                 market['incomplete_installment_id'] = incomplete_installment.id
             else:
                 market['incomplete_installment_id'] = None
         except:
             market['payment_status'] = None
+            market['incomplete_installment_id'] = None
         markets.append(market)
     return Response(markets, status=status.HTTP_200_OK)
