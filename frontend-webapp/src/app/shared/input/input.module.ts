@@ -16,7 +16,6 @@ import { InputDirective } from './input.directive';
     DateRangeInputDirective,
     TimeInputDirective,
     FileInputComponent,
-    FileInputComponent,
     InputDirective,
     InputErrorComponent,
     InputGroupComponent
