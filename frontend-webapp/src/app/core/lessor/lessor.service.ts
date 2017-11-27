@@ -8,7 +8,7 @@ import {
   Market,
   MarketServerResponse,
   MarketService
-} from '../core/market/market.service';
+} from '../market/market.service';
 
 export interface MarketList {
   upcomingMarkets: Market[];

@@ -5,10 +5,11 @@ import { ActivatedRoute } from '@angular/router';
 import { of as observableOf } from 'rxjs/observable/of';
 
 import { AlertService } from '../../../core/alert/alert.service';
+import { LessorService } from '../../../core/lessor/lessor.service';
 import { VendorProfileService } from '../../../core/vendor/vendor-profile.service';
 import { UserProfileComponent } from './user-profile.component';
 
-describe('VendorProfileComponent', () => {
+describe('UserProfileComponent', () => {
   let component: UserProfileComponent;
   let fixture: ComponentFixture<UserProfileComponent>;
 
@@ -19,7 +20,13 @@ describe('VendorProfileComponent', () => {
         declarations: [UserProfileComponent],
         schemas: [NO_ERRORS_SCHEMA],
         providers: [
-          { provide: VendorProfileService, useValue: {} },
+          {
+            provide: VendorProfileService,
+            useValue: {
+              updateVendorProfile: observableOf({}),
+              vendorProfile$: observableOf([])
+            }
+          },
           { provide: AlertService, useValue: {} },
           {
             provide: ActivatedRoute,
@@ -29,6 +36,14 @@ describe('VendorProfileComponent', () => {
                   email: 'a@b.com'
                 }
               })
+            }
+          },
+          {
+            provide: LessorService,
+            useValue: {
+              getMarketList: observableOf([]),
+              updateLessorProfile$: observableOf([]),
+              getLessorProfile$: observableOf({})
             }
           }
         ]

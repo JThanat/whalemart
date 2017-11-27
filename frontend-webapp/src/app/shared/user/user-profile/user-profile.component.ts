@@ -12,14 +12,11 @@ import { Observable } from 'rxjs/Observable';
 import { of as observableOf } from 'rxjs/observable/of';
 import { mergeMap } from 'rxjs/operators';
 import { AlertService } from '../../../core/alert/alert.service';
+import { LessorProfile, LessorService } from '../../../core/lessor/lessor.service';
 import {
   VendorProfile,
   VendorProfileService
 } from '../../../core/vendor/vendor-profile.service';
-import {
-  LessorProfile,
-  LessorService
-} from '../../../lessor-dashboard/lessor.service';
 import { LessorFormComponent } from '../lessor-form/lessor-form.component';
 
 @Component({

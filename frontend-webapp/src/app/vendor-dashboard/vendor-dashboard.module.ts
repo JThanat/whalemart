@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 
+import { LessorService } from '../core/lessor/lessor.service';
 import { VendorProfileResolver } from '../core/vendor/vendor-profile-resolver.service';
 import { VendorProfileService } from '../core/vendor/vendor-profile.service';
-import { LessorService } from '../lessor-dashboard/lessor.service';
 import { SharedModule } from '../shared/shared.module';
 import { UserProductService } from '../shared/user/user-product/user-product.service';
 import { VendorPaymentResolver } from './payment/vendor-payment-resolver.service';

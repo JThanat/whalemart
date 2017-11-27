@@ -1,7 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { inject, TestBed } from '@angular/core/testing';
 
-import { MarketService } from '../core/market/market.service';
+import { MarketService } from '../market/market.service';
 import { LessorService } from './lessor.service';
 
 describe('LessorService', () => {
