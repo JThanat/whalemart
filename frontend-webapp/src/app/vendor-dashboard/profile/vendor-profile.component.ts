@@ -1,12 +1,22 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
+import { Observable } from 'rxjs/Observable';
+import { empty as observableEmpty } from 'rxjs/observable/empty';
+import { mergeMap } from 'rxjs/operators';
 import { AlertService } from '../../core/alert/alert.service';
 import {
   LessorProfile,
   LessorService
 } from '../../lessor-dashboard/lessor.service';
+import { LessorFormComponent } from '../../shared/user/lessor-form/lessor-form.component';
 import { VendorProfile, VendorProfileService } from './vendor-profile.service';
 
 @Component({
@@ -14,12 +24,14 @@ import { VendorProfile, VendorProfileService } from './vendor-profile.service';
   templateUrl: './vendor-profile.component.html',
   styleUrls: ['./vendor-profile.component.scss']
 })
-export class VendorProfileComponent implements OnInit {
+export class VendorProfileComponent implements OnInit, AfterViewInit {
+  @ViewChild(LessorFormComponent) lessorFormComponent: LessorFormComponent;
   @Input() isLessor = true;
 
   vendorProfile: VendorProfile;
   lessorProfile: LessorProfile;
   vendorProfileForm: FormGroup;
+  lessorProfileForm: FormGroup;
   isEdit = false;
 
   constructor(
@@ -29,16 +41,27 @@ export class VendorProfileComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
+  loadData() {
+    this.vendorProfileService.getVendorProfile().subscribe(
+      data => this.vendorProfile = data,
+      err => this.alert.show({ message: 'เกิดข้อผิดพลาด', type: 'danger' })
+    );
+    if (this.isLessor) {
+      this.lessorService.getLessorProfile$.subscribe(
+        data => {
+          console.log(data);
+          this.lessorProfile = data;
+        },
+        err => this.alert.show({ message: 'เกิดข้อผิดพลาด', type: 'danger' })
+      );
+    }
+  }
+
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.vendorProfile = data.vendorProfile;
     });
-    if (this.isLessor) {
-      this.lessorService.getLessorProfile$.subscribe(
-        data => (this.lessorProfile = data),
-        err => this.alert.show({ message: 'เกิดข้อผิดพลาด', type: 'danger' })
-      );
-    }
+    this.loadData();
 
     this.vendorProfileForm = new FormGroup({
       firstName: new FormControl('', [Validators.required]),
@@ -49,10 +72,20 @@ export class VendorProfileComponent implements OnInit {
       ]),
       profileImage: new FormControl()
     });
+  }
 
-    if (!this.isLessor) {
-      this.vendorProfileForm.controls['lessor'].disable();
-    }
+  ngAfterViewInit() {
+    // Fix: https://github.com/angular/angular/issues/6005
+    setTimeout(() => {
+      if (this.isLessor) {
+        if (this.lessorFormComponent) {
+          this.lessorProfileForm = this.lessorFormComponent.form;
+          if (this.isEdit && this.lessorProfile) {
+            this.lessorProfileForm.reset(this.lessorProfile);
+          }
+        }
+      }
+    });
   }
 
   setEditProfile(isEdit: boolean) {
@@ -60,15 +93,47 @@ export class VendorProfileComponent implements OnInit {
 
     if (isEdit) {
       this.vendorProfileForm.reset(this.vendorProfile);
+      this.ngAfterViewInit();
     }
   }
 
   updateProfile() {
-    if (!this.vendorProfileForm.valid) {
+    if (this.lessorFormComponent) {
+      this.lessorFormComponent.submit();
+    }
+
+    if (
+      !this.vendorProfileForm.valid ||
+      (this.lessorProfileForm && !this.lessorProfileForm.valid)
+    ) {
       return;
     }
 
     this.vendorProfileForm.disable();
+
+    let lessorUpdateProfile$: Observable<any>;
+    if (this.lessorProfileForm) {
+      this.lessorProfileForm.disable();
+
+      const {
+        lessorName,
+        isOrganization,
+        organizationName,
+        organizationContactName,
+        organizationEmail,
+        organizationPhoneNumber
+      } = this.lessorProfileForm.value;
+      console.log(this.lessorProfileForm.value);
+
+      lessorUpdateProfile$ = this.lessorService.updateLessorProfile$({
+        lessor_name: lessorName,
+        is_organization: isOrganization,
+        organization_name: organizationName,
+        organization_contact_name: organizationContactName,
+        organization_email: organizationEmail,
+        organization_phone_number: organizationPhoneNumber
+      });
+    }
 
     const {
       firstName,
@@ -84,10 +149,20 @@ export class VendorProfileComponent implements OnInit {
         phone: phone,
         profile_image: profileImage ? profileImage[0] : null
       })
+      .pipe(
+        mergeMap(
+          () =>
+            this.lessorProfileForm ? lessorUpdateProfile$ : observableEmpty()
+        )
+      )
       .subscribe(
         () => {
-          this.alert.show({ message: 'อัพเดทเสร็จสมบูรณ์', type: 'success' });
-          location.reload();
+          this.isEdit = false;
+          this.vendorProfileForm.enable();
+          if (this.lessorProfileForm) {
+            this.lessorProfileForm.enable();
+          }
+          this.loadData();
         },
         err => {
           this.vendorProfileForm.enable();

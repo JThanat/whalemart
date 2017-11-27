@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { _throw as observableThrow } from 'rxjs/observable/throw';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, mapTo } from 'rxjs/operators';
 
 import {
   Market,
@@ -44,6 +44,15 @@ export interface LessorProfile {
   organizationContactName: string;
   organizationEmail: string;
   organizationPhoneNumber: string;
+}
+
+interface LessorProfileRequest {
+  lessor_name: string;
+  is_organization: boolean;
+  organization_name: string;
+  organization_contact_name: string;
+  organization_email: string;
+  organization_phone_number: string;
 }
 
 class LessorProfileError {}
@@ -106,6 +115,22 @@ export class LessorService {
         }
         return observableThrow(err);
       })
-    )
+    );
+  }
+
+  updateLessorProfile$(lessorProfile: LessorProfileRequest) {
+    return this.http
+      .post<LessorProfileRequest>('/api/lessor/change/', lessorProfile)
+      .pipe(
+        mapTo(true),
+        catchError((err: any) => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status >= 400 && err.status < 500) {
+              return observableThrow(new LessorProfileError());
+            }
+          }
+          return observableThrow(err);
+        })
+      );
   }
 }
