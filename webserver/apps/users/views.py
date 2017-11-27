@@ -1,13 +1,14 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import check_password
-from django.contrib import auth
-from django.shortcuts import get_object_or_404
 from rest_framework import viewsets, mixins, status
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.decorators import api_view
 
-from .serializers import RegistrationSerializer, UserSerializer, get_facebook_id
+from apps.commons.choices import ReservationStatus
+from apps.lessors.models import Lessor
+from apps.payments.models import Installment
+from .serializers import RegistrationSerializer, UserSerializer, CreditCardSerializer, get_facebook_id
 
 User = get_user_model()
 
@@ -52,6 +53,7 @@ class ValidateUserEmailView(APIView):
     """
     API endpoint that allows email to be checked before created
     """
+
     def get(self, request, *args, **kwargs):
         username = request.query_params.get('email', None)
 
@@ -65,7 +67,19 @@ class ValidateUserEmailView(APIView):
             return Response({'is_ok': False})
 
 
-@api_view(['POST',])
+class CreditCardView(viewsets.ModelViewSet):
+    serializer_class = CreditCardSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        return user.credit_cards.all()
+
+
+def is_lessor(user):
+    return Lessor.objects.filter(user=user).exists()
+
+
+@api_view(['POST', ])
 def login_username(request, *args, **kwargs):
     """
     ### Required
@@ -77,14 +91,15 @@ def login_username(request, *args, **kwargs):
         user = User.objects.get(username=username)
         if check_password(password, user.password):
             auth.login(request, user)
-            return Response({'first_name': user.first_name, 'last_name': user.last_name, 'email': user.email},
+            return Response({'first_name': user.first_name, 'last_name': user.last_name, 'email': user.email,
+                             'is_lessor': is_lessor(user)},
                             status=status.HTTP_200_OK)
         return Response(status=status.HTTP_400_BAD_REQUEST)
     except User.DoesNotExist:
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['POST',])
+@api_view(['POST', ])
 def login_facebook(request, *args, **kwargs):
     """
     ### Required
@@ -96,7 +111,8 @@ def login_facebook(request, *args, **kwargs):
         try:
             user = User.objects.get(facebook_id=response)
             auth.login(request, user)
-            return Response({'first_name': user.first_name, 'last_name': user.last_name, 'email': user.email},
+            return Response({'first_name': user.first_name, 'last_name': user.last_name, 'email': user.email,
+                             'is_lessor': is_lessor(user)},
                             status=status.HTTP_200_OK)
         except User.DoesNotExist:
             return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -104,7 +120,7 @@ def login_facebook(request, *args, **kwargs):
         return Response(response, status=response.status_code)
 
 
-@api_view(['POST',])
+@api_view(['POST', ])
 def logout(request, *args, **kwargs):
     auth.logout(request)
     return Response(status=status.HTTP_200_OK)
@@ -145,4 +161,52 @@ def get_current_user(request, *args, **kwargs):
         user.save()
         return Response(UserSerializer(user).data)
 
-    
+
+@api_view(['GET', ])
+def get_reserved_markets(request, *args, **kwargs):
+    """
+    `reservation_status`:\n
+    0: waiting for approval\n
+    1: approved\n
+    2: rejected\n
+    3: cancelled\n
+    `approved_booth`:
+    id: approved booth id
+    null: status is waiting for approval, rejected, or cancelled)\n
+    `payment_status`:\n
+    0: draft\n
+    1: deposited\n
+    2: fully paid\n
+    null: haven't make any payment yet\n
+    `incomplete_installment_id`:
+    id: id of installment to upload receipt\n
+    null: all of installments is complete\n
+    """
+    user = request.user
+    if user.is_anonymous():
+        return Response(status=status.HTTP_401_UNAUTHORIZED)
+    reservations = user.reservations.all()
+    markets = []
+    for reservation in reservations:
+        market = dict()
+        market['market_id'] = reservation.market.id
+        market['reservation_status'] = reservation.status
+        if market['reservation_status'] == ReservationStatus.APPROVED:
+            market['approved_booth'] = reservation.approved_booth.id
+            market['booth_rental_fee'] = reservation.approved_booth.rental_fee
+        else:
+            market['approved_booth'] = None
+            market['booth_rental_fee'] = None
+        if reservation.rental_payment_info:
+            market['payment_status'] = reservation.rental_payment_info.status
+        else:
+            market['payment_status'] = None
+        if reservation.rental_payment_info.installments.filter(payment_method=Installment.BANK_TRANSFER,
+                                                               receipt_image=None).exists():
+            incomplete_installment = reservation.rental_payment_info.installments.filter(
+                payment_method=Installment.BANK_TRANSFER, receipt_image=None)[0]
+            market['incomplete_installment_id'] = incomplete_installment.id
+        else:
+            market['incomplete_installment_id'] = None
+        markets.append(market)
+    return Response(markets, status=status.HTTP_200_OK)

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
@@ -20,7 +20,8 @@ export class BecomeLessorComponent implements OnInit {
   constructor(
     private becomeLessorService: BecomeLessorService,
     private alert: AlertService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -28,7 +29,7 @@ export class BecomeLessorComponent implements OnInit {
 
     this.becomeLessorForm = new FormGroup({
       lessorName: new FormControl('', [Validators.required]),
-      isOrganization: new FormControl(false, { updateOn: 'change' }),
+      isOrganization: new FormControl(false),
       organizationName: new FormControl('', [Validators.required]),
       organizationContactName: new FormControl('', [Validators.required]),
       organizationEmail: new FormControl('', [Validators.required, Validators.email]),
@@ -36,7 +37,7 @@ export class BecomeLessorComponent implements OnInit {
         '',
         [Validators.required, Validators.pattern(/^\+?\d{9,15}$/)]
       )
-    }, { updateOn: 'blur' });
+    });
 
     this.becomeLessorForm.controls['isOrganization'].valueChanges.pipe(
       distinctUntilChanged()
@@ -65,8 +66,6 @@ export class BecomeLessorComponent implements OnInit {
   }
 
   becomeLessor() {
-    this.becomeLessorForm.updateValueAndValidity();
-
     if (!this.becomeLessorForm.valid) {
       return;
     }
@@ -90,7 +89,7 @@ export class BecomeLessorComponent implements OnInit {
       organization_email: organizationEmail,
       organization_phone_number: organizationPhone
     }).subscribe(() => {
-      // TODO: Redirect to lessor profile
+      this.router.navigate(['/lessor']);
       this.alert.show({ message: 'สมัครผู้ให้เช่าตลาดสมบูรณ์', type: 'success' });
     }, err => {
       this.becomeLessorForm.enable();

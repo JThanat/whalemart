@@ -28,7 +28,8 @@ class CreditCard(models.Model):
         (VISA, 'Visa')
     )
     type = models.PositiveSmallIntegerField(choices=TYPE_CHOICES)
-    expiry_date = models.DateField(verbose_name='Expiry Date')
+    expiry_month = models.CharField(verbose_name='Expiry Month', max_length=2)
+    expiry_year = models.CharField(verbose_name='Expiry Year', max_length=2)
     verification_no = models.CharField(verbose_name='Verification Number', max_length=10)
 
     def __str__(self):

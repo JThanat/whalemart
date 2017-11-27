@@ -1,0 +1,92 @@
+<div class="row">
+  <div class="offset-md-1 col-md-10">
+    <h4>ข้อมูลบัตรเครดิต</h4>
+
+    <div *ngFor="let card of creditCards" class="payment-list">
+      <div class="mb-2">
+        <div class="d-flex flex-wrap align-items-center mt-3">
+          <div class="p-2 p-sm-3">
+            <div class="thumb-img">
+              <img class="img-fluid" [src]="'/assets/images/payment/' + card.type + '.png'" />
+            </div>
+          </div>
+          <div class="p-2">
+            <div class="font-weight-bold">{{ card.cardNumber | creditCard:'hide' }}</div>
+            <div>{{ card.cardHolderName }}</div>
+            <div class="card-type">{{ card.type == 'master' ? 'Master Card' : 'Visa Card' }}</div>
+          </div>
+          <div class="ml-auto p-3">
+            <button class="btn btn-danger" (click)="deleteCreditCard(card)">ลบ</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="creditCards && creditCards.length === 0">
+      ไม่มีข้อมูลบัตรเครดิตปรากฏอยู่
+    </div>
+
+    <div *ngIf="isShowAddCreditCard" class="mt-4">
+      <form [formGroup]="addCreditCardForm" (submit)="addCreditCard()">
+        <div class="row">
+          <div class="col-12">
+            <app-input-group label="ชื่อผู้ถือบัตร">
+              <input appInput type="text" class="form-control" formControlName="cardHolderName" placeholder="ชื่อ - นามสกุล">
+              <app-input-error *ngIf="addCreditCardForm.controls['cardHolderName'].hasError('required')">
+                กรุณากรอกผู้ถือบัตร
+              </app-input-error>
+            </app-input-group>
+          </div>
+          <div class="col-sm-6">
+            <app-input-group label="หมายเลขบัตรเดบิต/เครดิต">
+              <input appInput type="text" class="form-control" formControlName="cardNumber" placeholder="หมายเลขบัตรเดบิต/เครดิต">
+              <app-input-error *ngIf="addCreditCardForm.controls['cardNumber'].hasError('required')">
+                กรุณากรอกหมายเลขบัตรเดบิต/เครดิต
+              </app-input-error>
+              <app-input-error *ngIf="addCreditCardForm.controls['cardNumber'].hasError('pattern')">
+                บัตรเครดิตจะต้องเป็นเลข 16 หลัก ไม่มีขีด
+              </app-input-error>
+            </app-input-group>
+          </div>
+          <div class="col-sm-6">
+            <app-input-group label="ประเภทบัตรเครดิต">
+              <select appInput formControlName="type" class="form-control">
+                <option value="visa">Visa Card</option>
+                <option value="master">Master Card</option>
+              </select>
+              <app-input-error *ngIf="addCreditCardForm.controls['type'].hasError('required')">
+                กรุณาเลือกบัตรเครดิต
+              </app-input-error>
+            </app-input-group>
+          </div>
+          <div class="col-sm-6">
+            <app-input-group label="CVV">
+              <input appInput type="text" class="form-control" formControlName="verificationNo" placeholder="234">
+              <app-input-error *ngIf="addCreditCardForm.controls['verificationNo'].hasError('required')">
+                กรุณากรอกเลข CVV
+              </app-input-error>
+              <app-input-error *ngIf="addCreditCardForm.controls['verificationNo'].hasError('pattern')">
+                เลข CVV จะต้องประกอบด้วย 3 ตัวเท่านั้น
+              </app-input-error>
+            </app-input-group>
+          </div>
+          <div class="col-sm-6">
+            <app-input-group label="เดือน/ปี ที่หมดอายุ">
+              <input appInput type="text" class="form-control" formControlName="expiryDate" placeholder="01/17">
+              <app-input-error *ngIf="addCreditCardForm.controls['expiryDate'].hasError('required')">
+                กรุณากรอกเดือน/ปี ที่หมดอายุ
+              </app-input-error>
+              <app-input-error *ngIf="addCreditCardForm.controls['expiryDate'].hasError('pattern')">
+                ข้อมูลต้องอยู่ในรูป 01/17
+              </app-input-error>
+            </app-input-group>
+          </div>
+          <div class="col-sm-6">
+            <button type="submit" class="btn btn-primary mt-3" [disabled]="addCreditCardForm.disabled">เพิ่มบัตรเครดิต</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <button *ngIf="!isShowAddCreditCard" (click)="showAddCreditCard()" class="btn btn-primary mt-3">เพิ่มบัตรเครดิต</button>
+  </div>
+</div>

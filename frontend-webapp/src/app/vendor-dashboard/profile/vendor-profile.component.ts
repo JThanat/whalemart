@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs/operators';
 
-import { Observable } from 'rxjs/Observable';
 import { AlertService } from '../../core/alert/alert.service';
 import { VendorProfile, VendorProfileService } from './vendor-profile.service';
 
@@ -13,7 +11,7 @@ import { VendorProfile, VendorProfileService } from './vendor-profile.service';
   styleUrls: ['./vendor-profile.component.scss']
 })
 export class VendorProfileComponent implements OnInit {
-  vendorProfile$: Observable<VendorProfile>;
+  vendorProfile: VendorProfile;
   vendorProfileForm: FormGroup;
   isEdit = false;
 
@@ -24,25 +22,23 @@ export class VendorProfileComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.vendorProfile$ = this.route.data
-      .pipe(map(data => data.vendorProfile));
+    this.route.data.subscribe(data => {
+      this.vendorProfile = data.vendorProfile;
+    });
 
-    this.vendorProfileForm = new FormGroup(
-      {
-        firstName: new FormControl('', [Validators.required]),
-        lastName: new FormControl('', [Validators.required]),
-        phone: new FormControl('', [Validators.required, Validators.pattern(/^\+?\d{9,15}$/)]),
-        profileImage: new FormControl()
-      },
-      { updateOn: 'blur' }
-    );
+    this.vendorProfileForm = new FormGroup({
+      firstName: new FormControl('', [Validators.required]),
+      lastName: new FormControl('', [Validators.required]),
+      phone: new FormControl('', [Validators.required, Validators.pattern(/^\+?\d{9,15}$/)]),
+      profileImage: new FormControl()
+    });
   }
 
   setEditProfile(isEdit: boolean) {
     this.isEdit = isEdit;
 
     if (isEdit) {
-      this.vendorProfileForm.reset(this.vendorProfile$);
+      this.vendorProfileForm.reset(this.vendorProfile);
     }
   }
 
@@ -64,8 +60,8 @@ export class VendorProfileComponent implements OnInit {
       })
       .subscribe(
         () => {
-          this.vendorProfileForm.enable();
           this.alert.show({ message: 'อัพเดทเสร็จสมบูรณ์', type: 'success' });
+          location.reload();
         },
         err => {
           this.vendorProfileForm.enable();

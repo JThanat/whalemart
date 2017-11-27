@@ -1,11 +1,21 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
+import { NotFoundComponent } from './shared/not-found/not-found.component';
+
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
     loadChildren: './feed/feed.module#FeedModule'
+  },
+  {
+    path: 'admin',
+    loadChildren: './admin-dashboard/admin-dashboard.module#AdminDashboardModule'
+  },
+  {
+    path: 'lessor',
+    loadChildren: './lessor-dashboard/lessor-dashboard.module#LessorDashboardModule'
   },
   {
     path: 'ping',
@@ -34,6 +44,10 @@ const routes: Routes = [
   {
     path: 'vendor',
     loadChildren: './vendor-dashboard/vendor-dashboard.module#VendorDashboardModule'
+  },
+  {
+    path: '**',
+    component: NotFoundComponent
   }
 ];
 

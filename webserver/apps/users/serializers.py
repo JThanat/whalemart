@@ -7,6 +7,7 @@ from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 
 from .models import CreditCard
+from apps.lessors.models import Lessor
 
 User = get_user_model()
 
@@ -14,14 +15,16 @@ User = get_user_model()
 class CreditCardSerializer(serializers.ModelSerializer):
     class Meta:
         model = CreditCard
-        fields = ('id', 'card_number', 'card_holder_name', 'type', 'expiry_date', 'verification_no')
-        extra_kwargs = {
-            'id': {'read_only': False, 'required': False}
-        }
+        fields = ('id', 'card_number', 'card_holder_name', 'type', 'expiry_month', 'expiry_year', 'verification_no')
+
+    def create(self, validated_data):
+        user = self.context['request'].user
+        validated_data['user'] = user
+        return CreditCard.objects.create(**validated_data)
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
-    facebook_token = serializers.CharField(write_only=True)
+    facebook_token = serializers.CharField(write_only=True, required=False)
 
     class Meta:
         model = User
@@ -54,45 +57,18 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    credit_cards = CreditCardSerializer(many=True)
+    is_lessor = serializers.SerializerMethodField()
 
     class Meta:
         model = User
-        fields = ('id', 'email', 'first_name', 'last_name', 'phone', 'is_verified', 'profile_image', 'credit_cards')
+        fields = ('id', 'email', 'first_name', 'last_name', 'phone', 'is_verified', 'is_lessor', 'profile_image')
         extra_kwargs = {
             'is_verified': {'read_only': True},
             'email': {'read_only': True},
         }
 
-    def update(self, instance, validated_data):
-        credit_cards_data = validated_data.pop('credit_cards', None)
-        instance = super(UserSerializer, self).update(instance, validated_data)
-
-        current_credit_cards = CreditCard.objects.filter(user=instance.id)
-        validated_credit_cards = []
-        for credit_card_data in credit_cards_data:
-            # Update existing credit card
-            credit_card_id = credit_card_data.get('id', None)
-            if credit_card_id:
-                credit_card_obj = CreditCard.objects.get(id=credit_card_id)
-                credit_card_obj.user = instance
-                credit_card_obj.card_number = credit_card_data.get('card_number', credit_card_obj.card_number)
-                credit_card_obj.card_holder_name = credit_card_data.get('card_holder_name',
-                                                                        credit_card_obj.card_holder_name)
-                credit_card_obj.type = credit_card_data.get('type', credit_card_obj.type)
-                credit_card_obj.expiry_date = credit_card_data.get('expiry_date', credit_card_obj.expiry_date)
-                credit_card_obj.verification_no = credit_card_data.get('verification_no',
-                                                                       credit_card_obj.verification_no)
-                credit_card_obj.save()
-            # Create new credit card
-            else:
-                credit_card_obj = CreditCard.objects.create(user=instance, **credit_card_data)
-                validated_credit_cards.append(credit_card_obj)
-        # Delete credit card deleted by frontend
-        to_delete_credit_cards = set(current_credit_cards) - set(validated_credit_cards)
-        for credit_card_obj in to_delete_credit_cards:
-            credit_card_obj.delete()
-        return instance
+    def get_is_lessor(self, obj):
+        return Lessor.objects.filter(user=obj).exists()
 
 
 def get_facebook_id(facebook_token):
