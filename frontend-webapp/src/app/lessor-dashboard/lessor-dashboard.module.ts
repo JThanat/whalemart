@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { VendorProfileResolver } from '../core/vendor/vendor-profile-resolver.service';
 import { VendorProfileService } from '../core/vendor/vendor-profile.service';
 import { SharedModule } from '../shared/shared.module';
+import { UserProductService } from '../shared/user/user-product/user-product.service';
 import { CreateMarketComponent } from './create-market/create-market.component';
 import { CreateMarketService } from './create-market/create-market.service';
 import { LessorDashboardRoutingModule } from './lessor-dashboard-routing.module';
@@ -25,7 +26,8 @@ import { LessorMarketResolverService } from './manage-market/lessor-market-resol
     LessorMarketResolverService,
     CreateMarketService,
     VendorProfileResolver,
-    VendorProfileService
+    VendorProfileService,
+    UserProductService
   ]
 })
 export class LessorDashboardModule {}

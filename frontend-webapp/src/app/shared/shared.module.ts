@@ -23,6 +23,7 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { SubNavBarDirective } from './sub-nav-bar/sub-nav-bar.directive';
 import { SvgIconComponent } from './svg-icon/svg-icon.component';
 import { UserProfileModule } from './user/user-profile/user-profile.module';
+import { UserProductComponent } from './user/user-product/user-product.component';
 
 @NgModule({
   imports: [
@@ -46,6 +47,7 @@ import { UserProfileModule } from './user/user-profile/user-profile.module';
     PaginationComponent,
     SubNavBarDirective,
     MarketComponent,
+    UserProductComponent,
     DateRangePipe,
     BreadcrumbComponent,
     BreadcrumbItemDirective,
@@ -61,6 +63,7 @@ import { UserProfileModule } from './user/user-profile/user-profile.module';
     HttpClientModule,
     SvgIconComponent,
     PaginationComponent,
+    UserProductComponent,
     PortalModule,
     OverlayModule,
     A11yModule,

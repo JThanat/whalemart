@@ -4,11 +4,10 @@ import { VendorProfileResolver } from '../core/vendor/vendor-profile-resolver.se
 import { VendorProfileService } from '../core/vendor/vendor-profile.service';
 import { LessorService } from '../lessor-dashboard/lessor.service';
 import { SharedModule } from '../shared/shared.module';
+import { UserProductService } from '../shared/user/user-product/user-product.service';
 import { VendorPaymentResolver } from './payment/vendor-payment-resolver.service';
 import { VendorPaymentComponent } from './payment/vendor-payment.component';
 import { VendorPaymentService } from './payment/vendor-payment.service';
-import { VendorProductComponent } from './product/vendor-product.component';
-import { VendorProductService } from './product/vendor-product.service';
 import { VendorProfileComponent } from './profile/vendor-profile.component';
 import { VendorDashboardRoutingModule } from './vendor-dashboard-routing.module';
 import { VendorDashboardComponent } from './vendor-dashboard.component';
@@ -21,14 +20,13 @@ import { VendorDashboardComponent } from './vendor-dashboard.component';
   declarations: [
     VendorProfileComponent,
     VendorDashboardComponent,
-    VendorProductComponent,
     VendorPaymentComponent
   ],
   providers: [
     VendorProfileService,
     VendorPaymentResolver,
     VendorProfileResolver,
-    VendorProductService,
+    UserProductService,
     VendorPaymentService,
     LessorService
   ]
