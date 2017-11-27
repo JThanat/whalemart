@@ -13,7 +13,7 @@ export class CreditCardPipe implements PipeTransform {
       }
       if (args === 'hide' && dividedCardNumber.length) {
         for (let i = 0; i < dividedCardNumber.length - 1; i++) {
-          dividedCardNumber[i] = 'XXXX'
+          dividedCardNumber[i] = 'XXXX';
         }
       }
       return dividedCardNumber.join('-');
