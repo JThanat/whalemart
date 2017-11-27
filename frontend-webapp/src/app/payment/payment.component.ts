@@ -1,3 +1,5 @@
+/// <reference path="./cleave.d.ts" />
+
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -13,9 +15,9 @@ export class PaymentComponent implements OnInit, AfterViewInit {
   choosePaymentMethodForm: FormGroup;
   creditCardForm: FormGroup;
 
-  @ViewChild('cardNumber', {read: ElementRef}) cardNumber: ElementRef;
-  @ViewChild('expiryDate', {read: ElementRef}) expiryDate: ElementRef;
-  @ViewChild('verificationNo', {read: ElementRef}) verificationNo: ElementRef;
+  @ViewChild('cardNumber') cardNumber: ElementRef;
+  @ViewChild('expiryDate') expiryDate: ElementRef;
+  @ViewChild('verificationNo') verificationNo: ElementRef;
 
   constructor() { }
 
@@ -28,26 +30,23 @@ export class PaymentComponent implements OnInit, AfterViewInit {
       method: new FormControl('credit', [Validators.required])
     }, { updateOn: 'blur' });
 
-    this.creditCardForm = new FormGroup(
-      {
-        cardHolderName: new FormControl('', [Validators.required]),
-        cardNumber: new FormControl('', [
-          Validators.required,
-          Validators.pattern(/^\d{4} \d{4} \d{4} \d{4}$/)
-        ]),
-        type: new FormControl('visa', [Validators.required]),
-        expiryDate: new FormControl('', [
-          Validators.required,
-          Validators.pattern(/^\d{2}\/\d{2}$/)
-        ]),
-        verificationNo: new FormControl(null, [
-          Validators.required,
-          Validators.pattern(/^\d{3}$/)
-        ]),
-        isSaved: new FormControl(false)
-      },
-      { updateOn: 'blur' }
-    );
+    this.creditCardForm = new FormGroup({
+      cardHolderName: new FormControl('', [Validators.required]),
+      cardNumber: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^\d{4} \d{4} \d{4} \d{4}$/)
+      ]),
+      type: new FormControl('visa', [Validators.required]),
+      expiryDate: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^\d{2}\/\d{2}$/)
+      ]),
+      verificationNo: new FormControl(null, [
+        Validators.required,
+        Validators.pattern(/^\d{3}$/)
+      ]),
+      isSaved: new FormControl(false)
+    });
   }
 
   ngAfterViewInit() {
