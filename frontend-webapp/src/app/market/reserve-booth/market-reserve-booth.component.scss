@@ -83,6 +83,15 @@ hr {
   width: 100%;
 }
 
+.booths-duplicate-alert {
+  padding: 1rem 2rem;
+  border: 1px solid $danger;
+  background: lighten($danger, 40%);
+  color: darken($danger, 20%);
+  border-radius: $border-radius;
+  margin-bottom: 1.5rem;
+}
+
 .side-panel {
   position: sticky;
   top: 2rem;

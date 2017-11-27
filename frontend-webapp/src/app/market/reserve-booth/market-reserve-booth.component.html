@@ -35,7 +35,27 @@
             เลือกบูธที่ท่านต้องการจอง 1 บูธ โดยสามารถเลือกไว้ได้สูงสุดจำนวน 10 อันดับ เพื่อให้ผู้จัดการตลาดคัดเลือก หลังจากการคัดเลือกเสร็จสิ้น ทางระบบจะแจ้งหมายเลขบูธที่ท่านได้พร้อมราคาบูธ
           </p>
 
-          <img [src]="marketDetail.layoutImageUrl" alt="รูปแผนผังตลาด" class="market-map">
+          <img [src]="marketDetail.layoutImageUrl" alt="รูปแผนผังตลาด" class="market-map mb-5">
+
+          <div class="booths-duplicate-alert" role="alert" *ngIf="boothsForm.hasError('boothsDuplicate')">
+            กรุณาเลือกบูธที่ไม่ซ้ำกัน
+          </div>
+
+          <div class="row" formArrayName="booths">
+            <div class="col-12 col-md-6" *ngFor="let booth of boothsForm.controls; index as i">
+              <app-input-group label="ลำดับที่ {{ i + 1 }}">
+                <select appInput class="form-control" [formControlName]="i" required>
+                  <option value="">เลือกบูธ</option>
+                  <option *ngFor="let booth of (booths | async)" [value]="booth.id">
+                    {{ booth.name }} (ราคา {{ booth.price | currency:'THB':'symbol-narrow' }})
+                  </option>
+                </select>
+                <app-input-error *ngIf="booth.hasError('required')">
+                  กรุณาระบุบูธที่ต้องการ
+                </app-input-error>
+              </app-input-group>
+            </div>
+          </div>
         </section>
 
         <hr>
@@ -43,8 +63,15 @@
         <section>
           <h2><span class="number">2</span>ตั้งชื่อร้าน</h2>
 
-          <input type="text" formControlName="name" placeholder="ชื่อร้าน" class="form-control form-control-lg">
-          <small class="text-right form-text text-muted">{{ reserveForm.get('name')?.value.length }}/100</small>
+          <app-input-group label="ชื่อร้าน">
+            <input appInput type="text" formControlName="name" placeholder="ชื่อร้าน" class="form-control form-control-lg">
+            <small class="form-text text-muted">
+              {{ reserveForm.get('name')?.value.length }}/100
+            </small>
+            <app-input-error *ngIf="reserveForm.hasError('required', ['name'])">
+              กรุณาระบุชื่อร้าน
+            </app-input-error>
+          </app-input-group>
         </section>
 
         <hr>
