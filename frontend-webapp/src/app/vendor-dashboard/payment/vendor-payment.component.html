@@ -76,6 +76,9 @@
               <app-input-error *ngIf="addCreditCardForm.controls['expiryDate'].hasError('required')">
                 กรุณากรอกเดือน/ปี ที่หมดอายุ
               </app-input-error>
+              <app-input-error *ngIf="addCreditCardForm.controls['expiryDate'].hasError('pattern')">
+                ข้อมูลต้องอยู่ในรูป 01/17
+              </app-input-error>
             </app-input-group>
           </div>
           <div class="col-sm-6">

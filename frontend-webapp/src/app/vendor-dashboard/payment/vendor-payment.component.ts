@@ -37,7 +37,10 @@ export class VendorPaymentComponent implements OnInit {
         ]),
         cardHolderName: new FormControl('', [Validators.required]),
         type: new FormControl('', [Validators.required]),
-        expiryDate: new FormControl('', [Validators.required]),
+        expiryDate: new FormControl('', [
+          Validators.required,
+          Validators.pattern(/^\d{2}\/\d{2}$/)
+        ]),
         verificationNo: new FormControl(null, [
           Validators.required,
           Validators.pattern(/^\d{3}$/)
@@ -69,13 +72,16 @@ export class VendorPaymentComponent implements OnInit {
       verification_no: creditCard.verificationNo
     };
     console.log(creditCard, creditCardReq);
-    this.vendorPaymentService.addCreditCard$(creditCardReq).subscribe(data => {
-      this.addCreditCardForm.enable();
-      this.creditCards = data;
-    }, err => {
-      this.addCreditCardForm.enable();
-      this.alert.show({ message: 'เกิดข้อผิดพลาด', type: 'danger' });
-    });
+    this.vendorPaymentService.addCreditCard$(creditCardReq).subscribe(
+      data => {
+        this.addCreditCardForm.enable();
+        this.creditCards = data;
+      },
+      err => {
+        this.addCreditCardForm.enable();
+        this.alert.show({ message: 'เกิดข้อผิดพลาด', type: 'danger' });
+      }
+    );
   }
 
   deleteCreditCard(creditCard: CreditCard) {
