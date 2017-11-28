@@ -62,7 +62,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     });
   }
 
-  submitNeungForm() {
+  submitForm() {
     if (!this.creditCardForm.valid) {
       console.log(this.creditCardForm.errors);
       return;
