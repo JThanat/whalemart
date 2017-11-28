@@ -25,7 +25,7 @@ xdescribe('PaymentComponent', () => {
               marketID: 1
             })
           }
-        }
+        },
         { provider: AlertService, useValue: {} }
       ]
     })
