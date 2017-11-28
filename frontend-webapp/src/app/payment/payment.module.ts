@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../shared/shared.module';
+import { PaymentComponent } from './pay/payment.component';
 import { PaymentRoutingModule } from './payment-routing.module';
-import { PaymentComponent } from './payment.component';
 import { UploadReceiptComponent } from './upload-receipt/upload-receipt.component';
 
 @NgModule({
