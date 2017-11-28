@@ -8,6 +8,7 @@ from rest_framework import serializers
 
 from .models import CreditCard
 from apps.lessors.models import Lessor
+from apps.commons.notification import send_validation_link
 
 User = get_user_model()
 
@@ -53,6 +54,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
         validated_data['username'] = validated_data['email']
         validated_data['password'] = make_password(validated_data['password'])
         validated_data['facebook_id'] = validated_data.pop('facebook_token', '')
+        send_validation_link(validated_data['email'], 'http://localhost:4200/login')
         return User.objects.create(**validated_data)
 
 
