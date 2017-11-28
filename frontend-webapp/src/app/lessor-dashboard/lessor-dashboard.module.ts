@@ -12,6 +12,8 @@ import { LessorDashboardComponent } from './lessor-dashboard.component';
 import { LessorInfoComponent } from './lessor-info/lessor-info.component';
 import { LessorManageMarketComponent } from './manage-market/lessor-manage-market.component';
 import { LessorMarketResolverService } from './manage-market/lessor-market-resolver.service';
+import { PaymentStatusResolver } from './payment-status/payment-status-resolver.service';
+import { PaymentStatusComponent } from './payment-status/payment-status.component';
 
 @NgModule({
   imports: [SharedModule, LessorDashboardRoutingModule],
@@ -19,7 +21,8 @@ import { LessorMarketResolverService } from './manage-market/lessor-market-resol
     LessorDashboardComponent,
     LessorInfoComponent,
     LessorManageMarketComponent,
-    CreateMarketComponent
+    CreateMarketComponent,
+    PaymentStatusComponent
   ],
   providers: [
     LessorService,
@@ -27,7 +30,8 @@ import { LessorMarketResolverService } from './manage-market/lessor-market-resol
     CreateMarketService,
     VendorProfileResolver,
     VendorProfileService,
-    UserProductService
+    UserProductService,
+    PaymentStatusResolver
   ]
 })
 export class LessorDashboardModule {}
