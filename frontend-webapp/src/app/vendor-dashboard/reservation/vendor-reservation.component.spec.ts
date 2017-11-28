@@ -3,6 +3,7 @@ import { of as observableOf } from 'rxjs/observable/of';
 
 import { VendorReservationComponent } from './vendor-reservation.component';
 import { VendorReservationService } from './vendor-reservation.service';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('VendorReservationComponent', () => {
   let component: VendorReservationComponent;
@@ -10,6 +11,7 @@ describe('VendorReservationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [RouterTestingModule],
       declarations: [VendorReservationComponent],
       providers: [
         {
