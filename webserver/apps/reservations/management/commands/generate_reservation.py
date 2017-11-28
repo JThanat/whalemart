@@ -83,11 +83,11 @@ class Command(BaseCommand):
 
     def _mock_for_approval(self):
         users = User.objects.all()
-        market = Market.objects.get(pk=32)
+        market = Market.objects.get(pk=33)
         for i, user in enumerate(users):
-            if i < 15:
+            if i < 20:
                 continue
-            if i > 25:
+            if i > 30:
                 break
             product = self._create_product(user)
             reservation = Reservation.objects.create(
@@ -101,10 +101,9 @@ class Command(BaseCommand):
 
             for j in range(10):
                 booths = Booth.objects.filter(market=market)
-                ran = random.randint(0, len(booths) - 1)
-                reserved_booth = ReservedBooth.objects.create(
+                ReservedBooth.objects.create(
                     reservation=reservation,
-                    booth=booths[ran],
+                    booth=booths[j],
                 )
 
 
