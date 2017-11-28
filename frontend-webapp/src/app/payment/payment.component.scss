@@ -1,0 +1,68 @@
+@import '~styles/common';
+
+.header {
+  h1 {
+    font-size: 1.6rem;
+  }
+  .location, .date {
+    display: flex;
+    align-items: center;
+    color: $dark-gray;
+    margin-bottom: map-get($spacers, 1);
+    font-size: 0.9rem;
+    > app-svg-icon {
+      margin-right: 0.3rem;
+    }
+  }
+}
+
+.left-content {
+  h2 {
+    color: $primary;
+    @include font-weight(bold);
+    font-size: 1.3rem;
+    margin-bottom: map-get($spacers, 4);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    span {
+      background: $primary;
+      border-radius: 30px;
+      color: $white;
+      width: 30px;
+      height: 30px;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 10px;
+    }
+  }
+  hr {
+    margin-top: map-get($spacers, 5);
+    margin-bottom: map-get($spacers, 5);
+  }
+}
+
+.side-content {
+  position: sticky;
+  top: 5rem;
+}
+
+.info-container {
+  border: 1px solid $light-gray;
+  padding: map-get($spacers, 3) map-get($spacers, 4);
+  box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.05);
+  
+  .data-line {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .topic {
+      @include font-family(heading);
+      @include font-weight(bold);
+      color: $primary;
+      font-size: 1.1rem;
+    }
+  }
+}

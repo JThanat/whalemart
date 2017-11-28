@@ -46,6 +46,10 @@ const routes: Routes = [
     loadChildren: './vendor-dashboard/vendor-dashboard.module#VendorDashboardModule'
   },
   {
+    path: 'payment',
+    loadChildren: './payment/payment.module#PaymentModule'
+  },
+  {
     path: '**',
     component: NotFoundComponent
   }
