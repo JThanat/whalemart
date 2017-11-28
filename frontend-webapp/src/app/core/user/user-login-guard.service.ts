@@ -14,7 +14,7 @@ export class UserLoginGuard implements CanActivate {
   ) { }
 
   canActivate() {
-    return this.userService.getKnownUserStatus().pipe(
+    return this.userService.getFreshUserStatus().pipe(
       map(userStatus => userStatus.type === UserStatusType.LoggedIn),
       tap(isLoggedIn => {
         if (!isLoggedIn) {

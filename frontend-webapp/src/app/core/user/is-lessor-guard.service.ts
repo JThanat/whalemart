@@ -14,7 +14,7 @@ export class IsLessorGuard implements CanActivate {
   ) {}
 
   canActivate() {
-    return this.userService.getKnownUserStatus().pipe(
+    return this.userService.getFreshUserStatus().pipe(
       map(userStatus => userStatus.type === UserStatusType.LoggedIn && userStatus.user.isLessor),
       tap(isLoggedIn => {
         if (!isLoggedIn) {
