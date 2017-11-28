@@ -27,7 +27,7 @@
 
     <div *ngFor="let reserve of reservationInfo" class="d-none d-lg-block reserve-list">
       <div class="mt-2 p-2">
-        <a [routerLink]="reserve.paymentStatus !== 'draft' ? ('/payment/pay/' + reserve.marketID + '/') : ('/payment/receipt/' + reserve.incompleteInstallmentID + '/')">
+        <a [routerLink]="getExternalURL(reserve)">
           <div class="row">
             <div class="col-md-1 text-left text-md-center">
               {{ reserve.marketID }}
@@ -55,7 +55,7 @@
     <div *ngFor="let reserve of reservationInfo" class="d-block d-lg-none reserve-list">
       <div class="mt-3 p-2 py-3">
         <div class="container-fluid">
-          <a routerLink="/payment/pay/{{ reserve.marketID }}/">
+          <a [routerLink]="getExternalURL(reserve)">
             <dl class="row">
               <dt class="col-sm-3">เลขบูท</dt>
               <dd class="col-sm-9">{{ reserve.marketID }}</dd>
@@ -73,12 +73,10 @@
               <dd class="col-sm-9">
                 <span class="badge badge-{{ reserve.reservationStatus }}">{{ reservationToWord(reserve.reservationStatus) }}</span>
               </dd>
-              <ng-container *ngIf="reserve.paymentStatus">
-                <dt class="col-sm-3">สถานะการจ่าย</dt>
-                <dd class="col-sm-9">
-                  <span class="badge badge-{{ reserve.paymentStatus }}">{{ paymentToWord(reserve.paymentStatus) }}</span>
-                </dd>
-              </ng-container>
+              <dt class="col-sm-3">สถานะการจ่าย</dt>
+              <dd class="col-sm-9">
+                <span class="badge badge-{{ reserve.paymentStatus }}">{{ paymentToWord(reserve.paymentStatus) }}</span>
+              </dd>
             </dl>
           </a>
         </div>

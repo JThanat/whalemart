@@ -43,6 +43,18 @@ export class VendorReservationComponent implements OnInit {
         return 'จ่าย 30%';
       case 'fully':
         return 'จ่าย 100%';
+      case 'unpaid':
+        return 'ยังไม่จ่าย';
     }
+  }
+
+  getExternalURL(reserve: ReservationInformation) {
+    console.log(reserve);
+    if (reserve.paymentStatus === 'draft') {
+      return '/payment/receipt/' + reserve.incompleteInstallmentID + '/';
+    } else if (reserve.paymentStatus === 'unpaid') {
+      return '/payment/pay/' + reserve.marketID + '/';
+    }
+    return null;
   }
 }
