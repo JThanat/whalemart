@@ -1,14 +1,18 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { of as observableOf } from 'rxjs/observable/of';
 import { _throw as observableThrow } from 'rxjs/observable/throw';
 import { catchError, map } from 'rxjs/operators';
 
-export type ReservationStatus = 'waiting' | 'approved' | 'rejected' | 'cancelled';
+export type ReservationStatus =
+  | 'waiting'
+  | 'approved'
+  | 'rejected'
+  | 'cancelled';
 export type PaymentStatus = 'draft' | 'deposited' | 'fully' | null;
 
 export interface ReservationInformation {
   marketID: number;
+  marketName: string;
   reservationStatus: ReservationStatus;
   approvedBooth: number | null;
   boothRentalFee: number | null;
@@ -18,6 +22,7 @@ export interface ReservationInformation {
 
 export interface ReservationInformationResponse {
   market_id: number;
+  market_name: string;
   reservation_status: number;
   approved_booth: number | null;
   booth_rental_fee: number | null;
@@ -29,6 +34,8 @@ class ReservationInformationError {}
 
 @Injectable()
 export class VendorReservationService {
+  constructor(private http: HttpClient) {}
+
   transformToReservationInformation(
     data: ReservationInformationResponse
   ): ReservationInformation {
@@ -61,6 +68,7 @@ export class VendorReservationService {
     }
     return {
       marketID: data.market_id,
+      marketName: data.market_name,
       reservationStatus,
       approvedBooth: data.approved_booth,
       boothRentalFee: data.booth_rental_fee,
@@ -80,37 +88,12 @@ export class VendorReservationService {
     });
   }
 
-  get reservationInformation$() {
-    return observableOf([
-      {
-        market_id: 1,
-        reservation_status: 1,
-        approved_booth: 1,
-        booth_rental_fee: 1700.0,
-        payment_status: null,
-        incomplete_installment_id: null
-      },
-      {
-        market_id: 2,
-        reservation_status: 0,
-        approved_booth: null,
-        booth_rental_fee: null,
-        payment_status: null,
-        incomplete_installment_id: null
-      },
-      {
-        market_id: 4,
-        reservation_status: 1,
-        approved_booth: 296,
-        booth_rental_fee: 3300.0,
-        payment_status: 0,
-        incomplete_installment_id: 1
-      }
-    ]).pipe(
-      map((req: ReservationInformationResponse[]) =>
-        req.map(x => this.transformToReservationInformation(x))
-      ),
-      this.reservationInformationError
-    );
+  reservationInformation$() {
+    console.log(this.http);
+    return this.http.get<ReservationInformationResponse[]>('/api/reservation-status/')
+      .pipe(
+        map(req => req.map(x => this.transformToReservationInformation(x))),
+        this.reservationInformationError
+      );
   }
 }
