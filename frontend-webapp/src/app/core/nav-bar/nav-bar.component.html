@@ -14,7 +14,10 @@
     <div class="menu-list d-md-block" [class.hidden]="!isMenuOpened">
       <ul *ngIf="(userStatus | async) as status">
         <li class="nav-item active">
-          <a class="nav-link" routerLink="become-lessor">เป็นผู้ให้เช่าตลาด</a>
+          <a *ngIf="isLessor(status); else becomeLessorLink" class="nav-link" routerLink="lessor">โปรไฟล์ผู้ให้เช่า</a>
+          <ng-template #becomeLessorLink>
+            <a class="nav-link" routerLink="become-lessor">เป็นผู้ให้เช่าตลาด</a>
+          </ng-template>
         </li>
 
         <ng-container *ngIf="status.type === 'loggedIn'">
