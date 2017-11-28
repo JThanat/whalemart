@@ -1,5 +1,6 @@
 /// <reference path="./cleave.d.ts" />
 
+import { HttpClient } from '@angular/common/http';
 import {
   AfterViewInit,
   Component,
@@ -8,10 +9,9 @@ import {
   ViewChild
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-
-import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 // import * as Cleave from 'cleave.js';
+
 import { AlertService } from '../../core/alert/alert.service';
 
 type InstallmentType = 30 | 100;
@@ -130,7 +130,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
 
     this.http
       .post('/api/payment/', obj)
-      .subscribe(data =>
+      .subscribe(() =>
         this.alert.show({ message: 'ลงทะเบียนการ์ดสำเร็จ', type: 'success' })
       );
   }

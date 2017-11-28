@@ -4,7 +4,7 @@ import { of as observableOf } from 'rxjs/observable/of';
 import { VendorReservationComponent } from './vendor-reservation.component';
 import { VendorReservationService } from './vendor-reservation.service';
 
-xdescribe('VendorReservationComponent', () => {
+describe('VendorReservationComponent', () => {
   let component: VendorReservationComponent;
   let fixture: ComponentFixture<VendorReservationComponent>;
 
@@ -15,7 +15,7 @@ xdescribe('VendorReservationComponent', () => {
         {
           provide: VendorReservationService,
           useValue: {
-            reservationInformation$: observableOf([])
+            reservationInformation$: () => observableOf([])
           }
         }
       ]
