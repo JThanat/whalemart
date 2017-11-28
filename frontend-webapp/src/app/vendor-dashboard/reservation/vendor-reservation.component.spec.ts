@@ -4,7 +4,7 @@ import { of as observableOf } from 'rxjs/observable/of';
 import { VendorReservationComponent } from './vendor-reservation.component';
 import { VendorReservationService } from './vendor-reservation.service';
 
-fdescribe('VendorReservationComponent', () => {
+describe('VendorReservationComponent', () => {
   let component: VendorReservationComponent;
   let fixture: ComponentFixture<VendorReservationComponent>;
 
