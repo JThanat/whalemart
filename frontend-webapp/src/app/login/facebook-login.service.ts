@@ -145,7 +145,10 @@ export class FacebookLoginService {
         const userInfo: UserInfo = {
           firstName: result.first_name,
           lastName: result.last_name,
-          email: result.email
+          email: result.email,
+          phone: result.phone,
+          isLessor: result.is_lessor,
+          profileImage: result.profile_image
         };
         return userInfo;
       }),

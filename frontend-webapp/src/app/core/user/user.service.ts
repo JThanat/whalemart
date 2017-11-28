@@ -32,7 +32,6 @@ export type KnownUserStatus = UserStatusLoggedIn | UserStatusNotLoggedIn;
  */
 export type UserStatus = KnownUserStatus | UserStatusUnknown;
 
-
 /**
  * An immutable interface representing current user info.
  */
@@ -40,12 +39,18 @@ export interface UserInfo {
   readonly firstName: string;
   readonly lastName: string;
   readonly email: string;
+  readonly phone: string;
+  readonly isLessor: boolean;
+  readonly profileImage: string | null;
 }
 
 export interface UserInfoServerResponse {
   first_name: string;
   last_name: string;
   email: string;
+  phone: string;
+  is_lessor: boolean;
+  profile_image: string | null;
 }
 
 @Injectable()
@@ -73,10 +78,7 @@ export class UserService {
    * @returns an observable that emits single known UserStatus.
    */
   getKnownUserStatus(): Observable<KnownUserStatus> {
-    return this.userStatus.pipe(
-      filter(this.isUserStatusKnown),
-      first()
-    );
+    return this.userStatus.pipe(filter(this.isUserStatusKnown), first());
   }
 
   /**
@@ -101,7 +103,8 @@ export class UserService {
 
   logout() {
     // This API returns no body, so we have to set to text to prevent JSON parsing.
-    return this.http.post('/api/logout/', null, { responseType: 'text' })
+    return this.http
+      .post('/api/logout/', null, { responseType: 'text' })
       .pipe(tap(() => this.userStatus.next({ type: UserStatusType.LoggedOut })))
       .pipe(mapTo(true));
   }
@@ -114,7 +117,10 @@ export class UserService {
           user: {
             firstName: result.first_name,
             lastName: result.last_name,
-            email: result.email
+            email: result.email,
+            phone: result.phone,
+            isLessor: result.is_lessor,
+            profileImage: result.profile_image
           }
         };
       }),
