@@ -1,9 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
-from django.core.exceptions import ObjectDoesNotExist
 
 from .models import Product
-import re
 
 User = get_user_model()
 
@@ -16,7 +14,8 @@ class ProductSerializerWithoutUser(serializers.ModelSerializer):
             'id': {'read_only': True}
         }
 
+
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ('name', 'description', 'image', 'user')
+        fields = ('id', 'name', 'description', 'image', 'user')

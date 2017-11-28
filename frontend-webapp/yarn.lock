@@ -957,6 +957,10 @@ clean-css@4.1.x:
   dependencies:
     source-map "0.5.x"
 
+cleave.js@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/cleave.js/-/cleave.js-1.0.7.tgz#227ebc407d0b8fb3dcd2ce15d53876505a2b02cc"
+
 cliui@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/cliui/-/cliui-2.1.0.tgz#4b475760ff80264c762c3a1719032e91c7fea0d1"

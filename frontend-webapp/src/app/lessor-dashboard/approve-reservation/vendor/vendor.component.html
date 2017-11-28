@@ -1,0 +1,28 @@
+<div class="vendor" [class.selected]="selected">
+  <h4 class="shop-name">{{ vendor.shopName }}</h4>
+  <p class="vendor-name">{{ vendor.firstName }} {{ vendor.lastName }}</p>
+
+  <div *ngIf="note" class="note">
+    {{ note }}
+  </div>
+
+  <div *ngIf="vendor.products.length > 0" class="product mb-3">
+    <hr>
+
+    <h5>สินค้าที่จะขาย</h5>
+
+    <div class="mb-3 d-flex align-items-center" *ngFor="let product of vendor.products">
+      <img [src]="product.imageUrl">
+      <div>
+        <h4>{{ product.name }}</h4>
+        <span>{{ product.description }}</span>
+      </div>
+    </div>
+
+    <app-pagination [max]="vendor.products.length" [current]="selectedProduct" (navigate)="selectedProduct = $event"></app-pagination>
+  </div>
+
+  <hr>
+
+  <button class="btn btn-block" [class.btn-success]="selected" [class.btn-outline-success]="!selected" (click)="selectVendor()" [disabled]="selected">เลือกผู้เช่าคนนี้</button>
+</div>

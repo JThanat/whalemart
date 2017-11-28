@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { IsLessorGuard } from '../core/user/is-lessor-guard.service';
 import { VendorProfileResolver } from '../core/vendor/vendor-profile-resolver.service';
 import { CreateMarketComponent } from './create-market/create-market.component';
-import { IsLessorGuardService } from './is-lessor-guard.service';
 import { LessorDashboardComponent } from './lessor-dashboard.component';
 import { LessorInfoComponent } from './lessor-info/lessor-info.component';
 import { LessorManageMarketComponent } from './manage-market/lessor-manage-market.component';
@@ -13,7 +13,7 @@ const routes: Routes = [
   {
     path: '',
     component: LessorDashboardComponent,
-    canActivate: [IsLessorGuardService],
+    canActivate: [IsLessorGuard],
     children: [
       {
         path: '',
@@ -37,6 +37,10 @@ const routes: Routes = [
       {
         path: 'create-market',
         component: CreateMarketComponent
+      },
+      {
+        path: 'approve',
+        loadChildren: './approve-reservation/approve-reservation.module#ApproveReservationModule'
       }
     ]
   }
@@ -44,7 +48,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
-  providers: [IsLessorGuardService]
+  exports: [RouterModule]
 })
 export class LessorDashboardRoutingModule {}

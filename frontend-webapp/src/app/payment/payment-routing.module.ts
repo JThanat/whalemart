@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { UploadReceiptComponent } from './upload-receipt/upload-receipt.component';
 
 const routes: Routes = [

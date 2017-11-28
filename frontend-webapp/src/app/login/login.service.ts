@@ -25,7 +25,10 @@ export class LoginService {
           const userInfo: UserInfo = {
             firstName: result.first_name,
             lastName: result.last_name,
-            email: result.email
+            email: result.email,
+            isLessor: result.is_lessor,
+            phone: result.phone,
+            profileImage: result.profile_image
           };
           this.userService.setLoginData(userInfo);
           return userInfo;

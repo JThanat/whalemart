@@ -7,10 +7,13 @@ Refer to page 6 of Requirements Specification for more detials on when to call
 each function.
 """
 
+import asyncio
+
 from django.conf import settings
 from django.core.mail import send_mail
 
 
+# @asyncio.coroutine
 def _send_notification(subject, content, recipient_list):
 	"""
 	Send notification email to recipients in recipient_list
