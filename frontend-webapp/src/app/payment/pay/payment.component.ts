@@ -1,12 +1,20 @@
 /// <reference path="./cleave.d.ts" />
 
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 // import * as Cleave from 'cleave.js';
 import { AlertService } from '../../core/alert/alert.service';
+
+type InstallmentType = 30 | 100;
 
 @Component({
   selector: 'app-payment',
@@ -17,7 +25,10 @@ export class PaymentComponent implements OnInit, AfterViewInit {
   chooseInstallmentTypeForm: FormGroup;
   choosePaymentMethodForm: FormGroup;
   creditCardForm: FormGroup;
+  isBank = false;
+
   marketID: number;
+  installment: InstallmentType = 30;
 
   @ViewChild('cardNumber') cardNumber: ElementRef;
   @ViewChild('expiryDate') expiryDate: ElementRef;
@@ -27,7 +38,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private http: HttpClient,
     private alert: AlertService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -35,13 +46,19 @@ export class PaymentComponent implements OnInit, AfterViewInit {
       console.log(this.marketID);
     });
 
-    this.chooseInstallmentTypeForm = new FormGroup({
-      type: new FormControl('30', [Validators.required])
-    }, { updateOn: 'blur' });
+    this.chooseInstallmentTypeForm = new FormGroup(
+      {
+        type: new FormControl('30', [Validators.required])
+      },
+      { updateOn: 'blur' }
+    );
 
-    this.choosePaymentMethodForm = new FormGroup({
-      method: new FormControl('credit', [Validators.required])
-    }, { updateOn: 'blur' });
+    this.choosePaymentMethodForm = new FormGroup(
+      {
+        method: new FormControl('credit', [Validators.required])
+      },
+      { updateOn: 'blur' }
+    );
 
     this.creditCardForm = new FormGroup({
       cardHolderName: new FormControl('', [Validators.required]),
@@ -62,8 +79,20 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     });
   }
 
+  updateInstallmentType(event: any) {
+    console.log(event);
+    this.installment = event.target.value;
+    console.log(this.installment);
+  }
+
+  updateBank(event: any) {
+    console.log(event);
+    this.isBank = event.target.value === 'bank-transfer';
+    console.log(this.isBank);
+  }
+
   submitForm() {
-    if (!this.creditCardForm.valid) {
+    if (!this.isBank && !this.creditCardForm.valid) {
       console.log(this.creditCardForm.errors);
       return;
     }
@@ -79,8 +108,8 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     const cardNumberClean = cardNumber.split(' ').join('');
     const [expireMonth, expireYear] = expiryDate.split('/');
 
-    this.http.post('/api/payment/', {
-      payment_type: 1,
+    const obj: any = {
+      payment_type: this.installment === 30 ? 1 : 2,
       market: this.marketID,
       new_credit_card: {
         card_number: cardNumberClean,
@@ -91,9 +120,19 @@ export class PaymentComponent implements OnInit, AfterViewInit {
         verification_no: verificationNo
       },
       save_new_credit_card: isSaved,
-      payment_method: 1,
+      payment_method: this.isBank ? 2 : 1,
       amount: 360
-    }).subscribe(data => this.alert.show({ message: 'ลงทะเบียนการ์ดสำเร็จ', type: 'success' }));
+    };
+
+    if (this.isBank) {
+      delete obj['new_credit_card'];
+    }
+
+    this.http
+      .post('/api/payment/', obj)
+      .subscribe(data =>
+        this.alert.show({ message: 'ลงทะเบียนการ์ดสำเร็จ', type: 'success' })
+      );
   }
 
   ngAfterViewInit() {
@@ -101,17 +140,14 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     // new Cleave(this.cardNumber.nativeElement, {
     //   creditCard: true
     // });
-
     // new Cleave(this.expiryDate.nativeElement, {
     //   date: true,
     //   datePattern: ['m', 'y']
     // });
-
     // new Cleave(this.verificationNo.nativeElement, {
     //   blocks: [3],
     //   numericOnly: true
     // });
     /* tslint:enable:no-unused-expression */
   }
-
 }
