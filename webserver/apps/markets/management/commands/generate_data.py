@@ -7,10 +7,10 @@ from PIL import Image
 from django.conf import settings
 from django.core.management.base import BaseCommand
 
+from apps.booths.models import Booth
 from apps.markets.models import Market
 from apps.markets.models import Scene
 from apps.tags.models import Tag
-from apps.booths.models import Booth
 
 
 class Command(BaseCommand):
@@ -89,7 +89,7 @@ class Command(BaseCommand):
         for i in range(number_of_zone):
             for j in range(number_of_booth_in_each_zone):
                 rental_fee = 100 * randint(5, 50)
-                booth_number = chr(i+65).upper() + str(j+1)
+                booth_number = chr(i + 65).upper() + str(j + 1)
                 Booth.objects.create(market=market, booth_number=booth_number, rental_fee=rental_fee)
 
     def _fix_datetime(self, market):
@@ -97,7 +97,7 @@ class Command(BaseCommand):
         current_time = datetime.now(timezone.utc)
         if reservation_due < current_time:
             openning_date = market.opening_date
-            delt = (openning_date-current_time)/2
+            delt = (openning_date - current_time) / 2
             market.reservation_due_date = current_time + delt
             market.save()
 

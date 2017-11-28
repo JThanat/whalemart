@@ -5,6 +5,7 @@ import { VendorProfileResolver } from '../core/vendor/vendor-profile-resolver.se
 import { VendorPaymentResolver } from './payment/vendor-payment-resolver.service';
 import { VendorPaymentComponent } from './payment/vendor-payment.component';
 import { VendorProfileComponent } from './profile/vendor-profile.component';
+import { VendorReservationComponent } from './reservation/vendor-reservation.component';
 import { VendorDashboardComponent } from './vendor-dashboard.component';
 
 const routes: Routes = [
@@ -30,6 +31,10 @@ const routes: Routes = [
         resolve: {
           creditCards: VendorPaymentResolver
         }
+      },
+      {
+        path: 'reservation',
+        component: VendorReservationComponent
       }
     ]
   }

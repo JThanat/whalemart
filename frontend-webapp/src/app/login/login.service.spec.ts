@@ -47,7 +47,10 @@ describe('LoginService', () => {
       req.flush({
         email: 'test@abc.com',
         first_name: 'Foo',
-        last_name: 'Bar'
+        last_name: 'Bar',
+        is_lessor: false,
+        phone: '0812345678',
+        profile_image: null
       } as LoginServerResponse);
 
       expect(isSuccess).toBe(true);
@@ -55,7 +58,10 @@ describe('LoginService', () => {
       expect(userService.setLoginData.calls.first().args[0]).toEqual({
         email: 'test@abc.com',
         firstName: 'Foo',
-        lastName: 'Bar'
+        lastName: 'Bar',
+        isLessor: false,
+        phone: '0812345678',
+        profileImage: null
       } as UserInfo);
     }
   ));
