@@ -81,12 +81,35 @@ class Command(BaseCommand):
                     approved_list.append(reserved_booths[i].booth)
                     reservation.save()
 
-    def _payment(self):
-        pass
+    def _mock_for_approval(self):
+        users = User.objects.all()
+        market = Market.objects.get(pk=32)
+        for i, user in enumerate(users):
+            if i < 15:
+                continue
+            if i > 25:
+                break
+            product = self._create_product(user)
+            reservation = Reservation.objects.create(
+                shop_name=SHOPNAME[i],
+                reservation_time=datetime.now(timezone.utc),
+                user=user,
+                market=market,
+            )
+
+            reservation.products.add(product)
+
+            for j in range(10):
+                booths = Booth.objects.filter(market=market)
+                ran = random.randint(0, len(booths) - 1)
+                reserved_booth = ReservedBooth.objects.create(
+                    reservation=reservation,
+                    booth=booths[ran],
+                )
 
 
     def handle(self, *args, **options):
         random.seed(1959)
-        self._create_reservation()
-        self._approve()
-
+        # self._create_reservation()
+        # self._approve()
+        self._mock_for_approval()
