@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="my-5">
+    <div class="row">
+      <div class="offset-md-1 col-md-10">
+        <h4>อัพโหลดใบเสร็จ</h4>
+
+        <div class="mt-5"></div>
+
+        <h5>ตลาด</h5>
+        <div></div>
+
+        <div class="mt-3"></div>
+
+        <div>กรุณาอัพโหลดใบเสร็จด้านล่าง</div>
+
+        <div class="mb-5"></div>
+
+        <form [formGroup]="receiptForm" (submit)="uploadReceipt()">
+          <label><strong>เลือกรูปใบเสร็จ</strong></label><br>
+          <app-file-input formControlName="image" label="เลือกรูปภาพ"></app-file-input><br>
+          <div class="mb-2"></div>
+          <button type="submit" class="btn btn-primary">ยืนยันการอัพโหลด</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
