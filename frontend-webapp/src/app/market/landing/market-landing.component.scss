@@ -22,6 +22,7 @@
     color: $dark-gray;
     margin-bottom: map-get($spacers, 1);
     font-size: 0.9rem;
+    white-space: nowrap;
     > app-svg-icon {
       margin-right: 0.3rem;
       @include media-breakpoint-up(md) {

@@ -10,7 +10,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
 import { AlertService } from '../alert/alert.service';
-import { UserService, UserStatus } from '../user/user.service';
+import { UserService, UserStatus, UserStatusType } from '../user/user.service';
 import { SubNavBarService } from './sub-nav-bar.service';
 
 @Component({
@@ -66,6 +66,10 @@ export class NavBarComponent implements OnInit, OnDestroy {
         this.isMenuOpened = false;
       }
     });
+  }
+
+  isLessor(userStatus: UserStatus) {
+    return userStatus.type === UserStatusType.LoggedIn && userStatus.user.isLessor;
   }
 
   getSubNavBarPortal() {

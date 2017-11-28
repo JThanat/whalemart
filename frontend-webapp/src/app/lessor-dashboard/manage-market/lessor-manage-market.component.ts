@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 
+import { MarketList } from '../../core/lessor/lessor.service';
 import { Market } from '../../core/market/market.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { Market } from '../../core/market/market.service';
   styleUrls: ['./lessor-manage-market.component.scss']
 })
 export class LessorManageMarketComponent implements OnInit {
-  lessorMarkets$: Observable<Market[]>;
+  lessorMarkets$: Observable<{ unapproved: Market[]; all: MarketList }>;
 
   constructor(private route: ActivatedRoute) {}
 

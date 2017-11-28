@@ -1,0 +1,25 @@
+@import '~styles/common';
+
+.header {
+  h1 {
+    color: $primary;
+    font-size: 2rem;
+  }
+}
+
+.badge {
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  &.pay-0 {
+    color: #ce2031;
+    background-color: rgba(#dc3545, 0.15);
+  }
+  &.pay-30 {
+    color: #e98706;
+    background-color: rgba(#ffc107, 0.15);
+  }
+  &.pay-100 {
+    color: #10943c;
+    background-color: rgba(#28a745, 0.15);
+  }
+}

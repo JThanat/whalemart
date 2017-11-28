@@ -1,7 +1,7 @@
 <div class="container mb-5">
   <div class="row justify-content-center">
     <div class="col-12 col-sm-9 col-md-6 col-lg-5 col-xl-5">
-      <h1 class="display-4 mt-5">สมัครสมาชิก</h1>
+      <h1 class="mt-5 mb-4">สมัครสมาชิก</h1>
 
       <form [formGroup]="registerForm" (submit)="register()">
         <app-input-group label="อีเมล">
@@ -45,8 +45,12 @@
           </app-input-error>
         </app-input-group>
 
-        <button type="submit" class="btn btn-lg btn-primary" [disabled]="registerForm.disabled">สมัครสมาชิก</button>
+        <button type="submit" class="btn btn-block btn-primary mt-4" [disabled]="registerForm.disabled">สมัครสมาชิก</button>
       </form>
+
+      <div class="row mb-3 mt-5">
+        <div class="col-12">มีบัญชีอยู่แล้ว <a routerLink="/login">เข้าสู่ระบบ</a></div>
+      </div>
     </div>
   </div>
 </div>

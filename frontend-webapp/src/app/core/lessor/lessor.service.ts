@@ -4,11 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { _throw as observableThrow } from 'rxjs/observable/throw';
 import { catchError, map, mapTo } from 'rxjs/operators';
 
-import {
-  Market,
-  MarketServerResponse,
-  MarketService
-} from '../market/market.service';
+import { Market, MarketServerResponse, MarketService } from '../market/market.service';
 
 export interface MarketList {
   upcomingMarkets: Market[];
@@ -65,6 +61,22 @@ export class MarketsError {}
 export class LessorService {
   constructor(private http: HttpClient, private marketService: MarketService) {}
 
+  getUnapprovedMarketList(): Observable<Market[]> {
+    return this.http.get<MarketServerResponse[]>('/api/unapproved-markets/').pipe(
+      map(markets => {
+        return markets.map(market => this.marketService.normalizeMarket(market));
+      }),
+      catchError((err: any) => {
+        if (err instanceof HttpErrorResponse) {
+          if (err.status >= 400 && err.status < 500) {
+            return observableThrow(new MarketsError()) as Observable<Market[]>;
+          }
+        }
+        return observableThrow(err) as Observable<Market[]>;
+      })
+    );
+  }
+
   getMarketList(): Observable<MarketList> {
     return this.http.get<LessorResponse>('/api/lessor/').pipe(
       map(data => {
@@ -74,20 +86,14 @@ export class LessorService {
         const nowDate = new Date();
 
         return {
-          upcomingMarkets: normalizedMarkets.filter(
-            market => market.startDate > nowDate
-          ),
-          passedMarkets: normalizedMarkets.filter(
-            market => market.startDate <= nowDate
-          )
+          upcomingMarkets: normalizedMarkets.filter(market => market.startDate > nowDate),
+          passedMarkets: normalizedMarkets.filter(market => market.startDate <= nowDate)
         };
       }),
       catchError((err: any) => {
         if (err instanceof HttpErrorResponse) {
           if (err.status >= 400 && err.status < 500) {
-            return observableThrow(new MarketsError()) as Observable<
-              MarketList
-            >;
+            return observableThrow(new MarketsError()) as Observable<MarketList>;
           }
         }
         return observableThrow(err) as Observable<MarketList>;
@@ -119,18 +125,16 @@ export class LessorService {
   }
 
   updateLessorProfile$(lessorProfile: LessorProfileRequest) {
-    return this.http
-      .post<LessorProfileRequest>('/api/lessor/change/', lessorProfile)
-      .pipe(
-        mapTo(true),
-        catchError((err: any) => {
-          if (err instanceof HttpErrorResponse) {
-            if (err.status >= 400 && err.status < 500) {
-              return observableThrow(new LessorProfileError());
-            }
+    return this.http.post<LessorProfileRequest>('/api/lessor/change/', lessorProfile).pipe(
+      mapTo(true),
+      catchError((err: any) => {
+        if (err instanceof HttpErrorResponse) {
+          if (err.status >= 400 && err.status < 500) {
+            return observableThrow(new LessorProfileError());
           }
-          return observableThrow(err);
-        })
-      );
+        }
+        return observableThrow(err);
+      })
+    );
   }
 }

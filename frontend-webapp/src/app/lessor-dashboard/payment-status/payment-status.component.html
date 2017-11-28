@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-12 mb-4 header">
+    <h1>สถานะการชำระเงิน</h1>
+    <p class="market-info">
+      <span><b>ชื่อตลาด:</b> Fin Marke</span>
+    </p>
+  </div>
+  <div class="col-12">
+    <div class="table-responsiv ">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">หมายเลขบูธ</th>
+            <th scope="col">ผู้เช่าตลาด</th>
+            <th scope="col">สถานะ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let marketPaymentStatus of (marketPaymentStatus$ | async)">
+            <th scope="row">{{ marketPaymentStatus.boothNumber }}</th>
+            <td>{{ 'ยังไม่ได้เลือกผู้เช่าตลาด' || marketPaymentStatus.vendorName }}</td>
+            <ng-template [ngIf]="marketPaymentStatus.paymentStatus === 0" [ngIfElse]="pay30">
+              <td><span class="badge pay-0">ยังไม่ได้ชำระเงิน</span></td>
+            </ng-template>
+            <ng-template #pay30>
+              <ng-template [ngIf]="marketPaymentStatus.paymentStatus === 1" [ngIfElse]="pay100">
+                  <td><span class="badge pay-30">ชำระเงินแล้ว 30%</span></td>
+              </ng-template>
+            </ng-template>
+            <ng-template #pay100>
+              <ng-template [ngIf]="marketPaymentStatus.paymentStatus === 2">
+                  <td><span class="badge pay-100">ชำระเงินครบแล้ว</span></td>
+              </ng-template>
+            </ng-template>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
