@@ -53,7 +53,7 @@
         </app-input-group>
       </form>
 
-      <form [formGroup]="creditCardForm">
+      <form [formGroup]="creditCardForm" (submit)="submitNeungForm()">
         <div class="row">
           <div class="col-12">
             <app-input-group label="ชื่อผู้ถือบัตร">

@@ -3,9 +3,9 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { HttpClient } from '@angular/common/http/src/client';
+import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import * as Cleave from 'cleave.js';
+// import * as Cleave from 'cleave.js';
 import { AlertService } from '../../core/alert/alert.service';
 
 @Component({
@@ -32,6 +32,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.marketID = params['marketID'];
+      console.log(this.marketID);
     });
 
     this.chooseInstallmentTypeForm = new FormGroup({
@@ -46,7 +47,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
       cardHolderName: new FormControl('', [Validators.required]),
       cardNumber: new FormControl('', [
         Validators.required,
-        Validators.pattern(/^\d{4} \d{4} \d{4} \d{4}$/)
+        Validators.pattern(/^\d{4}\d{4}\d{4}\d{4}$/)
       ]),
       type: new FormControl('visa', [Validators.required]),
       expiryDate: new FormControl('', [
@@ -78,7 +79,6 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     const cardNumberClean = cardNumber.split(' ').join('');
     const [expireMonth, expireYear] = expiryDate.split('/');
 
-
     this.http.post('/api/payment/', {
       payment_type: 1,
       market: this.marketID,
@@ -88,29 +88,29 @@ export class PaymentComponent implements OnInit, AfterViewInit {
         type: 1,
         expiry_month: expireMonth,
         expiry_year: expireYear,
-        verfication_no: verificationNo
+        verification_no: verificationNo
       },
       save_new_credit_card: isSaved,
       payment_method: 1,
-      amonth: 360
+      amount: 360
     }).subscribe(data => this.alert.show({ message: 'ลงทะเบียนการ์ดสำเร็จ', type: 'success' }));
   }
 
   ngAfterViewInit() {
     /* tslint:disable:no-unused-expression */
-    new Cleave(this.cardNumber.nativeElement, {
-      creditCard: true
-    });
+    // new Cleave(this.cardNumber.nativeElement, {
+    //   creditCard: true
+    // });
 
-    new Cleave(this.expiryDate.nativeElement, {
-      date: true,
-      datePattern: ['m', 'y']
-    });
+    // new Cleave(this.expiryDate.nativeElement, {
+    //   date: true,
+    //   datePattern: ['m', 'y']
+    // });
 
-    new Cleave(this.verificationNo.nativeElement, {
-      blocks: [3],
-      numericOnly: true
-    });
+    // new Cleave(this.verificationNo.nativeElement, {
+    //   blocks: [3],
+    //   numericOnly: true
+    // });
     /* tslint:enable:no-unused-expression */
   }
 
