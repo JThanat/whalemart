@@ -1,6 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { MarketPaymentStatus, PaymentStatusService } from './payment-status.service';
+import { map } from 'rxjs/operators';
+
+export interface MarketPaymentStatus {
+  boothId: number;
+  boothNumber: string;
+  paymentStatus: number;
+  vendorId: null | number;
+  vendorName: null | string;
+}
 
 @Component({
   selector: 'app-payment-status',
@@ -10,10 +19,9 @@ import { MarketPaymentStatus, PaymentStatusService } from './payment-status.serv
 export class PaymentStatusComponent implements OnInit {
   marketPaymentStatus$: Observable<MarketPaymentStatus[]>;
 
-  constructor(private paymentStatusService: PaymentStatusService) { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.marketPaymentStatus$ = this.paymentStatusService.getMarketPaymentStatus();
+    this.marketPaymentStatus$ = this.route.data.pipe(map(data => data.paymentStatus));
   }
-
 }
