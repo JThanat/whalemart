@@ -1,9 +1,10 @@
 <div class="container mb-5">
   <div class="row justify-content-center">
     <div class="col-12 col-sm-9 col-md-6 col-lg-5 col-xl-5">
-      <h1 class="display-4 mt-5">เข้าสู่ระบบ</h1>
+      <h1 class="mt-5 mb-4">เข้าสู่ระบบ</h1>
 
       <form (submit)="login()" [formGroup]="loginForm">
+        
         <div *ngIf="isFb">
           <p>Access Token {{ fbAccessToken }}</p>
         </div>
@@ -22,8 +23,15 @@
           </app-input-error>
         </app-input-group>
 
-        <button class="btn btn-primary btn-lg" type="submit" [disabled]="loginForm.disabled">เข้าสู่ระบบ</button>
-        <button class="btn btn-facebook btn-lg ml-2" type="button" (click)="loginWithFacebook()">เข้าสู่ระบบด้วยเฟสบุ๊ค</button>
+        <button class="btn btn-block btn-primary mt-4" type="submit" [disabled]="loginForm.disabled">เข้าสู่ระบบ</button>
+        
+        <hr>
+
+        <button class="btn btn-block btn-facebook mb-4" type="button" (click)="loginWithFacebook()">เข้าสู่ระบบด้วยเฟสบุ๊ค</button>
+
+        <div class="row my-3">
+          <div class="col-12">ยังไม่มีบัญชี <a routerLink="/register">สมัครสมาชิก</a></div>
+        </div>
       </form>
     </div>
   </div>

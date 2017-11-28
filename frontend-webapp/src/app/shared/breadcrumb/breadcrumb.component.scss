@@ -1,6 +1,14 @@
 @import '~styles/common';
 
 .breadcrumb {
+  white-space: nowrap;
+  overflow-x: auto;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  -webkit-overflow-scrolling: touch;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  
   > a, > span {
     @include font-family(heading);
     padding: map-get($spacers, 3) 0;

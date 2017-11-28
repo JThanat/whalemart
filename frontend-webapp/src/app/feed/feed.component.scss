@@ -105,6 +105,7 @@
 .link-with-icon {
   display: flex;
   align-items: center;
+  white-space: nowrap;
   > .link-text {
     margin-right: 0.3rem;
   }
