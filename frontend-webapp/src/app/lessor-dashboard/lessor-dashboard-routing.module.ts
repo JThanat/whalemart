@@ -37,6 +37,10 @@ const routes: Routes = [
       {
         path: 'create-market',
         component: CreateMarketComponent
+      },
+      {
+        path: 'approve',
+        loadChildren: './approve-reservation/approve-reservation.module#ApproveReservationModule'
       }
     ]
   }

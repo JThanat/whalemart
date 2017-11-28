@@ -1,0 +1,19 @@
+@import '~styles/common';
+
+section {
+  margin-bottom: 2rem;
+}
+
+h2 {
+  color: $primary;
+  font-size: 1.5rem;
+}
+
+.booth-selector-container {
+  border: 1px solid $light-gray;
+  border-radius: $border-radius;
+  padding: 1rem 1rem 1rem 0.5rem;
+  button {
+    margin-left: 0.5rem;
+  }
+}

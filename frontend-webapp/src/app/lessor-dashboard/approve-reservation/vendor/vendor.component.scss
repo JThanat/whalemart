@@ -1,0 +1,45 @@
+@import '~styles/common';
+
+.vendor {
+  border: 1px solid $light-gray;
+  border-radius: $border-radius;
+  padding: 1rem;
+
+  .shop-name {
+    font-size: 1.2rem;
+    margin-bottom: 0.1rem;
+  }
+
+  .vendor-name {
+    font-size: 1rem;
+    margin-bottom: 0;
+  }
+
+  &.selected {
+    border: 1px solid $success;
+    background: lighten($success, 50%);
+  }
+}
+
+.note {
+  margin-top: 1rem;
+  color: $danger;
+}
+
+.product {
+  padding-bottom: 0.5rem;
+
+  img {
+    width: 4rem;
+    height: 4rem;
+    margin-right: 1.5rem;
+    border-radius: $border-radius;
+    object-fit: cover;
+    background-position: center;
+  }
+
+  h4 {
+    font-size: 1.05rem;
+    @include font-weight(bold);
+  }
+}
