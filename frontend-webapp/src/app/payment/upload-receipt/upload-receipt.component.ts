@@ -37,11 +37,13 @@ export class UploadReceiptComponent implements OnInit {
 
     const { image } = this.receiptForm.value;
 
+    console.log(image);
+
     const formData = new FormData();
     formData.append('payment_date', '2017-11-28');
-    formData.append('receipt_image', image);
+    formData.append('receipt_image', image[0]);
 
-    this.http.post('/api/upload-receipt/' + this.id, formData).subscribe(
+    this.http.patch('/api/upload-receipt/' + this.id + '/#', formData).subscribe(
       data => this.alert.show({ type: 'success', message: 'อัพโหลดสำเร็จ' })
     );
 

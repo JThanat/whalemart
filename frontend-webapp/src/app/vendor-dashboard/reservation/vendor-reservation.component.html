@@ -27,7 +27,7 @@
 
     <div *ngFor="let reserve of reservationInfo" class="d-none d-lg-block reserve-list">
       <div class="mt-2 p-2">
-        <a routerLink="/payment/pay/{{ reserve.marketID }}/">
+        <a [routerLink]="reserve.paymentStatus !== 'draft' ? ('/payment/pay/' + reserve.marketID + '/') : ('/payment/receipt/' + reserve.incompleteInstallmentID + '/')">
           <div class="row">
             <div class="col-md-1 text-left text-md-center">
               {{ reserve.marketID }}
