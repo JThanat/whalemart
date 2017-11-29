@@ -29,7 +29,7 @@
       <h2><span>1</span> เลือกรูปแบบการแบ่งชำระ</h2>
       <form [formGroup]="chooseInstallmentTypeForm">
         <app-input-group>
-          <select appInput class="form-control" formControlName="type">
+          <select appInput class="form-control" formControlName="type" (change)="updateInstallmentType($event)">
             <option value="30" selected>แบ่งชำระเงิน 30% ของค่าบูธ</option>
             <option value="100">ชำระเงินเต็มจำนวน</option>
           </select>
@@ -43,7 +43,7 @@
 
       <form [formGroup]="choosePaymentMethodForm">
         <app-input-group label="ชำระเงินโดย">
-          <select appInput class="form-control" formControlName="method">
+          <select appInput class="form-control" formControlName="method" (change)="updateBank($event)">
             <option value="credit" selected>ตัดจากบัตรเดบิต/เครดิต</option>
             <option value="bank-transfer">โอนผ่านบัญชีธนาคาร</option>
           </select>
@@ -53,8 +53,8 @@
         </app-input-group>
       </form>
 
-      <form [formGroup]="creditCardForm">
-        <div class="row">
+      <form [formGroup]="creditCardForm" (submit)="submitForm()">
+        <div *ngIf="!isBank" class="row">
           <div class="col-12">
             <app-input-group label="ชื่อผู้ถือบัตร">
               <input appInput type="text" class="form-control" formControlName="cardHolderName" placeholder="ชื่อ - นามสกุล">

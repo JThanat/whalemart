@@ -8,7 +8,7 @@ export type ReservationStatus =
   | 'approved'
   | 'rejected'
   | 'cancelled';
-export type PaymentStatus = 'draft' | 'deposited' | 'fully' | null;
+export type PaymentStatus = 'draft' | 'deposited' | 'fully' | 'unpaid' | null;
 
 export interface ReservationInformation {
   marketID: number;
@@ -66,6 +66,9 @@ export class VendorReservationService {
         paymentStatus = 'fully';
         break;
     }
+    if (reservationStatus === 'approved' && paymentStatus == null) {
+      paymentStatus = 'unpaid';
+    }
     return {
       marketID: data.market_id,
       marketName: data.market_name,
@@ -89,7 +92,6 @@ export class VendorReservationService {
   }
 
   reservationInformation$() {
-    console.log(this.http);
     return this.http.get<ReservationInformationResponse[]>('/api/reservation-status/')
       .pipe(
         map(req => req.map(x => this.transformToReservationInformation(x))),
