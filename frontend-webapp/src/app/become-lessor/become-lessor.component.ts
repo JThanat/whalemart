@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AfterViewInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
@@ -18,6 +18,7 @@ export class BecomeLessorComponent implements OnInit, AfterViewInit {
   @ViewChild(LessorFormComponent) lessorFormComponent: LessorFormComponent;
   becomeLessorForm: FormGroup;
   lessorStatus$: Observable<LessorStatus>;
+  bankAccountForm: FormGroup;
 
   constructor(
     private becomeLessorService: BecomeLessorService,
@@ -28,6 +29,13 @@ export class BecomeLessorComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.lessorStatus$ = this.route.data.pipe(map(data => data.lessorStatus));
+
+    this.bankAccountForm = new FormGroup({
+      accountName: new FormControl('', [Validators.required]),
+      accountID: new FormControl('', [Validators.required]),
+      bank: new FormControl('', [Validators.required]),
+      branch: new FormControl('', [Validators.required])
+    });
   }
 
   ngAfterViewInit() {
