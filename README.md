@@ -61,8 +61,7 @@ You can then access the followings:
 ### Import Data
 - Copy `dump_images` to `/webserver` folder and name it as `media`.
 - Start your docker-compose or webserver and db service. 
-- Exec into webserver docker by calling `docker exec -it <container> /bin/bash`
-- run `python3 manage.py loaddata dump.json` 
+- run `import_data.sh` which is a file in the webserver folder.
 
 ### Git Convention
 
