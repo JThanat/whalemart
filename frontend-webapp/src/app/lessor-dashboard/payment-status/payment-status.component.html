@@ -18,7 +18,7 @@
         <tbody>
           <tr *ngFor="let marketPaymentStatus of (marketPaymentStatus$ | async)">
             <th scope="row">{{ marketPaymentStatus.boothNumber }}</th>
-            <td>{{ 'ยังไม่ได้เลือกผู้เช่าตลาด' || marketPaymentStatus.vendorName }}</td>
+            <td>{{ marketPaymentStatus.vendorName || 'ยังไม่ได้เลือกผู้เช่าตลาด' }}</td>
             <ng-template [ngIf]="marketPaymentStatus.paymentStatus === 0" [ngIfElse]="pay30">
               <td><span class="badge pay-0">ยังไม่ได้ชำระเงิน</span></td>
             </ng-template>
