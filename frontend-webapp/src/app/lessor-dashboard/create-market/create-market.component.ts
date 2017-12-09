@@ -75,7 +75,7 @@ export class CreateMarketComponent implements OnInit {
       location: new FormControl('', [Validators.required, Validators.maxLength(200)]),
       locationLatLng: new FormControl('', [
         Validators.required,
-        Validators.pattern(/^-?\d+(\.\d+)?, -?\d+(\.\d+)?$/)
+        Validators.pattern(/^-?\d+(\.\d{1,6})?, -?\d+(\.\d{1,6})?$/)
       ]),
       termsAndCondition: new FormControl('', [Validators.required, Validators.maxLength(1000)]),
       depositPaymentDue: new FormControl(null, [Validators.required]),
