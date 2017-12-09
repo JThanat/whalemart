@@ -9,6 +9,29 @@
 
       <div *ngIf="(lessorStatus$ | async) === 'is_not_lessor'">
         <app-lessor-form></app-lessor-form>
+
+        <hr>
+
+        <h4>ข้อมูลธนาคาร</h4>
+
+        <form [formGroup]="bankAccountForm">
+          <app-input-group label="ชื่อบัญชี">
+            <input appInput type="text" formName="accountName" class="form-control" placeholder="ชื่อบัญชึ">
+          </app-input-group>
+
+          <app-input-group label="หมายเลขบัญชี">
+            <input appInput type="text" formName="accountID" class="form-control" placeholder="หมายเลขบัญชี">
+          </app-input-group>
+
+          <app-input-group label="ธนาคาร">
+            <input appInput type="text" formName="bank" class="form-control" placeholder="ธนาคาร">
+          </app-input-group>
+
+          <app-input-group label="สาขาของธนาคาร">
+            <input appInput type="text" formName="branch" class="form-control" placeholder="สาขาของธนาคาร">
+          </app-input-group>
+        </form>
+
         <button type="submit" class="btn btn-primary btn-lg" (click)="becomeLessor()" [disabled]="becomeLessorForm?.disabled">ลงตลาด</button>
       </div>
     </div>
